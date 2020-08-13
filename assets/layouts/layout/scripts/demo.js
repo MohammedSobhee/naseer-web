@@ -88,7 +88,7 @@ var Demo = function() {
             }
 
             if (lastSelectedLayout != layoutOption) {
-                //layout changed, run responsive handler:
+                //layout changed, run responsive handler: 
                 App.runResizeHandlers();
             }
             lastSelectedLayout = layoutOption;
@@ -124,7 +124,7 @@ var Demo = function() {
                 $(".top-menu > .navbar-nav > li.dropdown").removeClass("dropdown-dark");
             }
 
-            //footer
+            //footer 
             if (footerOption === 'fixed') {
                 $("body").addClass("page-footer-fixed");
             } else {
@@ -138,7 +138,7 @@ var Demo = function() {
                 $(".page-sidebar-menu").removeClass("page-sidebar-menu-light");
             }
 
-            //sidebar menu
+            //sidebar menu 
             if (sidebarMenuOption === 'hover') {
                 if (sidebarOption == 'fixed') {
                     $('.sidebar-menu-option', panel).val("accordion");
@@ -177,7 +177,7 @@ var Demo = function() {
                 }
             }
 
-            Layout.fixContentHeight(); // fix content height
+            Layout.fixContentHeight(); // fix content height            
             Layout.initFixedSidebar(); // reinitialize fixed sidebar
         };
 
@@ -188,7 +188,7 @@ var Demo = function() {
             if (color == 'light2') {
                 $('.page-logo img').attr('src', Layout.getLayoutImgPath() + 'logo-invert.png');
             } else {
-                $('.page-logo img').attr('src', Layout.getLayoutImgPath() + 'logo_.png');
+                $('.page-logo img').attr('src', Layout.getLayoutImgPath() + 'logo.png');
             }
         };
 
@@ -268,8 +268,8 @@ var Demo = function() {
         //main function to initiate the theme
         init: function() {
             // handles style customer tool
-            handleTheme();
-
+            handleTheme(); 
+            
             // handle layout style change
             $('.theme-panel .layout-style-option').change(function() {
                  setThemeStyle($(this).val());
@@ -279,14 +279,14 @@ var Demo = function() {
             if (typeof Cookies !== "undefined" && Cookies.get('layout-style-option') === 'rounded') {
                 setThemeStyle(Cookies.get('layout-style-option'));
                 $('.theme-panel .layout-style-option').val(Cookies.get('layout-style-option'));
-            }
+            }            
         }
     };
 
 }();
 
 if (App.isAngularJsApp() === false) {
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function() {    
        Demo.init(); // init metronic core componets
     });
 }

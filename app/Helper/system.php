@@ -27,6 +27,11 @@ function authAdmin()
     return null;
 }
 
+function admin_dashboard_url()
+{
+    return '/admin/home';
+}
+
 function empObj()
 {
     return new stdClass();
@@ -70,6 +75,27 @@ function admin_settings_vw()
 function admin_settings_url()
 {
     return admin_vw() . '/settings';
+}
+
+function admin_home_content_url()
+{
+    return 'admin/home-contents';
+}
+
+function admin_home_content_vw()
+{
+    return 'admin.contents';
+}
+
+
+function admin_constants_vw()
+{
+    return 'admin.constants';
+}
+
+function admin_constant_url()
+{
+    return 'admin/constant';
 }
 
 function version_api()

@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'DroidArabicKufiBold';
+    src: url('DroidArabicKufiBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DroidArabicKufiRegular';
+    src: url('DroidArabicKufiRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body,li,h1,h2,h3,h4,h5,h6,.select2-selection__rendered{
+    font-family: 'DroidArabicKufiRegular' !important;
+    font-weight: normal;
+    font-style: normal;
+}
+.table {
+    text-align: center;
+}
+thead, th {text-align: center;}
+.dataTables_wrapper .dataTables_processing {
+    width: 200px;
+    display: inline-block;
+    padding: 7px;
+    right: 50%;
+    margin-right: -100px;
+    margin-top: 10px;
+    text-align: center;
+
+    border: none !important;
+    background: none !important;
+    vertical-align: middle;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}

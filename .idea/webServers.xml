@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="cb3b0c77-6bf4-460e-a6d8-8b7f5f1ed2fe" name="Server" url="http://ftp.macrotop.website">
+        <fileTransfer host="ftp.macrotop.website" port="21" rootFolder="/naseer">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
