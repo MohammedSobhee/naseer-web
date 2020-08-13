@@ -49,7 +49,7 @@
     toastr.options = {
         "closeButton": true,
         "debug": false,
-        "positionClass": "toast-top-right",
+        "positionClass": "toast-top-left",
         "onclick": null,
         "showDuration": "1000",
         "hideDuration": "1000",

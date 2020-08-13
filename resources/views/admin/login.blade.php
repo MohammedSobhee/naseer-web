@@ -79,10 +79,10 @@ License: You must have a valid license purchased only from themeforest(the above
             <span> أدخل البريد الالكتروني وكلمة المرور الخاصة بك. </span>
         </div>
 
-        @if(session()->has('deactivate'))
+        @if(session()->has('error'))
             <div class="alert alert-danger">
                 <button class="close" data-close="alert"></button>
-                <span> {{session()->get('deactivate')}} </span>
+                <span> {{session()->get('error')}} </span>
             </div>
         @endif
         <div class="form-group">

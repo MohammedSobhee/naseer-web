@@ -75,10 +75,10 @@
                                             <i class="fa fa-search"></i>
                                         </a>
 
-                                        <button type="submit"
-                                                class="btn btn-sm btn-default btn-circle btn-icon-only filter-export margin-bottom" title="تصدير اكسل">
-                                            <i class="fa fa-file-excel-o"></i>
-                                        </button>
+{{--                                        <button type="submit"--}}
+{{--                                                class="btn btn-sm btn-default btn-circle btn-icon-only filter-export margin-bottom" title="تصدير اكسل">--}}
+{{--                                            <i class="fa fa-file-excel-o"></i>--}}
+{{--                                        </button>--}}
 
                                     </div>
 
@@ -115,7 +115,8 @@
                             <th> اسم المستخدم</th>
                             <th> البريد الالكتروني</th>
                             <th> رقم الهاتف</th>
-                            <th>تفاصيل</th>
+                            <th> الحالة</th>
+                            <th>العمليات</th>
                         </tr>
                         </thead>
                     </table>

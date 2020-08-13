@@ -35,6 +35,7 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
     Route::get('countries', 'LookUpController@getCountries');
     Route::get('lookups/{type?}', 'LookUpController@getLookUps');
     Route::get('services/{service_type_id?}', 'LookUpController@getServices');
+    Route::get('service_provider_types', 'LookUpController@getServiceProviderTypes');
 
     Route::group(['middleware' => ['auth:api']], function () {
 

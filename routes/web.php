@@ -46,7 +46,10 @@ Route::group(['namespace' => 'Admin\Auth'], function () {
 
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'namespace' => 'Admin'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/admins', 'AdminController@index');
+    Route::get('/admins/admin-data', 'AdminController@anyData');
+    Route::put('/admins/admin-status', 'AdminController@adminStatus');
 });

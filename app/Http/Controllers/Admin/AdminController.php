@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Admin;
 use App\Http\Controllers\Controller;
+use App\Repositories\Eloquents\AdminEloquent;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,11 +14,33 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $admin;
+
+    public function __construct(AdminEloquent $adminEloquent)
+    {
+        $this->admin = $adminEloquent;
+    }
+
     public function index()
     {
         //
+        $data = [
+            'title' => 'مديرو النظام',
+            'icon' => 'fa fa-users',
+        ];
+        return view('admin.admins.index', $data);
     }
 
+    public function anyData()
+    {
+        return $this->admin->anyData();
+    }
+
+    public function adminStatus(Request $request)
+    {
+        return $this->admin->adminStatus($request->only('admin_id'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +54,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +65,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin  $admin
+     * @param \App\Admin $admin
      * @return \Illuminate\Http\Response
      */
     public function show(Admin $admin)
@@ -53,7 +76,7 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin  $admin
+     * @param \App\Admin $admin
      * @return \Illuminate\Http\Response
      */
     public function edit(Admin $admin)
@@ -64,8 +87,8 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Admin  $admin
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Admin $admin
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Admin $admin)
@@ -76,7 +99,7 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin  $admin
+     * @param \App\Admin $admin
      * @return \Illuminate\Http\Response
      */
     public function destroy(Admin $admin)

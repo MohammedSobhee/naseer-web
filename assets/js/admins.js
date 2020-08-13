@@ -1,5 +1,27 @@
 $(document).ready(function () {
 
+    $('#admins_tbl').on('switchChange.bootstrapSwitch', '.make-switch', function (event, state) {
+        // ... skipped ...
+        var admin_id = $(this).data('id');
+
+        $.ajax({
+            url: baseURL + '/admins/admin-status',
+            type: 'PUT',
+            dataType: 'json',
+            data: {'_token': csrf_token, 'admin_id': admin_id},
+            success: function (data) {
+
+                if (data.status) {
+                    toastr['success'](data.message, '');
+                } else {
+                    toastr['error'](data.message);
+                }
+
+            }
+        });
+
+    });
+
     if ($("#admins_tbl").length) {
 
         var admins_tbl = $("#admins_tbl");
@@ -23,7 +45,7 @@ $(document).ready(function () {
                 //
                 //     }
                 // }
-                ,"dataSrc": function (json) {
+                , "dataSrc": function (json) {
                     //Make your callback here.
                     if (json.status != undefined && !json.status) {
                         $('#admins_tbl_processing').hide();
@@ -38,10 +60,14 @@ $(document).ready(function () {
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'username', name: 'username'},
                 {data: 'email', name: 'email'},
-                {data: 'mobile', name: 'mobile'},
+                {data: 'phone', name: 'phone'},
+                {data: 'status', name: 'status'},
                 {data: 'action', name: 'action'}
             ],
-
+            "fnDrawCallback": function () {
+                //Initialize checkbos for enable/disable user
+                $(".make-switch").bootstrapSwitch({size: "mini", onColor: "success", offColor: "danger"});
+            },
             language: {
                 "sProcessing": "<img src='" + baseAssets + "/apps/img/preloader.svg'>",
                 "sLengthMenu": "أظهر _MENU_ مدخلات",

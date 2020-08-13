@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\CountryResource;
+use App\Http\Resources\ServiceProviderResource;
+use App\Http\Resources\ServiceProviderTypeResource;
 use App\Http\Resources\ServiceResource;
 use App\Http\Resources\SubServiceResource;
 use App\Intro;
@@ -66,6 +68,11 @@ class LookUpController extends Controller
             ];
         }
         return response_api(true, 200, null, $data);
+    }
+
+    function getServiceProviderTypes()
+    {
+        return response_api(true, 200, null, ServiceProviderTypeResource::collection($this->providerType->all()));
     }
 
     function getCities()

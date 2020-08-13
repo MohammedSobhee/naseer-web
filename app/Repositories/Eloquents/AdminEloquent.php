@@ -36,32 +36,44 @@ class AdminEloquent implements Repository
                     $query->where('email', 'LIKE', '%' . request()->get('email') . '%');
                 }
 
-                if (request()->filled('level')) {
-                    $query->where('level', request()->get('level'));
+                if (request()->filled('status')) {
+                    $query->where('status', request()->get('status'));
                 }
 
             })
-            ->editColumn('level', function ($admin) {
-
-                return ($admin->level == 'admin') ? 'Admin' : 'Player';
-            })
-            ->editColumn('is_active', function ($admin) {
-                return ($admin->is_active == 1) ? '<span class="m-badge m-badge--success m-badge--wide">active</span>' : '<span class="m-badge m-badge--danger m-badge--wide">inactive</span>';
+            ->editColumn('status', function ($user) {
+                if ($user->status)
+                    return '<input type="checkbox" class="make-switch" data-on-text="&nbsp;مفعّل&nbsp;" data-off-text="&nbsp;معطّل&nbsp;" name="is_active" data-id="' . $user->id . '" checked  data-on-color="success" data-size="mini" data-off-color="warning">';
+                return '<input type="checkbox" class="make-switch" data-on-text="&nbsp;مفعّل&nbsp;" data-off-text="&nbsp;معطّل&nbsp;" name="is_active" data-id="' . $user->id . '" data-on-color="success" data-size="mini" data-off-color="warning">';
             })
             ->addColumn('action', function ($admin) {
-
-//                $delete = '';
-//                if ($admin->level != 'super_admin')
-//                    $delete = '<a href="' . url(admin_manage_url() . '/admin/' . $admin->id) . '" class="btn btn-danger  m-btn m-btn--icon m-btn--icon-only m-btn--pill delete "> <i class="fa fa-trash"></i></a>';
-////
-//                $checked='';
-//                if($admin->is_active)
-//                    $checked='checked="checked"';
-//                $activate= '<span class="m-switch m-switch m-switch--outline m-switch--icon m-switch--success" style="margin-left:3px;margin-top: 10px;vertical-align: middle;"><label><input type="checkbox"'.$checked .' name="is_active" class="is_active" data-id="'.$admin->id.'"><span></span></label></span>';
-//
-//                return $activate . '<a href="' . url(admin_manage_url() . '/admin/' . $admin->id . '/edit') . '" class="btn btn-primary m-btn m-btn--icon m-btn--icon-only m-btn--pill margin-right edit-admin-mdl"><i class="fa fa-edit"></i></a>' .  $delete ;
+                return '<a href="' . url(admin_vw() . '/profile/' . $admin->id) . '" class="btn btn-sm btn-success blue btn-circle btn-icon-only"
+                                                                                   title="View Profile">
+                                                                                    <i class="fa fa-eye"></i>
+                                                                                </a>
+                                                                                <a href="' . url(admin_vw() . '/admins/edit/' . $admin->id) . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only"
+                                                                                   title="Edit">
+                                                                                    <i class="fa fa-edit"></i>
+                                                                                </a>';
             })->addIndexColumn()
-            ->rawColumns(['action', 'is_active'])->toJson();
+            ->rawColumns(['action', 'status'])->toJson();
+    }
+
+    function adminStatus($id)
+    {
+
+        $admin = $this->model->find($id['admin_id']);
+
+        if (isset($admin)) {
+            $admin->status = !$admin->status;
+            if ($admin->save()) {
+//                if (!$admin->is_active) {
+//                }
+                return response_api(true, 200, null, $admin);
+            }
+        }
+        return response_api(false, 422);
+
     }
 
     function export()
@@ -159,7 +171,8 @@ class AdminEloquent implements Repository
 
     }
 
-    function adminActivate($id){
+    function adminActivate($id)
+    {
         $admin = $this->model->find($id['admin_id']);
         if (isset($admin)) {
             $admin->is_active = !$admin->is_active;

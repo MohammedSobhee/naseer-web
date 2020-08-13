@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthGuestMiddleware;
 use App\Http\Middleware\ClientMiddleware;
 use App\Http\Middleware\ServiceProviderMiddleware;
@@ -70,6 +71,7 @@ class Kernel extends HttpKernel
         'authGuest' => AuthGuestMiddleware::class,
         'service_provider' => ServiceProviderMiddleware::class,
         'client' => ClientMiddleware::class,
+        'admin' => AdminMiddleware::class,
 
     ];
 }

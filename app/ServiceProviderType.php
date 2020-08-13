@@ -9,4 +9,9 @@ class ServiceProviderType extends Model
 {
     //
     use SoftDeletes;
+
+    public function Services()
+    {
+        return $this->hasMany(Service::class, 'service_provider_type_id', 'id');
+    }
 }
