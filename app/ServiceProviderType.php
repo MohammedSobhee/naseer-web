@@ -10,6 +10,8 @@ class ServiceProviderType extends Model
     //
     use SoftDeletes;
 
+    protected $casts = ['is_licensed' => 'integer'];
+
     public function Services()
     {
         return $this->hasMany(Service::class, 'service_provider_type_id', 'id');
