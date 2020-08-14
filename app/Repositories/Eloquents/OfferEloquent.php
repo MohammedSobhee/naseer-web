@@ -40,7 +40,7 @@ class OfferEloquent extends Uploader implements Repository
         // TODO: Implement getAll() method.
         $page_size = isset($attributes['page_size']) ? $attributes['page_size'] : max_pagination(10);
         $page_number = isset($attributes['page_number']) ? $attributes['page_number'] : 1;
-        $collection = $this->model;
+        $collection = $this->model->where('request_id', $attributes['request_id']);
 
         if (isset($attributes['status'])) {
             $collection = $collection->where('status', $attributes['status']);
@@ -96,6 +96,19 @@ class OfferEloquent extends Uploader implements Repository
         $obj = $this->model->find($id);
         if (isset($obj) && $obj->delete()) {
             return response_api(true, 200, trans('app.deleted'), []);
+        }
+        return response_api(false, 422, null, []);
+
+    }
+
+    public function changeStatus(array $attributes)
+    {
+
+        $offer = $this->model->find($attributes['offer_id']);
+        $offer->status = $attributes['status'];
+
+        if ($offer->save()) {
+            return response_api(true, 200, null, []);
         }
         return response_api(false, 422, null, []);
 

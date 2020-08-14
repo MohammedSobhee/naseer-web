@@ -16,6 +16,7 @@ class CreateRequestsTable extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('city_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('service_id')->nullable();
             $table->enum('type', ['categorized', 'uncategorized'])->nullable();
 //            $table->integer('level'); // [1-3]
@@ -37,13 +38,14 @@ class CreateRequestsTable extends Migration
             $table->timestamp('service_date'); //موعد تقديم الخدمة
 
 
-            $table->enum('status', ['new', 'completed','canceled'])->default('new');
+            $table->enum('status', ['new', 'completed', 'canceled'])->default('new');
             $table->boolean('is_active')->default(true);
 
             $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
 
         });

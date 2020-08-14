@@ -11,6 +11,7 @@ class Request extends Model
     use SoftDeletes;
 
     protected $casts = [
+        'user_id' => 'integer',
         'city_id' => 'integer',
         'service_id' => 'integer',
         'level' => 'integer',
@@ -56,6 +57,11 @@ class Request extends Model
     public function City()
     {
         return $this->belongsTo(City::class, 'city_id');
+    }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function Service()

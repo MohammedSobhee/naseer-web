@@ -75,7 +75,7 @@ class OrderEloquent extends Uploader implements Repository
 
         $request = new Request();
         $request->city_id = $attributes['city_id'];
-//        $request->level = 3;
+        $request->user_id = auth()->user()->id;
         $type = 'uncategorized';
         if (isset($attributes['service_id'])) {
             $request->service_id = $attributes['service_id'];
@@ -199,6 +199,19 @@ class OrderEloquent extends Uploader implements Repository
         $obj = $this->model->find($id);
         if (isset($obj) && $obj->delete()) {
             return response_api(true, 200, trans('app.deleted'), []);
+        }
+        return response_api(false, 422, null, []);
+
+    }
+
+    public function changeStatus(array $attributes)
+    {
+
+        $request = $this->model->find($attributes['request_id']);
+        $request->status = $attributes['status'];
+
+        if ($request->save()) {
+            return response_api(true, 200, null, []);
         }
         return response_api(false, 422, null, []);
 

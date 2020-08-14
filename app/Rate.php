@@ -9,4 +9,6 @@ class Rate extends Model
 {
     //
     use SoftDeletes;
+
+    protected $casts = ['rate' => 'double', 'service_provider_id' => 'integer', 'request_id' => 'integer'];
 }

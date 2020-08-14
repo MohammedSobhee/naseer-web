@@ -54,6 +54,11 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
         Route::group(['middleware' => ['client']], function () {
 
             Route::post('order', 'OrderController@postOrder');
+            Route::put('order_status', 'OrderController@changeStatus');
+            Route::put('offer_status', 'OfferController@changeStatus');
+            Route::post('offers', 'OfferController@getOffers');
+            Route::post('rate', 'RateController@create');
+
         });
         Route::post('orders', 'OrderController@getOrders');
 

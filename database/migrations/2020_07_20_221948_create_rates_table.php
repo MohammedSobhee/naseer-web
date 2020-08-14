@@ -17,6 +17,7 @@ class CreateRatesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('service_provider_id');
+            $table->unsignedBigInteger('request_id');
             $table->double('rate');
             $table->longText('note')->nullable();
             $table->softDeletes();
@@ -24,6 +25,7 @@ class CreateRatesTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('service_provider_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('request_id')->references('id')->on('requests')->onDelete('cascade');
 
         });
     }

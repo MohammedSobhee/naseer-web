@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Order\ChangeStatusRequest;
 use App\Http\Requests\Api\Order\CreateRequest;
 use App\Http\Requests\Api\Order\GetRequest;
 use App\Repositories\Eloquents\OrderEloquent;
@@ -31,5 +32,10 @@ class OrderController extends Controller
     public function getOrder($order_id)
     {
         return $this->order->getById($order_id);
+    }
+
+    public function changeStatus(ChangeStatusRequest $request)
+    {
+        return $this->order->changeStatus($request->all());
     }
 }
