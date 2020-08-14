@@ -274,6 +274,8 @@ class UserEloquent extends Uploader implements UserRepository
             'country_code' => $attributes['country_code'],
             'type' => $attributes['type'],
         ]);
+
+        $user = $this->model->find($user->id);
         return response_api(true, 200, trans('app.user_created'), new ProfileResource($user));// . ',' . trans('app.sent_email_verification')
     }
 

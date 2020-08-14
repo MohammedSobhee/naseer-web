@@ -42,6 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_verify' => 'integer',
         'is_active' => 'integer',
+        'is_completed' => 'integer',
     ];
 
     protected $appends = ['photo100', 'photo300'];
