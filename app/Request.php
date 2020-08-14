@@ -14,7 +14,7 @@ class Request extends Model
         'city_id' => 'integer',
         'service_id' => 'integer',
         'level' => 'integer',
-        'is_active' => 'integer',
+        'is_active' => 'boolean',
     ];
 
     public function getCaseFileAttribute($value)

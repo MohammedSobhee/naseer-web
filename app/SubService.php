@@ -10,7 +10,7 @@ class SubService extends Model
     //
     use SoftDeletes;
 
-    protected $casts = ['service_id' => 'integer', 'is_case' => 'integer', 'is_evidence' => 'integer', 'is_prefered_outcome' => 'integer',];
+    protected $casts = ['service_id' => 'integer', 'is_case' => 'boolean', 'is_evidence' => 'boolean', 'is_prefered_outcome' => 'boolean',];
 
     public function Fields()
     {

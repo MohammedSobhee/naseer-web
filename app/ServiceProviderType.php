@@ -10,7 +10,7 @@ class ServiceProviderType extends Model
     //
     use SoftDeletes;
 
-    protected $casts = ['is_licensed' => 'integer'];
+    protected $casts = ['is_licensed' => 'boolean'];
 
     public function Services()
     {
