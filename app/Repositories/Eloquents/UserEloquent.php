@@ -289,6 +289,7 @@ class UserEloquent extends Uploader implements UserRepository
             $service_provider = new ServiceProvider();
         $service_provider->user_id = auth()->user()->id;
         $service_provider->service_provider_type_id = $attributes['service_provider_type_id'];
+
         $service_provider->idno = $attributes['idno'];
         if (isset($attributes['skill']))
             $service_provider->skill = $attributes['skill'];
@@ -301,6 +302,10 @@ class UserEloquent extends Uploader implements UserRepository
         if (isset($attributes['longitude']))
             $service_provider->longitude = $attributes['longitude'];
         if ($service_provider->save()) {
+
+            auth()->user()->is_completed = 1;
+            auth()->user()->save();
+
             if ($attributes['idno_file']) {
                 $service_provider->idno_file = $this->upload($attributes, 'idno_file');
                 sleep(1);
@@ -313,7 +318,7 @@ class UserEloquent extends Uploader implements UserRepository
                 $service_provider->save();
 
             }
-            return response_api(true, 200, trans('app.user_created'), []);// . ',' . trans('app.sent_email_verification')
+            return response_api(true, 200, trans('app.complete-service-provider'), []);// . ',' . trans('app.sent_email_verification')
         }
     }
 

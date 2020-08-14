@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->enum('type', ['user', 'service_provider']);
             $table->boolean('is_active')->default(true);
             $table->unsignedBigInteger('city_id')->nullable();
+            $table->boolean('is_completed')->default(false);
             $table->rememberToken();
             $table->timestamps();
 

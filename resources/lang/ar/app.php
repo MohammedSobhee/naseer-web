@@ -16,4 +16,6 @@ return [
     'invalid_token' => 'رمز غير صالح',
     'invalid_route' => 'مسار خاطئ',
     'client_input_error' => 'خطأ في الإدخال',
+    'user_created' => 'تم انشاء حساب جديد',
+    'complete-service-provider' => 'تم اكمال عملية التسجيل لمقدم الخدمة',
 ];
