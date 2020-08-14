@@ -29,7 +29,7 @@ class ProfileResource extends JsonResource
             'rate' => $this->Rates()->average('rate') ?: 0,
             'is_active' => $this->is_active,
             'is_completed' => $this->is_completed,
-            'service_provider' => new ServiceProviderResource($this->ServiceProvider()->first()),
+            'provider_det' => new ServiceProviderResource($this->ServiceProvider()->first()),
         ];
     }
 }

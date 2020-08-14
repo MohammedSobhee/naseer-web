@@ -43,16 +43,17 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
         Route::put('profile', 'UserController@putProfile');
         Route::get('profile/{id?}', 'UserController@getProfile');
 
+        Route::get('offer/{id}', 'OfferController@show');
+
         Route::group(['middleware' => ['service_provider']], function () {
 
+            Route::post('offer', 'OfferController@create');
             Route::put('complete_service_provider', 'UserController@completeServiceProvider');
-//        Route::get('settings', 'LookUpController@getSettings');
         });
 
         Route::group(['middleware' => ['client']], function () {
 
             Route::post('order', 'OrderController@postOrder');
-//        Route::get('settings', 'LookUpController@getSettings');
         });
         Route::post('orders', 'OrderController@getOrders');
 

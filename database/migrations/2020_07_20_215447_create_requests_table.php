@@ -37,7 +37,7 @@ class CreateRequestsTable extends Migration
             $table->timestamp('service_date'); //موعد تقديم الخدمة
 
 
-            $table->enum('status', ['new', 'completed'])->default('new');
+            $table->enum('status', ['new', 'completed','canceled'])->default('new');
             $table->boolean('is_active')->default(true);
 
             $table->softDeletes();
