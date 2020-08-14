@@ -17,6 +17,7 @@ class ServiceProviderTypeResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'is_licensed' => $this->is_licensed,
             'services' => ServiceResource::collection($this->Services()->get()),
         ];
     }

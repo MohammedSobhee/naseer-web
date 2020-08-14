@@ -12,7 +12,7 @@ class ServiceProvider extends Model
 
 
     protected $fillable = [
-        'user_id', 'idno', 'idno_file', 'skill', 'skill_file',
+        'user_id', 'idno', 'idno_file', 'skill', 'skill_file', 'licensed', 'licensed_file',
         'bio', 'address', 'latitude', 'longitude', 'service_provider_type_id'
     ];
 
@@ -23,6 +23,12 @@ class ServiceProvider extends Model
     }
 
     public function getSkillFileAttribute($value)
+    {
+        if (isset($value))
+            return url('assets/upload') . '/' . $value;
+    }
+
+    public function getLicensedFileAttribute($value)
     {
         if (isset($value))
             return url('assets/upload') . '/' . $value;

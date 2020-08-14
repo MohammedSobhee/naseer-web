@@ -293,6 +293,8 @@ class UserEloquent extends Uploader implements UserRepository
         $service_provider->idno = $attributes['idno'];
         if (isset($attributes['skill']))
             $service_provider->skill = $attributes['skill'];
+        if (isset($attributes['licensed']))
+            $service_provider->licensed = $attributes['licensed'];
         if (isset($attributes['bio']))
             $service_provider->bio = $attributes['bio'];
         if (isset($attributes['address']))
@@ -314,6 +316,12 @@ class UserEloquent extends Uploader implements UserRepository
             }
             if ($attributes['skill_file']) {
                 $service_provider->skill_file = $this->upload($attributes, 'skill_file');
+                sleep(1);
+                $service_provider->save();
+
+            }
+            if ($attributes['licensed_file']) {
+                $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
                 sleep(1);
                 $service_provider->save();
 

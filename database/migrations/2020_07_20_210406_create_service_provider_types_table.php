@@ -16,6 +16,7 @@ class CreateServiceProviderTypesTable extends Migration
         Schema::create('service_provider_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('is_licensed')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

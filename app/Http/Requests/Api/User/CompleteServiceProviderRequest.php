@@ -34,6 +34,8 @@ class CompleteServiceProviderRequest extends FormRequest
             'address' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
+            'licensed' => 'nullable',
+            'licensed_file' => 'nullable|file',
         ];
     }
 }

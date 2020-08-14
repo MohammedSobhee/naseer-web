@@ -26,6 +26,8 @@ class CreateServiceProvidersTable extends Migration
             $table->string('longitude');
             $table->unsignedBigInteger('service_provider_type_id');
             $table->string('licensed')->nullable();
+            $table->string('licensed_file')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
 
