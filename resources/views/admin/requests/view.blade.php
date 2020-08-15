@@ -304,6 +304,65 @@
                         </div>
                     @endif
 
+                @elseif($order->service_id == 8)
+                    <div class="form-group text-center" style="background-color:#002D5D; color: #FFFFFF">
+                        <label class="control-label col-md-12 main-label">{{$order->Service->name}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">الخدمة الفرعية</label>
+                        <div class="col-md-2">
+                            {{$order->CompaniesRegistrationAndTrademarking->SubService->name}}
+                        </div>
+
+                    </div>
+                    @if($order->CompaniesRegistrationAndTrademarking->sub_service_id == 23)
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">نوع الوكالة </label>
+                            <div class="col-md-2">
+                                {{$order->CompaniesRegistrationAndTrademarking->authorization_type_txt}}
+
+                            </div>
+                            <label class="control-label col-md-2">عدد الوكلاء </label>
+                            <div class="col-md-2">
+                                {{$order->CompaniesRegistrationAndTrademarking->agents_num}}
+
+                            </div>
+                            <label class="control-label col-md-2">عدد الموكلين </label>
+                            <div class="col-md-2">
+                                {{$order->CompaniesRegistrationAndTrademarking->clients_num}}
+
+                            </div>
+
+                        </div>
+                    @endif
+                    @if($order->CompaniesRegistrationAndTrademarking->sub_service_id == 24)
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">قيمة الدين </label>
+                            <div class="col-md-2">
+                                {{$order->CompaniesRegistrationAndTrademarking->debt_value}}
+
+                            </div>
+                            <label class="control-label col-md-2">طريقة التسليم </label>
+                            <div class="col-md-2">
+                                {{$order->CompaniesRegistrationAndTrademarking->delivery_method_txt}}
+
+                            </div>
+
+                        </div>
+                    @endif
+                    @if($order->CompaniesRegistrationAndTrademarking->sub_service_id == 25)
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">قيمة العقار </label>
+                            <div class="col-md-2">
+                                {{$order->CompaniesRegistrationAndTrademarking->property_value}}
+
+                            </div>
+
+                        </div>
+                    @endif
                 @elseif($order->service_id == 9)
                     <div class="form-group text-center" style="background-color:#002D5D; color: #FFFFFF">
                         <label class="control-label col-md-12 main-label">{{$order->Service->name}}</label>
