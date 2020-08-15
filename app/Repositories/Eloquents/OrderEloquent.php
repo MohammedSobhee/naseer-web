@@ -102,12 +102,6 @@ class OrderEloquent extends Uploader implements Repository
                                                                                     <i class="fa fa-eye"></i>
                                                                                    تفاصيل
                                                                                 </a>
-                                                                                <a href="' . url(admin_vw() . '/requests/' . $request->id . '/offers') . '" class="btn btn-sm btn-success purple btn-circle"
-                                                                                   title="offers">
-                                                                                   (' . $request->offers_num . ')
-                                                                                   العروض
-
-                                                                                </a>
                                                                                ';
             })->addIndexColumn()
             ->rawColumns(['status', 'type', 'contact_prefer', 'action'])->toJson();

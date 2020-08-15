@@ -32,4 +32,15 @@ class RequestController extends Controller
         return $this->order->anyData();
     }
 
+    public function requestDet($order_id)
+    {
+        $data = [
+            'title' => 'تفاصيل الطلب',
+            'icon' => 'icon-users',
+            'order_id' => $order_id,
+            'order' => Request::with('City')->find($order_id),
+        ];
+        return view(admin_vw() . '.requests.offers', $data);
+    }
+
 }
