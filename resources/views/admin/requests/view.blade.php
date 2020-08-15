@@ -141,7 +141,7 @@
                         </div>
                         <label class="control-label col-md-2">اسم المحكمة </label>
                         <div class="col-md-2">
-                            {{$order->AnnualLegalContract->issue_procuration}}
+                            {{$order->CourtAndLawsuit->issue_procuration}}
                         </div>
                     </div>
 
