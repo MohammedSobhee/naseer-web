@@ -236,14 +236,16 @@ class UserEloquent extends Uploader implements UserRepository
 
             })
             ->editColumn('gender', function ($user) {
-                 if ($user->gender == 'male')
-                     return 'ذكر';
+                if ($user->gender == 'male')
+                    return 'ذكر';
                 if ($user->gender == 'female')
                     return 'انثى';
                 return 'غير محدد';
 
             })
-            ->editColumn('phone', function ($user) {
+            ->editColumn('city.name', function ($user) {
+                return isset($user->City) ? $user->City->name : '-';
+            })->editColumn('phone', function ($user) {
                 return $user->country_code . $user->phone;
             })
             ->editColumn('photo', function ($user) {

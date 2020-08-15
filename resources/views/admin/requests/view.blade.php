@@ -11,27 +11,33 @@
         <form action="#" class="form-horizontal form-bordered">
             <div class="form-body">
                 <div class="form-group">
-                    <label class="control-label col-md-3">رقم الطلب</label>
-                    <div class="col-md-3">
+                    <label class="control-label col-md-2">رقم الطلب</label>
+                    <div class="col-md-2">
                         {{$order->id}}
                     </div>
-                    <label class="control-label col-md-3">المدينة</label>
-                    <div class="col-md-3">
-                        {{$order->City->name ?? '-'}}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3">مقدم الطلب</label>
-                    <div class="col-md-3">
+                    <label class="control-label col-md-2">مقدم الطلب</label>
+                    <div class="col-md-2">
                         {{$order->User->name ?? '-'}}
                     </div>
-                    <label class="control-label col-md-3">نوع الخدمة</label>
+                    <label class="control-label col-md-2">المدينة</label>
+                    <div class="col-md-2">
+                        {{$order->City->name ?? '-'}}
+                    </div>
+
+                </div>
+                <div class="form-group">
+
+                    <label class="control-label col-md-2"> الخدمة</label>
                     <div class="col-md-3">
                         {{$order->Service->name ?? '-'}}
                     </div>
+                    <label class="control-label col-md-1">نوع الخدمة</label>
+                    <div class="col-md-1">
+                        {{($order->type == 'categorized')?'مصنّفة':'غير مصنّفة' ?? '-'}}
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">تفاصيل الطلب</label>
+                    <label class="control-label col-md-2">تفاصيل الطلب</label>
                     <div class="col-md-3">
                         {{$order->case_text ?? '-'}}
                     </div>
@@ -53,7 +59,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">الاثباتات و الأدلة</label>
+                    <label class="control-label col-md-2">الاثباتات و الأدلة</label>
                     <div class="col-md-3">
                         {{$order->evidences_text ?? '-'}}
                     </div>
@@ -75,7 +81,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">النتائج</label>
+                    <label class="control-label col-md-2">النتائج</label>
                     <div class="col-md-3">
                         {{$order->preferred_outcomes_text ?? '-'}}
                     </div>
@@ -108,12 +114,12 @@
                         </div>
                         <label class="control-label col-md-2">المدعي أو المدعي عليه </label>
                         <div class="col-md-2">
-                            {{$order->CourtAndLawsuit->prosecutor_defender}}
+                            {{$order->CourtAndLawsuit->prosecutor_defender_txt}}
 
                         </div>
                         <label class="control-label col-md-2">طبيعة المدعي عليه</label>
                         <div class="col-md-2">
-                            {{$order->CourtAndLawsuit->lawsuit_nature}}
+                            {{$order->CourtAndLawsuit->lawsuit_nature_txt}}
 
                         </div>
                     </div>
@@ -125,28 +131,63 @@
                         </div>
                         <label class="control-label col-md-3">دعوى او اثبات </label>
                         <div class="col-md-2">
-                            {{$order->CourtAndLawsuit->lawsuit_proof}}
+                            {{$order->CourtAndLawsuit->lawsuit_proof_txt}}
                         </div>
 
                     </div>
-                    <div  class="form-group">
+                    <div class="form-group">
 
                         <label class="control-label col-md-2">مراجعة عقود </label>
                         <div class="col-md-2">
-                            {{$order->CourtAndLawsuit->court_name}}
+                            {{$order->CourtAndLawsuit->court_name ?? '-'}}
                         </div>
                         <label class="control-label col-md-2">بلد العقار </label>
                         <div class="col-md-2">
-                            {{$order->CourtAndLawsuit->property_country}}
+                            {{$order->CourtAndLawsuit->property_country ?? '-'}}
                         </div>
                         <label class="control-label col-md-2">اسم المحكمة </label>
                         <div class="col-md-2">
-                            {{$order->CourtAndLawsuit->issue_procuration}}
+                            {{$order->CourtAndLawsuit->issue_procuration ?? '-'}}
                         </div>
                     </div>
 
-                @endif
-                @if($order->service_id == 5)
+
+                @elseif($order->service_id == 2)
+                    <div class="form-group text-center" style="background-color:#002D5D; color: #FFFFFF">
+                        <label class="control-label col-md-12 main-label">{{$order->Service->name}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">الخدمة الفرعية</label>
+                        <div class="col-md-2">
+                            {{$order->PublicProsecutionAndPolice->SubService->name}}
+                        </div>
+                        <label class="control-label col-md-2">حالة المتهم </label>
+                        <div class="col-md-2">
+                            {{$order->PublicProsecutionAndPolice->accused_status_txt}}
+
+                        </div>
+                        <label class="control-label col-md-2">الجنس</label>
+                        <div class="col-md-2">
+                            {{$order->PublicProsecutionAndPolice->accused_gender_txt}}
+
+                        </div>
+                    </div>
+                @elseif($order->service_id == 4)
+                    <div class="form-group text-center" style="background-color:#002D5D; color: #FFFFFF">
+                        <label class="control-label col-md-12 main-label">{{$order->Service->name}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">الخدمة الفرعية</label>
+                        <div class="col-md-2">
+                            {{$order->DraftingRegulationAndContract->SubService->name}}
+                        </div>
+                        <label class="control-label col-md-2">نوع تقديم الخدمة </label>
+                        <div class="col-md-2">
+                            {{$order->DraftingRegulationAndContract->type_service_provided_txt}}
+
+                        </div>
+                    </div>
+                @elseif($order->service_id == 5)
                     <div class="form-group text-center" style="background-color:#002D5D; color: #FFFFFF">
                         <label class="control-label col-md-12 main-label">{{$order->Service->name}}</label>
                     </div>
@@ -182,7 +223,7 @@
                         </div>
 
                     </div>
-                    <div  class="form-group">
+                    <div class="form-group">
 
                         <label class="control-label col-md-2">مراجعة عقود </label>
                         <div class="col-md-2">
@@ -197,7 +238,21 @@
                             {{$order->AnnualLegalContract->issue_procuration}}
                         </div>
                     </div>
+                @elseif($order->service_id == 7)
+                    <div class="form-group text-center" style="background-color:#002D5D; color: #FFFFFF">
+                        <label class="control-label col-md-12 main-label">{{$order->Service->name}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">الخدمة الفرعية</label>
+                        <div class="col-md-2">
+                            {{$order->DivisionOfInheritance->SubService->name}}
+                        </div>
+                        <label class="control-label col-md-2">نوع تقديم الخدمة </label>
+                        <div class="col-md-2">
+{{--                            {{$order->DivisionOfInheritance->type_service_provided_txt}}--}}
 
+                        </div>
+                    </div>
                 @endif
             </div>
         </form>

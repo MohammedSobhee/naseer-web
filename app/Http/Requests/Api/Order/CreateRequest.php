@@ -66,13 +66,13 @@ class CreateRequest extends FormRequest
 
             //division_of_inheritances
             'heirs_details' => 'required_if:service_id,7',
-            'agreers' => 'required_if:service_id,7',
-            'against' => 'required_if:service_id,7',
-            'money' => 'required_if:service_id,7',
-            'real_estate' => 'required_if:service_id,7',
-            'bonds_shares' => 'required_if:service_id,7',
-            'companies' => 'required_if:service_id,7',
-            'others' => 'required_if:service_id,7',
+            'agreers' => 'required_if:sub_service_id,18',
+            'against' => 'required_if:sub_service_id,18',
+            'money' => 'nullable',
+            'real_estate' => 'nullable',
+            'bonds_shares' => 'nullable',
+            'companies' => 'nullable',
+            'others' => 'nullable',
 
             //companies_registration_and_trademarkings
             'authorization_type' => 'required_if:sub_service_id,23|in:individual,institution',

@@ -20,6 +20,8 @@ class PublicProsecutionAndPolice extends Model
         'sub_service_id' => 'integer',
     ];
 
+    protected $appends = ['accused_status_txt', 'accused_gender_txt'];
+
     public function Service()
     {
         return $this->belongsTo(Service::class, 'service_id');
@@ -29,4 +31,23 @@ class PublicProsecutionAndPolice extends Model
     {
         return $this->belongsTo(SubService::class, 'sub_service_id');
     }
+
+    public function getAccusedStatusTxtAttribute()
+    {
+        if ($this->accused_status == 'suspended')
+            return 'موقوف';
+        if ($this->accused_status == 'unsuspended')
+            return 'غير موقوف';
+    }
+
+    public function getAccusedGenderTxtAttribute()
+    {
+        if ($this->accused_gender == 'male')
+            return 'ذكر';
+        if ($this->accused_gender == 'female')
+            return 'انثى';
+        if ($this->accused_gender == 'minor')
+            return 'قاصر';
+    }
+
 }

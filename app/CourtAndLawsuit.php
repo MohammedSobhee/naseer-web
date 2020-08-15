@@ -21,6 +21,8 @@ class CourtAndLawsuit extends Model
         'country_id' => 'integer',
     ];
 
+    protected $appends = ['prosecutor_defender_txt', 'lawsuit_nature_txt', 'lawsuit_proof_txt'];
+
     public function Country()
     {
         return $this->belongsTo(Country::class, 'country_id');
@@ -34,5 +36,33 @@ class CourtAndLawsuit extends Model
     public function SubService()
     {
         return $this->belongsTo(SubService::class, 'sub_service_id');
+    }
+
+    public function getProsecutorDefenderTxtAttribute()
+    {
+        if ($this->prosecutor_defender == 'prosecutor')
+            return 'مدعي';
+        return 'مدعي عليه';
+    }
+
+    public function getLawsuitNatureTxtAttribute()
+    {
+        if ($this->lawsuit_nature == 'individual')
+            return 'فرد';
+        elseif ($this->lawsuit_nature == 'company_institution')
+            return 'شركة/مؤسسة';
+        elseif ($this->lawsuit_nature == 'government_agency')
+            return 'جهة حكومية';
+        return '-';
+    }
+
+    public function getLawsuitProofTxtAttribute()
+    {
+        if ($this->lawsuit_proof == 'lawsuit')
+            return 'دعوى';
+        elseif ($this->lawsuit_proof == 'proof')
+            return 'اثبات';
+        return '-';
+
     }
 }
