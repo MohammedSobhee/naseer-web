@@ -14,7 +14,7 @@ class UserController extends Controller
 
     public function __construct(UserEloquent $user)
     {
-        parent::__construct();
+//        parent::__construct();
         $this->user = $user;
     }
 
@@ -27,37 +27,29 @@ class UserController extends Controller
         return view(admin_vw() . '.users.index', $data);
     }
 
-    public function anyData()
+    public function providers()
     {
-//        return $this->user->anyData();
+        $data = [
+            'title' => 'مقدمو الخدمات',
+            'icon' => 'icon-users',
+        ];
+        return view(admin_vw() . '.users.providers', $data);
     }
 
-//    public function userDet($id)
-//    {
-//        $user = $this->user->getById($id);
-//        $data = [
-//            'title' => 'المستخدمين',
-//            'sub_title' => 'تفاصيل المستخدم',
-//            'icon' => 'icon-users',
-//            'user' => $user,
-//            'back_url' => url(admin_vw() . '/users')
-//        ];
-//
-//
-//        return view(admin_vw() . '.users.view', $data);
-//    }
-
-
+    public function anyData($type)
+    {
+        return $this->user->anyData($type);
+    }
     public function userActive(Request $request)
     {
         return $this->user->userActive($request->only('user_id'));
     }
 
-
-    public function verifyEmail(Request $request)
+    public function verifyPhone(Request $request)
     {
-        return $this->user->verifyEmail($request->only('user_id'));
+        return $this->user->verifyPhone($request->only('user_id'));
     }
+
     public function export()
     {
 //        return $this->user->export();

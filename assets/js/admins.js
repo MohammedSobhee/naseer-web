@@ -28,9 +28,9 @@ $(document).ready(function () {
         admins_tbl.on('preXhr.dt', function (e, settings, data) {
             //.name,.title,.server,.searcher.,.status
             // data.name = $('.name').val();
-            data.name = $('#name').val();
+            data.username = $('#username').val();
             data.email = $('#email').val();
-            data.mobile = $('#mobile').val();
+            data.status = $('#status').val();
         }).dataTable({
             "processing": true,
             "serverSide": true,

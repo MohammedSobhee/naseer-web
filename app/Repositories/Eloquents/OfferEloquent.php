@@ -22,6 +22,7 @@ use App\Offer;
 use App\PublicProsecutionAndPolice;
 use App\Repositories\Interfaces\Repository;
 use App\Repositories\Uploader;
+use App\User;
 
 
 class OfferEloquent extends Uploader implements Repository
@@ -33,6 +34,45 @@ class OfferEloquent extends Uploader implements Repository
     {
         $this->model = $model;
 
+    }
+
+    function anyData($order_id)
+    {
+        $offers = $this->model->with('ServiceProvider')->where('request_id', $order_id)->orderByDesc('created_at');
+
+        return datatables()->of($offers)
+            ->filter(function ($query) {
+
+                if (request()->filled('name')) {
+
+                    $service_providers_id = User::where('type', 'service_provider')->where('name', 'LIKE', '%' . request()->get('name') . '%')->pluck('id');
+                    $query->whereIn('service_provider_id', $service_providers_id);
+                }
+                if (request()->filled('payment_type')) {
+                    $query->where('payment_type', request()->get('payment_type'));
+                }
+                if (request()->filled('status')) {
+                    $query->where('status', request()->get('status'));
+                }
+
+            })
+            ->editColumn('service_provider.name', function ($request) {
+                return isset($request->ServiceProvider) ? $request->ServiceProvider->name : '-';
+            })->editColumn('payment_type', function ($request) {
+                if ($request->payment_type == 'down_payment')
+                    return 'دفعة مقدمة';
+                if ($request->payment_type == 'late_payment')
+                    return 'دفعة متأخرة';
+            })
+            ->editColumn('status', function ($request) {
+                if ($request->status == 'pending')
+                    return '<span class="label label-warning">قيد الانتظار</span>';
+                if ($request->status == 'accepted')
+                    return '<span class="label label-success">مقبولة</span>';
+                if ($request->status == 'rejected')
+                    return '<span class="label label-danger">مرفوضة</span>';
+            })->addIndexColumn()
+            ->rawColumns(['status'])->toJson();
     }
 
     function getAll(array $attributes)

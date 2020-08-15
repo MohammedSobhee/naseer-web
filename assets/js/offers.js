@@ -1,24 +1,22 @@
 $(document).ready(function () {
 
-    if ($("#orders_tbl").length) {
+    if ($("#offers_tbl").length) {
 
-        var orders_tbl = $("#orders_tbl");
-        orders_tbl.on('preXhr.dt', function (e, settings, data) {
+        var offers_tbl = $("#offers_tbl");
+        offers_tbl.on('preXhr.dt', function (e, settings, data) {
             data.name = $('#name').val();
-            data.city = $('#city').val();
-            data.type = $('#type').val();
-            data.service_id = $('#service_id').val();
+            data.payment_type = $('#payment_type').val();
             data.status = $('#status').val();
         }).dataTable({
             "processing": true,
             "serverSide": true,
 
             "ajax": {
-                url: baseURL + "/requests/request-data"
+                url: baseURL + "/offers/offer-data/" + $('#order_id').val()
                 , "dataSrc": function (json) {
                     //Make your callback here.
                     if (json.status != undefined && !json.status) {
-                        $('#orders_tbl_processing').hide();
+                        $('#offers_tbl_processing').hide();
                         bootbox.alert(json.message);
                         //
                     } else
@@ -26,16 +24,12 @@ $(document).ready(function () {
                 }
             },
             columns: [
-                {data: 'id', name: 'id'},
-                {data: 'user.name', name: 'user.name'},
-                {data: 'city.name', name: 'city.name'},
-                {data: 'type', name: 'type'},
-                {data: 'service.name', name: 'service.name'},
-                {data: 'contact_prefer', name: 'contact_prefer'},
-                {data: 'payment_prefer', name: 'payment_prefer'},
-                {data: 'service_date', name: 'service_date'},
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'service_provider.name', name: 'service_provider.name'},
+                {data: 'payment_type', name: 'payment_type'},
+                {data: 'payment_value', name: 'payment_value'},
+                {data: 'details', name: 'details'},
                 {data: 'status', name: 'status'},
-                {data: 'action', name: 'action'}
             ],
 
             language: {
@@ -69,14 +63,14 @@ $(document).ready(function () {
 
     $(document).on("click", ".filter-submit", function () {
 //                if ($(this).val().length > 3)
-        orders_tbl.api().ajax.reload();
+        offers_tbl.api().ajax.reload();
     });
     $(document).on('click', '.filter-cancel', function () {
 
         $(".select2").val('').trigger('change');
         $(this).closest('tr').find('input,select').val('');
         // $('#is_admin_confirm,.status').val('').trigger('change');
-        orders_tbl.api().ajax.reload();
+        offers_tbl.api().ajax.reload();
     });
 
 });

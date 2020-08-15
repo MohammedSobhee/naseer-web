@@ -28,8 +28,8 @@ class AdminEloquent implements Repository
         return datatables()->of($admins)
             ->filter(function ($query) {
 
-                if (request()->filled('name')) {
-                    $query->where('name', 'LIKE', '%' . request()->get('name') . '%');
+                if (request()->filled('username')) {
+                    $query->where('username', 'LIKE', '%' . request()->get('username') . '%');
                 }
 
                 if (request()->filled('email')) {
@@ -47,14 +47,12 @@ class AdminEloquent implements Repository
                 return '<input type="checkbox" class="make-switch" data-on-text="&nbsp;مفعّل&nbsp;" data-off-text="&nbsp;معطّل&nbsp;" name="is_active" data-id="' . $user->id . '" data-on-color="success" data-size="mini" data-off-color="warning">';
             })
             ->addColumn('action', function ($admin) {
-                return '<a href="' . url(admin_vw() . '/profile/' . $admin->id) . '" class="btn btn-sm btn-success blue btn-circle btn-icon-only"
-                                                                                   title="View Profile">
-                                                                                    <i class="fa fa-eye"></i>
-                                                                                </a>
-                                                                                <a href="' . url(admin_vw() . '/admins/edit/' . $admin->id) . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only"
+                return '<a href="' . url(admin_vw() . '/admins/' . $admin->id . '/edit') . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only edit-admin-mdl"
                                                                                    title="Edit">
                                                                                     <i class="fa fa-edit"></i>
-                                                                                </a>';
+                                                                                </a><a href="' . url(admin_vw() . '/admins/' . $admin->id) . '" class="btn btn-circle btn-icon-only red delete">
+                                        <i class="fa fa-trash"></i>
+                                    </a>';
             })->addIndexColumn()
             ->rawColumns(['action', 'status'])->toJson();
     }
@@ -98,30 +96,12 @@ class AdminEloquent implements Repository
     function create(array $attributes)
     {
         // TODO: Implement create() method.
-        $admin = new Admin();
-        $admin->username = $attributes['username'];
-        $admin->email = $attributes['email'];
-        $admin->name = $attributes['name'];
-        $admin->password = bcrypt($attributes['password']);
-        if ($admin->save()) {
 
-            $admin = $this->model->find($admin->id);
+        $attributes['password'] = bcrypt($attributes['password']);
+        $admin = Admin::create($attributes);
+        return response_api(true, 200, trans('app.admin_created'), $admin);
 
-//            if ($admin->level == 'admin') {
-//                // user has one roles in my case
-//                if (count($admin->roles) > 0) {
-//                    $admin->detachRoles($admin->roles);
-//                }
-//
-//                foreach ($attributes['role'] as $role)
-//                    $admin->attachRole($role);
-//            }
-
-
-            return response_api(true, 200, trans('app.admin_created'), $admin);
-
-        }
-        return response_api(false, 422, trans('app.not_created'));
+//        return response_api(false, 422, trans('app.not_created'));
     }
 
     function update(array $attributes, $id = null)
@@ -138,22 +118,12 @@ class AdminEloquent implements Repository
         if (isset($attributes['email']))
             $admin->email = $attributes['email'];
 
-        if (isset($attributes['mobile']) && $attributes['mobile'] != '')
-            $admin->mobile = $attributes['mobile'];
-//        if (isset($attributes['password']))
-//            $admin->password = bcrypt($attributes['password']);
+        if (isset($attributes['phone']) && $attributes['phone'] != '')
+            $admin->phone = $attributes['phone'];
+        if (isset($attributes['password']))
+            $admin->password = bcrypt($attributes['password']);
 
         if ($admin->save()) {
-
-//            if ($admin->level == 'admin') {
-//                // user has one roles in my case
-//                if (count($admin->roles) > 0) {
-//                    $admin->detachRoles($admin->roles);
-//                }
-//
-//                foreach ($attributes['role'] as $role)
-//                    $admin->attachRole($role);
-//            }
             return response_api(true, 200, trans('app.updated'), $admin);
 
         }
@@ -163,7 +133,7 @@ class AdminEloquent implements Repository
     function delete($id)
     {
         // TODO: Implement delete() method.
-        $admin = $this->model->where('level', 'admin')->find($id);
+        $admin = $this->model->where('type', 'admin')->find($id);
 
         if (isset($admin) && $admin->delete())
             return response_api(true, 200, trans('app.admin_deleted'), []);

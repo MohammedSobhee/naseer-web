@@ -18,6 +18,8 @@ class Request extends Model
         'is_active' => 'boolean',
     ];
 
+    protected $appends = ['offers_num'];
+
     public function getCaseFileAttribute($value)
     {
         if (isset($value))
@@ -122,5 +124,10 @@ class Request extends Model
     public function WitnessRequest()
     {
         return $this->hasOne(WitnessRequest::class, 'request_id', 'id');
+    }
+
+    public function getOffersNumAttribute()
+    {
+        return $this->Offers()->count();
     }
 }

@@ -3,84 +3,34 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Offer;
-use Illuminate\Http\Request;
+use App\Request;
+use App\Repositories\Eloquents\OfferEloquent;
 
 class OfferController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    private $offer;
+
+    public function __construct(OfferEloquent $offer)
     {
-        //
+//        parent::__construct();
+        $this->offer = $offer;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function index($order_id)
     {
-        //
+        $data = [
+            'title' => 'العروض ( رقم الطلب - ' . $order_id . ')',
+            'icon' => 'icon-users',
+            'order_id' => $order_id,
+            'order' => Request::with('City')->find($order_id),
+        ];
+        return view(admin_vw() . '.requests.offers', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Offer  $offer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Offer $offer)
+    public function anyData($order_id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Offer  $offer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Offer $offer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Offer  $offer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Offer $offer)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Offer  $offer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Offer $offer)
-    {
-        //
+        return $this->offer->anyData($order_id);
     }
 }

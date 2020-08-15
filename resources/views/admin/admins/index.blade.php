@@ -12,11 +12,6 @@
     <link href="{{url('/')}}/assets/global/css/plugins-md-rtl.min.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
 
-    <style>
-        td {
-            direction: ltr !important;
-        }
-    </style>
 @endsection
 @section('content')
 
@@ -43,37 +38,41 @@
 
                                 <th width="10%"> اسم المستخدم</th>
                                 <th width="20%"> البريد الالكتروني</th>
-                                <th width="10%"> رقم الهاتف</th>
+                                <th width="10%"> الحالة</th>
                                 <th width="10%"> العمليات</th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td></td>
                                 <td>
-                                    <input type="text" class="form-control form-filter input-md" name="name"
-                                           placeholder=" اسم المستخدم" id="name">
+                                    <input type="text" class="form-control form-filter input-md" name="username"
+                                           placeholder=" اسم المستخدم" id="username">
                                 </td>
                                 <td>
                                     <input type="email" class="form-control form-filter input-md" name="email"
                                            placeholder="البريد الالكتروني" id="email">
                                 </td>
-
                                 <td>
-                                    <input type="text" class="form-control form-filter input-md" name="mobile"
-                                           placeholder="رقم الهاتف" id="mobile">
+                                    <select class="form-control input-md status select"
+                                            name="status"
+                                            id="status">
+                                        <option value="">اختيار الحالة</option>
+                                        <option value="1">مفعّل</option>
+                                        <option value="0">معطّل</option>
+                                    </select>
                                 </td>
-
                                 <td>
                                     <div class="margin-bottom-5">
-                                        <a href="javascript:;"
-                                           class="btn btn-sm btn-danger btn-circle btn-icon-only filter-cancel"
-                                           title="افراغ الخانات">
-                                            <i class="fa fa-rotate-left"></i>
-                                        </a>
                                         <a href="javascript:;"
                                            class="btn btn-sm btn-success filter-submit btn-circle btn-icon-only margin-bottom"
                                            title="فلترة">
                                             <i class="fa fa-search"></i>
                                         </a>
+                                        <a href="javascript:;"
+                                           class="btn btn-sm btn-danger btn-circle btn-icon-only filter-cancel"
+                                           title="افراغ الخانات">
+                                            <i class="fa fa-rotate-left"></i>
+                                        </a>
+
 
 {{--                                        <button type="submit"--}}
 {{--                                                class="btn btn-sm btn-default btn-circle btn-icon-only filter-export margin-bottom" title="تصدير اكسل">--}}
@@ -98,7 +97,7 @@
                         <span class="caption-subject bold uppercase"> {{$title}}</span>
                     </div>
                     <div class="actions">
-                        <a href="{{url(admin_vw().'/admin/create')}}" class="btn btn-circle btn-success add-admin-mdl">
+                        <a href="{{url(admin_vw().'/admins/create')}}" class="btn btn-circle btn-success add-admin-mdl">
                             <i class="fa fa-plus"></i>
                             <span class="hidden-xs"> اضافة </span>
                         </a>

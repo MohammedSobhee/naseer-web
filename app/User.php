@@ -54,6 +54,12 @@ class User extends Authenticatable
     }
 
 
+    public function City()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
+
     public function ServiceProvider()
     {
         return $this->hasOne(ServiceProvider::class, 'user_id', 'id');
@@ -68,21 +74,21 @@ class User extends Authenticatable
     {
         if (isset($this->getAttributes()['photo']))
             return url('storage/app/users/' . $this->id) . '/100/' . $this->getAttributes()['photo'];
-        return null;
+        return url('assets/apps/img/unknown.png');
     }
 
     public function getPhoto300Attribute()
     {
         if (isset($this->getAttributes()['photo']))
             return url('storage/app/users/' . $this->id) . '/300/' . $this->getAttributes()['photo'];
-        return null;
+        return url('assets/apps/img/unknown.png');
     }
 
     public function getPhotoAttribute($value)
     {
         if (isset($value))
             return url('storage/app/users/' . $this->id) . '/' . $value;
-        return null;
+        return url('assets/apps/img/unknown.png');
     }
 
 

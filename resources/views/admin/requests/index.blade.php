@@ -11,6 +11,7 @@
           type="text/css"/>
     <link href="{{url('/')}}/assets/global/css/plugins-md-rtl.min.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
+
 @endsection
 @section('content')
 
@@ -27,8 +28,7 @@
                 </div>
                 <div class="portlet-body">
                     <div class="table-container">
-                        {!! Form::open(['method'=>'POST','url'=>url(admin_vw().'/users/export')]) !!}
-                        {{--                        <form method="POST" action="#">--}}
+                        {!! Form::open(['method'=>'POST','url'=>url(admin_vw().'/admins/export')]) !!}
                         <table class="table table-striped table-bordered table-hover table-checkable"
                                id="datatable_products">
                             <thead>
@@ -36,44 +36,52 @@
                                 <th width="1%">
                                 </th>
 
-                                <th width="10%"> اسم المستخدم</th>
-                                <th width="20%"> البريد الالكتروني</th>
-                                <th width="10%"> رقم الهاتف</th>
-                                <th width="10%"> حالة التحقق</th>
-                                <th width="10%"> الحالة</th>
+                                <th width="10%"> مقدم الطلب</th>
+                                <th width="10%"> المدينة</th>
+                                <th width="10%"> نوع الخدمة</th>
+                                <th width="10%"> الخدمة</th>
+                                <th width="10%"> حالة الطلب</th>
                                 <th width="10%"> العمليات</th>
                             </tr>
                             <tr role="row" class="filter">
                                 <td></td>
                                 <td>
                                     <input type="text" class="form-control form-filter input-md" name="name"
-                                           placeholder=" اسم المستخدم" id="name">
+                                           placeholder=" مقدم الطلب" id="name">
                                 </td>
                                 <td>
-                                    <input type="email" class="form-control form-filter input-md" name="email"
-                                           placeholder="البريد الالكتروني" id="email">
+                                    <input type="text" class="form-control form-filter input-md" name="city"
+                                           placeholder="المدينة" id="city">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control form-filter input-md" name="phone"
-                                           placeholder="رقم الهاتف" id="phone">
-                                </td>
-                                <td>
-                                    <select class="form-control input-md is_active select" name="is_active"
-                                            id="is_verify">
-                                        <option value="">اختيار حالة التحقق</option>
-                                        <option value="1">مفعّل</option>
-                                        <option value="0">معطّل</option>
+                                    <select class="form-control input-md type select"
+                                            name="type"
+                                            id="type">
+                                        <option value="">نوع الخدمة</option>
+                                        <option value="categorized">مصنّفة</option>
+                                        <option value="uncategorized">غير مصنّفة</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="form-control input-md is_active select" name="is_active"
-                                            id="is_active">
-                                        <option value="">اختيار الحالة</option>
-                                        <option value="1">مفعّل</option>
-                                        <option value="0">معطّل</option>
+                                    <select class="form-control input-md service_id select"
+                                            name="service_id"
+                                            id="service_id">
+                                        <option value=""> الخدمة</option>
+                                        @foreach($services as $service)
+                                            <option value="{{$service->id}}">{{$service->name}}</option>
+                                        @endforeach
                                     </select>
                                 </td>
-
+                                <td>
+                                    <select class="form-control input-md status select"
+                                            name="status"
+                                            id="status">
+                                        <option value="">حالة الطلب</option>
+                                        <option value="new">جديدة</option>
+                                        <option value="completed">منتهية</option>
+                                        <option value="canceled">ملغاة</option>
+                                    </select>
+                                </td>
                                 <td>
                                     <div class="margin-bottom-5">
                                         <a href="javascript:;"
@@ -86,6 +94,13 @@
                                            title="افراغ الخانات">
                                             <i class="fa fa-rotate-left"></i>
                                         </a>
+
+
+                                        {{--                                        <button type="submit"--}}
+                                        {{--                                                class="btn btn-sm btn-default btn-circle btn-icon-only filter-export margin-bottom" title="تصدير اكسل">--}}
+                                        {{--                                            <i class="fa fa-file-excel-o"></i>--}}
+                                        {{--                                        </button>--}}
+
                                     </div>
 
                                 </td>
@@ -94,7 +109,6 @@
                             <tbody></tbody>
                         </table>
                         {!! Form::close() !!}
-                        {{--                        </form>--}}
                     </div>
                 </div>
             </div>
@@ -109,20 +123,19 @@
                 <div class="portlet-body">
 
                     <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                           id="users_tbl">
+                           id="orders_tbl">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th> الصورة</th>
-                            <th> اسم المستخدم</th>
-                            <th> الجنس</th>
-                            <th> البريد الالكتروني</th>
-{{--                            <th> تحقق البريد الالكتروني</th>--}}
-                            <th> رقم الهاتف</th>
-                            <th> تحقق الهاتف</th>
-                            <th>المدينة</th>
-                            <th> الحالة</th>
-{{--                            <th>العمليات</th>--}}
+                            <th> مقدم الطلب</th>
+                            <th> المدينة</th>
+                            <th> نوع الخدمة</th>
+                            <th> الخدمة</th>
+                            <th> التواصل المفضلة</th>
+                            <th> الدفع المفضلة</th>
+                            <th> تاريخ الخدمة</th>
+                            <th> حالة الطلب</th>
+                            <th>العمليات</th>
                         </tr>
                         </thead>
                     </table>
@@ -148,6 +161,6 @@
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <!-- END PAGE LEVEL SCRIPTS -->
     <script src="{{url('/')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
-    <script src="{{url('/')}}/assets/js/users.js" type="text/javascript"></script>
+    <script src="{{url('/')}}/assets/js/orders.js" type="text/javascript"></script>
 
 @stop

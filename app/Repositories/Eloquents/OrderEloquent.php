@@ -11,6 +11,7 @@ namespace App\Repositories\Eloquents;
 use App\AnnualLegalContract;
 use App\Arbitration;
 use App\AssignExpert;
+use App\City;
 use App\CompaniesRegistrationAndTrademarking;
 use App\CourtAndLawsuit;
 use App\DivisionOfInheritance;
@@ -21,6 +22,7 @@ use App\PublicProsecutionAndPolice;
 use App\Repositories\Interfaces\Repository;
 use App\Repositories\Uploader;
 use App\Request;
+use App\User;
 
 
 class OrderEloquent extends Uploader implements Repository
@@ -32,6 +34,83 @@ class OrderEloquent extends Uploader implements Repository
     {
         $this->model = $model;
 
+    }
+
+    function anyData()
+    {
+        $requests = $this->model->with('City', 'User', 'Service')->orderByDesc('created_at');
+
+        return datatables()->of($requests)
+            ->filter(function ($query) {
+
+                if (request()->filled('name')) {
+
+                    $users_id = User::where('type', 'user')->where('name', 'LIKE', '%' . request()->get('name') . '%')->pluck('id');
+                    $query->whereIn('user_id', $users_id);
+                }
+
+                if (request()->filled('city')) {
+                    $cities_id = City::where('name', 'LIKE', '%' . request()->get('city') . '%')->pluck('id');
+                    $query->whereIn('city_id', $cities_id);
+                }
+
+
+                if (request()->filled('type')) {
+                    $query->where('type', request()->get('type'));
+                }
+                if (request()->filled('service_id')) {
+                    $query->where('service_id', request()->get('service_id'));
+                }
+                if (request()->filled('status')) {
+                    $query->where('status', request()->get('status'));
+                }
+
+            })
+            ->editColumn('user.name', function ($request) {
+                return isset($request->User) ? $request->User->name : '-';
+            })->editColumn('service.name', function ($request) {
+                return isset($request->Service) ? $request->Service->name : '-';
+            })->editColumn('type', function ($request) {
+                if ($request->type == 'categorized')
+                    return '<span class="label label-success">مصنّفة</span>';
+                if ($request->type == 'uncategorized')
+                    return '<span class="label label-danger">غير مصنّفة</span>';
+            })->editColumn('contact_prefer', function ($request) {
+                if ($request->contact_prefer == 'go_to_service_provider')
+                    return 'حضور مقدم الطلب الى مقدم الخدمة';
+                if ($request->contact_prefer == 'go_to_user')
+                    return 'حضور مقدم الخدمة الى مقدم الطلب';
+                if ($request->contact_prefer == 'according_agreement')
+                    return 'حسب الاتفاق';
+            })->editColumn('payment_prefer', function ($request) {
+                if ($request->payment_prefer == 'down_payment')
+                    return 'دفعة مقدمة';
+                if ($request->payment_prefer == 'without_down_payment')
+                    return 'بدون دفعة مقدمة';
+            })
+            ->editColumn('status', function ($request) {
+                if ($request->status == 'new')
+                    return '<span class="label label-warning">جديدة</span>';
+                if ($request->status == 'completed')
+                    return '<span class="label label-success">منتهية</span>';
+                if ($request->status == 'canceled')
+                    return '<span class="label label-danger">ملغاة</span>';
+            })
+            ->addColumn('action', function ($request) {
+                return '<a href="' . url(admin_vw() . '/requests/' . $request->id) . '" class="btn btn-sm btn-success green btn-circle"
+                                                                                   title="offers">
+                                                                                    <i class="fa fa-eye"></i>
+                                                                                   تفاصيل
+                                                                                </a>
+                                                                                <a href="' . url(admin_vw() . '/requests/' . $request->id . '/offers') . '" class="btn btn-sm btn-success purple btn-circle"
+                                                                                   title="offers">
+                                                                                   (' . $request->offers_num . ')
+                                                                                   العروض
+
+                                                                                </a>
+                                                                               ';
+            })->addIndexColumn()
+            ->rawColumns(['status', 'type', 'contact_prefer', 'action'])->toJson();
     }
 
     function getAll(array $attributes)

@@ -109,7 +109,7 @@
                 <div class="portlet-body">
 
                     <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                           id="users_tbl">
+                           id="providers_tbl">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -148,6 +148,6 @@
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <!-- END PAGE LEVEL SCRIPTS -->
     <script src="{{url('/')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
-    <script src="{{url('/')}}/assets/js/users.js" type="text/javascript"></script>
+    <script src="{{url('/')}}/assets/js/providers.js" type="text/javascript"></script>
 
 @stop

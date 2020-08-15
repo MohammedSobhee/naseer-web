@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('#users_tbl').on('switchChange.bootstrapSwitch', '.is_active', function (event, state) {
+    $('#providers_tbl').on('switchChange.bootstrapSwitch', '.is_active', function (event, state) {
         // ... skipped ...
         var user_id = $(this).data('id');
 
@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     });
 
-    $('#users_tbl').on('switchChange.bootstrapSwitch', '.verify', function (event, state) {
+    $('#providers_tbl').on('switchChange.bootstrapSwitch', '.verify', function (event, state) {
         // ... skipped ...
         var user_id = $(this).data('id');
 
@@ -44,10 +44,10 @@ $(document).ready(function () {
 
     });
 
-    if ($("#users_tbl").length) {
+    if ($("#providers_tbl").length) {
 
-        var users_tbl = $("#users_tbl");
-        users_tbl.on('preXhr.dt', function (e, settings, data) {
+        var providers_tbl = $("#providers_tbl");
+        providers_tbl.on('preXhr.dt', function (e, settings, data) {
             //.name,.title,.server,.searcher.,.status
             // data.name = $('.name').val();
             data.name = $('#name').val();
@@ -60,11 +60,11 @@ $(document).ready(function () {
             "serverSide": true,
 
             "ajax": {
-                url: baseURL + "/users/user-data/user"
+                url: baseURL + "/users/user-data/service_provider"
                 // success: function (response) {
                 //
                 //     if (!response.status) {
-                //         $('#users_tbl_processing').hide();
+                //         $('#providers_tbl_processing').hide();
                 //         bootbox.alert(response.message);
                 //
                 //     }
@@ -72,7 +72,7 @@ $(document).ready(function () {
                 , "dataSrc": function (json) {
                     //Make your callback here.
                     if (json.status != undefined && !json.status) {
-                        $('#users_tbl_processing').hide();
+                        $('#providers_tbl_processing').hide();
                         bootbox.alert(json.message);
                         //
                     } else
@@ -144,14 +144,14 @@ $(document).ready(function () {
     });
     $(document).on("click", ".filter-submit", function () {
 //                if ($(this).val().length > 3)
-        users_tbl.api().ajax.reload();
+        providers_tbl.api().ajax.reload();
     });
     $(document).on('click', '.filter-cancel', function () {
 
         $(".select2").val('').trigger('change');
         $(this).closest('tr').find('input,select').val('');
         // $('#is_admin_confirm,.status').val('').trigger('change');
-        users_tbl.api().ajax.reload();
+        providers_tbl.api().ajax.reload();
     });
 })
 ;

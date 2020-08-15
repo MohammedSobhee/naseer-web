@@ -16,7 +16,14 @@ class ServiceProviderMiddleware
     public function handle($request, Closure $next)
     {
         if (auth()->user()->type != 'service_provider') {
-            return response_api(false,422,'لا يوجد لديك صلاحية مزود خدمة',empObj());
+            return response_api(false, 422, 'لا يوجد لديك صلاحية مزود خدمة', empObj());
+        }
+
+        if (!auth()->user()->is_active) {
+            return response_api(false, 407, '2تم ايقاف حسابك', empObj());
+        }
+        if (!auth()->user()->is_verify) {
+            return response_api(false, 405, 'تحقق من كود التحقق2', ['token' => empObj(), 'user' => auth()->user()]);
         }
         return $next($request);
     }

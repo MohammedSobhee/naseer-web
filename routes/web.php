@@ -49,7 +49,27 @@ Route::group(['namespace' => 'Admin\Auth'], function () {
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'namespace' => 'Admin'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
+
     Route::get('/admins', 'AdminController@index');
     Route::get('/admins/admin-data', 'AdminController@anyData');
     Route::put('/admins/admin-status', 'AdminController@adminStatus');
+    Route::delete('admins/{id}', 'AdminController@delete');
+    Route::get('admins/{id}/edit', 'AdminController@edit');
+    Route::get('admins/create', 'AdminController@create');
+    Route::put('admins/{id}/edit', 'AdminController@update');
+    Route::post('admins/create', 'AdminController@store');
+
+    Route::get('/service-providers', 'UserController@providers');
+    Route::get('/users', 'UserController@index');
+    Route::get('/users/user-data/{type}', 'UserController@anyData');
+    Route::put('/users/user-verify', 'UserController@verifyPhone');
+    Route::put('/users/user-status', 'UserController@userActive');
+
+    Route::get('/requests', 'RequestController@index');
+    Route::get('/requests/request-data', 'RequestController@anyData');
+    Route::get('/requests/{id}', 'RequestController@requestDet');
+
+    Route::get('/requests/{order_id}/offers', 'OfferController@index');
+    Route::get('/offers/offer-data/{order_id}', 'OfferController@anyData');
+
 });

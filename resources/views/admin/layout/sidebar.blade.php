@@ -28,8 +28,8 @@
                     <span class="selected"></span>
                 </a>
             </li>
-            <li class="nav-item @if(preg_match('/user/i',url()->current())) start active open @endif ">
-                <a href="{{url(admin_vw().'/users')}}" class="nav-link nav-toggle">
+            <li class="nav-item @if(preg_match('/user|service-provider/i',url()->current())) start active open @endif ">
+                <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
                     <span class="title">ادارة المستخدمين</span>
                     <span class="selected"></span>
@@ -37,13 +37,13 @@
 
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item @if(preg_match('/cities/i',url()->current())) start active open @endif  ">
-                        <a href="{{url(admin_constant_url().'/cities')}}" class="nav-link ">
+                    <li class="nav-item @if(preg_match('/user/i',url()->current())) start active open @endif  ">
+                        <a href="{{url(admin_vw().'/users')}}" class="nav-link ">
                             <span class="title">المستخدمين  </span>
                         </a>
                     </li>
-                    <li class="nav-item @if(preg_match('/cities/i',url()->current())) start active open @endif  ">
-                        <a href="{{url(admin_constant_url().'/cities')}}" class="nav-link ">
+                    <li class="nav-item @if(preg_match('/service-providers/i',url()->current())) start active open @endif  ">
+                        <a href="{{url(admin_vw().'/service-providers')}}" class="nav-link ">
                             <span class="title">مقدمو الخدمات  </span>
                         </a>
                     </li>
@@ -52,8 +52,8 @@
                 </ul>
 
             </li>
-            <li class="nav-item @if(preg_match('/admins/i',url()->current())) start active open @endif ">
-                <a href="{{url(admin_vw().'/admins')}}" class="nav-link nav-toggle">
+            <li class="nav-item @if(preg_match('/requests/i',url()->current())) start active open @endif ">
+                <a href="{{url(admin_vw().'/requests')}}" class="nav-link nav-toggle">
                     <i class="icon-layers"></i>
                     <span class="title">الطلبات</span>
                     <span class="selected"></span>

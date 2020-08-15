@@ -195,7 +195,7 @@ class UserEloquent extends Uploader implements UserRepository
 
             if ($user->save()) {
                 if (!$user->is_active) {
-                    $action = 'user_deactivate';
+//                    $action = 'user_deactivate';
 //                    $this->notificationSystem->sendNotification(null, $user->id, $user->id, $action);
                     $this->logout($user->id);
                     return response_api(true, 200);
@@ -207,6 +207,71 @@ class UserEloquent extends Uploader implements UserRepository
         return response_api(false, 422);
 
     }
+
+    function anyData($type)
+    {
+        $users = $this->model->with('City')->where('type', $type)->orderByDesc('created_at');
+
+        return datatables()->of($users)
+            ->filter(function ($query) {
+
+                if (request()->filled('name')) {
+                    $query->where('name', 'LIKE', '%' . request()->get('name') . '%');
+                }
+
+                if (request()->filled('email')) {
+                    $query->where('email', 'LIKE', '%' . request()->get('email') . '%');
+                }
+
+                if (request()->filled('phone')) {
+                    $query->where('phone', 'LIKE', '%' . request()->get('phone') . '%');
+                }
+
+                if (request()->filled('is_active')) {
+                    $query->where('is_active', request()->get('is_active'));
+                }
+                if (request()->filled('is_verify')) {
+                    $query->where('is_verify', request()->get('is_verify'));
+                }
+
+            })
+            ->editColumn('gender', function ($user) {
+                 if ($user->gender == 'male')
+                     return 'ذكر';
+                if ($user->gender == 'female')
+                    return 'انثى';
+                return 'غير محدد';
+
+            })
+            ->editColumn('phone', function ($user) {
+                return $user->country_code . $user->phone;
+            })
+            ->editColumn('photo', function ($user) {
+                return '<img src="' . $user->photo100 . '" width="100" class="img-circle">';
+            })
+            ->editColumn('is_verify', function ($user) {
+                if ($user->is_verify)
+                    return '<input type="checkbox" class="make-switch verify" data-on-text="&nbsp;مفعّل&nbsp;" data-off-text="&nbsp;معطّل&nbsp;" name="is_verify" data-id="' . $user->id . '" checked  data-on-color="success" data-size="mini" data-off-color="warning">';
+                return '<input type="checkbox" class="make-switch verify" data-on-text="&nbsp;مفعّل&nbsp;" data-off-text="&nbsp;معطّل&nbsp;" name="is_verify" data-id="' . $user->id . '" data-on-color="success" data-size="mini" data-off-color="warning">';
+
+            })
+            ->editColumn('is_active', function ($user) {
+                if ($user->is_active)
+                    return '<input type="checkbox" class="make-switch is_active" data-on-text="&nbsp;مفعّل&nbsp;" data-off-text="&nbsp;معطّل&nbsp;" name="is_active" data-id="' . $user->id . '" checked  data-on-color="success" data-size="mini" data-off-color="warning">';
+                return '<input type="checkbox" class="make-switch is_active" data-on-text="&nbsp;مفعّل&nbsp;" data-off-text="&nbsp;معطّل&nbsp;" name="is_active" data-id="' . $user->id . '" data-on-color="success" data-size="mini" data-off-color="warning">';
+            })
+            ->addColumn('action', function ($user) {
+                return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/edit') . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only edit-user-mdl"
+                                                                                   title="Edit">
+                                                                                    <i class="fa fa-edit"></i>
+                                                                                </a>
+                                                                                <a href="' . url(admin_vw() . '/users/' . $user->id) . '" class="btn btn-circle btn-icon-only red delete">
+                                        <i class="fa fa-trash"></i>
+                                    </a>';
+            })->addIndexColumn()
+            ->rawColumns(['action', 'photo', 'is_active', 'is_verify'])->toJson();
+    }
+
 
     function verifyEmail($id)
     {
@@ -221,6 +286,24 @@ class UserEloquent extends Uploader implements UserRepository
                 $user->email_verified_at = null;
 
             if ($user->save()) {
+                return response_api(true, 200);
+            }
+        }
+        return response_api(false, 422);
+
+    }
+
+    function verifyPhone($id)
+    {
+
+        $user = $this->model->find($id['user_id']);
+
+        if (isset($user)) {
+            $user->is_verify = !$user->is_verify;
+            if ($user->save()) {
+                if (!$user->is_verify) {
+                    $this->logout($user->id);
+                }
                 return response_api(true, 200);
             }
         }
