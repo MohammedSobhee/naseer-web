@@ -16,4 +16,24 @@ class AssignExpert extends Model
         'service_id' => 'integer',
         'sub_service_id' => 'integer',
     ];
+    protected $appends = ['request_side_txt'];
+
+    public function Service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
+
+    public function SubService()
+    {
+        return $this->belongsTo(SubService::class, 'sub_service_id');
+    }
+
+    public function getRequestSideTxtAttribute()
+    {
+        if ($this->request_side == 'personal_agency')
+            return 'جهة شخصية';
+        if ($this->request_side == 'judicial_authority')
+            return 'جهة قضائية';
+    }
+
 }

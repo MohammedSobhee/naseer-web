@@ -15,4 +15,29 @@ class MarriageOfficer extends Model
         'service_id' => 'integer',
         'sub_service_id' => 'integer',
     ];
+
+
+    public function Service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
+
+    public function SubService()
+    {
+        return $this->belongsTo(SubService::class, 'sub_service_id');
+    }
+
+    public function getMedicalExaminationAttribute($value)
+    {
+        if (isset($value))
+            return url('assets/upload') . '/' . $value;
+    }
+
+    public function getDivorceCertificateAttribute($value)
+    {
+        if (isset($value))
+            return url('assets/upload') . '/' . $value;
+    }
+
+
 }

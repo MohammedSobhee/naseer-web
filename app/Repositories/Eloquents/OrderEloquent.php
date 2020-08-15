@@ -200,7 +200,28 @@ class OrderEloquent extends Uploader implements Repository
                 }
                 //MarriageOfficer
                 if ($attributes['service_id'] == 10) {
-                    MarriageOfficer::create($attributes);
+//                    MarriageOfficer::create($attributes);
+                    $marriage_office = new MarriageOfficer();
+                    $marriage_office->request_id = $attributes['request_id'];
+                    $marriage_office->service_id = $attributes['service_id'];
+                    $marriage_office->sub_service_id = $attributes['sub_service_id'];
+                    $marriage_office->location = $attributes['location'];
+                    $marriage_office->latitude = $attributes['latitude'];
+                    $marriage_office->longitude = $attributes['longitude'];
+                    $marriage_office->request_datetime = $attributes['request_datetime'];
+                    $marriage_office->client_idno = $attributes['client_idno'];
+                    if ($marriage_office->save()) {
+                        if (isset($attributes['medical_examination'])) {
+                            sleep(1);
+                            $marriage_office->medical_examination = $this->upload($attributes, 'medical_examination');
+                            $marriage_office->save();
+                        }
+                        if (isset($attributes['divorce_certificate'])) {
+                            sleep(1);
+                            $marriage_office->divorce_certificate = $this->upload($attributes, 'divorce_certificate');
+                            $marriage_office->save();
+                        }
+                    }
                 }
                 //AssignExpert
                 if ($attributes['service_id'] == 12) {

@@ -247,9 +247,141 @@
                         <div class="col-md-2">
                             {{$order->DivisionOfInheritance->SubService->name}}
                         </div>
-                        <label class="control-label col-md-2">نوع تقديم الخدمة </label>
+                        <label class="control-label col-md-2">تفاصيل الورثة </label>
                         <div class="col-md-2">
-{{--                            {{$order->DivisionOfInheritance->type_service_provided_txt}}--}}
+                            {{$order->DivisionOfInheritance->heirs_details}}
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        @if($order->DivisionOfInheritance->sub_service_id == 18)
+                            <label class="control-label col-md-2">المتفقون من الورثة</label>
+                            <div class="col-md-2">
+                                {{$order->DivisionOfInheritance->agreers}}
+                            </div>
+                            <label class="control-label col-md-2">المعارضون من الورثة </label>
+                            <div class="col-md-2">
+                                {{$order->DivisionOfInheritance->against}}
+
+                            </div>
+                        @endif
+
+                    </div>
+                    @if($order->DivisionOfInheritance->sub_service_id == 17 || $order->DivisionOfInheritance->sub_service_id == 18)
+
+                        <div class="form-group text-center" style="">
+                            <label class="control-label col-md-12 main-label">موجودات التركة</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">اموال نقدية</label>
+                            <div class="col-md-2">
+                                {{$order->DivisionOfInheritance->money}}
+                            </div>
+                            <label class="control-label col-md-2">عقارات </label>
+                            <div class="col-md-2">
+                                {{$order->DivisionOfInheritance->real_estate}}
+
+                            </div>
+                            <label class="control-label col-md-2">أسهم / سندات </label>
+                            <div class="col-md-2">
+                                {{$order->DivisionOfInheritance->bonds_shares}}
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">شركات / مؤسسات </label>
+                            <div class="col-md-2">
+                                {{$order->DivisionOfInheritance->companies}}
+
+                            </div>
+                            <label class="control-label col-md-2">اخرى </label>
+                            <div class="col-md-2">
+                                {{$order->DivisionOfInheritance->others}}
+
+                            </div>
+
+                        </div>
+                    @endif
+
+                @elseif($order->service_id == 9)
+                    <div class="form-group text-center" style="background-color:#002D5D; color: #FFFFFF">
+                        <label class="control-label col-md-12 main-label">{{$order->Service->name}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">الخدمة الفرعية</label>
+                        <div class="col-md-2">
+                            {{$order->Arbitration->SubService->name}}
+                        </div>
+                        <label class="control-label col-md-2">موضوع النزاع </label>
+                        <div class="col-md-2">
+                            {{$order->Arbitration->subject}}
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="control-label col-md-2">قيمته </label>
+                        <div class="col-md-2">
+                            {{$order->Arbitration->value}}
+
+                        </div>
+                        <label class="control-label col-md-2">اختصاص المحكم </label>
+                        <div class="col-md-2">
+                            {{$order->Arbitration->specialty_txt}}
+
+                        </div>
+                    </div>
+
+                @elseif($order->service_id == 10)
+                    <div class="form-group text-center" style="background-color:#002D5D; color: #FFFFFF">
+                        <label class="control-label col-md-12 main-label">{{$order->Service->name}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">الخدمة الفرعية</label>
+                        <div class="col-md-2">
+                            {{$order->MarriageOfficer->SubService->name}}
+                        </div>
+                        <label class="control-label col-md-2">العنوان </label>
+                        <div class="col-md-2">
+                            {{$order->MarriageOfficer->location}}
+
+                        </div>
+                        <label class="control-label col-md-2">الوقت و التاريخ </label>
+                        <div class="col-md-2">
+                            {{$order->MarriageOfficer->request_datetime}}
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">رقم بطاقة التعريف</label>
+                        <div class="col-md-2">
+                            {{$order->MarriageOfficer->client_idno}}
+                        </div>
+                        <label class="control-label col-md-2">وثائق الفحص الطبي </label>
+                        <div class="col-md-2">
+                            <a href="{{$order->MarriageOfficer->medical_examination}}" download><i
+                                    class="fa fa-download"></i></a>
+                        </div>
+                        <label class="control-label col-md-2">وثيقة صك الطلاق </label>
+                        <div class="col-md-2">
+                            <a href="{{$order->MarriageOfficer->divorce_certificate}}" download><i
+                                    class="fa fa-download"></i></a>
+                        </div>
+                    </div>
+                @elseif($order->service_id == 12)
+                    <div class="form-group text-center" style="background-color:#002D5D; color: #FFFFFF">
+                        <label class="control-label col-md-12 main-label">{{$order->Service->name}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">الخدمة الفرعية</label>
+                        <div class="col-md-2">
+                            {{$order->AssignExpert->SubService->name}}
+                        </div>
+                        <label class="control-label col-md-2">جهة الطلب </label>
+                        <div class="col-md-2">
+                            {{$order->AssignExpert->request_side_txt}}
 
                         </div>
                     </div>
