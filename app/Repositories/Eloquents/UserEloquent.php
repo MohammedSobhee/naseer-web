@@ -413,7 +413,10 @@ class UserEloquent extends Uploader implements UserRepository
                 $service_provider->save();
 
             }
-            return response_api(true, 200, trans('app.complete-service-provider'), []);// . ',' . trans('app.sent_email_verification')
+            return response_api(true, 200, trans('app.complete-service-provider'), [
+                'token' => null,
+                'user' => new ProfileResource(auth()->user())
+            ]);// . ',' . trans('app.sent_email_verification')
         }
     }
 
