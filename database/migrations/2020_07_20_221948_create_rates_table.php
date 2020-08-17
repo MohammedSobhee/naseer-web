@@ -20,6 +20,7 @@ class CreateRatesTable extends Migration
             $table->unsignedBigInteger('request_id');
             $table->double('rate');
             $table->longText('note')->nullable();
+            $table->boolean('is_approved')->default(false);
             $table->softDeletes();
             $table->timestamps();
 
