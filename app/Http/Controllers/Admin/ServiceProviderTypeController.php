@@ -23,7 +23,7 @@ class ServiceProviderTypeController extends Controller
     {
         $data = [
             'title' => 'أنواع مقدمو الخدمات',
-            'icon' => 'icon-layers',
+            'icon' => 'icon-settings',
         ];
         return view(admin_vw() . '.constants.service_provider_types', $data);
     }

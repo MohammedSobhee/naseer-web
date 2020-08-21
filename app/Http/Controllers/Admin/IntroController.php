@@ -23,7 +23,7 @@ class IntroController extends Controller
     {
         $data = [
             'title' => 'جمل تعريفية',
-            'icon' => 'icon-layers',
+            'icon' => 'icon-settings',
         ];
         return view(admin_vw() . '.constants.intros', $data);
     }

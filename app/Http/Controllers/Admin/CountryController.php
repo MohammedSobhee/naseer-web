@@ -22,7 +22,7 @@ class CountryController extends Controller
     {
         $data = [
             'title' => 'الدولة',
-            'icon' => 'icon-layers',
+            'icon' => 'icon-settings',
         ];
         return view(admin_vw() . '.constants.countries', $data);
     }

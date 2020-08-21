@@ -23,7 +23,7 @@ class CityController extends Controller
     {
         $data = [
             'title' => 'المدينة',
-            'icon' => 'icon-layers',
+            'icon' => 'icon-settings',
         ];
         return view(admin_vw() . '.constants.cities', $data);
     }
