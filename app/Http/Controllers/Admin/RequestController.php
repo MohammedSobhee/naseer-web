@@ -21,7 +21,7 @@ class RequestController extends Controller
     {
         $data = [
             'title' => 'الطلبات',
-            'icon' => 'icon-users',
+            'icon' => 'icon-basket',
             'services' => Service::all(),
         ];
         return view(admin_vw() . '.requests.index', $data);

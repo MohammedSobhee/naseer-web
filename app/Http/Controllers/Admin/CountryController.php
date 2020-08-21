@@ -2,85 +2,107 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Country;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Country\CreateRequest;
+use App\Http\Requests\Country\UpdateRequest;
+use App\Repositories\Eloquents\CountryEloquent;
 
 class CountryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private $country;
+
+    public function __construct(CountryEloquent $country)
+    {
+//        parent::__construct();
+        $this->country = $country;
+    }
+
     public function index()
     {
-        //
+        $data = [
+            'title' => 'الدولة',
+            'icon' => 'icon-layers',
+        ];
+        return view(admin_vw() . '.constants.countries', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function anyData()
+    {
+        return $this->country->anyData();
+    }
+
+    public function edit($id)
+    {
+
+        $country = $this->country->getById($id);
+
+        $html = 'This country does not exist';
+        if (isset($country)) {
+            $view = view()->make(admin_vw() . '.modal', [
+                'modal_id' => 'edit-country',
+                'modal_title' => 'تعديل الدولة',
+
+                'form' => [
+                    'method' => 'PUT',
+                    'url' => url(admin_constant_url() . '/countries/' . $id . '/edit'),
+                    'form_id' => 'formEdit',
+
+                    'fields' => [
+                        'name' => 'text',
+                    ],
+                    'values' => [
+                        'name' => $country->name,
+
+                    ],
+                    'fields_ar' => [
+                        'name' => 'الدولة',
+                    ]
+                ]
+            ]);
+
+            $html = $view->render();
+        }
+        return $html;
+    }
+
+    public function update(UpdateRequest $request, $id)
+    {
+        return $this->country->update($request->all(), $id);
+    }
+
     public function create()
     {
-        //
+        $view = view()->make(admin_vw() . '.modal', [
+            'modal_id' => 'add-country',
+            'modal_title' => 'اضافة مدينة جديد',
+            'form' => [
+                'method' => 'POST',
+                'url' => url(admin_constant_url() . '/countries/create'),
+                'form_id' => 'formAdd',
+                'fields' => [
+                    'name' => 'text',
+                ],
+                'fields_ar' => [
+                    'name' => 'الدولة',
+
+                ]
+            ]
+        ]);
+
+        $html = $view->render();
+
+        return $html;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        return $this->country->create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Country  $country
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Country $country)
+    public function delete($id)
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Country  $country
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Country $country)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Country  $country
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Country $country)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Country  $country
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Country $country)
-    {
-        //
+        return $this->country->delete($id);
     }
 }

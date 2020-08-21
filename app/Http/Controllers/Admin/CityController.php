@@ -4,83 +4,106 @@ namespace App\Http\Controllers\Admin;
 
 use App\City;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\City\CreateRequest;
+use App\Http\Requests\City\UpdateRequest;
+use App\Repositories\Eloquents\CityEloquent;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $city;
+
+    public function __construct(CityEloquent $city)
+    {
+//        parent::__construct();
+        $this->city = $city;
+    }
+
     public function index()
     {
-        //
+        $data = [
+            'title' => 'المدينة',
+            'icon' => 'icon-layers',
+        ];
+        return view(admin_vw() . '.constants.cities', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function anyData()
+    {
+        return $this->city->anyData();
+    }
+
+    public function edit($id)
+    {
+
+        $city = $this->city->getById($id);
+
+        $html = 'This city does not exist';
+        if (isset($city)) {
+            $view = view()->make(admin_vw() . '.modal', [
+                'modal_id' => 'edit-city',
+                'modal_title' => 'تعديل المدينة',
+
+                'form' => [
+                    'method' => 'PUT',
+                    'url' => url(admin_constant_url() . '/cities/' . $id . '/edit'),
+                    'form_id' => 'formEdit',
+
+                    'fields' => [
+                        'name' => 'text',
+                    ],
+                    'values' => [
+                        'name' => $city->name,
+
+                    ],
+                    'fields_ar' => [
+                        'name' => 'المدينة',
+                    ]
+                ]
+            ]);
+
+            $html = $view->render();
+        }
+        return $html;
+    }
+
+    public function update(UpdateRequest $request, $id)
+    {
+        return $this->city->update($request->all(), $id);
+    }
+
     public function create()
     {
-        //
+        $view = view()->make(admin_vw() . '.modal', [
+            'modal_id' => 'add-city',
+            'modal_title' => 'اضافة مدينة جديد',
+            'form' => [
+                'method' => 'POST',
+                'url' => url(admin_constant_url() . '/cities/create'),
+                'form_id' => 'formAdd',
+                'fields' => [
+                    'name' => 'text',
+                ],
+                'fields_ar' => [
+                    'name' => 'المدينة',
+
+                ]
+            ]
+        ]);
+
+        $html = $view->render();
+
+        return $html;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        return $this->city->create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function show(City $city)
+    public function delete($id)
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(City $city)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, City $city)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(City $city)
-    {
-        //
+        return $this->city->delete($id);
     }
 }

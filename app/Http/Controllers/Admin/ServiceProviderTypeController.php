@@ -3,84 +3,107 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ServiceProviderType\CreateRequest;
+use App\Http\Requests\ServiceProviderType\UpdateRequest;
+use App\Repositories\Eloquents\ServiceProviderTypeEloquent;
 use App\ServiceProviderType;
 use Illuminate\Http\Request;
 
 class ServiceProviderTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $serviceProviderType;
+
+    public function __construct(ServiceProviderTypeEloquent $serviceProviderType)
+    {
+//        parent::__construct();
+        $this->serviceProviderType = $serviceProviderType;
+    }
+
     public function index()
     {
-        //
+        $data = [
+            'title' => 'أنواع مقدمو الخدمات',
+            'icon' => 'icon-layers',
+        ];
+        return view(admin_vw() . '.constants.service_provider_types', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function anyData()
+    {
+        return $this->serviceProviderType->anyData();
+    }
+
+    public function edit($id)
+    {
+
+        $service_provider_type = $this->serviceProviderType->getById($id);
+
+        $html = 'This service provider type does not exist';
+        if (isset($service_provider_type)) {
+            $view = view()->make(admin_vw() . '.modal', [
+                'modal_id' => 'edit-service-provider-type',
+                'modal_title' => 'تعديل نوع مقدم الخدمة',
+
+                'form' => [
+                    'method' => 'PUT',
+                    'url' => url(admin_constant_url() . '/service-provider-types/' . $id . '/edit'),
+                    'form_id' => 'formEdit',
+
+                    'fields' => [
+                        'name' => 'text',
+                    ],
+                    'values' => [
+                        'name' => $service_provider_type->name,
+
+                    ],
+                    'fields_ar' => [
+                        'name' => 'نوع مقدم الخدمة',
+                    ]
+                ]
+            ]);
+
+            $html = $view->render();
+        }
+        return $html;
+    }
+
+    public function update(UpdateRequest $request, $id)
+    {
+        return $this->serviceProviderType->update($request->all(), $id);
+    }
+
     public function create()
     {
-        //
+        $view = view()->make(admin_vw() . '.modal', [
+            'modal_id' => 'add-service-provider-type',
+            'modal_title' => 'اضافة نوع مقدم خدمة جديد',
+            'form' => [
+                'method' => 'POST',
+                'url' => url(admin_constant_url() . '/service-provider-types/create'),
+                'form_id' => 'formAdd',
+                'fields' => [
+                    'name' => 'text',
+                ],
+                'fields_ar' => [
+                    'name' => 'نوع مقدم الخدمة',
+
+                ]
+            ]
+        ]);
+
+        $html = $view->render();
+
+        return $html;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        return $this->serviceProviderType->create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ServiceProviderType  $serviceProviderType
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ServiceProviderType $serviceProviderType)
+    public function delete($id)
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ServiceProviderType  $serviceProviderType
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ServiceProviderType $serviceProviderType)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ServiceProviderType  $serviceProviderType
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ServiceProviderType $serviceProviderType)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ServiceProviderType  $serviceProviderType
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ServiceProviderType $serviceProviderType)
-    {
-        //
+        return $this->serviceProviderType->delete($id);
     }
 }

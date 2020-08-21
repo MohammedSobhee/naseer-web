@@ -3,84 +3,117 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Intro\CreateRequest;
+use App\Http\Requests\Intro\UpdateRequest;
 use App\Intro;
+use App\Repositories\Eloquents\IntroEloquent;
 use Illuminate\Http\Request;
 
 class IntroController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $intro;
+
+    public function __construct(IntroEloquent $intro)
+    {
+//        parent::__construct();
+        $this->intro = $intro;
+    }
+
     public function index()
     {
-        //
+        $data = [
+            'title' => 'جمل تعريفية',
+            'icon' => 'icon-layers',
+        ];
+        return view(admin_vw() . '.constants.intros', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function anyData()
+    {
+        return $this->intro->anyData();
+    }
+
+    public function edit($id)
+    {
+
+        $intro = $this->intro->getById($id);
+
+        $html = 'This intro does not exist';
+        if (isset($intro)) {
+            $view = view()->make(admin_vw() . '.modal', [
+                'modal_id' => 'edit-intro',
+                'modal_title' => 'تعديل الجمل التعريفية',
+
+                'form' => [
+                    'method' => 'PUT',
+                    'url' => url(admin_constant_url() . '/intros/' . $id . '/edit'),
+                    'form_id' => 'formEdit',
+
+                    'fields' => [
+                        'image' => 'image',
+                        'title' => 'text',
+                        'description' => 'textarea',
+                    ],
+                    'values' => [
+                        'image' => $intro->image,
+                        'title' => $intro->title,
+                        'description' => $intro->description,
+
+                    ],
+                    'fields_ar' => [
+                        'image' => 'صورة',
+                        'title' => 'عنوان',
+                        'description' => 'نص',
+                    ]
+                ]
+            ]);
+
+            $html = $view->render();
+        }
+        return $html;
+    }
+
+    public function update(UpdateRequest $request, $id)
+    {
+        return $this->intro->update($request->all(), $id);
+    }
+
     public function create()
     {
-        //
+        $view = view()->make(admin_vw() . '.modal', [
+            'modal_id' => 'add-intro',
+            'modal_title' => 'اضافة الجمل التعريفية جديد',
+            'form' => [
+                'method' => 'POST',
+                'url' => url(admin_constant_url() . '/intros/create'),
+                'form_id' => 'formAdd',
+                'fields' => [
+                    'image' => 'image',
+                    'title' => 'text',
+                    'description' => 'textarea',
+                ],
+                'fields_ar' => [
+                    'image' => 'صورة',
+                    'title' => 'عنوان',
+                    'description' => 'نص',
+
+                ]
+            ]
+        ]);
+
+        $html = $view->render();
+
+        return $html;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        return $this->intro->create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Intro  $intro
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Intro $intro)
+    public function delete($id)
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Intro  $intro
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Intro $intro)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Intro  $intro
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Intro $intro)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Intro  $intro
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Intro $intro)
-    {
-        //
+        return $this->intro->delete($id);
     }
 }

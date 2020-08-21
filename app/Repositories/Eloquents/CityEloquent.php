@@ -29,9 +29,18 @@ class CityEloquent implements Repository
         $cities = $this->model->orderByDesc('id');
         return datatables()->of($cities)
             ->filter(function ($query) {
+                if (request()->filled('name')) {
+                    $query->where('name', 'LIKE', '%' . request()->get('name') . '%');
+                }
             })
             ->addColumn('action', function ($city) {
-
+                return '<a href="' . url(admin_constant_url() . '/cities/' . $city->id . '/edit') . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only edit-city-mdl"
+                                                                                   title="تعديل">
+                                                                                    <i class="fa fa-edit"></i>
+                                                                                </a><a href="' . url(admin_constant_url() . '/cities/' . $city->id) . '" class="btn btn-sm btn-danger red btn-circle btn-icon-only delete"
+                                                                                   title="حذف">
+                                                                                    <i class="fa fa-trash"></i>
+                                                                                </a>';
             })->addIndexColumn()
             ->rawColumns(['action'])->toJson();
     }
@@ -65,26 +74,23 @@ class CityEloquent implements Repository
     {
         // TODO: Implement create() method.
 
-//        $obj = new City();
-//        $obj->name_ar = $attributes['name_ar'];
-//        $obj->name_en = $attributes['name_en'];
-//        if ($obj->save())
-//            return response_api(true, 200, trans('app.created'), $obj);
+        $obj = new City();
+        $obj->name = $attributes['name'];
+        if ($obj->save())
+            return response_api(true, 200, trans('app.created'), $obj);
     }
 
     function update(array $attributes, $id = null)
     {
         // TODO: Implement update() method.
-//        $city = $this->model->find($id);
-//        $city->name_ar = $attributes['name_ar'];
-//        $city->name_en = $attributes['name_en'];
-//
-//        if ($city->save()) {
-//
-//            return response_api(true, 200, trans('app.updated'), $city);
-//
-//        }
-//        return response_api(false, 422, trans('app.not_updated'));
+        $city = $this->model->find($id);
+        $city->name = $attributes['name'];
+        if ($city->save()) {
+
+            return response_api(true, 200, trans('app.updated'), $city);
+
+        }
+        return response_api(false, 422, trans('app.not_updated'));
 
 
     }

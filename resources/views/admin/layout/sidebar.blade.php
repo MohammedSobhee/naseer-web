@@ -28,7 +28,7 @@
                     <span class="selected"></span>
                 </a>
             </li>
-            <li class="nav-item @if(preg_match('/user|service-provider/i',url()->current())) start active open @endif ">
+            <li class="nav-item @if(preg_match('/user|service-providers/i',url()->current())) start active open @endif ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
                     <span class="title">ادارة المستخدمين</span>
@@ -54,19 +54,19 @@
             </li>
             <li class="nav-item @if(preg_match('/requests/i',url()->current())) start active open @endif ">
                 <a href="{{url(admin_vw().'/requests')}}" class="nav-link nav-toggle">
-                    <i class="icon-layers"></i>
+                    <i class="icon-basket"></i>
                     <span class="title">الطلبات</span>
                     <span class="selected"></span>
                 </a>
             </li>
-            <li class="nav-item @if(preg_match('/admins/i',url()->current())) start active open @endif ">
-                <a href="{{url(admin_vw().'/admins')}}" class="nav-link nav-toggle">
+            <li class="nav-item @if(preg_match('/services/i',url()->current())) start active open @endif ">
+                <a href="{{url(admin_vw().'/services')}}" class="nav-link nav-toggle">
                     <i class="icon-layers"></i>
                     <span class="title">الخدمات</span>
                     <span class="selected"></span>
                 </a>
             </li>
-            <li class="nav-item  @if(preg_match('/constant/i',url()->current())) start active open @endif ">
+            <li class="nav-item  @if(preg_match('/constants/i',url()->current())) start active open @endif ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-settings"></i>
                     <span class="title">الثوابت</span>
@@ -74,18 +74,18 @@
                 </a>
                 <ul class="sub-menu">
 
-                    <li class="nav-item @if(preg_match('/cities/i',url()->current())) start active open @endif  ">
-                        <a href="{{url(admin_constant_url().'/cities')}}" class="nav-link ">
-                            <span class="title">انواع مقدمو الخدمات  </span>
+                    <li class="nav-item @if(preg_match('/service-provider-types/i',url()->current())) start active open @endif  ">
+                        <a href="{{url(admin_constant_url().'/service-provider-types')}}" class="nav-link ">
+                            <span class="title">أنواع مقدمو الخدمات  </span>
                         </a>
                     </li>
-                    <li class="nav-item @if(preg_match('/cities/i',url()->current())) start active open @endif  ">
-                        <a href="{{url(admin_constant_url().'/cities')}}" class="nav-link ">
-                            <span class="title">مقدمة البرنامج  </span>
+                    <li class="nav-item @if(preg_match('/intros/i',url()->current())) start active open @endif  ">
+                        <a href="{{url(admin_constant_url().'/intros')}}" class="nav-link ">
+                            <span class="title">جمل تعريفية  </span>
                         </a>
                     </li>
-                    <li class="nav-item @if(preg_match('/cities/i',url()->current())) start active open @endif  ">
-                        <a href="{{url(admin_constant_url().'/cities')}}" class="nav-link ">
+                    <li class="nav-item @if(preg_match('/countries/i',url()->current())) start active open @endif  ">
+                        <a href="{{url(admin_constant_url().'/countries')}}" class="nav-link ">
                             <span class="title">الدول  </span>
                         </a>
                     </li>

@@ -72,4 +72,45 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('/requests/{order_id}/offers', 'OfferController@index');
     Route::get('/offers/offer-data/{order_id}', 'OfferController@anyData');
 
+    Route::get('/services', 'ServiceController@index');
+    Route::get('/services/service-data', 'ServiceController@anyData');
+    Route::get('services/{id}/edit', 'ServiceController@edit');
+    Route::put('services/{id}/edit', 'ServiceController@update');
+    Route::group(['prefix' => 'constants'], function () {
+
+        Route::get('/service-provider-types', 'ServiceProviderTypeController@index');
+        Route::get('/service-provider-types-data', 'ServiceProviderTypeController@anyData');
+        Route::get('/service-provider-types/create', 'ServiceProviderTypeController@create');
+        Route::post('/service-provider-types/create', 'ServiceProviderTypeController@store');
+        Route::get('/service-provider-types/{id}/edit', 'ServiceProviderTypeController@edit');
+        Route::put('/service-provider-types/{id}/edit', 'ServiceProviderTypeController@update');
+        Route::delete('/service-provider-types/{id}', 'ServiceProviderTypeController@delete');
+
+        Route::get('/intros', 'IntroController@index');
+        Route::get('/intros-data', 'IntroController@anyData');
+        Route::get('/intros/create', 'IntroController@create');
+        Route::post('/intros/create', 'IntroController@store');
+        Route::get('/intros/{id}/edit', 'IntroController@edit');
+        Route::put('/intros/{id}/edit', 'IntroController@update');
+        Route::delete('/intros/{id}', 'IntroController@delete');
+
+        Route::get('/countries', 'CountryController@index');
+        Route::get('/countries-data', 'CountryController@anyData');
+        Route::get('/countries/create', 'CountryController@create');
+        Route::post('/countries/create', 'CountryController@store');
+        Route::get('/countries/{id}/edit', 'CountryController@edit');
+        Route::put('/countries/{id}/edit', 'CountryController@update');
+        Route::delete('/countries/{id}', 'CountryController@delete');
+
+        Route::get('/cities', 'CityController@index');
+        Route::get('/cities-data', 'CityController@anyData');
+        Route::get('/cities/create', 'CityController@create');
+        Route::post('/cities/create', 'CityController@store');
+        Route::get('/cities/{id}/edit', 'CityController@edit');
+        Route::put('/cities/{id}/edit', 'CityController@update');
+        Route::delete('/cities/{id}', 'CityController@delete');
+
+    });
+
+
 });

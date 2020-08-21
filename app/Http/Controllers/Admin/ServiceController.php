@@ -3,84 +3,78 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Service\UpdateRequest;
+use App\Repositories\Eloquents\ServiceEloquent;
 use App\Service;
+use App\ServiceProviderType;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private $service;
+
+    public function __construct(ServiceEloquent $service)
+    {
+//        parent::__construct();
+        $this->service = $service;
+    }
+
     public function index()
     {
-        //
+        $data = [
+            'title' => 'الخدمات المقدمة',
+            'icon' => 'icon-layers',
+            'service_provider_types' => ServiceProviderType::all(),
+        ];
+        return view(admin_vw() . '.services.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function anyData()
     {
-        //
+        return $this->service->anyData();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function edit($id)
     {
-        //
+
+        $service = $this->service->getById($id);
+
+        $html = 'This service does not exist';
+        if (isset($service)) {
+            $view = view()->make(admin_vw() . '.modal', [
+                'modal_id' => 'edit-service',
+                'modal_title' => 'تعديل الخدمة',
+//                'roles_id' => Role::all()->pluck('id')->toArray(),
+
+                'form' => [
+                    'method' => 'PUT',
+                    'url' => url(admin_vw() . '/services/' . $id . '/edit'),
+                    'form_id' => 'formEdit',
+
+                    'fields' => [
+                        'name' => 'text',
+                        'service_provider_type_id' => ServiceProviderType::all(),
+                    ],
+                    'values' => [
+                        'name' => $service->name,
+                        'service_provider_type_id' => $service->service_provider_type_id,
+
+                    ],
+                    'fields_ar' => [
+                        'name' => 'الخدمة',
+                        'service_provider_type_id' => 'نوع مقدم الخدمة',
+                    ]
+                ]
+            ]);
+
+            $html = $view->render();
+        }
+        return $html;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Service $service)
+    public function update(UpdateRequest $request, $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Service $service)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Service $service)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Service $service)
-    {
-        //
+        return $this->service->update($request->all(), $id);
     }
 }

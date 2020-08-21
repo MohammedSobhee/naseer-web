@@ -95,7 +95,7 @@ function admin_constants_vw()
 
 function admin_constant_url()
 {
-    return 'admin/constant';
+    return 'admin/constants';
 }
 
 function version_api()

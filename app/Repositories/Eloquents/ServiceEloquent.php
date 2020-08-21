@@ -8,16 +8,16 @@
 
 namespace App\Repositories\Eloquents;
 
-use App\Country;
 use App\Repositories\Interfaces\Repository;
+use App\Service;
 
 
-class CountryEloquent implements Repository
+class ServiceEloquent implements Repository
 {
 
     private $model;
 
-    public function __construct(Country $model)
+    public function __construct(Service $model)
     {
         $this->model = $model;
 
@@ -26,25 +26,27 @@ class CountryEloquent implements Repository
     // for cpanel
     function anyData()
     {
-        $countries = $this->model->orderByDesc('id');
-        return datatables()->of($countries)
+        $services = $this->model->with('ServiceProviderType')->orderByDesc('services.id');
+        return datatables()->of($services)
             ->filter(function ($query) {
+                if (request()->filled('service_provider_type_id')) {
+                    $query->where('service_provider_type_id', request()->get('service_provider_type_id'));
+                }
                 if (request()->filled('name')) {
                     $query->where('name', 'LIKE', '%' . request()->get('name') . '%');
                 }
             })
-            ->addColumn('action', function ($country) {
-                return '<a href="' . url(admin_constant_url() . '/countries/' . $country->id . '/edit') . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only edit-country-mdl"
-                                                                                   title="تعديل">
+            ->addColumn('service_provider_type_name', function ($service) {
+                return $service->ServiceProviderType->name;
+            })
+            ->addColumn('action', function ($service) {
+                return '<a href="' . url(admin_vw() . '/services/' . $service->id . '/edit') . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only edit-service-mdl"
+                                                                                   title="Edit">
                                                                                     <i class="fa fa-edit"></i>
-                                                                                </a><a href="' . url(admin_constant_url() . '/countries/' . $country->id) . '" class="btn btn-sm btn-danger red btn-circle btn-icon-only delete"
-                                                                                   title="حذف">
-                                                                                    <i class="fa fa-trash"></i>
                                                                                 </a>';
             })->addIndexColumn()
             ->rawColumns(['action'])->toJson();
     }
-
 
     function export()
     {
@@ -74,22 +76,18 @@ class CountryEloquent implements Repository
     function create(array $attributes)
     {
         // TODO: Implement create() method.
-
-        $obj = new Country();
-        $obj->name = $attributes['name'];
-        if ($obj->save())
-            return response_api(true, 200, trans('app.created'), $obj);
-
     }
 
     function update(array $attributes, $id = null)
     {
         // TODO: Implement update() method.
-        $country = $this->model->find($id);
-        $country->name = $attributes['name'];
-        if ($country->save()) {
+        $service = $this->model->find($id);
+        $service->name = $attributes['name'];
+        $service->service_provider_type_id = $attributes['service_provider_type_id'];
 
-            return response_api(true, 200, trans('app.updated'), $country);
+        if ($service->save()) {
+
+            return response_api(true, 200, trans('app.updated'), $service);
 
         }
         return response_api(false, 422, trans('app.not_updated'));
@@ -100,11 +98,5 @@ class CountryEloquent implements Repository
     function delete($id)
     {
         // TODO: Implement delete() method.
-        $obj = $this->model->find($id);
-        if (isset($obj) && $obj->delete()) {
-            return response_api(true, 200, trans('app.deleted'), []);
-        }
-        return response_api(false, 422, null, []);
-
     }
 }
