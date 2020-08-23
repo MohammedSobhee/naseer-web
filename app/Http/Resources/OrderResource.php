@@ -25,6 +25,7 @@ class OrderResource extends JsonResource
         }
         return [
             'id' => $this->id,
+            'user_id' => $this->user_id,
             'type' => $this->type,
             'case_text' => $this->case_text,
             'case_audio' => $this->case_audio,
@@ -45,6 +46,7 @@ class OrderResource extends JsonResource
             'city' => new CityResource($this->City()->first()),
             'service' => new ServiceResource($this->Service()->first()),
 
+            'client' => new ProfileResource($this->User()->first()),
             'data_request' => $data
         ];
     }
