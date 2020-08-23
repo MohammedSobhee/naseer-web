@@ -12,6 +12,7 @@ use App\Notification;
 use App\NotificationReceiver;
 use App\Repositories\Interfaces\Repository;
 use App\User;
+use Carbon\Carbon;
 
 class NotificationEloquent implements Repository
 {
@@ -99,6 +100,7 @@ class NotificationEloquent implements Repository
 
         if ($notification->save()) {
 
+
             $receiver_notification = new NotificationReceiver();
             $receiver_notification->notification_id = $notification->id;
             $receiver_notification->receiver_id = $attributes['receiver_id'];
@@ -145,19 +147,20 @@ class NotificationEloquent implements Repository
             else
                 $notification = $this->save_chat_notification($attributes);
 
-            $lang = 2; //default en
-            if (isset($receiver->lang_id))
-                $lang = $receiver->lang_id;
-            config()->set(['app.lang_id' => $lang]);
+//            $lang = 2; //default en
+//            if (isset($receiver->lang_id))
+//                $lang = $receiver->lang_id;
+//            config()->set(['app.lang_id' => $lang]);
 
-            $message = trans(notification_trans() . '.chat');
-
+            $message = $this->notificationSystem->getActionTrans('chat');
             $badge = $this->getCountUnseen($receiver->id);// + $this->unseen_chat_notification($receiver->id);
             $tokens = $this->device->getReceiverToken($receiver->id);//
             $notification = $this->model->find($notification->id);
             $notification->text = $message;
 //            $sender_name = auth()->user()->first_name . ' ' . auth()->user()->last_name;
-            $data = $this->notificationSystem->FCM(config('app.name'), $message, $notification, $tokens, $badge); //$sender_name . ' ' .
+
+            $data = $this->notificationSystem->FCM(config('app.name'), $this->notificationSystem->getActionTrans('chat'), $notification, $tokens, $badge); //$sender_name . ' ' .
+
             if ($data['numberSuccess'] > 0)
                 return response_api(true, 200, trans('app.notification_send'), $data);
             return response_api(false, 422, trans('app.notification_not_send'), $data);
@@ -180,8 +183,6 @@ class NotificationEloquent implements Repository
         $notification->sender_id = $attributes['sender_id'];
         $notification->action = $attributes['action'];
         $notification->action_id = $attributes['action_id'];
-        $notification->type = 'player';
-        $notification->data_id = $attributes['sender_id'];
         $notification->seen = 0;
 
         if ($notification->save()) {

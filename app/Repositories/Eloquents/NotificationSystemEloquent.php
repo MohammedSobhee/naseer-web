@@ -8,10 +8,18 @@
 
 namespace App\Repositories\Eloquents;
 
+use App\DeviceToken;
+use App\Notification;
+use App\NotificationReceiver;
+//use App\Reason;
+use App\Talent;
+use App\User;
+
 use LaravelFCM\Facades\FCM;
 use LaravelFCM\Message\OptionsBuilder;
 use LaravelFCM\Message\PayloadDataBuilder;
 use LaravelFCM\Message\PayloadNotificationBuilder;
+use LaravelFCM\Message\Topics;
 
 class NotificationSystemEloquent
 {
@@ -19,128 +27,75 @@ class NotificationSystemEloquent
     private $devices_id;
 
 
-    public function sendNotification($sender_id, $receiver_id, $action_id, $action, $type, $data_id, $title = null, $another = []) //$object
+    public function sendNotification($sender_id, $receiver_id, $action_id, $action, $another = null) //$object
     {
-
 
         if ($sender_id != $receiver_id) {
 
             $tokens = DeviceToken::getReceiverToken($receiver_id);//
+
             $this->devices_id = DeviceToken::getDevices($receiver_id);
 
-            if (count($tokens) > 0 || count($tokens) > 0) {
+            if (count($tokens) > 0) {
 
                 $attributes = [
                     'sender_id' => $sender_id,
                     'receiver_id' => $receiver_id,
-                    'type' => $type,
-                    'data_id' => $data_id,
                     'action_id' => $action_id,
                     'action' => $action
                 ];
-
                 $notification = $this->create($attributes);
 
-                $receiver = User::find($receiver_id);
-                //send fcm message according receiver language
-                app()->setLocale($receiver->Language->iso); // De
-//                $message = $this->getActionTrans($action);
-                $data = [];
-                if ($type == 'team') {
-                    $team = Team::find($action_id);
-                    $sender = auth()->user()->full_name;
-                    $league = null;
-                    if (isset($another['league_id'])) {
-                        $league = League::find($another['league_id']);
-                    }
-                    if (isset($another['team_id'])) {
-                        $team = Team::find($another['team_id']);
-                    }
-                    $team_name = '';
-                    if (isset($team))
-                        $team_name = $team->name;
-                    $league_name = '';
-                    if (isset($league))
-                        $league_name = $league->name;
-
-                    $data = ['user' => $sender, 'team' => $team_name, 'league' => $league_name];
-                } elseif ($type == 'league') {
-                    $league = League::find($action_id);
-                    $sender = auth()->user()->full_name;
-                    $team = null;
-                    if (isset($another['team_id'])) {
-                        $team = Team::find($another['team_id']);
-                    }
-
-                    $team_name = '';
-                    if (isset($team))
-                        $team_name = $team->name;
-                    $league_name = '';
-                    if (isset($league))
-                        $league_name = $league->name;
-
-                    $data = ['team' => $team_name, 'user' => $sender, 'league' => $league_name];
-                }
-
-
-
-                $message = trans(notification_trans() . '.' . $action, $data);
+                $message = $this->getActionTrans($action);
 
                 $object = new \stdClass();
                 $object->message = $message;
                 $notification->message = $object;
 
-                $title = isset($title) ? $title : config('app.name');
-
                 $notification = Notification::find($notification->id);
                 $notification->text = $message;
                 $notification->save();
-                $notification->title = $title;
-                $badge = 0;//$this->getCountUnseen($receiver_id);
+                $badge = $this->getCountUnseen($receiver_id);
+
                 try {
-                    $data_message = $message;
-                    sleep(5);
-
                     if (count($tokens[0]) > 0 || count($tokens[1]) > 0 || count($this->devices_id) > 0)
-                        $fcm_object = $this->FCM($title, $data_message, $notification, $tokens, $badge);
 
-                    $lang = 'en'; // default language system
-                    if (request()->hasHeader('lang'))
-                        $lang = request()->header('lang');
-                    app()->setLocale($lang);
+                        $fcm_object = $this->FCM(config('app.name'), $message, $notification, $tokens, $badge, $action);
                 } catch (\Throwable $e) { // For PHP 7
                     // handle $e
                 } catch (\Exception $e) { // For PHP 5
-                    //
+                    // handle $e
 
                 }
             }
         }
     }
 
-    public function FCM($title, $body, $data, $tokens, $badge)
+    public function FCM($title, $body, $data, $tokens, $badge, $action)
     {
+
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60 * 20);
 
         $notificationBuilder = new PayloadNotificationBuilder($title);
         $notificationBuilder->setBody($body)
             ->setSound('default')->setBadge($badge);
+        $data->title = $title;
 
         $dataBuilder = new PayloadDataBuilder();
         $dataBuilder->addData(['data' => $data]);
 
-//
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
         $data = $dataBuilder->build();
+
 
         if (count($tokens[0]) > 0) {
             // You must change it to get your tokens
             // android
             $downstreamResponse = FCM::sendTo($tokens[0], $option, null, $data);
-        }
 
+        }
         if (count($tokens[1]) > 0) {
             //ios
             $downstreamResponse = FCM::sendTo($tokens[1], $option, $notification, $data);
@@ -164,7 +119,26 @@ class NotificationSystemEloquent
             'numberFailure' => $downstreamResponse->numberFailure(),
             'numberModification' => $downstreamResponse->numberModification(),
         ];
+
         return $object;
+    }
+
+    public function getActionTrans($action)
+    {
+
+//'new_request','approved_request','complete_request','activate_account','disable_account','chat'
+        switch ($action) {
+            case 'new_request':
+                return trans(notification_trans() . '.new_request');
+            case 'approved_request':
+                return trans(notification_trans() . '.approved_request'); // waiting for approval
+            case 'complete_request':
+                return trans(notification_trans() . '.complete_request');
+            case 'activate_account':
+                return trans(notification_trans() . '.activate_account');
+            default:
+                return trans(notification_trans() . '.chat'); //chat user // action_id : auth id
+        }
     }
 
     function create(array $attributes)
@@ -175,8 +149,6 @@ class NotificationSystemEloquent
         $notification->sender_id = $attributes['sender_id'];
         $notification->action = $attributes['action'];
         $notification->action_id = $attributes['action_id'];
-        $notification->type = $attributes['type'];
-        $notification->data_id = $attributes['data_id'];
         if ($notification->save()) {
 
 

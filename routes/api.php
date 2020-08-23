@@ -50,7 +50,6 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
             Route::post('offer', 'OfferController@create');
             Route::put('complete_service_provider', 'UserController@completeServiceProvider');
         });
-
         Route::group(['middleware' => ['client']], function () {
 
             Route::post('order', 'OrderController@postOrder');
@@ -61,12 +60,21 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
             Route::post('rate', 'RateController@create');
 
         });
+
         Route::post('orders', 'OrderController@getOrders');
 
         Route::get('sub_services/{service_id}', 'LookUpController@getSubServices');
         Route::get('sub_service/{id}', 'LookUpController@getSubService');
         Route::get('order/{order_id}', 'OrderController@getOrder');
         Route::post('logout', 'UserController@logout');
+
+
+        Route::post('notifications', 'NotificationController@getNotifications');
+        Route::post('refresh_fcm_token', 'NotificationController@refreshFcmToken');
+        Route::delete('notification', 'NotificationController@delete');
+        Route::post('chat-notify', 'NotificationController@postChatNotification');
+        Route::get('unseen-notification', 'NotificationController@getUnseenNotification');
+
 
     });
     Route::group(['middleware' => 'authGuest:api'], function () {
