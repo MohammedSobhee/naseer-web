@@ -38,4 +38,8 @@ class OrderController extends Controller
     {
         return $this->order->changeStatus($request->all());
     }
+    public function delete($id)
+    {
+        return $this->order->delete($id);
+    }
 }

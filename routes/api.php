@@ -54,6 +54,7 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
         Route::group(['middleware' => ['client']], function () {
 
             Route::post('order', 'OrderController@postOrder');
+            Route::delete('order/{id}', 'OrderController@delete');
             Route::put('order_status', 'OrderController@changeStatus');
             Route::put('offer_status', 'OfferController@changeStatus');
             Route::post('offers', 'OfferController@getOffers');
