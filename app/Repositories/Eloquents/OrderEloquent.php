@@ -292,7 +292,7 @@ class OrderEloquent extends Uploader implements Repository
         // TODO: Implement delete() method.
         $obj = $this->model->where('user_id', auth()->user()->id)->find($id);
         if (isset($obj) && $obj->delete()) {
-            return response_api(true, 200, trans('app.deleted'), []);
+            return response_api(true, 200, trans('app.cancel_request'), []);
         }
         return response_api(false, 422, null, []);
 
