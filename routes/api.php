@@ -36,6 +36,8 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
     Route::get('lookups/{type?}', 'LookUpController@getLookUps');
     Route::get('services/{service_type_id?}', 'LookUpController@getServices');
     Route::get('service_provider_types', 'LookUpController@getServiceProviderTypes');
+    Route::get('sub_services/{service_id}', 'LookUpController@getSubServices');
+    Route::get('sub_service/{id}', 'LookUpController@getSubService');
 
     Route::group(['middleware' => ['auth:api']], function () {
 
@@ -63,8 +65,6 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
 
         Route::post('orders', 'OrderController@getOrders');
 
-        Route::get('sub_services/{service_id}', 'LookUpController@getSubServices');
-        Route::get('sub_service/{id}', 'LookUpController@getSubService');
         Route::get('order/{order_id}', 'OrderController@getOrder');
         Route::post('logout', 'UserController@logout');
 
