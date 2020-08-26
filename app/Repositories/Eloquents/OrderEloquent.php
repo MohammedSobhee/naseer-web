@@ -112,7 +112,7 @@ class OrderEloquent extends Uploader implements Repository
         // TODO: Implement getAll() method.
         $page_size = isset($attributes['page_size']) ? $attributes['page_size'] : max_pagination(10);
         $page_number = isset($attributes['page_number']) ? $attributes['page_number'] : 1;
-        $collection = $this->model->where('type', $attributes['type']);
+        $collection = $this->model->where('user_id', auth()->user()->id)->where('type', $attributes['type']);
 
         if (isset($attributes['status'])) {
             $collection = $collection->where('status', $attributes['status']);
