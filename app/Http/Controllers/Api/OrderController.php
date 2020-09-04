@@ -29,6 +29,11 @@ class OrderController extends Controller
         return $this->order->getAll($request->all());
     }
 
+    public function getOrderClients(GetRequest $request)
+    {
+        return $this->order->getOrderClients($request->all());
+    }
+
     public function getOrder($order_id)
     {
         return $this->order->getById($order_id);

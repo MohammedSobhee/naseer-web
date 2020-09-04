@@ -18,6 +18,7 @@ use App\DivisionOfInheritance;
 use App\DraftingRegulationAndContract;
 use App\Http\Resources\OrderResource;
 use App\MarriageOfficer;
+use App\Offer;
 use App\PublicProsecutionAndPolice;
 use App\Repositories\Interfaces\Repository;
 use App\Repositories\Uploader;
@@ -131,6 +132,33 @@ class OrderEloquent extends Uploader implements Repository
         }
 
         //
+
+        if (isset($attributes['status'])) {
+            $collection = $collection->where('status', $attributes['status']);
+        }
+        $count = $collection->count();
+
+        $page_count = page_count($count, $page_size);
+        $page_number = $page_number - 1;
+        $page_number = $page_number > $page_count ? $page_number = $page_count - 1 : $page_number;
+        $object = $collection->take($page_size)->skip((int)$page_number * $page_size)->orderBy('created_at', 'desc')->get();
+        if (request()->segment(1) == 'api' || request()->ajax()) {
+            return response_api(true, 200, null, OrderResource::collection($object), $page_count, $page_number, $count);
+        }
+        return $object;
+    }
+
+    // service's client // الموكلين
+    function getOrderClients(array $attributes)
+    {
+        // TODO: Implement getAll() method.
+        $page_size = isset($attributes['page_size']) ? $attributes['page_size'] : max_pagination(10);
+        $page_number = isset($attributes['page_number']) ? $attributes['page_number'] : 1;
+
+        $collection = $this->model;
+
+        $orders = Offer::where('user_id', auth()->user()->id)->where('status', 'accepted')->pluck('request_id');
+        $collection = $collection::whereIn('id', $orders)->orderByDesc('created_at')->pluck('user_id');
 
         if (isset($attributes['status'])) {
             $collection = $collection->where('status', $attributes['status']);

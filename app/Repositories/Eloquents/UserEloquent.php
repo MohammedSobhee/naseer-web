@@ -326,13 +326,13 @@ class UserEloquent extends Uploader implements UserRepository
 
         $collection = $this->model;
 
-        if (auth()->user()->type == 'service_provider') {
-            $orders = Offer::where('user_id', auth()->user()->id)->where('status', 'accepted')->pluck('request_id');
-            $clients = \App\Request::whereIn('id', $orders)->orderByDesc('created_at')->pluck('user_id');
-
-            $ids_clients = implode(',', $clients);
-            $collection = $collection->whereIn('id', $clients)->orderByRaw("FIELD(id, $ids_clients)");
-        }
+//        if (auth()->user()->type == 'service_provider') {
+//            $orders = Offer::where('user_id', auth()->user()->id)->where('status', 'accepted')->pluck('request_id');
+//            $clients = \App\Request::whereIn('id', $orders)->orderByDesc('created_at')->pluck('user_id');
+//
+//            $ids_clients = implode(',', $clients);
+//            $collection = $collection->whereIn('id', $clients)->orderByRaw("FIELD(id, $ids_clients)");
+//        }
         $count = $collection->count();
 
         $page_count = page_count($count, $page_size);
