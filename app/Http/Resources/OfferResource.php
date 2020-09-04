@@ -21,7 +21,7 @@ class OfferResource extends JsonResource
             'payment_value' => $this->payment_value,
             'details' => $this->details,
             'service_provider' => new ProfileResource($this->ServiceProvider()->first()),
-            'request' => new OrderResource($this->Order()->first()),
+            'order' => new OrderSecondResource($this->Order()->first()),
 
         ];
     }
