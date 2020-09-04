@@ -16,4 +16,9 @@ class Offer extends Model
     {
         return $this->belongsTo(User::class, 'service_provider_id');
     }
+
+    public function Order()
+    {
+        return $this->belongsTo(Request::class, 'request_id');
+    }
 }

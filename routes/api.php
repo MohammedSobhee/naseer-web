@@ -64,7 +64,6 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
 
         Route::post('offers', 'OfferController@getOffers');
 
-
         Route::post('orders', 'OrderController@getOrders');
 
         Route::get('order/{order_id}', 'OrderController@getOrder');
