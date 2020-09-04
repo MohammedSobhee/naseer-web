@@ -14,6 +14,13 @@ class OfferSecondResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'status' => $this->status,
+            'payment_type' => $this->payment_type,
+            'payment_value' => $this->payment_value,
+            'details' => $this->details,
+            'service_provider' => new ProfileResource($this->ServiceProvider()->first()),
+        ];
     }
 }
