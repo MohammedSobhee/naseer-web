@@ -157,7 +157,7 @@ class OrderEloquent extends Uploader implements Repository
 
         $collection = $this->model;
 
-        $orders = Offer::where('user_id', auth()->user()->id)->where('status', 'accepted')->pluck('request_id');
+        $orders = Offer::where('service_provider_id', auth()->user()->id)->where('status', 'accepted')->pluck('request_id');
         $collection = $collection::whereIn('id', $orders)->orderByDesc('created_at')->pluck('user_id');
 
         if (isset($attributes['status'])) {
