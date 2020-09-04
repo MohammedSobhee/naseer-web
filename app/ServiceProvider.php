@@ -16,6 +16,8 @@ class ServiceProvider extends Model
         'bio', 'address', 'latitude', 'longitude', 'service_provider_type_id'
     ];
 
+    protected $casts = ['service_provider_type_id' => 'integer'];
+
     public function getIdnoFileAttribute($value)
     {
         if (isset($value))
