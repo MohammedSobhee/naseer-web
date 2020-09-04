@@ -82,6 +82,9 @@ class OfferEloquent extends Uploader implements Repository
         $page_number = isset($attributes['page_number']) ? $attributes['page_number'] : 1;
         $collection = $this->model;
 
+        if (auth()->user()->type == 'service_provider') {
+            $collection = $collection->where('service_provider_id', auth()->user()->id);
+        }
         if (isset($attributes['request_id'])) {
             $collection = $collection->where('request_id', $attributes['request_id']);
         }
