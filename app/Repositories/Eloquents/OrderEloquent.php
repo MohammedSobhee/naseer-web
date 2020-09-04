@@ -158,7 +158,7 @@ class OrderEloquent extends Uploader implements Repository
         $collection = $this->model;
 
         $orders = Offer::where('service_provider_id', auth()->user()->id)->where('status', 'accepted')->pluck('request_id');
-        $collection = $collection::whereIn('id', $orders)->orderByDesc('created_at')->pluck('user_id');
+        $collection = $collection::whereIn('id', $orders)->orderByDesc('service_date');
 
         if (isset($attributes['status'])) {
             $collection = $collection->where('status', $attributes['status']);
@@ -168,7 +168,7 @@ class OrderEloquent extends Uploader implements Repository
         $page_count = page_count($count, $page_size);
         $page_number = $page_number - 1;
         $page_number = $page_number > $page_count ? $page_number = $page_count - 1 : $page_number;
-        $object = $collection->take($page_size)->skip((int)$page_number * $page_size)->orderBy('created_at', 'desc')->get();
+        $object = $collection->take($page_size)->skip((int)$page_number * $page_size)->get();
         if (request()->segment(1) == 'api' || request()->ajax()) {
             return response_api(true, 200, null, OrderResource::collection($object), $page_count, $page_number, $count);
         }
