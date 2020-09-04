@@ -22,6 +22,7 @@ use App\PublicProsecutionAndPolice;
 use App\Repositories\Interfaces\Repository;
 use App\Repositories\Uploader;
 use App\Request;
+use App\Service;
 use App\User;
 
 
@@ -112,7 +113,24 @@ class OrderEloquent extends Uploader implements Repository
         // TODO: Implement getAll() method.
         $page_size = isset($attributes['page_size']) ? $attributes['page_size'] : max_pagination(10);
         $page_number = isset($attributes['page_number']) ? $attributes['page_number'] : 1;
-        $collection = $this->model->where('user_id', auth()->user()->id)->where('type', $attributes['type']);
+
+
+        if (auth()->user()->type == 'user')
+            // for client
+            $collection = $this->model->where('user_id', auth()->user()->id)->where('type', $attributes['type']);
+        else // for service provider
+        {
+            $collection = $this->model->where('type', $attributes['type']);
+
+            if ($attributes['type'] == 'categorized') {
+
+                $service_ids = Service::where('service_provider_type_id', auth()->user()->ServiceProvider->service_provider_type_id)->pluck('id');
+
+                $collection = $this->model->whereIn('service_id', $service_ids);
+            }
+        }
+
+        //
 
         if (isset($attributes['status'])) {
             $collection = $collection->where('status', $attributes['status']);

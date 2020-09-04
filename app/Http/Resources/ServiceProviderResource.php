@@ -25,6 +25,7 @@ class ServiceProviderResource extends JsonResource
             'address' => $this->address,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
+            'service_provider_type_id' => $this->service_provider_type_id,
         ];
     }
 }
