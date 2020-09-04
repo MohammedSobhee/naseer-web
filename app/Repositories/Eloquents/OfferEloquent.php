@@ -152,6 +152,7 @@ class OfferEloquent extends Uploader implements Repository
 
         $offer = $this->model->find($attributes['offer_id']);
         $offer->status = $attributes['status'];
+        dd($offer);
 
         if ($offer->save()) {
 
