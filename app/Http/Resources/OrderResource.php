@@ -41,7 +41,7 @@ class OrderResource extends JsonResource
             'service_date' => $this->service_date,
             'status' => $this->status,
             'offers_num' => $this->Offers()->count(),
-            'offers' => OfferResource::collection($this->Offers()->get()),
+            'offers' => OfferSecondResource::collection($this->Offers()->get()),
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'city' => new CityResource($this->City()->first()),
             'service' => new ServiceResource($this->Service()->first()),
