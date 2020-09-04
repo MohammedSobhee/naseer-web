@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Order\ChangeStatusRequest;
 use App\Http\Requests\Api\Order\CreateRequest;
+use App\Http\Requests\Api\Order\GetOrderClientsRequest;
 use App\Http\Requests\Api\Order\GetRequest;
 use App\Repositories\Eloquents\OrderEloquent;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class OrderController extends Controller
         return $this->order->getAll($request->all());
     }
 
-    public function getOrderClients(GetRequest $request)
+    public function getOrderClients(GetOrderClientsRequest $request)
     {
         return $this->order->getOrderClients($request->all());
     }

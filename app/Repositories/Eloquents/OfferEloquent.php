@@ -154,6 +154,10 @@ class OfferEloquent extends Uploader implements Repository
         $offer->status = $attributes['status'];
 
         if ($offer->save()) {
+
+            if ($attributes['status'] == 'accepted') {
+                $offer->Order->update(['status' => 'assigned']);
+            }
             return response_api(true, 200, null, []);
         }
         return response_api(false, 422, null, []);
