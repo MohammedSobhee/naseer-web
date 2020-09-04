@@ -345,6 +345,35 @@ class UserEloquent extends Uploader implements UserRepository
         return $object;
     }
 
+    // Service Providers list
+    function getServiceProviders(array $attributes)
+    {
+        // TODO: Implement getAll() method.
+        $page_size = isset($attributes['page_size']) ? $attributes['page_size'] : max_pagination(10);
+        $page_number = isset($attributes['page_number']) ? $attributes['page_number'] : 1;
+
+        $collection = $this->model->where('type', 'service_provider');
+
+        if (isset($attributes['name'])) {
+            $collection = $collection->where('name', 'LIKE', '%' . $attributes['name'] . '%');
+        }
+        if (isset($attributes['service_provider_type_id'])) {
+            $collection = $collection->whereHas('ServiceProvider', function ($query) use ($attributes) {
+                $query->where('service_provider_type_id', $attributes['service_provider_type_id']);
+            });
+        }
+        $count = $collection->count();
+
+        $page_count = page_count($count, $page_size);
+        $page_number = $page_number - 1;
+        $page_number = $page_number > $page_count ? $page_number = $page_count - 1 : $page_number;
+        $object = $collection->take($page_size)->skip((int)$page_number * $page_size)->get();
+        if (request()->segment(1) == 'api' || request()->ajax()) {
+            return response_api(true, 200, null, ProfileResource::collection($object), $page_count, $page_number, $count);
+        }
+        return $object;
+    }
+
 
     // get user by email
     function getByEmail($email)

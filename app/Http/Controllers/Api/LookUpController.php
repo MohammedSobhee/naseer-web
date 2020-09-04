@@ -50,6 +50,10 @@ class LookUpController extends Controller
             if ($type == 'cities') {
                 $data = CityResource::collection($this->city->getAll([]));
             }
+            if ($type == 'services') {
+                $data = ServiceResource::collection($this->service->all());
+            }
+
             if ($type == 'terms') {
 
                 $data = ['terms' => Setting::where('key', 'terms')->first()->value];
@@ -58,9 +62,11 @@ class LookUpController extends Controller
 
             $service_provider_types = $this->providerType->all();
             $intro = $this->intro->all();
+            $services =  ServiceResource::collection($this->service->all());
 
             $data = [
                 'service_provider_types' => $service_provider_types,
+                'services' => $services,
                 'intros' => $intro,
                 'countries' => CountryResource::collection($this->country->getAll([])),
                 'cities' => CityResource::collection($this->city->getAll([])),

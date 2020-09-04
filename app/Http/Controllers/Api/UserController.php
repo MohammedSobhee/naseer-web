@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\CompleteServiceProviderRequest;
 use App\Http\Requests\Api\User\ConfirmCodeRequest;
 use App\Http\Requests\Api\User\GetRequest;
+use App\Http\Requests\Api\User\GetServiceProvidersRequest;
 use App\Http\Requests\Api\User\LoginRequest;
 use App\Http\Requests\Api\User\ResendConfirmCodeRequest;
 use App\Http\Requests\Api\User\SignUpRequest;
@@ -70,9 +71,9 @@ class UserController extends Controller
     }
 
 
-    public function getClients(GetRequest $request)
+    public function getServiceProviders(GetServiceProvidersRequest $request)
     {
-        return $this->user->getAll($request->all());
+        return $this->user->getServiceProviders($request->all());
     }
     // logout user
     public function logout(Request $request)

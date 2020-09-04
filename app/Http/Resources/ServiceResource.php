@@ -17,6 +17,7 @@ class ServiceResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'sub_services' => SubServiceTwoResource::collection($this->SubServices()->get()),
         ];
     }
 }

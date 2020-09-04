@@ -53,6 +53,7 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
             Route::put('complete_service_provider', 'UserController@completeServiceProvider');
             Route::post('order_clients', 'OrderController@getOrderClients');
         });
+
         Route::group(['middleware' => ['client']], function () {
 
             Route::post('order', 'OrderController@postOrder');
@@ -63,7 +64,9 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
 
         });
 
-        Route::post('clients', 'UserController@getClients');
+//        Route::post('clients', 'UserController@getClients');
+        Route::post('service_providers', 'UserController@getServiceProviders');
+
         Route::post('offers', 'OfferController@getOffers');
         Route::post('orders', 'OrderController@getOrders');
 
