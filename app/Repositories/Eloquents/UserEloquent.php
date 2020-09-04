@@ -382,6 +382,7 @@ class UserEloquent extends Uploader implements UserRepository
                 ->where('is_approved', 1)
                 ->groupBy('rates.service_provider_id')
                 ->havingRaw('AVG(rates.rate) >= ' . $attributes['rate'])
+                ->havingRaw('AVG(rates.rate) < ' . ($attributes['rate'] + 1))
                 ->pluck('rates.service_provider_id');
 
             $collection = $collection->whereIn('id', $providerIds);
