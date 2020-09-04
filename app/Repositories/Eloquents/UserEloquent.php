@@ -362,12 +362,39 @@ class UserEloquent extends Uploader implements UserRepository
                 $query->where('service_provider_type_id', $attributes['service_provider_type_id']);
             });
         }
+        if (isset($attributes['service_id'])) {
+
+            $service = Service::find($attributes['service_id']);
+            $collection = $collection->whereHas('ServiceProvider', function ($query) use ($service) {
+                $query->where('service_provider_type_id', $service->service_provider_type_id);
+            });
+        }
+
+        if (isset($attributes['city_id'])) {
+            $collection = $collection->where('city_id', $attributes['city_id']);
+        }
+        if (isset($attributes['rate'])) {
+
+            $providerIds = DB::table('users')
+                ->join('rates', 'users.id', '=', 'rates.service_provider_id')
+                ->select('rates.service_provider_id')
+                ->selectRaw('AVG(rates.rate) AS average_rating')
+                ->where('is_approved', 1)
+                ->groupBy('rates.service_provider_id')
+                ->havingRaw('AVG(rates.rate) >= ' . $attributes['rate'])
+                ->pluck('rates.service_provider_id');
+
+            $collection = $collection->whereIn('id', $providerIds);
+        }
+
         $count = $collection->count();
 
         $page_count = page_count($count, $page_size);
         $page_number = $page_number - 1;
         $page_number = $page_number > $page_count ? $page_number = $page_count - 1 : $page_number;
         $object = $collection->take($page_size)->skip((int)$page_number * $page_size)->get();
+
+
         if (request()->segment(1) == 'api' || request()->ajax()) {
             return response_api(true, 200, null, ProfileResource::collection($object), $page_count, $page_number, $count);
         }

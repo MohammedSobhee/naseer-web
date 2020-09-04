@@ -59,7 +59,6 @@ class User extends Authenticatable
         return $this->belongsTo(City::class, 'city_id');
     }
 
-
     public function ServiceProvider()
     {
         return $this->hasOne(ServiceProvider::class, 'user_id', 'id');
