@@ -9,9 +9,12 @@
 namespace App\Repositories\Eloquents;
 
 use App\DeviceToken;
+use App\Http\Resources\OrderResource;
 use App\Http\Resources\ProfileResource;
+use App\Offer;
 use App\Repositories\Interfaces\UserRepository;
 use App\Repositories\Uploader;
+use App\Service;
 use App\ServiceProvider;
 use App\User;
 use Carbon\Carbon;
@@ -318,8 +321,30 @@ class UserEloquent extends Uploader implements UserRepository
     function getAll(array $attributes)
     {
         // TODO: Implement getAll() method.
-        return $this->model->all();
+        $page_size = isset($attributes['page_size']) ? $attributes['page_size'] : max_pagination(10);
+        $page_number = isset($attributes['page_number']) ? $attributes['page_number'] : 1;
+
+        $collection = $this->model;
+
+        if (auth()->user()->type == 'service_provider') {
+            $orders = Offer::where('user_id', auth()->user()->id)->where('status', 'accepted')->pluck('request_id');
+            $clients = \App\Request::whereIn('id', $orders)->orderByDesc('created_at')->pluck('user_id');
+
+            $ids_clients = implode(',', $clients);
+            $collection = $collection->whereIn('id', $clients)->orderByRaw("FIELD(id, $ids_clients)");
+        }
+        $count = $collection->count();
+
+        $page_count = page_count($count, $page_size);
+        $page_number = $page_number - 1;
+        $page_number = $page_number > $page_count ? $page_number = $page_count - 1 : $page_number;
+        $object = $collection->take($page_size)->skip((int)$page_number * $page_size)->get();
+        if (request()->segment(1) == 'api' || request()->ajax()) {
+            return response_api(true, 200, null, ProfileResource::collection($object), $page_count, $page_number, $count);
+        }
+        return $object;
     }
+
 
     // get user by email
     function getByEmail($email)

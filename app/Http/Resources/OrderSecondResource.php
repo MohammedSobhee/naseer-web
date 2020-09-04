@@ -41,9 +41,9 @@ class OrderSecondResource extends JsonResource
             'payment_prefer' => $this->payment_prefer,
             'payment_prefer_lbl' => __('app.payment_prefer.' . $this->payment_prefer),
             'service_date' => $this->service_date,
+            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'status' => $this->status,
             'offers_num' => $this->Offers()->count(),
-            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'city' => new CityResource($this->City()->first()),
             'service' => new ServiceResource($this->Service()->first()),
 

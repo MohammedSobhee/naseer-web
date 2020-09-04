@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\CompleteServiceProviderRequest;
 use App\Http\Requests\Api\User\ConfirmCodeRequest;
+use App\Http\Requests\Api\User\GetRequest;
 use App\Http\Requests\Api\User\LoginRequest;
 use App\Http\Requests\Api\User\ResendConfirmCodeRequest;
 use App\Http\Requests\Api\User\SignUpRequest;
@@ -68,6 +69,11 @@ class UserController extends Controller
         return $this->user->putMobile($request->all());
     }
 
+
+    public function getClients(GetRequest $request)
+    {
+        return $this->user->getAll($request->all());
+    }
     // logout user
     public function logout(Request $request)
     {
