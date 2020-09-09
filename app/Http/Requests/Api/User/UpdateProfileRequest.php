@@ -28,7 +28,7 @@ class UpdateProfileRequest extends FormRequest
         if (auth()->user()->type == 'user')
             return [
                 'name' => 'nullable',
-                'email' => 'nullable|email|unique:users,email',
+                'email' => 'nullable|email|unique:users,email,id,' . auth()->user()->id,
                 'password' => 'nullable|min:6',
                 'old_password' => 'required_with:password|min:6',
                 'gender' => 'nullable|in:male,female',
@@ -38,13 +38,14 @@ class UpdateProfileRequest extends FormRequest
 
             ];
         else {
+
             return [
                 'name' => 'nullable',
-                'email' => 'nullable|email|unique:users,email',
+                'email' => 'nullable|email|unique:users,email,id,' . auth()->user()->id,
                 'password' => 'nullable|min:6',
                 'old_password' => 'required_with:password|min:6',
                 'gender' => 'nullable|in:male,female',
-                'phone' => 'nullable|unique:users,phone|digits:9',
+                'phone' => 'nullable|digits:9|unique:users,phone,id,' . auth()->user()->id,
                 'country_code' => 'nullable',//|exists:countries,country_code
                 'city_id' => 'nullable|exists:cities,id',
 
