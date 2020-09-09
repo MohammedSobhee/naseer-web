@@ -10,7 +10,7 @@ class Offer extends Model
     //
     use SoftDeletes;
 
-    protected $fillable = ['request_id', 'service_provider_id', 'status', 'payment_type', 'payment_value', 'details'];
+    protected $fillable = ['request_id', 'service_provider_id', 'status', 'down_payment', 'late_payment', 'details'];
 
     public function ServiceProvider()
     {

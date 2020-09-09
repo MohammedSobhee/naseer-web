@@ -17,8 +17,8 @@ class OfferResource extends JsonResource
         return [
             'id' => $this->id,
             'status' => $this->status,
-            'payment_type' => $this->payment_type,
-            'payment_value' => $this->payment_value,
+            'down_payment' => $this->down_payment,
+            'late_payment' => $this->late_payment,
             'details' => $this->details,
             'service_provider' => new ProfileResource($this->ServiceProvider()->first()),
             'order' => new OrderSecondResource($this->Order()->first()),

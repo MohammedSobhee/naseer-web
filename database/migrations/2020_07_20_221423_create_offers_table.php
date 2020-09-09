@@ -18,8 +18,9 @@ class CreateOffersTable extends Migration
             $table->unsignedBigInteger('request_id');
             $table->unsignedBigInteger('service_provider_id');
             $table->enum('status', ['pending', 'accepted', 'rejected']);
-            $table->enum('payment_type', ['down_payment', 'late_payment']);
-            $table->double('payment_value');
+//            $table->enum('payment_type', ['down_payment', 'late_payment']);
+            $table->double('down_payment')->nullable();
+            $table->double('late_payment')->nullable();
             $table->longText('details')->nullable();
             $table->softDeletes();
             $table->timestamps();
