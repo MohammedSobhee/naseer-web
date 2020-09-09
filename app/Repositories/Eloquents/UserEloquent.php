@@ -483,19 +483,19 @@ class UserEloquent extends Uploader implements UserRepository
             auth()->user()->is_completed = 1;
             auth()->user()->save();
 
-            if ($attributes['idno_file']) {
+            if (isset($attributes['idno_file'])) {
                 $service_provider->idno_file = $this->upload($attributes, 'idno_file');
                 sleep(1);
                 $service_provider->save();
 
             }
-            if ($attributes['skill_file']) {
+            if (isset($attributes['skill_file'])) {
                 $service_provider->skill_file = $this->upload($attributes, 'skill_file');
                 sleep(1);
                 $service_provider->save();
 
             }
-            if ($attributes['licensed_file']) {
+            if (isset($attributes['licensed_file'])) {
                 $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
                 sleep(1);
                 $service_provider->save();
@@ -605,7 +605,7 @@ class UserEloquent extends Uploader implements UserRepository
             if (isset($attributes['longitude']))
                 $service_provider->longitude = $attributes['longitude'];
 
-            if ($attributes['idno_file']) {
+            if (isset($attributes['idno_file'])) {
 
 //                if (isset($service_provider->idno_file)) {
 //                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['idno_file']));
@@ -614,7 +614,7 @@ class UserEloquent extends Uploader implements UserRepository
                 sleep(1);
 
             }
-            if ($attributes['skill_file']) {
+            if (isset($attributes['skill_file'])) {
 //                if (isset($service_provider->skill_file)) {
 //                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['skill_file']));
 //                }
@@ -622,7 +622,7 @@ class UserEloquent extends Uploader implements UserRepository
                 sleep(1);
 
             }
-            if ($attributes['licensed_file']) {
+            if (isset($attributes['licensed_file'])) {
 
 //                if (isset($service_provider->licensed_file)) {
 //                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['licensed_file']));
