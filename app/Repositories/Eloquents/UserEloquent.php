@@ -510,7 +510,7 @@ class UserEloquent extends Uploader implements UserRepository
 
     function update(array $attributes, $id = null)
     {
-        $message = trans('app.user_updated');
+        $message = 'تم حفظ البيانات بنجاح';
         $user = auth()->user();
 
         if (isset($attributes['name']))
@@ -538,9 +538,9 @@ class UserEloquent extends Uploader implements UserRepository
 
             if (Hash::check($attributes['old_password'], $user->password)) {
                 $user->password = bcrypt($attributes['password']);
-                $message = trans('app.password_updated');
+                $message = 'تم تغير كلمة المرور بنجاح';
             } else {
-                return response_api(false, 422, trans('app.password_not_match'), []);
+                return response_api(false, 422, 'كلمة المرور القديمة غير صحيحة', []);
             }
 
         }
@@ -551,7 +551,7 @@ class UserEloquent extends Uploader implements UserRepository
 
     function editProvider(array $attributes, $id = null)
     {
-        $message = trans('app.user_updated');
+        $message = 'تم حفظ البيانات بنجاح';
         $user = auth()->user();
 
         if (isset($attributes['name']))
@@ -579,9 +579,9 @@ class UserEloquent extends Uploader implements UserRepository
 
             if (Hash::check($attributes['old_password'], $user->password)) {
                 $user->password = bcrypt($attributes['password']);
-                $message = trans('app.password_updated');
+                $message = 'تم تغير كلمة المرور بنجاح';
             } else {
-                return response_api(false, 422, trans('app.password_not_match'), []);
+                return response_api(false, 422, 'كلمة المرور القديمة غير صحيحة', []);
             }
 
         }
