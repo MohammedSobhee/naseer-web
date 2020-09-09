@@ -128,7 +128,7 @@ class OrderEloquent extends Uploader implements Repository
 
                 $service_ids = Service::where('service_provider_type_id', auth()->user()->ServiceProvider->service_provider_type_id)->pluck('id');
 
-                $collection = $this->model->whereIn('service_id', $service_ids);
+                $collection = $collection->whereIn('service_id', $service_ids);
             }
 
             $provider_offer_orders = Offer::where('service_provider_id', auth()->user()->id)->pluck('request_id')->toArray();
