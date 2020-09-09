@@ -28,11 +28,11 @@ class UpdateProfileRequest extends FormRequest
         if (auth()->user()->type == 'user')
             return [
                 'name' => 'nullable',
-                'email' => 'nullable|email|unique:users,email,id,' . auth()->user()->id,
+                'email' => 'nullable|email|unique:users,email,' . auth()->user()->id,
                 'password' => 'nullable|min:6',
                 'old_password' => 'required_with:password|min:6',
                 'gender' => 'nullable|in:male,female',
-                'phone' => 'nullable|unique:users,phone|digits:9',
+                'phone' => 'nullable|digits:9|unique:users,phone,'. auth()->user()->id,
                 'country_code' => 'nullable',//|exists:countries,country_code
                 'city_id' => 'nullable|exists:cities,id',
 
@@ -41,11 +41,11 @@ class UpdateProfileRequest extends FormRequest
 
             return [
                 'name' => 'nullable',
-                'email' => 'nullable|email|unique:users,email,id,' . auth()->user()->id,
+                'email' => 'nullable|email|unique:users,email,' . auth()->user()->id,
                 'password' => 'nullable|min:6',
                 'old_password' => 'required_with:password|min:6',
                 'gender' => 'nullable|in:male,female',
-                'phone' => 'nullable|digits:9|unique:users,phone,id,' . auth()->user()->id,
+                'phone' => 'nullable|digits:9|unique:users,phone,' . auth()->user()->id,
                 'country_code' => 'nullable',//|exists:countries,country_code
                 'city_id' => 'nullable|exists:cities,id',
 
