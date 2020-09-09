@@ -587,9 +587,11 @@ class UserEloquent extends Uploader implements UserRepository
         }
         if ($user->save()) {
             $service_provider = ServiceProvider::where('user_id', auth()->user()->id)->first();
-            $service_provider->service_provider_type_id = $attributes['service_provider_type_id'];
+            if (isset($attributes['service_provider_type_id']))
+                $service_provider->service_provider_type_id = $attributes['service_provider_type_id'];
 
-            $service_provider->idno = $attributes['idno'];
+            if (isset($attributes['idno']))
+                $service_provider->idno = $attributes['idno'];
             if (isset($attributes['skill']))
                 $service_provider->skill = $attributes['skill'];
             if (isset($attributes['licensed']))
