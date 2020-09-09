@@ -60,7 +60,7 @@ class LookUpController extends Controller
             }
         } else {
 
-            $service_provider_types = $this->providerType->all();
+            $service_provider_types = ServiceProviderTypeResource::collection($this->providerType->all());
             $intro = $this->intro->all();
             $services =  ServiceResource::collection($this->service->all());
 
