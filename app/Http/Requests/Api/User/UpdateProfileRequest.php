@@ -31,7 +31,7 @@ class UpdateProfileRequest extends FormRequest
                 'email' => 'nullable|email|unique:users,email',
                 'password' => 'nullable|min:6',
                 'old_password' => 'required_with:password|min:6',
-                'gender' => 'required|in:male,female',
+                'gender' => 'nullable|in:male,female',
                 'phone' => 'nullable|unique:users,phone|digits:9',
                 'country_code' => 'nullable',//|exists:countries,country_code
                 'city_id' => 'nullable|exists:cities,id',
@@ -43,7 +43,7 @@ class UpdateProfileRequest extends FormRequest
                 'email' => 'nullable|email|unique:users,email',
                 'password' => 'nullable|min:6',
                 'old_password' => 'required_with:password|min:6',
-                'gender' => 'required|in:male,female',
+                'gender' => 'nullable|in:male,female',
                 'phone' => 'nullable|unique:users,phone|digits:9',
                 'country_code' => 'nullable',//|exists:countries,country_code
                 'city_id' => 'nullable|exists:cities,id',
