@@ -25,6 +25,7 @@ class CreateServiceProvidersTable extends Migration
             $table->string('latitude');
             $table->string('longitude');
             $table->unsignedBigInteger('service_provider_type_id');
+            $table->enum('license_type',['licensed','unlicensed'])->nullable();
             $table->string('licensed')->nullable();
             $table->string('licensed_file')->nullable();
 

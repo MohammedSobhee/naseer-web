@@ -16,6 +16,7 @@ use App\Repositories\Interfaces\UserRepository;
 use App\Repositories\Uploader;
 use App\Service;
 use App\ServiceProvider;
+use App\ServiceProviderType;
 use App\User;
 use Carbon\Carbon;
 use DB;
@@ -454,6 +455,8 @@ class UserEloquent extends Uploader implements UserRepository
             sleep(1);
         }
         $service_provider = $this->serviceProvider->where('user_id', auth()->user()->id)->first();
+
+        $service_provider_type = ServiceProviderType::find($attributes['service_provider_type_id']);
         if (!isset($service_provider))
             $service_provider = new ServiceProvider();
         $service_provider->user_id = auth()->user()->id;
@@ -472,6 +475,9 @@ class UserEloquent extends Uploader implements UserRepository
             $service_provider->latitude = $attributes['latitude'];
         if (isset($attributes['longitude']))
             $service_provider->longitude = $attributes['longitude'];
+
+        $service_provider->license_type = $service_provider_type->is_licensed ? 'licensed' : 'unlicensed';
+
         if ($service_provider->save()) {
 
             auth()->user()->is_completed = 1;
@@ -513,20 +519,19 @@ class UserEloquent extends Uploader implements UserRepository
             $user->email = $attributes['email'];
         if (isset($attributes['gender']))
             $user->gender = $attributes['gender'];
-        if (isset($attributes['country_id']))
-            $user->country_id = $attributes['country_id'];
+        if (isset($attributes['phone']))
+            $user->phone = $attributes['phone'];
+        if (isset($attributes['country_code']))
+            $user->country_code = $attributes['country_code'];
         if (isset($attributes['city_id']))
             $user->city_id = $attributes['city_id'];
-        if (isset($attributes['school_id']))
-            $user->school_id = $attributes['school_id'];
-        if (isset($attributes['grade_id']))
-            $user->grade_id = $attributes['grade_id'];
-        if (isset($attributes['avatar'])) {
 
-            if (isset($user->avatar) && $user->avatar != '') {
-                $this->deleteImage('users', $user->id, $user->getOriginal('avatar'));
+        if (isset($attributes['photo'])) {
+
+            if (isset($user->photo) && $user->photo != '') {
+                $this->deleteImage('users', $user->id, $user->getOriginal('photo'));
             }
-            $user->avatar = $this->storeImageThumb('users', $user->id, $attributes['avatar']);
+            $user->photo = $this->storeImageThumb('users', $user->id, $attributes['photo']);
         }
 
         if (isset($attributes['password'])) {
@@ -540,6 +545,95 @@ class UserEloquent extends Uploader implements UserRepository
 
         }
         $user->save();
+
+        return response_api(true, 200, $message, new ProfileResource($user));
+    }
+
+    function editProvider(array $attributes, $id = null)
+    {
+        $message = trans('app.user_updated');
+        $user = auth()->user();
+
+        if (isset($attributes['name']))
+            $user->name = $attributes['name'];
+        if (isset($attributes['email']))
+            $user->email = $attributes['email'];
+        if (isset($attributes['gender']))
+            $user->gender = $attributes['gender'];
+        if (isset($attributes['phone']))
+            $user->phone = $attributes['phone'];
+        if (isset($attributes['country_code']))
+            $user->country_code = $attributes['country_code'];
+        if (isset($attributes['city_id']))
+            $user->city_id = $attributes['city_id'];
+
+        if (isset($attributes['photo'])) {
+
+            if (isset($user->photo) && $user->photo != '') {
+                $this->deleteImage('users', $user->id, $user->getOriginal('photo'));
+            }
+            $user->photo = $this->storeImageThumb('users', $user->id, $attributes['photo']);
+        }
+
+        if (isset($attributes['password'])) {
+
+            if (Hash::check($attributes['old_password'], $user->password)) {
+                $user->password = bcrypt($attributes['password']);
+                $message = trans('app.password_updated');
+            } else {
+                return response_api(false, 422, trans('app.password_not_match'), []);
+            }
+
+        }
+        if ($user->save()) {
+            $service_provider = ServiceProvider::where('user_id', auth()->user()->id)->first();
+            $service_provider->service_provider_type_id = $attributes['service_provider_type_id'];
+
+            $service_provider->idno = $attributes['idno'];
+            if (isset($attributes['skill']))
+                $service_provider->skill = $attributes['skill'];
+            if (isset($attributes['licensed']))
+                $service_provider->licensed = $attributes['licensed'];
+            if (isset($attributes['bio']))
+                $service_provider->bio = $attributes['bio'];
+            if (isset($attributes['address']))
+                $service_provider->address = $attributes['address'];
+            if (isset($attributes['latitude']))
+                $service_provider->latitude = $attributes['latitude'];
+            if (isset($attributes['longitude']))
+                $service_provider->longitude = $attributes['longitude'];
+
+            if ($attributes['idno_file']) {
+
+                if (isset($service_provider->idno_file)) {
+                    unlink($service_provider->idno_file);
+                }
+                $service_provider->idno_file = $this->upload($attributes, 'idno_file');
+                sleep(1);
+                $service_provider->save();
+
+            }
+            if ($attributes['skill_file']) {
+                if (isset($service_provider->skill_file)) {
+                    unlink($service_provider->skill_file);
+                }
+                $service_provider->skill_file = $this->upload($attributes, 'skill_file');
+                sleep(1);
+                $service_provider->save();
+
+            }
+            if ($attributes['licensed_file']) {
+
+                if (isset($service_provider->licensed_file)) {
+                    unlink($service_provider->licensed_file);
+                }
+                $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
+                sleep(1);
+                $service_provider->save();
+
+            }
+
+        }
 
         return response_api(true, 200, $message, new ProfileResource($user));
     }

@@ -10,6 +10,7 @@ use App\Http\Requests\Api\User\GetServiceProvidersRequest;
 use App\Http\Requests\Api\User\LoginRequest;
 use App\Http\Requests\Api\User\ResendConfirmCodeRequest;
 use App\Http\Requests\Api\User\SignUpRequest;
+use App\Http\Requests\Api\User\UpdateProfileRequest;
 use App\Http\Requests\Api\User\UpdateUserMobileRequest;
 use App\Repositories\Eloquents\UserEloquent;
 use Illuminate\Http\Request;
@@ -75,6 +76,16 @@ class UserController extends Controller
     {
         return $this->user->getServiceProviders($request->all());
     }
+
+    public function putUser(UpdateProfileRequest $request)
+    {
+        if (auth()->user()->type == 'user')
+            return $this->user->update($request->all());
+        else
+            return $this->user->editProvider($request->all());
+
+    }
+
     // logout user
     public function logout(Request $request)
     {
