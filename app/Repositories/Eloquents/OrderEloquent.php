@@ -122,7 +122,7 @@ class OrderEloquent extends Uploader implements Repository
         else // for service provider
         {
 
-            $provider_offer_orders = Offer::where('user_id', auth()->user()->id)->pluck('request_id')->toArray();
+            $provider_offer_orders = Offer::where('service_provider_id', auth()->user()->id)->pluck('request_id')->toArray();
             $collection = $this->model->where('type', $attributes['type'])->whereNotIn('id', $provider_offer_orders);
 
             if ($attributes['type'] == 'categorized') {
