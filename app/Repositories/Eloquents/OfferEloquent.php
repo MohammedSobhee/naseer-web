@@ -123,7 +123,7 @@ class OfferEloquent extends Uploader implements Repository
         // check if provider has post to request
         $offer = $this->model->where('request_id', $attributes['request_id'])->where('service_provider_id', auth()->user()->id)->first();
         if (isset($offer))
-            return response_api(false, 422, 'يوجد عرض مسبقاً لهذا الطلب', $offer);
+            return response_api(false, 422, 'يوجد عرض مسبقاً لهذا الطلب', new OfferResource($offer));
 
         $attributes['service_provider_id'] = auth()->user()->id;
         $offer = $this->model->create($attributes);
