@@ -605,33 +605,33 @@ class UserEloquent extends Uploader implements UserRepository
 
             if ($attributes['idno_file']) {
 
-                if (isset($service_provider->idno_file)) {
-                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['idno_file']));
-                }
+//                if (isset($service_provider->idno_file)) {
+//                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['idno_file']));
+//                }
                 $service_provider->idno_file = $this->upload($attributes, 'idno_file');
                 sleep(1);
-                $service_provider->save();
 
             }
             if ($attributes['skill_file']) {
-                if (isset($service_provider->skill_file)) {
-                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['skill_file']));
-                }
+//                if (isset($service_provider->skill_file)) {
+//                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['skill_file']));
+//                }
                 $service_provider->skill_file = $this->upload($attributes, 'skill_file');
                 sleep(1);
-                $service_provider->save();
 
             }
             if ($attributes['licensed_file']) {
 
-                if (isset($service_provider->licensed_file)) {
-                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['licensed_file']));
-                }
+//                if (isset($service_provider->licensed_file)) {
+//                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['licensed_file']));
+//                }
                 $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
                 sleep(1);
-                $service_provider->save();
 
             }
+
+            $service_provider->save();
+
 
         }
 
