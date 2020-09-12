@@ -16,6 +16,7 @@ use App\CompaniesRegistrationAndTrademarking;
 use App\CourtAndLawsuit;
 use App\DivisionOfInheritance;
 use App\DraftingRegulationAndContract;
+use App\Http\Resources\OrderEditResource;
 use App\Http\Resources\OrderResource;
 use App\MarriageOfficer;
 use App\Offer;
@@ -184,7 +185,7 @@ class OrderEloquent extends Uploader implements Repository
             // TODO: Implement getById() method.
             $obj = $this->model->find($id);
             if (isset($obj))
-                return response_api(true, 200, null, new OrderResource($obj));
+                return response_api(true, 200, null, new OrderEditResource($obj));
             return response_api(false, 422, trans('app.not_data_found'), []);
         }
         return $this->model->find($id);
