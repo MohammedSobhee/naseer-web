@@ -26,6 +26,7 @@ class ServiceProviderResource extends JsonResource
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'service_provider_type_id' => $this->service_provider_type_id,
+            'service_provider_type_name' => $this->ServiceProviderType->name,
             'license_type' => $this->license_type == 'licensed' ? 'مرخص' : 'غير مرخص',
         ];
     }

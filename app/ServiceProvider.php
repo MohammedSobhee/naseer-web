@@ -18,6 +18,12 @@ class ServiceProvider extends Model
 
     protected $casts = ['service_provider_type_id' => 'integer'];
 
+
+    public function ServiceProviderType()
+    {
+        return $this->belongsTo(ServiceProviderType::class, 'service_provider_type_id');
+    }
+
     public function getIdnoFileAttribute($value)
     {
         if (isset($value))

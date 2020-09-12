@@ -135,9 +135,7 @@ class OrderEloquent extends Uploader implements Repository
             $collection = $collection->whereNotIn('id', $provider_offer_orders);
 
         }
-
-        //
-
+        
         if (isset($attributes['status'])) {
             $collection = $collection->where('status', $attributes['status']);
         }
