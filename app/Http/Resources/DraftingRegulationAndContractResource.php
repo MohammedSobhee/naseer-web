@@ -19,7 +19,7 @@ class DraftingRegulationAndContractResource extends JsonResource
             'service_id' => $this->service_id,
             'sub_service_id' => $this->sub_service_id,
             'type_service_provided' => $this->type_service_provided,
-            'service' => new ServiceResource($this->Service()->first()),
+            'service' => new ServiceTwoResource($this->Service()->first()),
             'sub_service' => new SubServiceTwoResource($this->SubService()->first()),
         ];
     }
