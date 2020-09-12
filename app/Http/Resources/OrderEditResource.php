@@ -15,16 +15,16 @@ class OrderEditResource extends JsonResource
      */
     public function toArray($request)
     {
-        $data = null;
-        if (isset($this->service_id)) {
-            if ($this->service_id == 1) {
-                $data = new CourtAndLawsuitResource($this->CourtAndLawsuit()->first());
-            } elseif ($this->service_id == 2) {
-                $data = new PublicProsecutionAndPoliceResource($this->PublicProsecutionAndPolice()->first());
-            }elseif ($this->service_id == 4) {
-                $data = new DraftingRegulationAndContractResource($this->DraftingRegulationAndContract()->first());
-            }
-        }
+//        $data = null;
+//        if (isset($this->service_id)) {
+//            if ($this->service_id == 1) {
+//                $data = new CourtAndLawsuitResource($this->CourtAndLawsuit()->first());
+//            } elseif ($this->service_id == 2) {
+//                $data = new PublicProsecutionAndPoliceResource($this->PublicProsecutionAndPolice()->first());
+//            } elseif ($this->service_id == 4) {
+//                $data = new DraftingRegulationAndContractResource($this->DraftingRegulationAndContract()->first());
+//            }
+//        }
 
         return [
             'id' => $this->id,
@@ -50,9 +50,8 @@ class OrderEditResource extends JsonResource
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'city' => new CityResource($this->City()->first()),
             'service' => new ServiceResource($this->Service()->first()),
-
             'client' => new ProfileResource($this->User()->first()),
-            'data_request' => $data
+            'sub_service' => SubServiceResource::collection($this->sub_service->where('service_id', $this->service_id)->get())
         ];
     }
 }
