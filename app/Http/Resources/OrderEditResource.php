@@ -52,7 +52,7 @@ class OrderEditResource extends JsonResource
             'city' => new CityResource($this->City()->first()),
             'service' => new ServiceResource($this->Service()->first()),
             'client' => new ProfileResource($this->User()->first()),
-            'sub_service' => SubServiceResource::collection(SubService::where('service_id', $this->service_id)->get())
+            'details' => SubServiceResource::collection(SubService::where('service_id', $this->service_id)->get())
         ];
     }
 }
