@@ -21,6 +21,8 @@ class OrderEditResource extends JsonResource
                 $data = new CourtAndLawsuitResource($this->CourtAndLawsuit()->first());
             } elseif ($this->service_id == 2) {
                 $data = new PublicProsecutionAndPoliceResource($this->PublicProsecutionAndPolice()->first());
+            }elseif ($this->service_id == 4) {
+                $data = new DraftingRegulationAndContractResource($this->DraftingRegulationAndContract()->first());
             }
         }
         return [
