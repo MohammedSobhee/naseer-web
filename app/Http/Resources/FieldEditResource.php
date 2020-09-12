@@ -15,6 +15,8 @@ class FieldEditResource extends JsonResource
      */
     public function toArray($request)
     {
+
+
         $data = [];
         if ($this->type == 'select') {
             if ($this->data == 'country_id')
@@ -28,6 +30,7 @@ class FieldEditResource extends JsonResource
 //        if ($this->type == 'select_tree')
 //            $data = FieldResource::collection($this->Children()->get());
 
+        dd($request->all());
         return [
             'id' => $this->id,
             'key' => $this->key,

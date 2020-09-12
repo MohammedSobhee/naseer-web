@@ -26,6 +26,7 @@ class OrderEditResource extends JsonResource
 //                $data = new DraftingRegulationAndContractResource($this->DraftingRegulationAndContract()->first());
 //            }
 //        }
+        $request->request->add(['request_id' => $this->id]);
 
         return [
             'id' => $this->id,
