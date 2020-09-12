@@ -135,7 +135,7 @@ class OrderEloquent extends Uploader implements Repository
             $collection = $collection->whereNotIn('id', $provider_offer_orders);
 
         }
-        
+
         if (isset($attributes['status'])) {
             $collection = $collection->where('status', $attributes['status']);
         }
@@ -176,6 +176,19 @@ class OrderEloquent extends Uploader implements Repository
             return response_api(true, 200, null, OrderResource::collection($object), $page_count, $page_number, $count);
         }
         return $object;
+    }
+
+    function getEditOrder($id)
+    {
+        if (request()->segment(1) == 'api') {
+            // TODO: Implement getById() method.
+            $obj = $this->model->find($id);
+            if (isset($obj))
+                return response_api(true, 200, null, new OrderResource($obj));
+            return response_api(false, 422, trans('app.not_data_found'), []);
+        }
+        return $this->model->find($id);
+
     }
 
     function getById($id)

@@ -40,6 +40,11 @@ class OrderController extends Controller
         return $this->order->getById($order_id);
     }
 
+    public function getEditOrder($order_id)
+    {
+        return $this->order->getEditOrder($order_id);
+    }
+
     public function changeStatus(ChangeStatusRequest $request)
     {
         return $this->order->changeStatus($request->all());
