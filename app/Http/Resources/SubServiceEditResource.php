@@ -28,7 +28,7 @@ class SubServiceEditResource extends JsonResource
             'is_preferred_outcome' => $this->is_prefered_outcome,
             'service_id' => $this->service_id,
             'icon' => $this->icon,
-            'fields' => FieldResource::collection($this->Fields()->whereNull('request_fields.parent_id')->get()),
+            'fields' => FieldEditResource::collection($this->Fields()->whereNull('request_fields.parent_id')->get()),
             'extend_data' => ($this->service_id == 7 || $this->service_id == 5) ? $extend_data : empObj()
         ];
     }

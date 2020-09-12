@@ -36,7 +36,6 @@ class FieldResource extends JsonResource
             'type' => $this->type,
             'select_key' => $this->select_key,
             'data' => $data,
-            'selected_value' => 'XXX',
             'fields' => FieldResource::collection($this->Children()->get()),
         ];
     }

@@ -35,6 +35,7 @@ class FieldEditResource extends JsonResource
             'hint' => $this->hint,
             'type' => $this->type,
             'select_key' => $this->select_key,
+            'selected_value' => 'XXX',
             'data' => $data,
             'fields' => FieldEditResource::collection($this->Children()->get()),
         ];
