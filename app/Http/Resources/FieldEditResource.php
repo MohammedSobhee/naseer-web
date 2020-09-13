@@ -30,7 +30,6 @@ class FieldEditResource extends JsonResource
 //        if ($this->type == 'select_tree')
 //            $data = FieldResource::collection($this->Children()->get());
 
-        dd($request->all());
         return [
             'id' => $this->id,
             'key' => $this->key,
@@ -38,9 +37,9 @@ class FieldEditResource extends JsonResource
             'hint' => $this->hint,
             'type' => $this->type,
             'select_key' => $this->select_key,
-            'selected_value' => 'XXX',
+            'selected_value' => ($request->get('is_selected')) ? $request->get('dataRequest')->{$this->key} : '',
             'data' => $data,
-            'fields' => FieldEditResource::collection($this->Children()->get()),
+            'fields' => FieldEditResource::collection($this->Children()->get())->toArray($request),
         ];
     }
 }

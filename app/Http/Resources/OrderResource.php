@@ -15,12 +15,26 @@ class OrderResource extends JsonResource
      */
     public function toArray($request)
     {
-        $data = null;
+        $subService = null;
         if (isset($this->service_id)) {
             if ($this->service_id == 1) {
-                $data = new CourtAndLawsuitResource($this->CourtAndLawsuit()->first());
+                $subService = new CourtAndLawsuitResource($this->CourtAndLawsuit()->first());
             } elseif ($this->service_id == 2) {
-                $data = new PublicProsecutionAndPoliceResource($this->PublicProsecutionAndPolice()->first());
+                $subService = new PublicProsecutionAndPoliceResource($this->PublicProsecutionAndPolice()->first());
+            } elseif ($this->service_id == 4) {
+                $subService = new DraftingRegulationAndContractResource($this->DraftingRegulationAndContract()->first());
+            } elseif ($this->service_id == 5) {
+                $subService = new AnnualLegalContractResource($this->AnnualLegalContract()->first());
+            } elseif ($this->service_id == 7) {
+                $subService = new DivisionOfInheritanceResource($this->DivisionOfInheritance()->first());
+            } elseif ($this->service_id == 8) {
+                $subService = new CompaniesRegistrationAndTrademarkingResource($this->CompaniesRegistrationAndTrademarking()->first());
+            } elseif ($this->service_id == 9) {
+                $subService = new ArbitrationResource($this->Arbitration()->first());
+            } elseif ($this->service_id == 10) {
+                $subService = new MarriageOfficerResource($this->MarriageOfficer()->first());
+            } elseif ($this->service_id == 12) {
+                $subService = new AssignExpertResource($this->AssignExpert()->first());
             }
         }
         return [
@@ -49,7 +63,7 @@ class OrderResource extends JsonResource
             'service' => new ServiceResource($this->Service()->first()),
 
             'client' => new ProfileResource($this->User()->first()),
-            'data_request' => $data
+            'data_request' => $subService
         ];
     }
 }
