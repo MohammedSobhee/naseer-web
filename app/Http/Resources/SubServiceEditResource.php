@@ -17,7 +17,7 @@ class SubServiceEditResource extends JsonResource
     {
         $extend_data = [
             'hint' => ($this->service_id == 7) ? 'موجودات التركة' : 'حدد أنواع الخدمات السنوية',
-            'fields' => EstateFieldResource::collection(Estate::where('sub_service_id', $this->id)->get())->toArray($request),
+            'fields' => Estate::where('sub_service_id', $this->id)->count() > 0 ? EstateFieldResource::collection(Estate::where('sub_service_id', $this->id)->get())->toArray($request) : null,
         ];
 
         $request->request->add(['is_selected' => ($this->id == $request->get('sub_service_id'))]);

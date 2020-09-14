@@ -17,7 +17,7 @@ class SubServiceResource extends JsonResource
     {
         $extend_data = [
             'hint' => ($this->service_id == 7) ? 'موجودات التركة' : 'حدد أنواع الخدمات السنوية',
-            'fields' => Estate::where('sub_service_id', $this->id)->get(),
+            'fields' => Estate::where('sub_service_id', $this->id)->count() > 0 ? Estate::where('sub_service_id', $this->id)->get() : null,
         ];
 
         return [
