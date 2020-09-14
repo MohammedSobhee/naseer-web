@@ -7,6 +7,7 @@ use App\Http\Requests\Api\Order\ChangeStatusRequest;
 use App\Http\Requests\Api\Order\CreateRequest;
 use App\Http\Requests\Api\Order\GetOrderClientsRequest;
 use App\Http\Requests\Api\Order\GetRequest;
+use App\Http\Requests\Api\Order\UpdateRequest;
 use App\Repositories\Eloquents\OrderEloquent;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,11 @@ class OrderController extends Controller
     public function postOrder(CreateRequest $request)
     {
         return $this->order->create($request->all());
+    }
+
+    public function putOrder(UpdateRequest $request, $id)
+    {
+        return $this->order->update($request->all(), $id);
     }
 
     public function getOrders(GetRequest $request)
@@ -49,6 +55,7 @@ class OrderController extends Controller
     {
         return $this->order->changeStatus($request->all());
     }
+
     public function delete($id)
     {
         return $this->order->delete($id);

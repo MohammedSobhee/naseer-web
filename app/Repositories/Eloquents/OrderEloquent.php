@@ -336,17 +336,135 @@ class OrderEloquent extends Uploader implements Repository
     function update(array $attributes, $id = null)
     {
         // TODO: Implement update() method.
-//        $city = $this->model->find($id);
-//        $city->name_ar = $attributes['name_ar'];
-//        $city->name_en = $attributes['name_en'];
-//
-//        if ($city->save()) {
-//
-//            return response_api(true, 200, trans('app.updated'), $city);
-//
-//        }
-//        return response_api(false, 422, trans('app.not_updated'));
+        $request = $this->model->where('status', 'new')->find($id);
 
+        if (isset($request)) {
+            if (isset($attributes['case_text']))
+                $request->case_text = $attributes['case_text'];
+            if (isset($attributes['evidences_text']))
+                $request->evidences_text = $attributes['evidences_text'];
+            if (isset($attributes['preferred_outcomes_text']))
+                $request->preferred_outcomes_text = $attributes['preferred_outcomes_text'];
+
+            if (isset($attributes['contact_prefer']))
+                $request->contact_prefer = $attributes['contact_prefer'];
+            if (isset($attributes['payment_prefer']))
+                $request->payment_prefer = $attributes['payment_prefer'];
+            if (isset($attributes['service_date']))
+                $request->service_date = $attributes['service_date'];
+
+            if ($request->save()) {
+
+
+                $attributes['request_id'] = $request->id;
+
+                if (isset($request->service_id)) {
+                    //CourtAndLawsuit
+                    if ($request->service_id == 1) {
+                        CourtAndLawsuit::where('request_id', $request->id)->update($attributes);
+                    }
+                    //PublicProsecutionAndPolice
+                    if ($request->service_id == 2) {
+                        PublicProsecutionAndPolice::where('request_id', $request->id)->update($attributes);
+                    }
+                    //DraftingRegulationAndContract
+                    if ($request->service_id == 4) {
+                        DraftingRegulationAndContract::where('request_id', $request->id)->update($attributes);
+                    }
+
+                    //DivisionOfInheritance
+                    if ($request->service_id == 7) {
+                        DivisionOfInheritance::where('request_id', $request->id)->update($attributes);
+                    }
+                    //CompaniesRegistrationAndTrademarking
+                    if ($request->service_id == 8) {
+                        CompaniesRegistrationAndTrademarking::where('request_id', $request->id)->update($attributes);
+                    }
+
+                    //Arbitration
+                    if ($request->service_id == 9) {
+                        Arbitration::where('request_id', $request->id)->update($attributes);
+                    }
+                    //MarriageOfficer
+                    if ($request->service_id == 10) {
+
+                        $marriage_office = MarriageOfficer::where('request_id', $request->id)->first();
+                        if (!isset($marriage_office))
+                            $marriage_office = new MarriageOfficer();
+                        if (isset($attributes['request_id']))
+                            $marriage_office->request_id = $request->id;
+                        if (isset($attributes['service_id']))
+                            $marriage_office->service_id = $request->service_id;
+                        if (isset($attributes['sub_service_id']))
+                            $marriage_office->sub_service_id = $attributes['sub_service_id'];
+                        if (isset($attributes['location']))
+                            $marriage_office->location = $attributes['location'];
+                        if (isset($attributes['latitude']))
+                            $marriage_office->latitude = $attributes['latitude'];
+                        if (isset($attributes['longitude']))
+                            $marriage_office->longitude = $attributes['longitude'];
+                        if (isset($attributes['request_datetime']))
+                            $marriage_office->request_datetime = $attributes['request_datetime'];
+                        if (isset($attributes['client_idno']))
+                            $marriage_office->client_idno = $attributes['client_idno'];
+                        if ($marriage_office->save()) {
+                            if (isset($attributes['medical_examination'])) {
+                                sleep(1);
+                                $marriage_office->medical_examination = $this->upload($attributes, 'medical_examination');
+                                $marriage_office->save();
+                            }
+                            if (isset($attributes['divorce_certificate'])) {
+                                sleep(1);
+                                $marriage_office->divorce_certificate = $this->upload($attributes, 'divorce_certificate');
+                                $marriage_office->save();
+                            }
+                        }
+                    }
+                    //AssignExpert
+                    if ($request->service_id == 12) {
+                        AssignExpert::where('request_id', $request->id)->update($attributes);
+                    }
+
+                    //AnnualLegalContract
+                    if ($request->service_id == 5) {
+                        AnnualLegalContract::where('request_id', $request->id)->update($attributes);
+                    }
+                }
+                if (isset($attributes['case_file'])) {
+                    sleep(1);
+                    $request->case_file = $this->upload($attributes, 'case_file');
+                    $request->save();
+                }
+                if (isset($attributes['evidences_file'])) {
+                    sleep(1);
+                    $request->evidences_file = $this->upload($attributes, 'evidences_file');
+                    $request->save();
+                }
+                if (isset($attributes['preferred_outcomes_file'])) {
+                    sleep(1);
+                    $request->preferred_outcomes_file = $this->upload($attributes, 'preferred_outcomes_file');
+                    $request->save();
+                }
+                if (isset($attributes['case_audio'])) {
+                    sleep(1);
+                    $request->case_audio = $this->upload($attributes, 'case_audio');
+                    $request->save();
+                }
+                if (isset($attributes['evidences_audio'])) {
+                    sleep(1);
+                    $request->evidences_audio = $this->upload($attributes, 'evidences_audio');
+                    $request->save();
+                }
+                if (isset($attributes['preferred_outcomes_audio'])) {
+                    sleep(1);
+                    $request->preferred_outcomes_audio = $this->upload($attributes, 'preferred_outcomes_audio');
+                    $request->save();
+                }
+
+                return response_api(true, 200, 'تم تعديل الطلب بنجاح', new OrderResource($request));// . ',' . trans('app.sent_email_verification')
+            }
+        }
+        return response_api(false, 422, null, empObj());// . ',' . trans('app.sent_email_verification')
 
     }
 
