@@ -17,7 +17,7 @@ class SubServiceEditResource extends JsonResource
     {
         $extend_data = [
             'hint' => ($this->service_id == 7) ? 'موجودات التركة' : 'حدد أنواع الخدمات السنوية',
-            'fields' => Estate::where('sub_service_id', $this->id)->count() > 0 ? EstateFieldResource::collection(Estate::where('sub_service_id', $this->id)->get())->toArray($request) : null,
+            'fields' => EstateFieldResource::collection(Estate::where('sub_service_id', $this->id)->get()),
         ];
 
         $request->request->add(['is_selected' => ($this->id == $request->get('sub_service_id'))]);
@@ -31,7 +31,7 @@ class SubServiceEditResource extends JsonResource
             'icon' => $this->icon,
             'is_selected' => $this->id == $request->get('sub_service_id'),
             'fields' => FieldEditResource::collection($this->Fields()->whereNull('request_fields.parent_id')->get())->toArray($request),
-            'extend_data' => ($this->service_id == 7 || $this->service_id == 5) ? $extend_data : empObj()
+            'extend_data' => ($this->service_id == 7 || $this->service_id == 5) ? (!empty($extend_data['fields']) ? $extend_data : null) : empObj()
         ];
     }
 }
