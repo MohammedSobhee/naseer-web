@@ -31,7 +31,7 @@ class SubServiceEditResource extends JsonResource
             'icon' => $this->icon,
             'is_selected' => $this->id == $request->get('sub_service_id'),
             'fields' => FieldEditResource::collection($this->Fields()->whereNull('request_fields.parent_id')->get())->toArray($request),
-            'extend_data' => ($this->service_id == 7 || $this->service_id == 5) ? (!empty($extend_data['fields']) ? $extend_data : null) : empObj()
+            'extend_data' => ($this->service_id == 7 || $this->service_id == 5) ? (count($extend_data['fields']) > 0 ? $extend_data : null) : empObj()
         ];
     }
 }

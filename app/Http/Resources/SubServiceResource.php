@@ -29,7 +29,7 @@ class SubServiceResource extends JsonResource
             'service_id' => $this->service_id,
             'icon' => $this->icon,
             'fields' => FieldResource::collection($this->Fields()->whereNull('request_fields.parent_id')->get()),
-            'extend_data' => ($this->service_id == 7 || $this->service_id == 5) ? (!empty($extend_data['fields']) ? $extend_data : null) : empObj()
+            'extend_data' => ($this->service_id == 7 || $this->service_id == 5) ? (count($extend_data['fields']) > 0 ? $extend_data : null) : empObj()
         ];
     }
 }
