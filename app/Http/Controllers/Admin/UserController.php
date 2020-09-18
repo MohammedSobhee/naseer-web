@@ -56,6 +56,7 @@ class UserController extends Controller
     {
         $user = $this->user->getById($id);
 
+        dd($user->Slave);
         $data = [
             'title' => 'عرض تفاصيل مزود الخدمة',
             'icon' => 'icon-users',
