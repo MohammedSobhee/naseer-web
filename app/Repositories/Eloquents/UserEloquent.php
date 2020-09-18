@@ -571,7 +571,6 @@ class UserEloquent extends Uploader implements UserRepository
     function confirmUpdateProvider(array $attributes, $id = null)
     {
         $user = User::find($id);
-        return response_api(true, 200, 'ff', []);
         $tmp = User::where('master_id', $user->id)->first();
         $user->name = $tmp->name;
         $user->phone = $tmp->phone;
