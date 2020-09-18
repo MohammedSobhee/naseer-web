@@ -61,9 +61,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
 
     Route::get('/service-providers', 'UserController@providers');
     Route::get('/users', 'UserController@index');
+    Route::get('/users/{id}/view', 'UserController@showProvider');
     Route::get('/users/user-data/{type}', 'UserController@anyData');
     Route::put('/users/user-verify', 'UserController@verifyPhone');
     Route::put('/users/user-status', 'UserController@userActive');
+    Route::put('/users/approval-provider-edits/{id}', 'UserController@confirmUpdateProvider');
 
     Route::get('/requests', 'RequestController@index');
     Route::get('/requests/request-data', 'RequestController@anyData');

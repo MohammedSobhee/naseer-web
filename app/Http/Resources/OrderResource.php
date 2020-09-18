@@ -56,6 +56,7 @@ class OrderResource extends JsonResource
             'payment_prefer_lbl' => __('app.payment_prefer.' . $this->payment_prefer),
             'service_date' => $this->service_date,
             'status' => $this->status,
+            'is_edit' => $this->is_edit,
             'offers_num' => $this->Offers()->count(),
             'offers' => OfferSecondResource::collection($this->Offers()->get()),
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),

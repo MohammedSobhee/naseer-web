@@ -353,6 +353,8 @@ class OrderEloquent extends Uploader implements Repository
             if (isset($attributes['service_date']))
                 $request->service_date = $attributes['service_date'];
 
+            $request->is_edit = 1;
+
             if ($request->save()) {
 
 

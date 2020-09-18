@@ -29,6 +29,7 @@ class ProfileResource extends JsonResource
             'rate' => $this->Rates()->where('is_approved', true)->average('rate') ?: 0,
             'is_active' => $this->is_active,
             'is_completed' => $this->is_completed,
+            'is_edit' => $this->is_edit,
             'city' => new CityResource($this->City()->first()),
             'provider_det' => new ServiceProviderResource($this->ServiceProvider()->first()),
         ];

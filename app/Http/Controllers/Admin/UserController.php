@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProfileResource;
 use App\Repositories\Eloquents\UserEloquent;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,7 @@ class UserController extends Controller
     {
         return $this->user->anyData($type);
     }
+
     public function userActive(Request $request)
     {
         return $this->user->userActive($request->only('user_id'));
@@ -48,6 +50,23 @@ class UserController extends Controller
     public function verifyPhone(Request $request)
     {
         return $this->user->verifyPhone($request->only('user_id'));
+    }
+
+    public function showProvider($id)
+    {
+        $user = $this->user->getById($id);
+
+        $data = [
+            'title' => 'عرض تفاصيل مزود الخدمة',
+            'icon' => 'icon-users',
+            'user' => $user,
+        ];
+        return view(admin_vw() . '.users.view-provider', $data);
+    }
+
+    public function confirmUpdateProvider(Request $request, $id)
+    {
+        return $this->user->confirmUpdateProvider($request->all(), $id);
     }
 
     public function export()

@@ -16,6 +16,8 @@ class Request extends Model
         'service_id' => 'integer',
         'level' => 'integer',
         'is_active' => 'boolean',
+        'is_edit' => 'boolean',
+
     ];
 
     protected $appends = ['offers_num'];

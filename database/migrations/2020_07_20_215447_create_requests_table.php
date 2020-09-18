@@ -40,6 +40,7 @@ class CreateRequestsTable extends Migration
 
             $table->enum('status', ['new', 'assigned', 'completed', 'canceled'])->default('new');
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_edit')->default(false);
 
             $table->softDeletes();
             $table->timestamps();

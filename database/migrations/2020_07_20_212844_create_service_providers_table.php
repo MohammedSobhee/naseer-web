@@ -28,6 +28,7 @@ class CreateServiceProvidersTable extends Migration
             $table->enum('license_type',['licensed','unlicensed'])->nullable();
             $table->string('licensed')->nullable();
             $table->string('licensed_file')->nullable();
+            $table->unsignedBigInteger('master_id')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

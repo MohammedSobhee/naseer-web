@@ -29,6 +29,8 @@ class CreateUsersTable extends Migration
             $table->boolean('is_active')->default(true);
             $table->unsignedBigInteger('city_id')->nullable();
             $table->boolean('is_completed')->default(false);
+            $table->boolean('is_edit')->default(false);
+            $table->unsignedBigInteger('master_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

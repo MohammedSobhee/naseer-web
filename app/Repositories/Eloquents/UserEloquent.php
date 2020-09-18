@@ -214,7 +214,13 @@ class UserEloquent extends Uploader implements UserRepository
 
     function anyData($type)
     {
-        $users = $this->model->with('City')->where('type', $type)->orderByDesc('created_at');
+        $users_id = $this->model->whereNotNull('master_id')->pluck('master_id')->toArray();
+        $users_id = implode(',', $users_id);
+
+        if (isset($users_id) && $users_id != '') {
+            $users = $this->model->with('City')->where('type', $type)->whereNull('master_id')->orderByRaw("FIELD(id, $users_id) DESC");//->orderByDesc('created_at');
+        } else
+            $users = $this->model->with('City')->where('type', $type)->whereNull('master_id')->orderByDesc('updated_at');
 
         return datatables()->of($users)
             ->filter(function ($query) {
@@ -267,13 +273,26 @@ class UserEloquent extends Uploader implements UserRepository
                 return '<input type="checkbox" class="make-switch is_active" data-on-text="&nbsp;مفعّل&nbsp;" data-off-text="&nbsp;معطّل&nbsp;" name="is_active" data-id="' . $user->id . '" data-on-color="success" data-size="mini" data-off-color="warning">';
             })
             ->addColumn('action', function ($user) {
-                return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/edit') . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only edit-user-mdl"
-                                                                                   title="Edit">
-                                                                                    <i class="fa fa-edit"></i>
-                                                                                </a>
-                                                                                <a href="' . url(admin_vw() . '/users/' . $user->id) . '" class="btn btn-circle btn-icon-only red delete">
-                                        <i class="fa fa-trash"></i>
-                                    </a>';
+//                return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/edit') . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only edit-user-mdl"
+//                                                                                   title="Edit">
+//                                                                                    <i class="fa fa-edit"></i>
+//                                                                                </a>
+//                                                                                <a href="' . url(admin_vw() . '/users/' . $user->id) . '" class="btn btn-circle btn-icon-only red delete">
+//                                        <i class="fa fa-trash"></i>
+//                                    </a>';
+                $action = '';
+                if (isset($user->Slave)) {
+                    $action = '<a href="' . url(admin_vw() . '/users/approval-provider-edits/' . $user->id) . '" class="btn btn-sm btn-success red btn-circle approval-edits"
+                                                                                   title="اعتماد التعديل">
+                                                                                    <i class="fa fa-check"></i>
+                                                                                    اعتماد التعديل
+                                                                                </a>';
+                }
+                return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/view') . '" class="btn btn-sm btn-success blue btn-circle"
+                                                                                   title="عرض">
+                                                                                    <i class="fa fa-eye"></i>
+                                                                                    عرض
+                                                                                </a>' . $action;
             })->addIndexColumn()
             ->rawColumns(['action', 'photo', 'is_active', 'is_verify'])->toJson();
     }
@@ -549,32 +568,58 @@ class UserEloquent extends Uploader implements UserRepository
         return response_api(true, 200, $message, new ProfileResource($user));
     }
 
+    function confirmUpdateProvider(array $attributes, $id = null)
+    {
+        $user = User::find($id);
+
+        $tmp = User::where('master_id', $user->id)->first();
+        $user->name = $tmp->name;
+        $user->phone = $tmp->phone;
+        $user->country_code = $tmp->country_code;
+        $user->email = $tmp->email;
+        $user->email_verified_at = $tmp->email_verified_at;
+        $user->password = $tmp->password;
+        $user->verification_code = $tmp->verification_code;
+        $user->is_verify = $tmp->is_verify;
+        $user->photo = $tmp->getAttributes()['photo'];
+        $user->gender = $tmp->gender;
+        $user->type = $tmp->type;
+        $user->city_id = $tmp->city_id;
+        $user->is_completed = $tmp->is_completed;
+        $user->save();
+
+
+        $provider = ServiceProvider::where('user_id', $user->id)->whereNull('master_id')->first();
+        $tmp_provider = ServiceProvider::where('master_id', $user->ServiceProvider->id)->first();
+
+        //`user_id`, `idno`, `idno_file`, `skill`, `skill_file`, `bio`, `address`, `latitude`,
+        // `longitude`, `service_provider_type_id`, `license_type`, `licensed`, `licensed_file`
+        $provider->idno = $tmp_provider->idno;
+        $provider->idno_file = $tmp_provider->getAttributes()['idno_file'];
+        $provider->skill = $tmp_provider->skill;
+        $provider->skill_file = $tmp_provider->getAttributes()['skill_file'];
+        $provider->licensed = $tmp_provider->licensed;
+        $provider->licensed_file = $tmp_provider->getAttributes()['licensed_file'];
+        $provider->bio = $tmp_provider->bio;
+        $provider->address = $tmp_provider->address;
+        $provider->latitude = $tmp_provider->latitude;
+        $provider->longitude = $tmp_provider->longitude;
+        $provider->service_provider_type_id = $tmp_provider->service_provider_type_id;
+        $provider->license_type = $tmp_provider->license_type;
+        $provider->save();
+
+        $tmp->forceDelete();
+        $tmp_provider->forceDelete();
+        return response_api(true, 200, 'تم اعتماد البيانات بنجاح', []);
+
+    }
+
     function editProvider(array $attributes, $id = null)
     {
-        $message = 'تم حفظ البيانات بنجاح';
+        $message = 'تم حفظ البيانات بنجاح، بانتظار اعتماد ادارة النظام.';
         $user = auth()->user();
 
-        if (isset($attributes['name']))
-            $user->name = $attributes['name'];
-        if (isset($attributes['email']))
-            $user->email = $attributes['email'];
-        if (isset($attributes['gender']))
-            $user->gender = $attributes['gender'];
-        if (isset($attributes['phone']))
-            $user->phone = $attributes['phone'];
-        if (isset($attributes['country_code']))
-            $user->country_code = $attributes['country_code'];
-        if (isset($attributes['city_id']))
-            $user->city_id = $attributes['city_id'];
-
-        if (isset($attributes['photo'])) {
-
-            if (isset($user->photo) && $user->photo != '') {
-                $this->deleteImage('users', $user->id, $user->getOriginal('photo'));
-            }
-            $user->photo = $this->storeImageThumb('users', $user->id, $attributes['photo']);
-        }
-
+        // api change password
         if (isset($attributes['password'])) {
 
             if (Hash::check($attributes['old_password'], $user->password)) {
@@ -584,55 +629,139 @@ class UserEloquent extends Uploader implements UserRepository
                 return response_api(false, 422, 'كلمة المرور القديمة غير صحيحة', []);
             }
 
+            $user->save();
+            return response_api(true, 200, $message, new ProfileResource($user));
+
         }
-        if ($user->save()) {
+
+        if ($user->is_edit) {
+            return response_api(false, 422, 'تم التعديل مسبقاً', empObj());
+        }
+
+        $user_tmp = new User();
+        $user_tmp->master_id = $user->id;
+        if (!isset($attributes['password'])) {
+            $user_tmp->password = $user->password;
+        }
+        if (!isset($attributes['verification_code'])) {
+            $user_tmp->verification_code = $user->verification_code;
+            $user_tmp->is_verify = $user->is_verify;
+        }
+        $user_tmp->type = $user->type;
+        $user_tmp->is_active = $user->is_active;
+        $user_tmp->is_completed = $user->is_completed;
+        $user_tmp->email_verified_at = $user->email_verified_at;
+        if (isset($attributes['name']))
+            $user_tmp->name = $attributes['name'];
+        else
+            $user_tmp->name = $user->name;
+
+        if (isset($attributes['email']))
+            $user_tmp->email = $attributes['email'];
+        else
+            $user_tmp->email = $user->email;
+
+        if (isset($attributes['gender']))
+            $user_tmp->gender = $attributes['gender'];
+        else
+            $user_tmp->gender = $user->gender;
+        if (isset($attributes['phone']))
+            $user_tmp->phone = $attributes['phone'];
+        else
+            $user_tmp->phone = $user->phone;
+
+        if (isset($attributes['country_code']))
+            $user_tmp->country_code = $attributes['country_code'];
+        else
+            $user_tmp->country_code = $user->country_code;
+
+        if (isset($attributes['city_id']))
+            $user_tmp->city_id = $attributes['city_id'];
+        else
+            $user_tmp->city_id = $user->city_id;
+
+        if (isset($attributes['photo'])) {
+            $user_tmp->photo = $this->storeImageThumb('users', $user->id, $attributes['photo']);
+        } else
+            $user_tmp->photo = $user->getAttributes()['photo'];
+
+        $user->is_edit = 1;
+
+        if ($user->save() && $user_tmp->save()) {
             $service_provider = ServiceProvider::where('user_id', auth()->user()->id)->first();
+
+            $service_provider_tmp = new ServiceProvider();
+            $service_provider_tmp->master_id = $service_provider->id;
+            $service_provider_tmp->user_id = $user->id;
+
             if (isset($attributes['service_provider_type_id']))
-                $service_provider->service_provider_type_id = $attributes['service_provider_type_id'];
+                $service_provider_tmp->service_provider_type_id = $attributes['service_provider_type_id'];
+            else
+                $service_provider_tmp->service_provider_type_id = $service_provider->service_provider_type_id;
 
             if (isset($attributes['idno']))
-                $service_provider->idno = $attributes['idno'];
+                $service_provider_tmp->idno = $attributes['idno'];
+            else
+                $service_provider_tmp->idno = $service_provider->idno;
+
             if (isset($attributes['skill']))
-                $service_provider->skill = $attributes['skill'];
+                $service_provider_tmp->skill = $attributes['skill'];
+            else
+                $service_provider_tmp->skill = $service_provider->skill;
+
             if (isset($attributes['licensed']))
-                $service_provider->licensed = $attributes['licensed'];
+                $service_provider_tmp->licensed = $attributes['licensed'];
+            else
+                $service_provider_tmp->licensed = $service_provider->licensed;
+
             if (isset($attributes['bio']))
-                $service_provider->bio = $attributes['bio'];
+                $service_provider_tmp->bio = $attributes['bio'];
+            else
+                $service_provider_tmp->bio = $service_provider->bio;
+
             if (isset($attributes['address']))
-                $service_provider->address = $attributes['address'];
+                $service_provider_tmp->address = $attributes['address'];
+            else
+                $service_provider_tmp->address = $service_provider->address;
+
             if (isset($attributes['latitude']))
-                $service_provider->latitude = $attributes['latitude'];
+                $service_provider_tmp->latitude = $attributes['latitude'];
+            else
+                $service_provider_tmp->latitude = $service_provider->latitude;
+
             if (isset($attributes['longitude']))
-                $service_provider->longitude = $attributes['longitude'];
+                $service_provider_tmp->longitude = $attributes['longitude'];
+            else
+                $service_provider_tmp->longitude = $service_provider->longitude;
 
             if (isset($attributes['idno_file'])) {
 
 //                if (isset($service_provider->idno_file)) {
 //                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['idno_file']));
 //                }
-                $service_provider->idno_file = $this->upload($attributes, 'idno_file');
+                $service_provider_tmp->idno_file = $this->upload($attributes, 'idno_file');
                 sleep(1);
 
-            }
+            } else
+                $service_provider_tmp->idno_file = $service_provider->getAttributes()['idno_file'];
+
             if (isset($attributes['skill_file'])) {
-//                if (isset($service_provider->skill_file)) {
-//                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['skill_file']));
-//                }
-                $service_provider->skill_file = $this->upload($attributes, 'skill_file');
+                $service_provider_tmp->skill_file = $this->upload($attributes, 'skill_file');
                 sleep(1);
 
-            }
+            } else
+                $service_provider_tmp->skill_file = $service_provider->getAttributes()['skill_file'];
+
             if (isset($attributes['licensed_file'])) {
-
-//                if (isset($service_provider->licensed_file)) {
-//                    unlink(base_path('assets/upload/' . $service_provider->getOriginal()['licensed_file']));
-//                }
-                $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
+                $service_provider_tmp->licensed_file = $this->upload($attributes, 'licensed_file');
                 sleep(1);
 
-            }
+            } else
+                $service_provider_tmp->licensed_file = $service_provider->getAttributes()['licensed_file'];
+
 
             $service_provider->save();
+            $service_provider_tmp->save();
 
 
         }

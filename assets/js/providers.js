@@ -1,9 +1,28 @@
 $(document).ready(function () {
 
+    $(document).on('switchChange.bootstrapSwitch', '.change_activation', function (event, state) {
+        // ... skipped ...
+        var user_id = $(this).data('id');
+        $.ajax({
+            url: baseURL + '/users/user-status',
+            type: 'PUT',
+            dataType: 'json',
+            data: {'_token': csrf_token, 'user_id': user_id},
+            success: function (data) {
+
+                if (data.status) {
+                    toastr['success'](data.message, '');
+                } else {
+                    toastr['error'](data.message);
+                }
+
+            }
+        });
+
+    });
     $('#providers_tbl').on('switchChange.bootstrapSwitch', '.is_active', function (event, state) {
         // ... skipped ...
         var user_id = $(this).data('id');
-
         $.ajax({
             url: baseURL + '/users/user-status',
             type: 'PUT',
@@ -91,7 +110,7 @@ $(document).ready(function () {
                 {data: 'is_verify', name: 'is_verify'},
                 {data: 'city.name', name: 'city.name'},
                 {data: 'is_active', name: 'is_active'},
-                // {data: 'action', name: 'action'}
+                {data: 'action', name: 'action'}
             ],
             "fnDrawCallback": function () {
                 //Initialize checkbos for enable/disable user
@@ -125,6 +144,53 @@ $(document).ready(function () {
             order: [[2, "asc"]]
         });
     }
+
+    $(document).on('click', '.approval-edits', function (event) {
+
+        var _this = $(this);
+        var action = _this.attr('href');
+        event.preventDefault();
+
+        bootbox.confirm({
+            message: "تأكيد اعتماد التعديلات!",
+            buttons: {
+
+                confirm: {
+                    label: 'بالتأكيد <i class="fa fa-check"></i>',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'الغاء<i class="fa fa-times"></i>',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: action,
+                        type: 'PUT',
+                        dataType: 'json',
+                        data: {'_token': csrf_token},
+                        success: function (data) {
+
+                            if (data.status) {
+                                $('.alert').hide();
+                                toastr['success'](data.message, '');
+                                providers_tbl.api().ajax.reload();
+
+                            }
+                            else {
+                                toastr['error'](data.message);
+                            }
+
+                        }
+                    });
+                }
+            }
+        });
+
+    });
+
     $(document).on('click', '.user-det', function (e) {
         $("#wait_msg,#overlay").show();
         e.preventDefault();

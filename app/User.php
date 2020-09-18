@@ -43,6 +43,7 @@ class User extends Authenticatable
         'is_verify' => 'boolean',
         'is_active' => 'boolean',
         'is_completed' => 'boolean',
+        'is_edit' => 'boolean',
     ];
 
     protected $appends = ['photo100', 'photo300'];
@@ -50,7 +51,10 @@ class User extends Authenticatable
     // Set as username any column from users table
     public function findForPassport($username)
     {
-        return $this->where('email', $username)->orWhere(DB::raw("CONCAT(`country_code`, `phone`)"), $username)->first();
+        return $this->where(function ($query) use ($username) {
+            $query->where('email', $username)->orWhere(DB::raw("CONCAT(`country_code`, `phone`)"), $username);
+        })->whereNull('master_id')
+            ->first();
     }
 
 
@@ -61,7 +65,12 @@ class User extends Authenticatable
 
     public function ServiceProvider()
     {
-        return $this->hasOne(ServiceProvider::class, 'user_id', 'id');
+        return $this->hasOne(ServiceProvider::class, 'user_id', 'id')->whereNull('service_providers.master_id');
+    }
+
+    public function Slave()
+    {
+        return $this->hasOne(User::class, 'master_id', 'id');
     }
 
     public function Rates()
