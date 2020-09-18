@@ -65,7 +65,7 @@ class User extends Authenticatable
 
     public function ServiceProvider()
     {
-        return $this->hasOne(ServiceProvider::class, 'user_id', 'id')->whereNull('service_providers.master_id');
+        return $this->hasOne(ServiceProvider::class, 'user_id', 'id');
     }
 
     public function Slave()

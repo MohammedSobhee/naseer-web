@@ -38,7 +38,9 @@ class OfferEloquent extends Uploader implements Repository
 
     function anyData($order_id)
     {
-        $offers = $this->model->with('ServiceProvider')->where('request_id', $order_id)->orderByDesc('created_at');
+        $offers = $this->model->with(['ServiceProvider'=>function($query){
+            $query->whereNull('service_providers.master_id');
+        }])->where('request_id', $order_id)->orderByDesc('created_at');
 
         return datatables()->of($offers)
             ->filter(function ($query) {

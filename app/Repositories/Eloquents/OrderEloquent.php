@@ -127,7 +127,7 @@ class OrderEloquent extends Uploader implements Repository
 
             if ($attributes['type'] == 'categorized') {
 
-                $service_ids = Service::where('service_provider_type_id', auth()->user()->ServiceProvider->service_provider_type_id)->pluck('id');
+                $service_ids = Service::where('service_provider_type_id', auth()->user()->ServiceProvider->whereNull('service_providers.master_id')->service_provider_type_id)->pluck('id');
 
                 $collection = $collection->whereIn('service_id', $service_ids);
             }

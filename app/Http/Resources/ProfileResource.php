@@ -31,7 +31,7 @@ class ProfileResource extends JsonResource
             'is_completed' => $this->is_completed,
             'is_edit' => $this->is_edit,
             'city' => new CityResource($this->City()->first()),
-            'provider_det' => new ServiceProviderResource($this->ServiceProvider()->first()),
+            'provider_det' => new ServiceProviderResource($this->ServiceProvider()->whereNull('service_providers.master_id')->first()),
         ];
     }
 }

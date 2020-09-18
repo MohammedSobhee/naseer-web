@@ -20,7 +20,7 @@ class OfferSecondResource extends JsonResource
             'down_payment' => $this->down_payment,
             'late_payment' => $this->late_payment,
             'details' => $this->details,
-            'service_provider' => new ProfileResource($this->ServiceProvider()->first()),
+            'service_provider' => new ProfileResource($this->ServiceProvider()->whereNull('service_providers.master_id')->first()),
         ];
     }
 }
