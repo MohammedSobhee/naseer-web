@@ -70,7 +70,7 @@ class User extends Authenticatable
 
     public function ServiceProviderTemp()
     {
-        return $this->hasOne(ServiceProvider::class, 'user_id', 'id')->whereNotNull('service_providers.master_id');
+        return $this->hasOne(ServiceProvider::class, 'user_id', 'master_id')->whereNotNull('service_providers.master_id');
     }
 
     public function Slave()
