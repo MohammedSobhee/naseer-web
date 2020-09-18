@@ -21,16 +21,6 @@
                 <span class="caption-subject font-green-haze bold uppercase">البيانات الشخصية</span>
                 <span class="caption-helper">مزود خدمة...</span>
             </div>
-            <div class="actions">
-                <a class="btn btn-circle btn-primary" href="javascript:;">
-                    <i class="icon-eye"></i>
-                    عرض التعديلات
-                </a>
-                <a class="btn btn-circle btn-danger" href="javascript:;">
-                    <i class="icon-check"></i>
-                    اعتماد التعديلات
-                </a>
-            </div>
         </div>
         <div class="portlet-body form">
             <!-- BEGIN FORM-->
@@ -211,6 +201,208 @@
         </div>
     </div>
 
+    @if(isset($user->Slave))
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-equalizer font-green-haze"></i>
+                    <span class="caption-subject font-green-haze bold uppercase">البيانات الشخصية المعدّلة</span>
+                    <span class="caption-helper">مزود خدمة...</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-circle btn-danger" href="javascript:;">
+                        <i class="icon-check"></i>
+                        اعتماد التعديلات
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                <form class="form-horizontal" role="form" id="profile">
+                    <div class="form-body">
+                        <h3 class="form-section">البيانات الاساسية</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">اسم المستخدم:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> {{$user->Slave->name ?? ''}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">رقم الهاتف:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">  {{$user->Slave->country_code.$user->Slave->phone ?? ''}}  </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">البريد الالكتروني:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">  {{$user->Slave->email ?? ''}}  </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">الجنس:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">  {{$user->Slave->gender == 'male' ? 'ذكر' : 'انثى' ?? 'غير محدد'}}  </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">المدينة:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">  {{$user->Slave->city->name ?? ''}}  </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">الحالة:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"><input type="checkbox"
+                                                                              class="make-switch change_activation"
+                                                                              data-on-text="&nbsp;مفعّل&nbsp;"
+                                                                              data-off-text="&nbsp;معطّل&nbsp;"
+                                                                              name="is_active"
+                                                                              data-id="{{$user->Slave->id}}"
+                                                                              @if($user->Slave->is_active) checked
+                                                                              @endif data-on-color="success"
+                                                                              data-size="mini" data-off-color="warning">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <h3 class="form-section">البيانات الفرعية</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">نوع مقدم الخدمة:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">  {{$user->Slave->ServiceProvider->ServiceProviderType->name ?? ''}}  </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">العنوان:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">  {{$user->Slave->ServiceProvider->address ?? ''}}  </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">رقم البطاقة الشخصية:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">  {{$user->Slave->ServiceProvider->idno ?? ''}}  </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">صورة البطاقة التعريفية:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">  @if(isset($user->Slave->ServiceProvider->idno_file))
+                                                <a
+                                                    href="{{$user->Slave->ServiceProvider->idno_file ?? '#'}}"
+                                                    target="_blank">ملف
+                                                    البطاقة التعريفية</a> @else غير مُرفقة @endif </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">الهواية:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> {{$user->Slave->ServiceProvider->skill ?? ''}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">مرفق الهواية:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> @if(isset($user->Slave->ServiceProvider->skill_file))
+                                                <a
+                                                    href="{{$user->Slave->ServiceProvider->skill_file ?? '#'}}"
+                                                    target="_blank">مرفق
+                                                    الهواية</a> @else غير مُرفقة @endif </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">حالة الرخصة:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">  {{$user->Slave->ServiceProvider->license_type == 'licensed' ? 'مرخص' : 'غير مرخص' ?? ''}}  </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">ملف الرخصة:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> @if(isset($user->Slave->ServiceProvider->licensed_file))
+                                                <a
+                                                    href="{{$user->Slave->ServiceProvider->licensed_file ?? '#'}}"
+                                                    target="_blank">مرفق
+                                                    الهواية</a> @else غير مُرفقة @endif  </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">نبذه:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">  {{$user->Slave->ServiceProvider->bio ?? ''}}  </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM-->
+            </div>
+        </div>
+    @endif
 @endsection
 @section('js')
     <!-- BEGIN PAGE LEVEL PLUGINS -->
