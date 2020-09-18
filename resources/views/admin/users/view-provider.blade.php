@@ -210,7 +210,8 @@
                     <span class="caption-helper">مزود خدمة...</span>
                 </div>
                 <div class="actions">
-                    <a class="btn btn-circle btn-danger approval-edits" href="javascript:;">
+                    <a href="{{url(admin_vw() . '/users/approval-provider-edits/' . $user->id)}}"
+                       class="btn btn-circle btn-danger approval-edits">
                         <i class="fa fa-check"></i>
                         اعتماد التعديلات
                     </a>
