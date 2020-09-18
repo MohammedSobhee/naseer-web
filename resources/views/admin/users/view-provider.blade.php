@@ -21,7 +21,16 @@
                 <span class="caption-subject font-green-haze bold uppercase">البيانات الشخصية</span>
                 <span class="caption-helper">مزود خدمة...</span>
             </div>
-
+            <div class="actions">
+                <a class="btn btn-circle btn-primary" href="javascript:;">
+                    <i class="icon-eye"></i>
+                    عرض التعديلات
+                </a>
+                <a class="btn btn-circle btn-danger" href="javascript:;">
+                    <i class="icon-check"></i>
+                    اعتماد التعديلات
+                </a>
+            </div>
         </div>
         <div class="portlet-body form">
             <!-- BEGIN FORM-->
@@ -84,7 +93,14 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">الحالة:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static">  <input type="checkbox" class="make-switch change_activation" data-on-text="&nbsp;مفعّل&nbsp;" data-off-text="&nbsp;معطّل&nbsp;" name="is_active" data-id="{{$user->id}}" @if($user->is_active) checked @endif data-on-color="success" data-size="mini" data-off-color="warning">  </p>
+                                    <p class="form-control-static"><input type="checkbox"
+                                                                          class="make-switch change_activation"
+                                                                          data-on-text="&nbsp;مفعّل&nbsp;"
+                                                                          data-off-text="&nbsp;معطّل&nbsp;"
+                                                                          name="is_active" data-id="{{$user->id}}"
+                                                                          @if($user->is_active) checked
+                                                                          @endif data-on-color="success"
+                                                                          data-size="mini" data-off-color="warning"></p>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +142,9 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">صورة البطاقة التعريفية:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static">  @if(isset($user->ServiceProvider->idno_file))<a href="{{$user->ServiceProvider->idno_file ?? '#'}}" target="_blank">ملف البطاقة التعريفية</a> @else غير مُرفقة @endif </p>
+                                    <p class="form-control-static">  @if(isset($user->ServiceProvider->idno_file))<a
+                                            href="{{$user->ServiceProvider->idno_file ?? '#'}}" target="_blank">ملف
+                                            البطاقة التعريفية</a> @else غير مُرفقة @endif </p>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +164,9 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">مرفق الهواية:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static"> @if(isset($user->ServiceProvider->skill_file))<a href="{{$user->ServiceProvider->skill_file ?? '#'}}" target="_blank">مرفق الهواية</a> @else غير مُرفقة @endif </p>
+                                    <p class="form-control-static"> @if(isset($user->ServiceProvider->skill_file))<a
+                                            href="{{$user->ServiceProvider->skill_file ?? '#'}}" target="_blank">مرفق
+                                            الهواية</a> @else غير مُرفقة @endif </p>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +186,9 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">ملف الرخصة:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static"> @if(isset($user->ServiceProvider->licensed_file)) <a href="{{$user->ServiceProvider->licensed_file ?? '#'}}" target="_blank">مرفق الهواية</a> @else غير مُرفقة @endif  </p>
+                                    <p class="form-control-static"> @if(isset($user->ServiceProvider->licensed_file)) <a
+                                            href="{{$user->ServiceProvider->licensed_file ?? '#'}}" target="_blank">مرفق
+                                            الهواية</a> @else غير مُرفقة @endif  </p>
                                 </div>
                             </div>
                         </div>
