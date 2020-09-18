@@ -145,7 +145,7 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on('click', '.approval-edits', function (event) {
+    $(document).on('click', '.approval-edits,.approval-edits-in', function (event) {
 
         var _this = $(this);
         var action = _this.attr('href');
@@ -176,10 +176,13 @@ $(document).ready(function () {
                             if (data.status) {
                                 $('.alert').hide();
                                 toastr['success'](data.message, '');
-                                providers_tbl.api().ajax.reload();
 
-                            }
-                            else {
+                                if (event.target.id == 'approval-edits')
+                                    providers_tbl.api().ajax.reload();
+                                else
+                                    location.reload()
+
+                            } else {
                                 toastr['error'](data.message);
                             }
 

@@ -210,7 +210,7 @@
                     <span class="caption-helper">مزود خدمة...</span>
                 </div>
                 <div class="actions">
-                    <a class="btn btn-circle btn-danger" href="javascript:;">
+                    <a class="btn btn-circle btn-danger approval-edits" href="javascript:;">
                         <i class="fa fa-check"></i>
                         اعتماد التعديلات
                     </a>
