@@ -299,7 +299,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">نوع مقدم الخدمة:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static">  {{$user->Slave->ServiceProvider->ServiceProviderType->name ?? ''}}  </p>
+                                        <p class="form-control-static">  {{$user->Slave->ServiceProviderTemp->ServiceProviderType->name ?? ''}}  </p>
                                     </div>
                                 </div>
                             </div>
@@ -308,7 +308,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">العنوان:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static">  {{$user->Slave->ServiceProvider->address ?? ''}}  </p>
+                                        <p class="form-control-static">  {{$user->Slave->ServiceProviderTemp->address ?? ''}}  </p>
                                     </div>
                                 </div>
                             </div>
@@ -319,7 +319,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">رقم البطاقة الشخصية:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static">  {{$user->Slave->ServiceProvider->idno ?? ''}}  </p>
+                                        <p class="form-control-static">  {{$user->Slave->ServiceProviderTemp->idno ?? ''}}  </p>
                                     </div>
                                 </div>
                             </div>
@@ -328,9 +328,9 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">صورة البطاقة التعريفية:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static">  @if(isset($user->Slave->ServiceProvider->idno_file))
+                                        <p class="form-control-static">  @if(isset($user->Slave->ServiceProviderTemp->idno_file))
                                                 <a
-                                                    href="{{$user->Slave->ServiceProvider->idno_file ?? '#'}}"
+                                                    href="{{$user->Slave->ServiceProviderTemp->idno_file ?? '#'}}"
                                                     target="_blank">ملف
                                                     البطاقة التعريفية</a> @else غير مُرفقة @endif </p>
                                     </div>
@@ -343,7 +343,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">الهواية:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static"> {{$user->Slave->ServiceProvider->skill ?? ''}} </p>
+                                        <p class="form-control-static"> {{$user->Slave->ServiceProviderTemp->skill ?? ''}} </p>
                                     </div>
                                 </div>
                             </div>
@@ -352,9 +352,9 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">مرفق الهواية:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static"> @if(isset($user->Slave->ServiceProvider->skill_file))
+                                        <p class="form-control-static"> @if(isset($user->Slave->ServiceProviderTemp->skill_file))
                                                 <a
-                                                    href="{{$user->Slave->ServiceProvider->skill_file ?? '#'}}"
+                                                    href="{{$user->Slave->ServiceProviderTemp->skill_file ?? '#'}}"
                                                     target="_blank">مرفق
                                                     الهواية</a> @else غير مُرفقة @endif </p>
                                     </div>
@@ -367,7 +367,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">حالة الرخصة:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static">  {{$user->Slave->ServiceProvider->license_type == 'licensed' ? 'مرخص' : 'غير مرخص' ?? ''}}  </p>
+                                        <p class="form-control-static">  {{$user->Slave->ServiceProviderTemp->license_type == 'licensed' ? 'مرخص' : 'غير مرخص' ?? ''}}  </p>
                                     </div>
                                 </div>
                             </div>
@@ -376,9 +376,9 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">ملف الرخصة:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static"> @if(isset($user->Slave->ServiceProvider->licensed_file))
+                                        <p class="form-control-static"> @if(isset($user->Slave->ServiceProviderTemp->licensed_file))
                                                 <a
-                                                    href="{{$user->Slave->ServiceProvider->licensed_file ?? '#'}}"
+                                                    href="{{$user->Slave->ServiceProviderTemp->licensed_file ?? '#'}}"
                                                     target="_blank">مرفق
                                                     الهواية</a> @else غير مُرفقة @endif  </p>
                                     </div>
@@ -391,7 +391,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">نبذه:</label>
                                     <div class="col-md-9">
-                                        <p class="form-control-static">  {{$user->Slave->ServiceProvider->bio ?? ''}}  </p>
+                                        <p class="form-control-static">  {{$user->Slave->ServiceProviderTemp->bio ?? ''}}  </p>
                                     </div>
                                 </div>
                             </div>
