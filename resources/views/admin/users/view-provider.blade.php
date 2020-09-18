@@ -211,7 +211,7 @@
                 </div>
                 <div class="actions">
                     <a class="btn btn-circle btn-danger" href="javascript:;">
-                        <i class="icon-check"></i>
+                        <i class="fa fa-check"></i>
                         اعتماد التعديلات
                     </a>
                 </div>

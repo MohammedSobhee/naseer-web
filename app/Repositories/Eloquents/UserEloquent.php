@@ -284,13 +284,13 @@ class UserEloquent extends Uploader implements UserRepository
                 if (isset($user->Slave)) {
                     $action = '<a href="' . url(admin_vw() . '/users/approval-provider-edits/' . $user->id) . '" class="btn btn-sm btn-success red btn-circle approval-edits"
                                                                                    title="اعتماد التعديل">
-                                                                                    <i class="icon-check"></i>
+                                                                                    <i class="fa fa-check"></i>
                                                                                     اعتماد التعديل
                                                                                 </a>';
                 }
                 return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/view') . '" class="btn btn-sm btn-success blue btn-circle"
                                                                                    title="عرض">
-                                                                                    <i class="icon-eye"></i>
+                                                                                    <i class="fa fa-eye"></i>
                                                                                     عرض
                                                                                 </a>' . $action;
             })->addIndexColumn()
