@@ -585,6 +585,7 @@ class UserEloquent extends Uploader implements UserRepository
         $user->type = $tmp->type;
         $user->city_id = $tmp->city_id;
         $user->is_completed = $tmp->is_completed;
+        $user->is_edit = 0;
         $user->save();
 
 
@@ -634,7 +635,7 @@ class UserEloquent extends Uploader implements UserRepository
         }
 
         if ($user->is_edit) {
-            return response_api(false, 422, 'تم التعديل مسبقاً', empObj());
+            return response_api(false, 422, 'تم ارسال التعديلات الى الادارة، الرجاء الانتظار.', empObj());
         }
 
         $user_tmp = new User();
