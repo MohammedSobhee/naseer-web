@@ -28,7 +28,7 @@ class GetRequest extends FormRequest
             'page_size' => 'nullable|numeric|gt:0',
             'page_number' => 'nullable|numeric|gt:0',
             'type' => 'required|in:categorized,uncategorized',
-            'status' => 'nullable|in:new,completed'
+            'status' => 'nullable|in:new,assigned,completed'
         ];
     }
 }
