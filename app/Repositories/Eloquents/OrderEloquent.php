@@ -360,7 +360,7 @@ class OrderEloquent extends Uploader implements Repository
 
                 $attributes['request_id'] = $request->id;
 
-                if (isset($request->service_id)) {
+                /*if (isset($request->service_id)) {
                     //CourtAndLawsuit
                     if ($request->service_id == 1) {
                         CourtAndLawsuit::where('request_id', $request->id)->update($attributes);
@@ -432,7 +432,7 @@ class OrderEloquent extends Uploader implements Repository
                         AnnualLegalContract::where('request_id', $request->id)->update($attributes);
                     }
                 }
-
+                */
 
                 if (isset($attributes['case_file']) && $attributes['case_file'] != 'deleted') {
                     sleep(1);
