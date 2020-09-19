@@ -357,10 +357,10 @@ class OrderEloquent extends Uploader implements Repository
 
             if ($request->save()) {
 
-/*
+
                 $attributes['request_id'] = $request->id;
 
-                if (isset($request->service_id)) {
+                /*if (isset($request->service_id)) {
                     //CourtAndLawsuit
                     if ($request->service_id == 1) {
                         CourtAndLawsuit::where('request_id', $request->id)->update($attributes);
@@ -432,31 +432,45 @@ class OrderEloquent extends Uploader implements Repository
                         AnnualLegalContract::where('request_id', $request->id)->update($attributes);
                     }
                 }
+                */
+
                 if (isset($attributes['case_file'])) {
                     sleep(1);
                     $request->case_file = $this->upload($attributes, 'case_file');
+                } else if ($attributes['case_file'] == '') {
+                    $request->case_file = null;
                 }
                 if (isset($attributes['evidences_file'])) {
                     sleep(1);
                     $request->evidences_file = $this->upload($attributes, 'evidences_file');
+                } else if ($attributes['evidences_file'] == '') {
+                    $request->evidences_file = null;
                 }
                 if (isset($attributes['preferred_outcomes_file'])) {
                     sleep(1);
                     $request->preferred_outcomes_file = $this->upload($attributes, 'preferred_outcomes_file');
+                } else if ($attributes['preferred_outcomes_file'] == '') {
+                    $request->preferred_outcomes_file = null;
                 }
                 if (isset($attributes['case_audio'])) {
                     sleep(1);
                     $request->case_audio = $this->upload($attributes, 'case_audio');
+                } else if ($attributes['case_audio'] == '') {
+                    $request->case_audio = null;
                 }
                 if (isset($attributes['evidences_audio'])) {
                     sleep(1);
                     $request->evidences_audio = $this->upload($attributes, 'evidences_audio');
+                } else if ($attributes['evidences_audio'] == '') {
+                    $request->evidences_audio = null;
                 }
                 if (isset($attributes['preferred_outcomes_audio'])) {
                     sleep(1);
                     $request->preferred_outcomes_audio = $this->upload($attributes, 'preferred_outcomes_audio');
+                } else if ($attributes['preferred_outcomes_audio'] == '') {
+                    $request->preferred_outcomes_audio = null;
                 }
-                $request->save();*/
+                $request->save();
 
                 return response_api(true, 200, 'تم تعديل الطلب بنجاح', new OrderResource($request));// . ',' . trans('app.sent_email_verification')
             }
