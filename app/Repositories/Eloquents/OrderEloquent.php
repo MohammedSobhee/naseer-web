@@ -438,48 +438,55 @@ class OrderEloquent extends Uploader implements Repository
                     sleep(1);
                     $request->case_file = $this->upload($attributes, 'case_file');
                 } else if (isset($attributes['case_file']) && $attributes['case_file'] == 'deleted') {
-                    if (isset($request->getAttributes()['case_file']))
-                        unlink(base_path('assets/upload/' . $request->getAttributes()['case_file']));
+
+                    $file = base_path('assets/upload/' . $request->getAttributes()['case_file']);
+                    if (file_exists($file))
+                        unlink($file);
                     $request->case_file = null;
                 }
                 if (isset($attributes['evidences_file']) && $attributes['evidences_file'] != 'deleted') {
                     sleep(1);
                     $request->evidences_file = $this->upload($attributes, 'evidences_file');
                 } else if (isset($attributes['evidences_file']) && $attributes['evidences_file'] == 'deleted') {
-                    if (isset($request->getAttributes()['evidences_file']))
-                        unlink(base_path('assets/upload/' . $request->getAttributes()['evidences_file']));
+                    $file = base_path('assets/upload/' . $request->getAttributes()['evidences_file']);
+                    if (file_exists($file))
+                        unlink($file);
                     $request->evidences_file = null;
                 }
                 if (isset($attributes['preferred_outcomes_file']) && $attributes['preferred_outcomes_file'] != 'deleted') {
                     sleep(1);
                     $request->preferred_outcomes_file = $this->upload($attributes, 'preferred_outcomes_file');
                 } else if (isset($attributes['preferred_outcomes_file']) && $attributes['preferred_outcomes_file'] == 'deleted') {
-                    if (isset($request->getAttributes()['preferred_outcomes_file']))
-                        unlink(base_path('assets/upload/' . $request->getAttributes()['preferred_outcomes_file']));
+                    $file = base_path('assets/upload/' . $request->getAttributes()['preferred_outcomes_file']);
+                    if (file_exists($file))
+                        unlink($file);
                     $request->preferred_outcomes_file = null;
                 }
                 if (isset($attributes['case_audio']) && $attributes['case_audio'] != 'deleted') {
                     sleep(1);
                     $request->case_audio = $this->upload($attributes, 'case_audio');
                 } else if (isset($attributes['case_audio']) && $attributes['case_audio'] == 'deleted') {
-                    if (isset($request->getAttributes()['case_audio']))
-                        unlink(base_path('assets/upload/' . $request->getAttributes()['case_audio']));
+                    $file = base_path('assets/upload/' . $request->getAttributes()['case_audio']);
+                    if (file_exists($file))
+                        unlink($file);
                     $request->case_audio = null;
                 }
                 if (isset($attributes['evidences_audio']) && $attributes['evidences_audio'] != 'deleted') {
                     sleep(1);
                     $request->evidences_audio = $this->upload($attributes, 'evidences_audio');
                 } else if (isset($attributes['evidences_audio']) && $attributes['evidences_audio'] == 'deleted') {
-                    if (isset($request->getAttributes()['evidences_audio']))
-                        unlink(base_path('assets/upload/' . $request->getAttributes()['evidences_audio']));
+                    $file = base_path('assets/upload/' . $request->getAttributes()['evidences_audio']);
+                    if (file_exists($file))
+                        unlink($file);
                     $request->evidences_audio = null;
                 }
                 if (isset($attributes['preferred_outcomes_audio']) && $attributes['preferred_outcomes_audio'] != 'deleted') {
                     sleep(1);
                     $request->preferred_outcomes_audio = $this->upload($attributes, 'preferred_outcomes_audio');
                 } else if (isset($attributes['preferred_outcomes_audio']) && $attributes['preferred_outcomes_audio'] == 'deleted') {
-                    if (isset($request->getAttributes()['preferred_outcomes_audio']))
-                        unlink(base_path('assets/upload/' . $request->getAttributes()['preferred_outcomes_audio']));
+                    $file = base_path('assets/upload/' . $request->getAttributes()['preferred_outcomes_audio']);
+                    if (file_exists($file))
+                        unlink($file);
                     $request->preferred_outcomes_audio = null;
                 }
                 $request->save();
