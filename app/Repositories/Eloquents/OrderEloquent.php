@@ -346,18 +346,18 @@ class OrderEloquent extends Uploader implements Repository
             if (isset($attributes['preferred_outcomes_text']))
                 $request->preferred_outcomes_text = $attributes['preferred_outcomes_text'];
 
-            if (isset($attributes['contact_prefer']))
-                $request->contact_prefer = $attributes['contact_prefer'];
-            if (isset($attributes['payment_prefer']))
-                $request->payment_prefer = $attributes['payment_prefer'];
-            if (isset($attributes['service_date']))
-                $request->service_date = $attributes['service_date'];
+//            if (isset($attributes['contact_prefer']))
+//                $request->contact_prefer = $attributes['contact_prefer'];
+//            if (isset($attributes['payment_prefer']))
+//                $request->payment_prefer = $attributes['payment_prefer'];
+//            if (isset($attributes['service_date']))
+//                $request->service_date = $attributes['service_date'];
 
             $request->is_edit = 1;
 
             if ($request->save()) {
 
-
+/*
                 $attributes['request_id'] = $request->id;
 
                 if (isset($request->service_id)) {
@@ -435,33 +435,28 @@ class OrderEloquent extends Uploader implements Repository
                 if (isset($attributes['case_file'])) {
                     sleep(1);
                     $request->case_file = $this->upload($attributes, 'case_file');
-                    $request->save();
                 }
                 if (isset($attributes['evidences_file'])) {
                     sleep(1);
                     $request->evidences_file = $this->upload($attributes, 'evidences_file');
-                    $request->save();
                 }
                 if (isset($attributes['preferred_outcomes_file'])) {
                     sleep(1);
                     $request->preferred_outcomes_file = $this->upload($attributes, 'preferred_outcomes_file');
-                    $request->save();
                 }
                 if (isset($attributes['case_audio'])) {
                     sleep(1);
                     $request->case_audio = $this->upload($attributes, 'case_audio');
-                    $request->save();
                 }
                 if (isset($attributes['evidences_audio'])) {
                     sleep(1);
                     $request->evidences_audio = $this->upload($attributes, 'evidences_audio');
-                    $request->save();
                 }
                 if (isset($attributes['preferred_outcomes_audio'])) {
                     sleep(1);
                     $request->preferred_outcomes_audio = $this->upload($attributes, 'preferred_outcomes_audio');
-                    $request->save();
                 }
+                $request->save();*/
 
                 return response_api(true, 200, 'تم تعديل الطلب بنجاح', new OrderResource($request));// . ',' . trans('app.sent_email_verification')
             }
