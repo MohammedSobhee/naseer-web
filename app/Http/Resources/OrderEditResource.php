@@ -65,7 +65,7 @@ class OrderEditResource extends JsonResource
             'status' => $this->status,
             'is_edit' => $this->is_edit,
             'offers_num' => $this->Offers()->count(),
-            'offers' => OfferSecondResource::collection($this->Offers()->get()),
+            'offers' => OfferSecondResource::collection($this->Offers()->orderByDesc('created_at')->get()),
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'city' => new CityResource($this->City()->first()),
 //            'service' => new ServiceResource($this->Service()->first()),
