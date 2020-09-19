@@ -699,6 +699,10 @@ class UserEloquent extends Uploader implements UserRepository
             else
                 $service_provider_tmp->service_provider_type_id = $service_provider->service_provider_type_id;
 
+
+            $service_provider_type = ServiceProviderType::find($service_provider_tmp->service_provider_type_id);
+            $service_provider_tmp->license_type = $service_provider_type->is_licensed ? 'licensed' : 'unlicensed';
+
             if (isset($attributes['idno']))
                 $service_provider_tmp->idno = $attributes['idno'];
             else
@@ -757,12 +761,17 @@ class UserEloquent extends Uploader implements UserRepository
             } else
                 $service_provider_tmp->skill_file = $service_provider->getAttributes()['skill_file'];
 
-            if (isset($attributes['licensed_file'])) {
-                $service_provider_tmp->licensed_file = $this->upload($attributes, 'licensed_file');
-                sleep(1);
+            if (!$service_provider_type->is_licensed) {
+                $service_provider_tmp->licensed_file = null;
+                $service_provider_tmp->licensed = null;
+            }
+            else
+                if (isset($attributes['licensed_file'])) {
+                    $service_provider_tmp->licensed_file = $this->upload($attributes, 'licensed_file');
+                    sleep(1);
 
-            } else
-                $service_provider_tmp->licensed_file = $service_provider->getAttributes()['licensed_file'];
+                } else
+                    $service_provider_tmp->licensed_file = $service_provider->getAttributes()['licensed_file'];
 
 
             $service_provider->save();
