@@ -718,10 +718,10 @@ class UserEloquent extends Uploader implements UserRepository
             else
                 $service_provider_tmp->licensed = $service_provider->licensed;
 
-            if (isset($attributes['license_type']))
-                $service_provider_tmp->license_type = $attributes['license_type'];
-            else
-                $service_provider_tmp->license_type = $service_provider->license_type;
+//            if (isset($attributes['license_type']))
+//                $service_provider_tmp->license_type = $attributes['license_type'];
+//            else
+//                $service_provider_tmp->license_type = $service_provider->license_type;
 
             if (isset($attributes['bio']))
                 $service_provider_tmp->bio = $attributes['bio'];
