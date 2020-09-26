@@ -42,7 +42,7 @@ class OrderEditResource extends JsonResource
         $request->request->add(['request_id' => $this->id,
             'service_id' => $this->service_id,
             'sub_service_id' => isset($subService) ? $subService->sub_service_id : 0,
-            'dataRequest' => $subService]);
+            'dataRequest' => isset($subService) ? $subService : empObj()]);
 
         return [
             'id' => $this->id,
