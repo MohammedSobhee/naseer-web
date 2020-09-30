@@ -127,7 +127,10 @@ class OfferEloquent extends Uploader implements Repository
             return response_api(false, 422, 'يوجد عرض مسبقاً لهذا الطلب', new OfferResource($offer));
 
         $attributes['service_provider_id'] = auth()->user()->id;
-        $offer = $this->model->create($attributes);
+
+        $this->model->create($attributes);
+
+        $offer = $this->model->where('request_id', $attributes['request_id'])->where('service_provider_id', auth()->user()->id)->first();
 
         // new offer to order
         $this->notification->sendNotification(auth()->user()->id, $offer->service_provider_id, $offer->request_id, 'new_offer');
