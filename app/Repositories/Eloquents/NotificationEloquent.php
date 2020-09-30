@@ -157,8 +157,6 @@ class NotificationEloquent implements Repository
             $badge = $this->getCountUnseen($receiver->id);// + $this->unseen_chat_notification($receiver->id);
             $tokens = $this->device->getReceiverToken($receiver->id);//
             $notification = $this->model->find($notification->id);
-            $notification->text = $message;
-//            $sender_name = auth()->user()->first_name . ' ' . auth()->user()->last_name;
 
             $data = $this->notificationSystem->FCM(config('app.name'), $this->notificationSystem->getActionTrans('chat'), $notification, $tokens, $badge); //$sender_name . ' ' .
 
