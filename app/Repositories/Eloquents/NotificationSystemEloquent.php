@@ -126,16 +126,17 @@ class NotificationSystemEloquent
     public function getActionTrans($action)
     {
 
-//'new_request','approved_request','complete_request','activate_account','disable_account','chat'
         switch ($action) {
-            case 'new_request':
-                return trans(notification_trans() . '.new_request');
-            case 'approved_request':
-                return trans(notification_trans() . '.approved_request'); // waiting for approval
-            case 'complete_request':
-                return trans(notification_trans() . '.complete_request');
-            case 'activate_account':
-                return trans(notification_trans() . '.activate_account');
+            case 'new_order':
+                return trans(notification_trans() . '.new_order');
+            case 'assigned_driver':
+                return trans(notification_trans() . '.assigned_driver'); // //
+            case 'completed_order':
+                return trans(notification_trans() . '.completed_order');
+            case 'canceled_order':
+                return trans(notification_trans() . '.canceled_order');
+            case 'new_offer':
+                return trans(notification_trans() . '.new_offer');
             default:
                 return trans(notification_trans() . '.chat'); //chat user // action_id : auth id
         }

@@ -25,17 +25,19 @@ use App\Repositories\Interfaces\Repository;
 use App\Repositories\Uploader;
 use App\Request;
 use App\Service;
+use App\ServiceProvider;
 use App\User;
 
 
 class OrderEloquent extends Uploader implements Repository
 {
 
-    private $model;
+    private $model, $notification;
 
-    public function __construct(Request $model)
+    public function __construct(Request $model, NotificationSystemEloquent $notification)
     {
         $this->model = $model;
+        $this->notification = $notification;
 
     }
 
@@ -327,6 +329,32 @@ class OrderEloquent extends Uploader implements Repository
                 $request->save();
             }
 
+            // send notifications to all service providers
+            // if order is categorized service providers according service type
+            // else all service providers
+            if (isset($attributes['service_id'])) {
+                $service_provider_type_id = $request->Service->service_provider_type_id;
+
+                $providers = ServiceProvider::where('service_provider_type_id', $service_provider_type_id)->whereHas('Provider', function ($query) {
+                    $query->where('is_active', 1);
+                })->pluck('user_id')->toArray();
+
+                //'new_order','assigned_driver','completed_order','canceled_order'
+                foreach ($providers as $provider)
+                    $this->notification->sendNotification(auth()->user()->id, $provider, $request->id, 'new_order');
+
+
+            } else {
+                $providers = ServiceProvider::whereHas('Provider', function ($query) {
+                    $query->where('is_active', 1);
+                })->pluck('user_id')->toArray();
+
+                foreach ($providers as $provider)
+                    $this->notification->sendNotification(auth()->user()->id, $provider, $request->id, 'new_order');
+
+            }
+
+
             return response_api(true, 200, 'تم انشاء الطلب بنجاح', new OrderResource($request));// . ',' . trans('app.sent_email_verification')
         }
         return response_api(false, 422, null, empObj());// . ',' . trans('app.sent_email_verification')
@@ -516,6 +544,12 @@ class OrderEloquent extends Uploader implements Repository
         $request->status = $attributes['status'];
 
         if ($request->save()) {
+
+            if ($attributes['status'] == 'completed_order') {
+                $offer = Offer::where('request_id', $attributes['request_id'])->where('status', 'accepted')->first();
+                $this->notification->sendNotification(auth()->user()->id, $offer->service_provider_id, $offer->request_id, $attributes['status'] . '_order');
+            }
+
             return response_api(true, 200, null, []);
         }
         return response_api(false, 422, null, []);

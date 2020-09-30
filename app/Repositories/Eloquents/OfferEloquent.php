@@ -28,11 +28,12 @@ use App\User;
 class OfferEloquent extends Uploader implements Repository
 {
 
-    private $model;
+    private $model, $notification;
 
-    public function __construct(Offer $model)
+    public function __construct(Offer $model, NotificationSystemEloquent $notification)
     {
         $this->model = $model;
+        $this->notification = $notification;
 
     }
 
@@ -127,6 +128,10 @@ class OfferEloquent extends Uploader implements Repository
 
         $attributes['service_provider_id'] = auth()->user()->id;
         $offer = $this->model->create($attributes);
+
+        // new offer to order
+        $this->notification->sendNotification(auth()->user()->id, $offer->Order->user_id, $offer->request_id, 'new_offer');
+
         return response_api(true, 200, 'تم ارسال العرض', new OfferResource($offer));
 
     }
@@ -157,6 +162,8 @@ class OfferEloquent extends Uploader implements Repository
 
             if ($attributes['status'] == 'accepted') {
                 $offer->Order()->update(['status' => 'assigned', 'is_edit' => 1]);
+                $this->notification->sendNotification(auth()->user()->id, $offer->Order->user_id, $offer->request_id, 'assigned_driver');
+
             }
             return response_api(true, 200, null, []);
         }

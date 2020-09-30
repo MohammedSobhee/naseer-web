@@ -28,5 +28,13 @@ return [
     'payment_prefer' => [
         'down_payment' => 'مع دفعة مقدمة',
         'without_down_payment' => 'بدون دفعة مقدمة',
-    ]
+    ],
+    'notification_message' => [
+//'new_order','assigned_driver','completed_order','canceled_order','new_offer'
+        'new_order' => 'طلب جدید',
+        'new_offer' => 'تم تقديم عرض على طلبك',
+        'assigned_driver' => 'تمت الموافقة على عرضك',
+//        'canceled_order' => 'تم ',
+        'completed_order' => 'تم الانتهاء من الطلب',
+    ],
 ];
