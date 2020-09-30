@@ -165,7 +165,7 @@ class OfferEloquent extends Uploader implements Repository
 
             if ($attributes['status'] == 'accepted') {
                 $offer->Order()->update(['status' => 'assigned', 'is_edit' => 1]);
-                $this->notification->sendNotification(auth()->user()->id, $offer->Order->user_id, $offer->request_id, 'assigned_driver');
+                $this->notification->sendNotification(auth()->user()->id, $offer->service_provider_id, $offer->request_id, 'assigned_driver');
 
             }
             return response_api(true, 200, null, []);
