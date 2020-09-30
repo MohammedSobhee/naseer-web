@@ -87,7 +87,7 @@ class NotificationSystemEloquent
         $data = $dataBuilder->build();
 
 
-        dd($data);
+        return response_api(true, 200, null, $data);
         if (count($tokens[0]) > 0) {
             // You must change it to get your tokens
             // android
