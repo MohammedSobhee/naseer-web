@@ -86,8 +86,6 @@ class NotificationSystemEloquent
         $notification = $notificationBuilder->build();
         $data = $dataBuilder->build();
 
-
-        return $data;
         if (count($tokens[0]) > 0) {
             // You must change it to get your tokens
             // android
