@@ -36,5 +36,6 @@ return [
         'assigned_driver' => 'تمت الموافقة على عرضك',
 //        'canceled_order' => 'تم ',
         'completed_order' => 'تم الانتهاء من الطلب',
+        'chat' => 'رسالة جديدة',
     ],
 ];
