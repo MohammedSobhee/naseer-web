@@ -36,7 +36,6 @@ class NotificationSystemEloquent
             $this->devices_id = DeviceToken::getDevices($receiver_id);
 
 
-            dd($tokens);
             if (count($tokens) > 0) {
 
                 $attributes = [
@@ -47,6 +46,7 @@ class NotificationSystemEloquent
                 ];
                 $notification = $this->create($attributes);
 
+                dd($notification);
                 $message = $this->getActionTrans($action);
 
                 $object = new \stdClass();
