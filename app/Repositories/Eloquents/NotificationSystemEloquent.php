@@ -47,10 +47,10 @@ class NotificationSystemEloquent
                 $notification = $this->create($attributes);
 
                 $message = $this->getActionTrans($action);
-
-                $object = new \stdClass();
-                $object->message = $message;
-                $notification->message = $object;
+//
+//                $object = new \stdClass();
+//                $object->message = $message;
+//                $notification->message = $object;
 
                 $badge = $this->getCountUnseen($receiver_id);
 
@@ -79,7 +79,6 @@ class NotificationSystemEloquent
             ->setSound('default')->setBadge($badge);
         $data->title = $title;
 
-        dd($data);
         $dataBuilder = new PayloadDataBuilder();
         $dataBuilder->addData(['data' => $data]);
 
@@ -88,6 +87,7 @@ class NotificationSystemEloquent
         $data = $dataBuilder->build();
 
 
+        dd($data);
         if (count($tokens[0]) > 0) {
             // You must change it to get your tokens
             // android
