@@ -8,6 +8,7 @@
 
 namespace App\Repositories\Eloquents;
 
+use App\Http\Resources\NotificationResource;
 use App\Notification;
 use App\NotificationReceiver;
 use App\Repositories\Interfaces\Repository;
@@ -65,7 +66,7 @@ class NotificationEloquent implements Repository
 
         if (request()->segment(1) == 'api' || request()->ajax()) {
             if (count($object) > 0) {
-                return response_api(true, 200, null, $object, $page_count, $page_number);
+                return response_api(true, 200, null, NotificationResource::collection($object), $page_count, $page_number);
             }
             return response_api(false, 422, trans('app.not_data_found'), []);
         }
