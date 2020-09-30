@@ -158,7 +158,7 @@ class NotificationEloquent implements Repository
             $tokens = $this->device->getReceiverToken($receiver->id);//
             $notification = $this->model->find($notification->id);
 
-            $data = $this->notificationSystem->FCM(config('app.name'), $this->notificationSystem->getActionTrans('chat'), $notification, $tokens, $badge); //$sender_name . ' ' .
+            $data = $this->notificationSystem->FCM(config('app.name'), $this->notificationSystem->getActionTrans('chat'), $notification, $tokens, $badge, ''); //$sender_name . ' ' .
 
             if ($data['numberSuccess'] > 0)
                 return response_api(true, 200, trans('app.notification_send'), $data);
