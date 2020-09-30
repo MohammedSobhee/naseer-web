@@ -79,6 +79,7 @@ class NotificationSystemEloquent
             ->setSound('default')->setBadge($badge);
         $data->title = $title;
 
+        dd($data);
         $dataBuilder = new PayloadDataBuilder();
         $dataBuilder->addData(['data' => $data]);
 
