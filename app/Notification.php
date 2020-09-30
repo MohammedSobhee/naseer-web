@@ -11,7 +11,7 @@ class Notification extends Model
     //
     use SoftDeletes;
 
-    protected $appends = ['created_date'];
+    protected $appends = ['created_date','text'];
     protected $casts = [
         'sender_id' => 'integer',
         'action_id' => 'integer',
@@ -23,7 +23,7 @@ class Notification extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function getTextAttribute($key)
+    public function getTextAttribute()
     {
         return trans(notification_trans() . '.' . $this->action);
     }

@@ -46,7 +46,6 @@ class NotificationSystemEloquent
                 ];
                 $notification = $this->create($attributes);
 
-                dd($notification);
                 $message = $this->getActionTrans($action);
 
                 $object = new \stdClass();
@@ -54,8 +53,7 @@ class NotificationSystemEloquent
                 $notification->message = $object;
 
                 $notification = Notification::find($notification->id);
-                $notification->text = $message;
-                $notification->save();
+
                 $badge = $this->getCountUnseen($receiver_id);
 
                 try {
