@@ -52,8 +52,6 @@ class NotificationSystemEloquent
                 $object->message = $message;
                 $notification->message = $object;
 
-                $notification = Notification::find($notification->id);
-
                 $badge = $this->getCountUnseen($receiver_id);
 
                 try {

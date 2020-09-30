@@ -11,7 +11,7 @@ class Notification extends Model
     //
     use SoftDeletes;
 
-    protected $appends = ['created_date','text'];
+    protected $appends = ['created_date', 'text'];
     protected $casts = [
         'sender_id' => 'integer',
         'action_id' => 'integer',
@@ -21,6 +21,11 @@ class Notification extends Model
     protected function serializeDate(\DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    function Sender()
+    {
+        return $this->belongsTo(User::class, 'sender_id');
     }
 
     public function getTextAttribute()
