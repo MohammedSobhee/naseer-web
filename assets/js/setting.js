@@ -64,25 +64,6 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on('click', '.edit-setting-mdl', function (e) {
-        e.preventDefault();
-        $("#wait_msg,#overlay").show();
-        var action = $(this).attr('href');
-
-        $.ajax({
-            url: action,
-            type: 'GET',
-            success: function (data) {
-                $("#wait_msg,#overlay").hide();
-
-                $('#results-modals').html(data);
-                $('#edit-setting').modal('show', {backdrop: 'static', keyboard: false});
-            }, error: function (xhr) {
-
-            }
-        });
-    });
-
     $(document).on('submit', '#formEdit', function (event) {
 
         var _this = $(this);
@@ -110,7 +91,6 @@ $(document).ready(function () {
 
                     $('.alert').hide();
                     toastr['success'](data.message, '');
-                    settings_tbl.api().ajax.reload();
 
                 } else {
                     var $errors = '<strong>' + data.message + '</strong>';

@@ -56,13 +56,15 @@ class LookUpController extends Controller
 
             if ($type == 'terms') {
 
-                $data = ['terms' => Setting::where('key', 'terms')->first()->value];
+                $setting = Setting::first();
+                $data = ['terms' => $setting->terms];
             }
         } else {
 
             $service_provider_types = ServiceProviderTypeResource::collection($this->providerType->all());
             $intro = $this->intro->all();
-            $services =  ServiceResource::collection($this->service->all());
+            $services = ServiceResource::collection($this->service->all());
+            $setting = Setting::first();
 
             $data = [
                 'service_provider_types' => $service_provider_types,
@@ -70,7 +72,7 @@ class LookUpController extends Controller
                 'intros' => $intro,
                 'countries' => CountryResource::collection($this->country->getAll([])),
                 'cities' => CityResource::collection($this->city->getAll([])),
-                'terms' => Setting::where('key', 'terms')->first()->value,
+                'terms' => $setting->terms,
             ];
         }
         return response_api(true, 200, null, $data);
