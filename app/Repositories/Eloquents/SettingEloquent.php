@@ -56,10 +56,10 @@ class SettingEloquent implements Repository
         $setting->expire_offer = $attributes['expire_offer'];
         if ($setting->save()) {
 
-            return response_api(true, 200, trans('app.updated'), $setting);
+            return response_api(true, 200, trans('app.success'), $setting);
 
         }
-        return response_api(false, 422, trans('app.not_updated'));
+        return response_api(false, 422, trans('app.error'));
 
 
     }
