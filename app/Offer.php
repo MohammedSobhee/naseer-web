@@ -12,7 +12,7 @@ class Offer extends Model
 
     protected $fillable = ['request_id', 'service_provider_id', 'status', 'down_payment', 'late_payment', 'details'];
 
-    protected $casts = ['down_payment' => 'double', 'late_payment' => 'double'];
+    protected $casts = ['down_payment' => 'double', 'late_payment' => 'double', 'request_id' => 'integer'];
 
     public function ServiceProvider()
     {

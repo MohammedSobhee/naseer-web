@@ -153,7 +153,7 @@ class NotificationEloquent implements Repository
 //                $lang = $receiver->lang_id;
 //            config()->set(['app.lang_id' => $lang]);
 
-            $message = $this->notificationSystem->getActionTrans('chat');
+//            $message = $this->notificationSystem->getActionTrans('chat');
             $badge = $this->getCountUnseen($receiver->id);// + $this->unseen_chat_notification($receiver->id);
             $tokens = $this->device->getReceiverToken($receiver->id);//
             $notification = $this->model->find($notification->id);
