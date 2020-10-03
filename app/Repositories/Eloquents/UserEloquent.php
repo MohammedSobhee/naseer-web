@@ -372,7 +372,7 @@ class UserEloquent extends Uploader implements UserRepository
         $page_size = isset($attributes['page_size']) ? $attributes['page_size'] : max_pagination(10);
         $page_number = isset($attributes['page_number']) ? $attributes['page_number'] : 1;
 
-        $collection = $this->model->where('type', 'service_provider')->where('is_completed', 1);
+        $collection = $this->model->where('type', 'service_provider')->where('is_completed', 1)->where('is_active', 1);
 
         if (isset($attributes['name'])) {
             $collection = $collection->where('name', 'LIKE', '%' . $attributes['name'] . '%');

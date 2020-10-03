@@ -19,10 +19,10 @@ class ClientMiddleware
             return response_api(false, 422, 'لا يوجد لديك صلاحية مستخدم', empObj());
         }
         if (!auth()->user()->is_active) {
-            return response_api(false, 407, '2تم ايقاف حسابك', empObj());
+            return response_api(false, 407, 'تم ايقاف حسابك', empObj());
         }
         if (!auth()->user()->is_verify) {
-            return response_api(false, 405, 'تحقق من كود التحقق2', ['token' => empObj(), 'user' => auth()->user()]);
+            return response_api(false, 405, 'تحقق من كود التحقق', ['token' => empObj(), 'user' => auth()->user()]);
         }
 
         return $next($request);
