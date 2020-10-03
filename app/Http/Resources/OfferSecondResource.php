@@ -16,6 +16,7 @@ class OfferSecondResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'request_id' => $this->request_id,
             'status' => $this->status,
             'down_payment' => $this->down_payment,
             'late_payment' => $this->late_payment,
