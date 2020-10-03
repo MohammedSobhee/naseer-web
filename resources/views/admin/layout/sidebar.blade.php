@@ -100,7 +100,7 @@
             </li>
             <li class="nav-item @if(preg_match('/settings/i',url()->current())) start active open @endif ">
                 <a href="{{url(admin_vw().'/settings')}}" class="nav-link nav-toggle">
-                    <i class="icon-cogs"></i>
+                    <i class="fa fa-cogs"></i>
                     <span class="title">الاعدادات</span>
                     <span class="selected"></span>
                 </a>
