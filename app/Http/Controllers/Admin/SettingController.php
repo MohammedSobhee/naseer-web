@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Eloquents\SettingEloquent;
 use App\Setting;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,20 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $setting;
+
+    public function __construct(SettingEloquent $setting)
+    {
+//        parent::__construct();
+        $this->setting = $setting;
+    }
+
     public function index()
     {
         //
-
-        return view(admin_settings_vw() . '.index');
+        $setting = Setting::first();
+        return view(admin_settings_vw() . '.index', ['setting' => $setting]);
     }
 
     /**

@@ -74,10 +74,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('/requests/{order_id}/offers', 'OfferController@index');
     Route::get('/offers/offer-data/{order_id}', 'OfferController@anyData');
 
+    Route::get('/settings', 'SettingController@index');
+    Route::put('/settings', 'SettingController@update');
+
     Route::get('/services', 'ServiceController@index');
     Route::get('/services/service-data', 'ServiceController@anyData');
     Route::get('services/{id}/edit', 'ServiceController@edit');
     Route::put('services/{id}/edit', 'ServiceController@update');
+
     Route::group(['prefix' => 'constants'], function () {
 
         Route::get('/service-provider-types', 'ServiceProviderTypeController@index');
