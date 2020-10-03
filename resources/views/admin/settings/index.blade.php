@@ -32,17 +32,20 @@
                         <label for="support_mobile" class="col-md-2 control-label">وقت انتهاء صلاحية العرض</label>
                         <div class="col-md-6">
                             <div class="input-group">
-                                                    <span class="input-group-addon">
+
+                                <input type="text" class="form-control " value="{{$setting->expire_offer ?? ''}}"
+                                       name="expire_offer" id="expire_offer" placeholder="وقت انتهاء صلاحية العرض">
+                                <span class="input-group-addon">
                                                         ساعة
                                                     </span>
-                                <input type="text" class="form-control " value="{{$setting->expire_offer ?? ''}}" name="expire_offer" id="expire_offer" placeholder="وقت انتهاء صلاحية العرض">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="contract" class="col-md-2 control-label">تفاصيل عقد الاتفاق</label>
                         <div class="col-md-6">
-                            <textarea rows="5"  class="form-control ckeditor" name="contract" placeholder="تفاصيل عقد الاتفاق">{{$setting->contract ?? ''}}
+                            <textarea rows="5" class="form-control ckeditor" name="contract"
+                                      placeholder="تفاصيل عقد الاتفاق">{{$setting->contract ?? ''}}
                             </textarea>
                         </div>
                     </div>
@@ -50,8 +53,8 @@
                     <div class="form-group">
                         <label for="terms" class="col-md-2 control-label">الشروط والاحكام</label>
                         <div class="col-md-6">
-                            <textarea  rows="5" class="form-control ckeditor" name="terms"  id="terms"
-                                   placeholder="الشروط والاحكام">{{$setting->terms ?? ''}}
+                            <textarea rows="5" class="form-control ckeditor" name="terms" id="terms"
+                                      placeholder="الشروط والاحكام">{{$setting->terms ?? ''}}
                             </textarea>
                         </div>
                     </div>
