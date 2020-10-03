@@ -31,10 +31,14 @@
                     <div class="form-group">
                         <label for="support_mobile" class="col-md-2 control-label">وقت انتهاء صلاحية العرض</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control " value="{{$setting->expire_offer ?? ''}}" name="expire_offer" id="expire_offer" placeholder="وقت انتهاء صلاحية العرض">
+                            <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        ساعة
+                                                    </span>
+                                <input type="text" class="form-control " value="{{$setting->expire_offer ?? ''}}" name="expire_offer" id="expire_offer" placeholder="وقت انتهاء صلاحية العرض">
+                            </div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label for="contract" class="col-md-2 control-label">تفاصيل عقد الاتفاق</label>
                         <div class="col-md-6">
