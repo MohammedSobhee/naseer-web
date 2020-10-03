@@ -44,7 +44,7 @@
                     </li>
                     <li class="nav-item @if(preg_match('/service-providers/i',url()->current())) start active open @endif  ">
                         <a href="{{url(admin_vw().'/service-providers')}}" class="nav-link ">
-                            <span class="title">مزويدي الخدمات  </span>
+                            <span class="title">مزودي الخدمات  </span>
                         </a>
                     </li>
 
@@ -76,7 +76,7 @@
 
                     <li class="nav-item @if(preg_match('/service-provider-types/i',url()->current())) start active open @endif  ">
                         <a href="{{url(admin_constant_url().'/service-provider-types')}}" class="nav-link ">
-                            <span class="title">أنواع مزويدي الخدمات  </span>
+                            <span class="title">أنواع مزودي الخدمات  </span>
                         </a>
                     </li>
                     <li class="nav-item @if(preg_match('/intros/i',url()->current())) start active open @endif  ">

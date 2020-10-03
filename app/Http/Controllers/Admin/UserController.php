@@ -31,7 +31,7 @@ class UserController extends Controller
     public function providers()
     {
         $data = [
-            'title' => 'مقدمو الخدمات',
+            'title' => 'مزودي الخدمات',
             'icon' => 'icon-users',
         ];
         return view(admin_vw() . '.users.providers', $data);

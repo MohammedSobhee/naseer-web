@@ -22,7 +22,7 @@ class ServiceProviderTypeController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'أنواع مقدمو الخدمات',
+            'title' => 'أنواع مزودي الخدمات',
             'icon' => 'icon-settings',
         ];
         return view(admin_vw() . '.constants.service_provider_types', $data);
@@ -42,7 +42,7 @@ class ServiceProviderTypeController extends Controller
         if (isset($service_provider_type)) {
             $view = view()->make(admin_vw() . '.modal', [
                 'modal_id' => 'edit-service-provider-type',
-                'modal_title' => 'تعديل نوع مقدم الخدمة',
+                'modal_title' => 'تعديل نوع مزود الخدمة',
 
                 'form' => [
                     'method' => 'PUT',
@@ -57,7 +57,7 @@ class ServiceProviderTypeController extends Controller
 
                     ],
                     'fields_ar' => [
-                        'name' => 'نوع مقدم الخدمة',
+                        'name' => 'نوع مزود الخدمة',
                     ]
                 ]
             ]);
@@ -76,7 +76,7 @@ class ServiceProviderTypeController extends Controller
     {
         $view = view()->make(admin_vw() . '.modal', [
             'modal_id' => 'add-service-provider-type',
-            'modal_title' => 'اضافة نوع مقدم خدمة جديد',
+            'modal_title' => 'اضافة نوع مزود خدمة جديد',
             'form' => [
                 'method' => 'POST',
                 'url' => url(admin_constant_url() . '/service-provider-types/create'),
@@ -85,7 +85,7 @@ class ServiceProviderTypeController extends Controller
                     'name' => 'text',
                 ],
                 'fields_ar' => [
-                    'name' => 'نوع مقدم الخدمة',
+                    'name' => 'نوع مزود الخدمة',
 
                 ]
             ]

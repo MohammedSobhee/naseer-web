@@ -37,7 +37,7 @@
                                 </th>
 
                                 <th width="10%"> الخدمة</th>
-                                <th width="10%"> نوع مقدم الخدمة</th>
+                                <th width="10%"> نوع مزود الخدمة</th>
                                 <th width="10%"> العمليات</th>
                             </tr>
                             <tr role="row" class="filter">
@@ -51,7 +51,7 @@
                                     <select class="form-control input-md service_provider_type_id select"
                                             name="service_provider_type_id"
                                             id="service_provider_type_id">
-                                        <option value=""> نوع مقدم الخدمة</option>
+                                        <option value=""> نوع مزود الخدمة</option>
                                         @foreach($service_provider_types as $service_provider_type)
                                             <option value="{{$service_provider_type->id}}">{{$service_provider_type->name}}</option>
                                         @endforeach
@@ -104,7 +104,7 @@
                         <tr>
                             <th>#</th>
                             <th> الخدمة</th>
-                            <th> نوع مقدم الخدمة</th>
+                            <th> نوع مزود الخدمة</th>
                             <th>العمليات</th>
                         </tr>
                         </thead>

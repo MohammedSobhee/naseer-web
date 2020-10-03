@@ -18,12 +18,12 @@ return [
     'invalid_route' => 'مسار خاطئ',
     'client_input_error' => 'خطأ في الإدخال',
     'user_created' => 'تم انشاء حساب جديد',
-    'complete-service-provider' => 'تم اكمال عملية التسجيل لمقدم الخدمة',
+    'complete-service-provider' => 'تم اكمال عملية التسجيل لمزود الخدمة',
 
     'contact_prefer' => [
-        'go_to_service_provider' => 'حضوري إلى مقّر مقدم الخدمة',
-        'go_to_user' => 'حضور مقدم الخدمة إلى موقعي',
-        'according_agreement' => 'حسب االتفاق بيني وبين مقدم الخدمة',
+        'go_to_service_provider' => 'حضوري إلى مقّر مزود الخدمة',
+        'go_to_user' => 'حضور مزود الخدمة إلى موقعي',
+        'according_agreement' => 'حسب االتفاق بيني وبين مزود الخدمة',
     ],
     'payment_prefer' => [
         'down_payment' => 'مع دفعة مقدمة',

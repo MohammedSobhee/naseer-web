@@ -36,7 +36,7 @@
                                 <th width="1%">
                                 </th>
 
-                                <th width="10%"> نوع مقدمة الخدمة</th>
+                                <th width="10%"> نوع مزود الخدمة</th>
                                 <th width="10%"> العمليات</th>
                             </tr>
                             <tr role="row" class="filter">
@@ -97,7 +97,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th> نوع مقدم الخدمة</th>
+                            <th> نوع مزود الخدمة</th>
                             <th>العمليات</th>
                         </tr>
                         </thead>

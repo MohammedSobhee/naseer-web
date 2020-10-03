@@ -101,7 +101,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">نوع مقدم الخدمة:</label>
+                                <label class="control-label col-md-3">نوع مزود الخدمة:</label>
                                 <div class="col-md-9">
                                     <p class="form-control-static">  {{$user->ServiceProvider->ServiceProviderType->name ?? ''}}  </p>
                                 </div>
@@ -298,7 +298,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3">نوع مقدم الخدمة:</label>
+                                    <label class="control-label col-md-3">نوع مزود الخدمة:</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static">  {{$user->Slave->ServiceProviderTemp->ServiceProviderType->name ?? ''}}  </p>
                                     </div>

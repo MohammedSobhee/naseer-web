@@ -23,7 +23,7 @@ class ServiceController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'الخدمات المقدمة',
+            'title' => 'الخدمات المزودة',
             'icon' => 'icon-layers',
             'service_provider_types' => ServiceProviderType::all(),
         ];
@@ -63,7 +63,7 @@ class ServiceController extends Controller
                     ],
                     'fields_ar' => [
                         'name' => 'الخدمة',
-                        'service_provider_type_id' => 'نوع مقدم الخدمة',
+                        'service_provider_type_id' => 'نوع مزود الخدمة',
                     ]
                 ]
             ]);

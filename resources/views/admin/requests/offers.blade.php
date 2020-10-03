@@ -38,7 +38,7 @@
                                 <th width="1%">
                                 </th>
 
-                                <th width="10%"> مقدم الخدمة</th>
+                                <th width="10%"> مزود الخدمة</th>
                                 <th width="10%"> طريقة الدفع</th>
                                 <th width="10%"> الحالة</th>
                                 <th width="10%"> العمليات</th>
@@ -47,7 +47,7 @@
                                 <td></td>
                                 <td>
                                     <input type="text" class="form-control form-filter input-md" name="name"
-                                           placeholder=" مقدم الخدمة" id="name">
+                                           placeholder=" مزود الخدمة" id="name">
                                 </td>
                                 <td>
                                     <select class="form-control input-md payment_type select"
@@ -114,7 +114,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th> مقدم الخدمة</th>
+                            <th> مزود الخدمة</th>
                             <th> طريقة الدفع</th>
                             <th> قيمة الدفعة</th>
                             <th> تفاصيل</th>

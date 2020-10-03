@@ -82,9 +82,9 @@ class OrderEloquent extends Uploader implements Repository
                     return '<span class="label label-danger">غير مصنّفة</span>';
             })->editColumn('contact_prefer', function ($request) {
                 if ($request->contact_prefer == 'go_to_service_provider')
-                    return 'حضور مقدم الطلب الى مقدم الخدمة';
+                    return 'حضور مقدم الطلب الى مزود الخدمة';
                 if ($request->contact_prefer == 'go_to_user')
-                    return 'حضور مقدم الخدمة الى مقدم الطلب';
+                    return 'حضور مزود الخدمة الى مقدم الطلب';
                 if ($request->contact_prefer == 'according_agreement')
                     return 'حسب الاتفاق';
             })->editColumn('payment_prefer', function ($request) {
