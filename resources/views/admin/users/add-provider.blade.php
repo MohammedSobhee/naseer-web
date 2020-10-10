@@ -99,7 +99,7 @@
                                                                           class="make-switch"
                                                                           data-on-text="&nbsp;مفعّل&nbsp;"
                                                                           data-off-text="&nbsp;معطّل&nbsp;"
-                                                                          name="is_active" data-id="{{$user->id}}"
+                                                                          name="is_active"
                                                                           checked
                                                                           data-on-color="success"
                                                                           data-size="mini" data-off-color="warning"></p>
