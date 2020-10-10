@@ -310,7 +310,7 @@
 
 
                 } else {
-                    window.alert('{{trans(lang_app_site().'.no_address')}}');
+                    window.alert('No Address');
                 }
             } else {
                 window.alert('Geocoder failed due to: ' + status);
