@@ -17,8 +17,8 @@
     <div class="portlet light bordered">
         <div class="portlet-title">
             <div class="caption">
-                <i class="icon-equalizer font-green-haze"></i>
-                <span class="caption-subject fa fa-user-plus bold uppercase">{{$title ?? ''}}</span>
+                <i class="fa fa-user-plus font-green-haze"></i>
+                <span class="caption-subject font-green-haze bold uppercase">{{$title ?? ''}}</span>
             </div>
         </div>
         <div class="portlet-body form">
