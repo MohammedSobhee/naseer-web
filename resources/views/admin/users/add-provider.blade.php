@@ -284,6 +284,7 @@
     <script src="{{url('/')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
     <script src="{{url('/')}}/assets/js/providers.js" type="text/javascript"></script>
 
+    <script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script>
 
     <script>
     $(document).ready(function () {
