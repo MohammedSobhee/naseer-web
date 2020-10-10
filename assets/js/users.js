@@ -91,7 +91,7 @@ $(document).ready(function () {
                 {data: 'is_verify', name: 'is_verify'},
                 {data: 'city.name', name: 'city.name'},
                 {data: 'is_active', name: 'is_active'},
-                // {data: 'action', name: 'action'}
+                {data: 'action', name: 'action'}
             ],
             "fnDrawCallback": function () {
                 //Initialize checkbos for enable/disable user
