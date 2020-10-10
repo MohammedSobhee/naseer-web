@@ -138,8 +138,17 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">العنوان:</label>
                             <div class="col-md-9">
-                                <input type="text" name="address" id="address" class="form-control"
-                                       placeholder="اضف العنوان...">
+                                <div class="input-group">
+                                    <div class="input-icon">
+                                        <i class="fa fa-lock fa-fw"></i>
+                                        <input type="text" name="address" id="address" class="form-control"
+                                               placeholder="اضف العنوان..." disabled>                                    </div>
+                                    <span class="input-group-btn">
+                                                            <button id="genpassword" class="btn btn-success" type="button">
+                                                                <i class="fa fa-map"></i> الخريطة</button>
+                                                        </span>
+                                </div>
+
 
                                 <input type="hidden" name="latitude" id="latitude" class="form-control">
                                 <input type="hidden" name="longitude" id="longitude" class="form-control">
@@ -242,7 +251,6 @@
                                 class="fa fa-user-plus"></i>
                             اضافة جديدة
                         </button>
-                        <a href="javascript:;" onclick="openMap()">Map</a>
                     </div>
                 </div>
             </div>
