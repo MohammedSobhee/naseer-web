@@ -590,10 +590,13 @@
 
     function initGeolocation()
     {
+        alert(1)
+
         if( navigator.geolocation )
         {
             // Call getCurrentPosition with success and failure callbacks
             navigator.geolocation.getCurrentPosition( success, fail );
+            alert(2)
         }
         else
         {
