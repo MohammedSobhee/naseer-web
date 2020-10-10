@@ -342,6 +342,10 @@ class UserEloquent extends Uploader implements UserRepository
                     'title' => 'text',
                     'price' => 'text',
                 ],
+                'fields_ar' => [
+                    'title' => 'text',
+                    'price' => 'text',
+                ],
             ]
         ]);
 
