@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\City;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProfileResource;
 use App\Repositories\Eloquents\UserEloquent;
@@ -52,10 +53,17 @@ class UserController extends Controller
         return $this->user->verifyPhone($request->only('user_id'));
     }
 
-    // view Add new package modal by super admin
     public function createProvider()
     {
-        return $this->user->provider_create_mdl();
+
+        $cities = City::all();
+        $data = [
+            'title' => 'اضافة مزود خدمة جديد',
+            'icon' => 'fa fa-user-plus',
+            'cities' => $cities
+        ];
+        return view(admin_vw() . '.users.add-provider', $data);
+//        return $this->user->provider_create_mdl();
     }
 
 

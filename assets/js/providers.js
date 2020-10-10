@@ -242,23 +242,23 @@ $(document).ready(function () {
 
     });
 
-    $(document).on('click', '.add-provider-mdl', function (e) {
-        $("#wait_msg,#overlay").show();
-        e.preventDefault();
-        var action = $(this).attr('href');
-        $.ajax({
-            url: action,
-            type: 'GET',
-            success: function (data) {
-                $("#wait_msg,#overlay").hide();
-
-                $('#results-modals').html(data);
-                $('#add-provider-mdl').modal('show', {backdrop: 'static', keyboard: false});
-            }, error: function (xhr) {
-
-            }
-        });
-    });
+    // $(document).on('click', '.add-provider-mdl', function (e) {
+    //     $("#wait_msg,#overlay").show();
+    //     e.preventDefault();
+    //     var action = $(this).attr('href');
+    //     $.ajax({
+    //         url: action,
+    //         type: 'GET',
+    //         success: function (data) {
+    //             $("#wait_msg,#overlay").hide();
+    //
+    //             $('#results-modals').html(data);
+    //             $('#add-provider-mdl').modal('show', {backdrop: 'static', keyboard: false});
+    //         }, error: function (xhr) {
+    //
+    //         }
+    //     });
+    // });
     $(document).on('click', '.user-det', function (e) {
         $("#wait_msg,#overlay").show();
         e.preventDefault();
