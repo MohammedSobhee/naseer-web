@@ -345,8 +345,8 @@
     }
 
     function initMap() {
-        var lat = '{{$user->latitude}}';
-        var lng = '{{$user->longitude}}';
+        var lat = '38.92508148993897';
+        var lng = '35.63450999999998';
         console.log('lng bef' + lng);
         lat = parseFloat(lat);
         lng = parseFloat(lng);
