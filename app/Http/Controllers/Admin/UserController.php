@@ -59,11 +59,16 @@ class UserController extends Controller
         $cities = City::all();
         $data = [
             'title' => 'مزود خدمة جديد',
-            'icon' => '$cities',
+            'icon' => 'fa fa-user-plus',
             'cities' => $cities
         ];
         return view(admin_vw() . '.users.add-provider', $data);
 //        return $this->user->provider_create_mdl();
+    }
+
+    public function storeProvider(Request $request)
+    {
+        dd($request->all());
     }
 
 
