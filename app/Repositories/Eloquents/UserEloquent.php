@@ -283,8 +283,7 @@ class UserEloquent extends Uploader implements UserRepository
                 $action = '';
                 if (isset($user->Slave)) {
 
-                    $action = '<div class="btn-group">
-                                                        <button class="btn btn-sm btn-success green btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> معّدل
+                    $action = '<button class="btn btn-sm btn-success green btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> معّدل
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
@@ -297,8 +296,7 @@ class UserEloquent extends Uploader implements UserRepository
                                                                     <i class="fa fa-times"></i> رفض التعديل </a>
                                                             </li>
 
-                                                        </ul>
-                                                    </div>';
+                                                        </ul>';
                 }
                 return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/view') . '" class="btn btn-sm btn-success blue btn-circle"
                                                                                    title="عرض">
