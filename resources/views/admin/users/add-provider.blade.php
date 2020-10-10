@@ -140,12 +140,11 @@
                             <div class="col-md-9">
                                 <div class="input-group">
                                     <div class="input-icon">
-                                        <i class="fa fa-lock fa-fw"></i>
                                         <input type="text" name="address" id="address" class="form-control"
                                                placeholder="اضف العنوان..." disabled>                                    </div>
                                     <span class="input-group-btn">
-                                                            <button id="genpassword" class="btn btn-success" type="button">
-                                                                <i class="fa fa-map"></i> الخريطة</button>
+                                                            <button id="genpassword" class="btn btn-success" type="button" onclick="openMap()">
+                                                                <i class="fa fa-map-marker"></i> الخريطة</button>
                                                         </span>
                                 </div>
 
