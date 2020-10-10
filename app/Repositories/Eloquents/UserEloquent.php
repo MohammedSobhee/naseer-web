@@ -284,7 +284,7 @@ class UserEloquent extends Uploader implements UserRepository
                 if (isset($user->Slave)) {
 
                     $action = '<div class="btn-group">
-                                                        <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> معّدل
+                                                        <button class="btn btn-sm btn-success green btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> معّدل
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
@@ -299,6 +299,15 @@ class UserEloquent extends Uploader implements UserRepository
 
                                                         </ul>
                                                     </div>';
+//                    $action = '<a href="' . url(admin_vw() . '/users/approval-provider-edits/' . $user->id) . '" class="btn btn-sm btn-success green btn-circle approval-edits"
+//                                                                                   title="اعتماد التعديل">
+//                                                                                    <i class="fa fa-check"></i>
+//                                                                                    اعتماد التعديل
+//                                                                                </a><a href="' . url(admin_vw() . '/users/reject-provider-edits/' . $user->id) . '" class="btn btn-sm btn-danger red btn-circle reject-edits"
+//                                                                                   title="رفض الاعتماد">
+//                                                                                    <i class="fa fa-times"></i>
+//                                                                                     رفض الاعتماد
+//                                                                                </a>';
                 }
                 return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/view') . '" class="btn btn-sm btn-success blue btn-circle"
                                                                                    title="عرض">
