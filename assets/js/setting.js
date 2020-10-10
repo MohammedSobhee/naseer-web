@@ -21,7 +21,7 @@ $(document).ready(function () {
                     //Make your callback here.
                     if (json.status != undefined && !json.status) {
                         $('#settings_tbl_processing').hide();
-                        bootbox.alert(json.message);
+                        location.reload();
                         //
                     } else
                         return json.data;

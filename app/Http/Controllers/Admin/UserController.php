@@ -52,6 +52,13 @@ class UserController extends Controller
         return $this->user->verifyPhone($request->only('user_id'));
     }
 
+    // view Add new package modal by super admin
+    public function createProvider()
+    {
+        return $this->user->provider_create_mdl();
+    }
+
+
     public function profile($id)
     {
         $user = $this->user->getById($id);

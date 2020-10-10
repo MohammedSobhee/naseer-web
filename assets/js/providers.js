@@ -92,7 +92,7 @@ $(document).ready(function () {
                     //Make your callback here.
                     if (json.status != undefined && !json.status) {
                         $('#providers_tbl_processing').hide();
-                        bootbox.alert(json.message);
+                        location.reload();
                         //
                     } else
                         return json.data;
@@ -242,6 +242,23 @@ $(document).ready(function () {
 
     });
 
+    $(document).on('click', '.add-provider-mdl', function (e) {
+        $("#wait_msg,#overlay").show();
+        e.preventDefault();
+        var action = $(this).attr('href');
+        $.ajax({
+            url: action,
+            type: 'GET',
+            success: function (data) {
+                $("#wait_msg,#overlay").hide();
+
+                $('#results-modals').html(data);
+                $('#add-provider-mdl').modal('show', {backdrop: 'static', keyboard: false});
+            }, error: function (xhr) {
+
+            }
+        });
+    });
     $(document).on('click', '.user-det', function (e) {
         $("#wait_msg,#overlay").show();
         e.preventDefault();
@@ -270,5 +287,52 @@ $(document).ready(function () {
         // $('#is_admin_confirm,.status').val('').trigger('change');
         providers_tbl.api().ajax.reload();
     });
-})
-;
+
+
+    $(document).on('submit', '#formAdd,#formEdit', function (event) {
+
+        var _this = $(this);
+        // var loader = '<i class="fa fa-spinner fa-spin"></i>';
+        _this.find('.save i').addClass('fa-spinner fa-spin');
+        event.preventDefault(); // Totally stop stuff happening
+        // START A LOADING SPINNER HERE
+        // Create a formdata object and add the files
+
+        var formData = new FormData($(this)[0]);
+
+        var action = $(this).attr('action');
+        var method = $(this).attr('method');
+
+        $.ajax({
+            url: action,
+            type: method,
+            data: formData,
+
+            contentType: false,
+            processData: false,
+            success: function (data) {
+
+                if (data.status) {
+
+                    $('.alert').hide();
+                    toastr['success'](data.message, '');
+                    providers_tbl.api().ajax.reload();
+                } else {
+                    var $errors = '<strong>' + data.message + '</strong>';
+                    $errors += '<ul>';
+                    $.each(data.errors, function (i, v) {
+                        $errors += '<li>' + v.message + '</li>';
+                    });
+                    $errors += '</ul>';
+                    $('.alert').show();
+                    $('.alert').html($errors);
+                    // toastr['error'](data.message);
+                }
+                _this.find('.btn i').removeClass('fa-spinner fa-spin');
+                // _this.find('.fa-spin').hide();
+                // $('#save_category_frm').attr('action', $('#url_action').val());
+            }
+        });
+    });
+
+});

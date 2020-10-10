@@ -60,6 +60,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::post('admins/create', 'AdminController@store');
 
     Route::get('/service-providers', 'UserController@providers');
+    Route::get('/service-provider', 'UserController@createProvider');
+    Route::post('/service-provider', 'UserController@storeProvider');
     Route::get('/users', 'UserController@index');
     Route::get('/users/{id}/view', 'UserController@profile');
     Route::get('/users/user-data/{type}', 'UserController@anyData');

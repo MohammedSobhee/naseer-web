@@ -330,6 +330,29 @@ class UserEloquent extends Uploader implements UserRepository
 
     }
 
+    public function provider_create_mdl()
+    {
+        $view = view()->make(admin_vw() . '.modal', [
+            'modal_id' => 'add-provider-mdl',
+            'modal_title' => 'اضافة مزود خدمة جديدة',
+            'icon' => '<i class="fa fa-plus"></i>',
+            'form' => [
+                'method' => 'POST',
+                'url' => url(admin_vw() . '/service-provider'),
+                'form_id' => 'formAdd',
+                'fields' => [
+                    'title' => 'text',
+                    'price' => 'text',
+                ],
+            ]
+        ]);
+
+        $html = $view->render();
+
+        return $html;
+    }
+
+
     function verifyPhone($id)
     {
 

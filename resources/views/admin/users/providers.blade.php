@@ -104,7 +104,13 @@
                         <i class="{{$icon}} font-dark"></i>
                         <span class="caption-subject bold uppercase"> {{$title}}</span>
                     </div>
-
+                    <div class="actions">
+                        <a href="{{url(admin_vw().'/service-provider')}}"
+                           class="btn btn-circle btn-info add-provider-mdl">
+                            <i class="fa fa-user-plus"></i>
+                            <span class="hidden-xs"> اضافة </span>
+                        </a>
+                    </div>
                 </div>
                 <div class="portlet-body">
 
@@ -117,7 +123,7 @@
                             <th> اسم المستخدم</th>
                             <th> الجنس</th>
                             <th> البريد الالكتروني</th>
-{{--                            <th> تحقق البريد الالكتروني</th>--}}
+                            {{--                            <th> تحقق البريد الالكتروني</th>--}}
                             <th> رقم الهاتف</th>
                             <th> تحقق الهاتف</th>
                             <th>المدينة</th>
