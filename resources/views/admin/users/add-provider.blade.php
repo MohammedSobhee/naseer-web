@@ -296,13 +296,14 @@
         $('#exampleModalLong').modal('hide');
     }
 
+    var address = '';
     function geocodeLatLng(location, first) {
 
         geocoder.geocode({'location': location}, function (results, status) {
             if (status === 'OK') {
                 if (results[0]) {
 
-                    var address = results[0].formatted_address;
+                    address = results[0].formatted_address;
                     if (first == '1') {
                         $('#autocomplete').val(address);
                     } else {
@@ -369,7 +370,7 @@
             panControl: true,
             zoomControl: true,
             streetViewControl: false,
-            zoom: 17
+            zoom: 10
         });
 
         directionsDisplay.setMap(map);
@@ -435,7 +436,7 @@
 
         setLongLatmyFunction(location);
         var infowindow = new google.maps.InfoWindow({
-            content: 'Your Place'
+            content: address
         });
 
         infowindow.open(map, marker);
