@@ -103,7 +103,7 @@
                 <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="{{$icon}} font-dark"></i>
-                        <span class="caption-subject bold uppercase"> {{$title}}</span>
+                        <span class="caption-subject bold uppercase"> العروض المقدمة</span>
                     </div>
 
                 </div>
