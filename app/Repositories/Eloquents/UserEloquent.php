@@ -282,15 +282,23 @@ class UserEloquent extends Uploader implements UserRepository
 //                                    </a>';
                 $action = '';
                 if (isset($user->Slave)) {
-                    $action = '<a href="' . url(admin_vw() . '/users/approval-provider-edits/' . $user->id) . '" class="btn btn-sm btn-success red btn-circle approval-edits"
-                                                                                   title="اعتماد التعديل">
-                                                                                    <i class="fa fa-check"></i>
-                                                                                    اعتماد التعديل
-                                                                                </a><a href="' . url(admin_vw() . '/users/reject-provider-edits/' . $user->id) . '" class="btn btn-sm btn-danger red btn-circle reject-edits"
-                                                                                   title="رفض الاعتماد">
-                                                                                    <i class="fa fa-times"></i>
-                                                                                     رفض الاعتماد
-                                                                                </a>';
+
+                    $action = '<div class="btn-group">
+                                                        <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> معّدل
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <a href="' . url(admin_vw() . '/users/approval-provider-edits/' . $user->id) . ' " class="approval-edits">
+                                                                    <i class="fa fa-check"></i> اعتماد التعديل </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="' . url(admin_vw() . '/users/reject-provider-edits/' . $user->id) . '" class="reject-edits">
+                                                                    <i class="fa fa-times"></i> رفض التعديل </a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>';
                 }
                 return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/view') . '" class="btn btn-sm btn-success blue btn-circle"
                                                                                    title="عرض">
