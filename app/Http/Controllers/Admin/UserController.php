@@ -58,8 +58,8 @@ class UserController extends Controller
 
         $cities = City::all();
         $data = [
-            'title' => 'اضافة مزود خدمة جديد',
-            'icon' => 'fa fa-user-plus',
+            'title' => 'مزود خدمة جديد',
+            'icon' => '$cities',
             'cities' => $cities
         ];
         return view(admin_vw() . '.users.add-provider', $data);
