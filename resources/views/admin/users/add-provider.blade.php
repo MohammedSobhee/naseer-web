@@ -312,10 +312,10 @@
 
 
                 } else {
-                    window.alert('No Address');
+                    // window.alert('No Address');
                 }
             } else {
-                window.alert('Geocoder failed due to: ' + status);
+                // window.alert('Geocoder failed due to: ' + status);
             }
         });
     }
@@ -452,91 +452,9 @@
 
     }
 
-
-    function doSend() {
-
-        required = false;
-
-        var set = $('.required');
-        var length = set.length;
-        $('.required').each(function (index, element) {
-
-            if ($(this).val() == '') {
-
-
-                required = true;
-                $(this).parent('div').addClass('has-error');
-                $(this).addClass('error');
-
-
-            } else {
-                $(this).parent('div').removeClass('has-error');
-                $(this).removeClass('error');
-
-            }
-        });
-
-
-        if ($('#from_latitude').val() !== '') {
-            $('#autocomplete').removeClass('error');
-        }
-
-        if ($('#to_latitude').val() !== '') {
-            $('#autocomplete').removeClass('error');
-        }
-
-
-        if ($('#from_latitude').val() === '') {
-            $('#autocomplete').addClass('error');
-            required = true;
-        }
-
-        if ($('#to_latitude').val() === '') {
-            console.log('Error mm ');
-            $('#autocomplete').addClass('error');
-            required = true;
-        }
-
-
-        if (!required) {
-
-
-            data = {
-                'name': $('#name').val(),
-                'email': $('#email').val(),
-                'message': $('#message').val(),
-                'phone': $('#phone').val(),
-                'date': $('#date').val(),
-                'time': $('#time').val(),
-                'from_latitude': $('#from_latitude').val(),
-                'from_longitude': $('#from_longitude').val(),
-                'to_latitude': $('#to_latitude').val(),
-                'to_longitude': $('#to_longitude').val(),
-                'cartype': $('#cartype').val(),
-                'from_place': $('#autocomplete').val(),
-                'to_place': $('#autocompleteEnd').val(),
-            };
-
-
-            $.request('onSend', {
-                'data': data,
-                success: function (data) {
-
-                    if (data.status) {
-                        $('#sendBook').css('display', 'none');
-                        $('#toMapModal').modal('show');
-                        // $('#putData').html(text_success);
-                    } else {
-                        clearFncont(data.div);
-
-                    }
-                }
-            });
-        }
-    }
-
-
     function onPlaceChanged() {
+
+        console.log(2);
         var place = autocomplete.getPlace();
         if (place.geometry) {
             map.panTo(place.geometry.location);
@@ -665,19 +583,13 @@
             });
     }
 
+    function openMap() {
 
+        $('#exampleModalLong').modal('show');
+    }
     </script>
 
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDviHB7G4RWAgQNwvjaVXLhC1j5DNTSPFE&libraries=places&callback=initMap"
         async defer></script>
-
-    <script>
-        function openMap() {
-
-            $('#exampleModalLong').modal('show');
-        }
-
-    </script>
-    </script>
 @stop
