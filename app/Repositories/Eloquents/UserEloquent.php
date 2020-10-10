@@ -259,7 +259,7 @@ class UserEloquent extends Uploader implements UserRepository
                 return $user->country_code . $user->phone;
             })
             ->editColumn('photo', function ($user) {
-                return '<img src="' . $user->photo100 . '" width="100" class="img-circle">';
+                return '<img src="' . $user->photo100 . '" width="70" class="img-circle">';
             })
             ->editColumn('is_verify', function ($user) {
                 if ($user->is_verify)
