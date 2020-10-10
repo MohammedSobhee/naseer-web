@@ -11,6 +11,22 @@
           type="text/css"/>
     <link href="{{url('/')}}/assets/global/css/plugins-md-rtl.min.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
+
+    <style>
+        .pac-container {
+            background-color: #FFF;
+            z-index: 20;
+            position: fixed;
+            display: inline-block;
+            float: left;
+        }
+        .modal{
+            z-index: 20;
+        }
+        .modal-backdrop{
+            z-index: 10;
+        }​
+    </style>
 @endsection
 @section('content')
 
@@ -244,11 +260,7 @@
         </div>
     </div>
 
-    <style>
-        .pac-container {
-            z-index: 10000 !important;
-        }
-    </style>
+
     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
