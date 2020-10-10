@@ -357,8 +357,6 @@
         directionsDisplay = new google.maps.DirectionsRenderer();
         geocoder = new google.maps.Geocoder;
         map = new google.maps.Map(document.getElementById('map'), {
-
-            center: {lat: lat, lng: lng},
             mapTypeControl: true,
             panControl: true,
             zoomControl: true,
