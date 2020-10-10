@@ -293,7 +293,6 @@
 
     <script>
     $(document).ready(function () {
-        initGeolocation();
     });
 
     function AddPlace() {
