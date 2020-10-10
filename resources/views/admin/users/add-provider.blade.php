@@ -343,13 +343,13 @@
 
 
     function getPositionErrorMessage(code) {
-        console.log('error place code' + code);
+        // console.log('error place code' + code);
     }
 
     function initMap() {
         var lat = '38.92508148993897';
         var lng = '35.63450999999998';
-        console.log('lng bef' + lng);
+        // console.log('lng bef' + lng);
         lat = parseFloat(lat);
         lng = parseFloat(lng);
         if (!lat > 0) {
@@ -454,7 +454,6 @@
 
     function onPlaceChanged() {
 
-        console.log(2);
         var place = autocomplete.getPlace();
         if (place.geometry) {
             map.panTo(place.geometry.location);
