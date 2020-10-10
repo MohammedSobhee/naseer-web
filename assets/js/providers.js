@@ -293,7 +293,9 @@ $(document).ready(function () {
 
         var _this = $(this);
         // var loader = '<i class="fa fa-spinner fa-spin"></i>';
-        _this.find('.save i').addClass('fa-spinner fa-spin');
+
+        var _icon = _this.find('.save i').attr('class');
+        _this.find('.save i').removeClass(_icon).addClass('fa fa-spinner fa-spin');
         event.preventDefault(); // Totally stop stuff happening
         // START A LOADING SPINNER HERE
         // Create a formdata object and add the files
@@ -328,7 +330,8 @@ $(document).ready(function () {
                     $('.alert').html($errors);
                     // toastr['error'](data.message);
                 }
-                _this.find('.btn i').removeClass('fa-spinner fa-spin');
+                // _this.find('.btn i').removeClass('fa-spinner fa-spin');
+                _this.find('.save i').removeClass('fa fa-spinner fa-spin').addClass(_icon);
                 // _this.find('.fa-spin').hide();
                 // $('#save_category_frm').attr('action', $('#url_action').val());
             }
