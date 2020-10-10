@@ -193,6 +193,54 @@ $(document).ready(function () {
         });
 
     });
+    $(document).on('click', '.reject-edits', function (event) {
+
+        var _this = $(this);
+        var action = _this.attr('href');
+        event.preventDefault();
+
+        bootbox.confirm({
+            message: "تأكيد رفض اعتماد التعديلات!",
+            buttons: {
+
+                confirm: {
+                    label: 'بالتأكيد <i class="fa fa-check"></i>',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'الغاء<i class="fa fa-times"></i>',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: action,
+                        type: 'PUT',
+                        dataType: 'json',
+                        data: {'_token': csrf_token},
+                        success: function (data) {
+
+                            if (data.status) {
+                                $('.alert').hide();
+                                toastr['success'](data.message, '');
+
+                                if (event.target.id == 'reject-edits')
+                                    providers_tbl.api().ajax.reload();
+                                else
+                                    location.reload()
+
+                            } else {
+                                toastr['error'](data.message);
+                            }
+
+                        }
+                    });
+                }
+            }
+        });
+
+    });
 
     $(document).on('click', '.user-det', function (e) {
         $("#wait_msg,#overlay").show();

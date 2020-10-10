@@ -211,9 +211,14 @@
                 </div>
                 <div class="actions">
                     <a href="{{url(admin_vw() . '/users/approval-provider-edits/' . $user->id)}}"
-                       class="btn btn-circle btn-danger approval-edits">
+                       class="btn btn-circle btn-success approval-edits">
                         <i class="fa fa-check"></i>
                         اعتماد التعديلات
+                    </a>
+                    <a href="{{url(admin_vw() . '/users/reject-provider-edits/' . $user->id)}}"
+                       class="btn btn-circle btn-danger reject-edits">
+                        <i class="fa fa-times"></i>
+                        رفض اعتماد التعديلات
                     </a>
                 </div>
             </div>

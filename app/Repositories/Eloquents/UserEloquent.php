@@ -286,6 +286,10 @@ class UserEloquent extends Uploader implements UserRepository
                                                                                    title="اعتماد التعديل">
                                                                                     <i class="fa fa-check"></i>
                                                                                     اعتماد التعديل
+                                                                                </a><a href="' . url(admin_vw() . '/users/reject-provider-edits/' . $user->id) . '" class="btn btn-sm btn-danger red btn-circle reject-edits"
+                                                                                   title="رفض الاعتماد">
+                                                                                    <i class="fa fa-times"></i>
+                                                                                     رفض الاعتماد
                                                                                 </a>';
                 }
                 return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/view') . '" class="btn btn-sm btn-success blue btn-circle"
@@ -568,6 +572,28 @@ class UserEloquent extends Uploader implements UserRepository
         return response_api(true, 200, $message, new ProfileResource($user));
     }
 
+    function rejectUpdateProvider(array $attributes, $id = null)
+    {
+        $user = User::find($id);
+        $user->is_edit = 0;
+        $user->save();
+
+        $tmp = User::where('master_id', $user->id)->first();
+
+        if (isset($tmp) && $tmp->forceDelete()) {
+            $tmp_provider = ServiceProvider::where('master_id', $user->ServiceProvider->id)->first();
+
+            if (isset($tmp_provider) && $tmp_provider->forceDelete()) {
+                return response_api(true, 200, 'تم رفض اعتماد البيانات بنجاح', []);
+
+            }
+
+        }
+
+        return response_api(false, 422, 'لم يتم رفض الاعتماد', []);
+
+    }
+
     function confirmUpdateProvider(array $attributes, $id = null)
     {
         $user = User::find($id);
@@ -764,8 +790,7 @@ class UserEloquent extends Uploader implements UserRepository
             if (!$service_provider_type->is_licensed) {
                 $service_provider_tmp->licensed_file = null;
                 $service_provider_tmp->licensed = null;
-            }
-            else
+            } else
                 if (isset($attributes['licensed_file'])) {
                     $service_provider_tmp->licensed_file = $this->upload($attributes, 'licensed_file');
                     sleep(1);

@@ -52,21 +52,37 @@ class UserController extends Controller
         return $this->user->verifyPhone($request->only('user_id'));
     }
 
-    public function showProvider($id)
+    public function profile($id)
     {
         $user = $this->user->getById($id);
 
-        $data = [
-            'title' => 'عرض تفاصيل مزود الخدمة',
-            'icon' => 'icon-users',
-            'user' => $user,
-        ];
-        return view(admin_vw() . '.users.view-provider', $data);
+        if ($user->type == 'service_provider') {
+            $data = [
+                'title' => 'عرض تفاصيل مزود الخدمة',
+                'icon' => 'icon-users',
+                'user' => $user,
+            ];
+            return view(admin_vw() . '.users.view-provider', $data);
+        } else {
+            $data = [
+                'title' => 'عرض تفاصيل المستخدم',
+                'icon' => 'icon-users',
+                'user' => $user,
+            ];
+            return view(admin_vw() . '.users.view-user', $data);
+
+        }
+
     }
 
     public function confirmUpdateProvider(Request $request, $id)
     {
         return $this->user->confirmUpdateProvider($request->all(), $id);
+    }
+
+    public function rejectUpdateProvider(Request $request, $id)
+    {
+        return $this->user->rejectUpdateProvider($request->all(), $id);
     }
 
     public function export()

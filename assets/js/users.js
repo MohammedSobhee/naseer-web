@@ -125,6 +125,7 @@ $(document).ready(function () {
             order: [[2, "asc"]]
         });
     }
+
     $(document).on('click', '.user-det', function (e) {
         $("#wait_msg,#overlay").show();
         e.preventDefault();
