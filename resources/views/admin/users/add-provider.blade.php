@@ -131,8 +131,13 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">العنوان:</label>
                             <div class="col-md-9">
-                                    <textarea name="address" id="address" rows="5" placeholder="اضف العنوان"
-                                              class="form-control"></textarea>
+                                <input type="text" name="address" id="address" class="form-control"
+                                       placeholder="اضف العنوان...">
+
+                                <input type="hidden" name="latitude" id="latitude" class="form-control">
+                                <input type="hidden" name="longitude" id="longitude" class="form-control">
+
+
                             </div>
                         </div>
                     </div>
@@ -306,6 +311,7 @@
                     address = results[0].formatted_address;
                     if (first == '1') {
                         $('#autocomplete').val(address);
+                        $('#address').val(address);
                     } else {
                         $('#autocompleteEnd').val(address);
                     }
@@ -347,18 +353,6 @@
     }
 
     function initMap() {
-        var lat = '38.92508148993897';
-        var lng = '35.63450999999998';
-        // console.log('lng bef' + lng);
-        lat = parseFloat(lat);
-        lng = parseFloat(lng);
-        if (!lat > 0) {
-            lat = 38.92508148993897;
-            lng = 35.63450999999998;
-        }
-
-        const initialPosition = {lat: lat, lng: lng};
-
 
         directionsService = new google.maps.DirectionsService();
         directionsDisplay = new google.maps.DirectionsRenderer();
@@ -385,10 +379,6 @@
             placeMarker(map, event.latLng);
 
         });
-        const marker = new google.maps.Marker({map, position: initialPosition});
-
-
-        markers.push(marker);
 
         // Create the autocomplete object and associate it with the UI input control.
         // Restrict the search to the default country, and to place type "cities".
@@ -399,8 +389,6 @@
 
         places = new google.maps.places.PlacesService(map);
         autocomplete.addListener('place_changed', onPlaceChanged);
-
-
     }
 
 
@@ -586,36 +574,6 @@
 
         $('#exampleModalLong').modal('show');
     }
-
-
-    function initGeolocation()
-    {
-
-        if( navigator.geolocation )
-        {
-            // Call getCurrentPosition with success and failure callbacks
-            navigator.geolocation.getCurrentPosition( success, fail );
-        }
-        else
-        {
-            alert("Sorry, your browser does not support geolocation services.");
-        }
-    }
-
-    function success(position)
-    {
-
-        console.log(position.coords.latitude)
-        console.log(position.coords.longitude)
-        // document.getElementById('long').value = position.coords.longitude;
-        // document.getElementById('lat').value = position.coords.latitude
-    }
-
-    function fail()
-    {
-        // Could not obtain location
-    }
-
     </script>
 
     <script
