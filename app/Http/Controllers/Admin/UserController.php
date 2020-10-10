@@ -6,6 +6,7 @@ use App\City;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProfileResource;
 use App\Repositories\Eloquents\UserEloquent;
+use App\ServiceProviderType;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -57,10 +58,12 @@ class UserController extends Controller
     {
 
         $cities = City::all();
+        $service_provider_types = ServiceProviderType::all();
         $data = [
             'title' => 'مزود خدمة جديد',
             'icon' => 'fa fa-user-plus',
-            'cities' => $cities
+            'cities' => $cities,
+            'service_provider_types' => $service_provider_types,
         ];
         return view(admin_vw() . '.users.add-provider', $data);
 //        return $this->user->provider_create_mdl();

@@ -116,7 +116,6 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">نوع مزود الخدمة:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static">  {{$user->ServiceProvider->ServiceProviderType->name ?? ''}}  </p>
 
                                     <select class="form-control select" name="service_provider_type_id"
                                             id="service_provider_type_id">
@@ -216,8 +215,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">نبذه:</label>
                                 <div class="col-md-9">
-<textarea name="bio" id="bio" rows="5" placeholder="اضف نبذه..."
-          class="form-control"></textarea>
+                                    <textarea name="bio" id="bio" rows="5" placeholder="اضف نبذه..." class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
