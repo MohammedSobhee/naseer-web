@@ -14,18 +14,9 @@
 
     <style>
         .pac-container {
-            background-color: #FFF;
-            z-index: 20;
-            position: fixed;
-            display: inline-block;
-            float: left;
+            z-index: 9999999;
+            display: block;
         }
-        .modal{
-            z-index: 20;
-        }
-        .modal-backdrop{
-            z-index: 10;
-        }​
     </style>
 @endsection
 @section('content')
@@ -261,7 +252,7 @@
     </div>
 
 
-    <div class="modal fade" id="exampleModalLong" role="dialog" aria-labelledby="exampleModalLongTitle"
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
