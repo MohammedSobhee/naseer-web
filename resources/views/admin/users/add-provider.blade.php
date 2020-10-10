@@ -353,10 +353,16 @@
 
     function initMap() {
 
+        // الرياض
+        var lat = 24.7255553;
+        var lng = 47.1027145;
+
         directionsService = new google.maps.DirectionsService();
         directionsDisplay = new google.maps.DirectionsRenderer();
         geocoder = new google.maps.Geocoder;
         map = new google.maps.Map(document.getElementById('map'), {
+
+            center: {lat: lat, lng: lng},
             mapTypeControl: true,
             panControl: true,
             zoomControl: true,
