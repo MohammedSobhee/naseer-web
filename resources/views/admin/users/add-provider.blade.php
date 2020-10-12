@@ -79,15 +79,13 @@
                             <div class="col-md-9">
 
                                 <div class="input-group">
-                                    <div class="input-icon">
-                                        <input type="text" name="phone" id="phone" class="form-control"
-                                               placeholder="اضف رقم الهاتف..."></div>
-                                    <span class="input-group-btn">
+                                    <input type="text" name="phone" id="phone" class="form-control"
+                                           placeholder="اضف رقم الهاتف..."></div>
+                                <span class="input-group-btn">
                                                             <input type="text" name="country_code" id="country_code"
                                                                    class="form-control"
                                                                    placeholder="+966">
                                                         </span>
-                                </div>
 
 
                             </div>
