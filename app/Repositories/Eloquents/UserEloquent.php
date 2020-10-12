@@ -301,6 +301,17 @@ class UserEloquent extends Uploader implements UserRepository
                                                         </ul></div>';
                 }
 
+                $item = '';
+                if ($user->type == 'service_provider') {
+                    $item = '<li>
+
+                                                                    <a href="' . url(admin_vw() . '/service-provider/' . $user->id) . '"
+                                                                                   title="تعديل">
+                                                                                    <i class="fa fa-edit"></i>
+                                                                                    تعديل
+                                                                                </a>
+                                                            </li>';
+                }
                 $action .= '<div class="btn-group" style=" position: relative;  margin-top: 0px;">
                                                         <button class="btn btn-sm green btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> العمليات
                                                             <i class="fa fa-angle-down"></i>
@@ -313,14 +324,7 @@ class UserEloquent extends Uploader implements UserRepository
                                                                                     عرض
                                                                                 </a>
                                                             </li>
-                                                            <li>
-
-                                                                    <a href="' . url(admin_vw() . '/service_provider/' . $user->id) . '"
-                                                                                   title="تعديل">
-                                                                                    <i class="fa fa-edit"></i>
-                                                                                    تعديل
-                                                                                </a>
-                                                            </li>
+                                                           ' . $item . '
                                                         </ul>
                                                     </div>';
                 return $action;
