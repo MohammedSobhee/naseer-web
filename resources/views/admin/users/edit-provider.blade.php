@@ -30,7 +30,7 @@
         </div>
         <div class="portlet-body form">
             <!-- BEGIN FORM-->
-            {!! Form::open(['method'=>'post','class'=>'form-horizontal','files'=>true,'id'=>'formAdd']) !!}
+            {!! Form::open(['method'=>'put','class'=>'form-horizontal','files'=>true,'id'=>'formEdit']) !!}
             <input type="hidden" name="type" id="type" value="service_provider">
             <div class="form-body">
                 <h3 class="form-section">البيانات الاساسية</h3>
@@ -42,7 +42,7 @@
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-preview thumbnail" data-trigger="fileinput"
                                          style="width: 200px; height: 150px;">
-                                        <img src="{{url('assets/apps/img/unknown.png')}}"
+                                        <img src="{{$user->photo}}"
                                              alt=""/>
 
                                     </div>
@@ -68,7 +68,7 @@
                             <label class="control-label col-md-3">الاسم كامل:</label>
                             <div class="col-md-9">
                                 <input type="text" name="name" id="name" class="form-control"
-                                       placeholder="اضف الاسم كامل...">
+                                       placeholder="اضف الاسم كامل..." value="{{$user->name ?? ''}}">
                             </div>
                         </div>
                     </div>
@@ -79,10 +79,12 @@
                                 <div class="input-group">
                                     <div class="input-icon">
                                         <input type="text" name="phone" id="phone" class="form-control"
-                                               placeholder="5XXXXXXXX" style="direction: ltr"></div>
+                                               placeholder="5XXXXXXXX" style="direction: ltr"
+                                               value="{{$user->phone ?? ''}}"></div>
                                     <span class="input-group-btn">
                                                             <input type="text" name="country_code" id="country_code"
                                                                    class="form-control input-xsmall"
+                                                                   value="{{$user->country_code ?? ''}}"
                                                                    placeholder="+966" style="direction: ltr">
                                                         </span>
                                 </div>
@@ -99,7 +101,7 @@
                                 <label class="control-label col-md-3">البريد الالكتروني:</label>
                                 <div class="col-md-9">
                                     <input type="text" name="email" id="email" class="form-control"
-                                           placeholder="اضف البريد الالكتروني...">
+                                           placeholder="اضف البريد الالكتروني..." value="{{$user->email ?? ''}}">
                                 </div>
                             </div>
                         </div>
@@ -110,8 +112,9 @@
                                 <div class="col-md-6">
                                     <select class="form-control select" name="gender"
                                             id="gender">
-                                        <option value="male">ذكر</option>
-                                        <option value="female">انثى</option>
+                                        <option value="male" @if($user->gender == 'male') selected @endif>ذكر</option>
+                                        <option value="female" @if($user->gender == 'female') selected @endif>انثى
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -127,7 +130,8 @@
                                     <select class="form-control select" name="city_id"
                                             id="city_id">
                                         @foreach($cities as $city)
-                                            <option value="{{$city->id}}">{{$city->name}}</option>
+                                            <option value="{{$city->id}}"
+                                                    @if($user->city_id == $city->id) selected @endif >{{$city->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -142,8 +146,8 @@
                                                                           class="make-switch"
                                                                           data-on-text="&nbsp;مفعّل&nbsp;"
                                                                           data-off-text="&nbsp;معطّل&nbsp;"
+                                                                          @if($user->is_active) checked @endif
                                                                           name="is_active"
-                                                                          checked
                                                                           data-on-color="success"
                                                                           data-size="mini" data-off-color="warning"></p>
                                 </div>
@@ -186,7 +190,8 @@
                                             id="service_provider_type_id">
                                         @foreach($service_provider_types as $service_provider_type)
                                             <option
-                                                value="{{$service_provider_type->id}}">{{$service_provider_type->name}}</option>
+                                                value="{{$service_provider_type->id}}"
+                                                @if($user->service_provider_type_id == $service_provider_type->id) selected @endif>{{$service_provider_type->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -200,7 +205,7 @@
                                     <div class="input-group">
                                         <div class="input-icon">
                                             <input type="text" name="address" id="address" class="form-control"
-                                                   placeholder="اضف العنوان..."></div>
+                                                   placeholder="اضف العنوان..." value="{{$user->address ?? ''}}"></div>
                                         <span class="input-group-btn">
                                                             <button id="genpassword" class="btn btn-success"
                                                                     type="button" onclick="openMap()">
@@ -209,8 +214,10 @@
                                     </div>
 
 
-                                    <input type="hidden" name="latitude" id="latitude" class="form-control">
-                                    <input type="hidden" name="longitude" id="longitude" class="form-control">
+                                    <input type="hidden" name="latitude" id="latitude" value="{{$user->latitude ?? ''}}"
+                                           class="form-control">
+                                    <input type="hidden" name="longitude" id="longitude"
+                                           value="{{$user->longitude ?? ''}}" class="form-control">
 
 
                                 </div>
@@ -224,6 +231,7 @@
                                 <label class="control-label col-md-3">رقم البطاقة الشخصية:</label>
                                 <div class="col-md-9">
                                     <input type="text" name="idno" id="idno" class="form-control"
+                                           value="{{$user->idno ?? ''}}"
                                            placeholder="اضف رقم البطاقة الشخصية...">
                                 </div>
                             </div>
@@ -245,6 +253,7 @@
                                 <label class="control-label col-md-3">الهواية:</label>
                                 <div class="col-md-9">
                                     <input type="text" name="skill" id="skill" class="form-control"
+                                           value="{{$user->skill ?? ''}}"
                                            placeholder="اضف الهواية...">
                                 </div>
                             </div>
@@ -269,8 +278,12 @@
 
                                     <select class="form-control select" name="license_type"
                                             id="license_type">
-                                        <option value="licensed">مرخص</option>
-                                        <option value="unlicensed">غير مرخص</option>
+                                        <option value="licensed" @if($user->license_type == 'licensed') selected @endif>
+                                            مرخص
+                                        </option>
+                                        <option value="unlicensed"
+                                                @if($user->license_type == 'unlicensed') selected @endif>غير مرخص
+                                        </option>
                                     </select>
 
                                 </div>
@@ -295,7 +308,7 @@
                                 <label class="control-label col-md-3">نبذه:</label>
                                 <div class="col-md-9">
                                     <textarea name="bio" id="bio" rows="5" placeholder="اضف نبذه..."
-                                              class="form-control"></textarea>
+                                              class="form-control">{{$user->bio}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -307,8 +320,8 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <button type="submit" class="btn btn-circle green btn-md save"><i
-                                    class="fa fa-user-plus"></i>
-                                اضافة جديدة
+                                    class="fa fa-edit"></i>
+                                حفظ التعديلات
                             </button>
                         </div>
                     </div>

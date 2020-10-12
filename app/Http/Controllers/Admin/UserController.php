@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\User\UpdateProviderRequest;
 use App\Http\Resources\ProfileResource;
 use App\Repositories\Eloquents\UserEloquent;
 use App\ServiceProviderType;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -70,13 +71,16 @@ class UserController extends Controller
         return view(admin_vw() . '.users.add-provider', $data);
 //        return $this->user->provider_create_mdl();
     }
+
     public function editProvider($id)
     {
 
+        $user = User::find($id);
         $cities = City::all();
         $service_provider_types = ServiceProviderType::all();
         $data = [
-            'title' => 'مزود خدمة جديد',
+            'user' => $user,
+            'title' => 'مزود خدمة',
             'icon' => 'fa fa-user-plus',
             'cities' => $cities,
             'service_provider_types' => $service_provider_types,
