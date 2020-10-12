@@ -579,6 +579,7 @@ class UserEloquent extends Uploader implements UserRepository
             'phone' => $attributes['phone'],
             'country_code' => $attributes['country_code'],
             'type' => $attributes['type'],
+            'is_active' => isset($attributes['is_active']) && $attributes['is_active'] == 'on' ? 1 : 0,
         ]);
 
         if (isset($attributes['photo'])) {
