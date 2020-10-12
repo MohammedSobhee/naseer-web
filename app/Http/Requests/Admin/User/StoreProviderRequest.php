@@ -29,6 +29,7 @@ class StoreProviderRequest extends FormRequest
             'type' => 'required|in:service_provider',
             'name' => 'required',
             'phone' => 'required|unique:users,phone',
+            'country_code' => 'required|between:2,4',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
             'gender' => 'required|in:male,female',
