@@ -72,52 +72,26 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-6">
-                        <div class="input-group">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown">Action
-                                    <i class="fa fa-angle-down"></i>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="javascript:;"> Action </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Another action </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Something else here </a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;"> Separated link </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /btn-group -->
-                            <input type="text" class="form-control"> </div>
-                        <!-- /input-group -->
-                    </div>
-                    <div class="col-md-6">
-
                         <div class="form-group">
                             <label class="control-label col-md-3">رقم الهاتف:</label>
                             <div class="col-md-9">
                                 <div class="input-group">
-                                    <input type="text" name="country_code" id="country_code"
-                                           class="form-control"
-                                           placeholder="+966">
+                                    <div class="input-icon">
+                                        <input type="text" name="phone" id="phone" class="form-control"
+                                               placeholder="اضف رقم الهاتف..."></div>
+                                    <span class="input-group-btn">
+                                                            <input type="text" name="country_code" id="country_code"
+                                                                   class="form-control"
+                                                                   placeholder="+966">
+                                                        </span>
                                 </div>
-                                <!-- /btn-group -->
-                                <input type="text" name="phone" id="phone" class="form-control"
-                                       placeholder="اضف رقم الهاتف...">
-                                <!-- /input-group -->
+
+
                             </div>
                         </div>
-
-                        <!--/span-->
                     </div>
+
                     <!--/row-->
                     <div class="row">
                         <div class="col-md-6">
