@@ -158,7 +158,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">تأكيد كلمة المرور:</label>
                             <div class="col-md-9">
-                                <input type="password" name="confirmation_password" id="confirmation_password"
+                                <input type="password" name="password_confirmation" id="password_confirmation"
                                        class="form-control"
                                        placeholder="اضف تأكيد كلمة المرور...">
                             </div>
