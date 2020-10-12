@@ -82,7 +82,7 @@
                                                placeholder="اضف رقم الهاتف..."></div>
                                     <span class="input-group-addon">
                                                             <input type="text" name="country_code" id="country_code"
-                                                                   class="form-control"
+                                                                   class="form-control input-xsmall"
                                                                    placeholder="+966">
                                                         </span>
                                 </div>
