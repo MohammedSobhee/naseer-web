@@ -79,7 +79,7 @@
                                 <div class="input-group">
                                     <div class="input-icon">
                                         <input type="text" name="phone" id="phone" class="form-control"
-                                               placeholder="اضف رقم الهاتف..." style="direction: ltr"></div>
+                                               placeholder="5XXXXXXXX" style="direction: ltr"></div>
                                     <span class="input-group-btn">
                                                             <input type="text" name="country_code" id="country_code"
                                                                    class="form-control input-xsmall"
@@ -107,7 +107,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label col-md-3">الجنس:</label>
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                     <select class="form-control select" name="gender"
                                             id="gender">
                                         <option value="male">ذكر</option>
