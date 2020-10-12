@@ -298,6 +298,15 @@ class UserEloquent extends Uploader implements UserRepository
 
                                                         </ul>';
                 }
+
+                if ($user->type == 'service_provider') {
+
+                    $action .= '<a href="' . url(admin_vw() . '/service_provider/' . $user->id) . '" class="btn btn-sm btn-success purple btn-circle"
+                                                                                   title="تعديل">
+                                                                                    <i class="fa fa-edit"></i>
+                                                                                    تعديل
+                                                                                </a>';
+                }
                 return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/view') . '" class="btn btn-sm btn-success blue btn-circle"
                                                                                    title="عرض">
                                                                                     <i class="fa fa-eye"></i>
@@ -635,7 +644,86 @@ class UserEloquent extends Uploader implements UserRepository
                 $service_provider->save();
 
             }
-            return response_api(true, 200, trans('app.complete-service-provider'), [
+            return response_api(true, 200, __('app.success'), [
+                'token' => null,
+                'user' => new ProfileResource($user)
+            ]);// . ',' . trans('app.sent_email_verification')
+        }
+    }
+
+    function updateProvider(array $attributes, $id)
+    {
+
+        $code = generateVerificationCode(4);
+
+        $user = User::where('id', $id)->update([
+            'name' => $attributes['name'],
+            'email' => $attributes['email'],
+            'gender' => $attributes['gender'],
+            'phone' => $attributes['phone'],
+            'country_code' => $attributes['country_code'],
+            'type' => $attributes['type'],
+            'is_active' => isset($attributes['is_active']) && $attributes['is_active'] == 'on' ? 1 : 0,
+        ]);
+
+        if (isset($attributes['photo'])) {
+            $user->photo = $this->storeImageThumb('user', $user->id, $attributes['photo']);
+            $user->save();
+            sleep(1);
+        }
+        if (isset($attributes['password'])) {
+            $user->password = bcrypt($attributes['password']);
+            $user->save();
+        }
+
+        $service_provider = $this->serviceProvider->where('user_id', $user->id)->first();
+
+        $service_provider_type = ServiceProviderType::find($attributes['service_provider_type_id']);
+        if (!isset($service_provider))
+            $service_provider = new ServiceProvider();
+        $service_provider->user_id = $user->id;
+        $service_provider->service_provider_type_id = $attributes['service_provider_type_id'];
+
+        $service_provider->idno = $attributes['idno'];
+        if (isset($attributes['skill']))
+            $service_provider->skill = $attributes['skill'];
+        if (isset($attributes['licensed']))
+            $service_provider->licensed = $attributes['licensed'];
+        if (isset($attributes['bio']))
+            $service_provider->bio = $attributes['bio'];
+        if (isset($attributes['address']))
+            $service_provider->address = $attributes['address'];
+        if (isset($attributes['latitude']))
+            $service_provider->latitude = $attributes['latitude'];
+        if (isset($attributes['longitude']))
+            $service_provider->longitude = $attributes['longitude'];
+
+        $service_provider->license_type = $service_provider_type->is_licensed ? 'licensed' : 'unlicensed';
+
+        if ($service_provider->save()) {
+
+            $user->is_completed = 1;
+            $user->save();
+
+            if (isset($attributes['idno_file'])) {
+                $service_provider->idno_file = $this->upload($attributes, 'idno_file');
+                sleep(1);
+                $service_provider->save();
+
+            }
+            if (isset($attributes['skill_file'])) {
+                $service_provider->skill_file = $this->upload($attributes, 'skill_file');
+                sleep(1);
+                $service_provider->save();
+
+            }
+            if (isset($attributes['licensed_file'])) {
+                $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
+                sleep(1);
+                $service_provider->save();
+
+            }
+            return response_api(true, 200, __('app.success'), [
                 'token' => null,
                 'user' => new ProfileResource($user)
             ]);// . ',' . trans('app.sent_email_verification')

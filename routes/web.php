@@ -62,6 +62,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('/service-providers', 'UserController@providers');
     Route::get('/service-provider', 'UserController@createProvider');
     Route::post('/service-provider', 'UserController@storeProvider');
+    Route::get('/service-provider/{id}', 'UserController@editProvider');
+    Route::put('/service-provider/{id}', 'UserController@updateProvider');
     Route::get('/users', 'UserController@index');
     Route::get('/users/{id}/view', 'UserController@profile');
     Route::get('/users/user-data/{type}', 'UserController@anyData');

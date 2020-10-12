@@ -242,23 +242,6 @@ $(document).ready(function () {
 
     });
 
-    // $(document).on('click', '.add-provider-mdl', function (e) {
-    //     $("#wait_msg,#overlay").show();
-    //     e.preventDefault();
-    //     var action = $(this).attr('href');
-    //     $.ajax({
-    //         url: action,
-    //         type: 'GET',
-    //         success: function (data) {
-    //             $("#wait_msg,#overlay").hide();
-    //
-    //             $('#results-modals').html(data);
-    //             $('#add-provider-mdl').modal('show', {backdrop: 'static', keyboard: false});
-    //         }, error: function (xhr) {
-    //
-    //         }
-    //     });
-    // });
     $(document).on('click', '.user-det', function (e) {
         $("#wait_msg,#overlay").show();
         e.preventDefault();
@@ -277,14 +260,12 @@ $(document).ready(function () {
         });
     });
     $(document).on("click", ".filter-submit", function () {
-//                if ($(this).val().length > 3)
         providers_tbl.api().ajax.reload();
     });
     $(document).on('click', '.filter-cancel', function () {
 
         $(".select2").val('').trigger('change');
         $(this).closest('tr').find('input,select').val('');
-        // $('#is_admin_confirm,.status').val('').trigger('change');
         providers_tbl.api().ajax.reload();
     });
 
@@ -318,7 +299,7 @@ $(document).ready(function () {
 
                     $('.alert').hide();
                     toastr['success'](data.message, '');
-                    providers_tbl.api().ajax.reload();
+                    location.reload();
                 } else {
                     var $errors = '<strong>' + data.message + '</strong>';
                     $errors += '<ul>';
@@ -328,12 +309,8 @@ $(document).ready(function () {
                     $errors += '</ul>';
                     $('.alert').show();
                     $('.alert').html($errors);
-                    // toastr['error'](data.message);
                 }
-                // _this.find('.btn i').removeClass('fa-spinner fa-spin');
                 _this.find('.save i').removeClass('fa fa-spinner fa-spin').addClass(_icon);
-                // _this.find('.fa-spin').hide();
-                // $('#save_category_frm').attr('action', $('#url_action').val());
             }
         });
     });

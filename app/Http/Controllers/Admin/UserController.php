@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\City;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\StoreProviderRequest;
+use App\Http\Requests\Admin\User\UpdateProviderRequest;
 use App\Http\Resources\ProfileResource;
 use App\Repositories\Eloquents\UserEloquent;
 use App\ServiceProviderType;
@@ -69,13 +70,30 @@ class UserController extends Controller
         return view(admin_vw() . '.users.add-provider', $data);
 //        return $this->user->provider_create_mdl();
     }
+    public function editProvider($id)
+    {
+
+        $cities = City::all();
+        $service_provider_types = ServiceProviderType::all();
+        $data = [
+            'title' => 'مزود خدمة جديد',
+            'icon' => 'fa fa-user-plus',
+            'cities' => $cities,
+            'service_provider_types' => $service_provider_types,
+        ];
+        return view(admin_vw() . '.users.edit-provider', $data);
+//        return $this->user->provider_create_mdl();
+    }
 
     public function storeProvider(StoreProviderRequest $request)
     {
         return $this->user->storeProvider($request->all());
-
     }
 
+    public function updateProvider(UpdateProviderRequest $request, $id)
+    {
+        return $this->user->updateProvider($request->all(), $id);
+    }
 
     public function profile($id)
     {
