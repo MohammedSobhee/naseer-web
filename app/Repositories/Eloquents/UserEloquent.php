@@ -672,7 +672,11 @@ class UserEloquent extends Uploader implements UserRepository
 
         $code = generateVerificationCode(4);
 
-        $user = User::where('id', $id)->update([
+        $user = User::find($id);
+
+        if (!isset($user))
+            return response_api(false, 422, null, []);
+        $user->update([
             'name' => $attributes['name'],
             'email' => $attributes['email'],
             'gender' => $attributes['gender'],
