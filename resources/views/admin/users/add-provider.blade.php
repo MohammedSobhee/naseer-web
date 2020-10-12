@@ -79,11 +79,11 @@
                                 <div class="input-group">
                                     <div class="input-icon">
                                         <input type="text" name="phone" id="phone" class="form-control"
-                                               placeholder="اضف رقم الهاتف..."></div>
+                                               placeholder="اضف رقم الهاتف..." style="direction: ltr"></div>
                                     <span class="input-group-btn">
                                                             <input type="text" name="country_code" id="country_code"
                                                                    class="form-control input-xsmall"
-                                                                   placeholder="+966">
+                                                                   placeholder="+966" style="direction: ltr">
                                                         </span>
                                 </div>
 
