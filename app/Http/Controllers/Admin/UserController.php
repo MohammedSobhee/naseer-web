@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\City;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User\StoreProviderRequest;
 use App\Http\Resources\ProfileResource;
 use App\Repositories\Eloquents\UserEloquent;
 use App\ServiceProviderType;
@@ -69,9 +70,10 @@ class UserController extends Controller
 //        return $this->user->provider_create_mdl();
     }
 
-    public function storeProvider(Request $request)
+    public function storeProvider(StoreProviderRequest $request)
     {
-        dd($request->all());
+        return $this->user->storeProvider($request->all());
+
     }
 
 

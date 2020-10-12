@@ -1,10 +1,10 @@
 @extends(admin_layout_vw().'.index')
 
 @section('css')
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <link href="{{url('/')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css"/>
-    <link href="{{url('/')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap-rtl.css"
-          rel="stylesheet" type="text/css"/>
+
+    <link href="{{url('/')}}/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet"
+          type="text/css"/>
+
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="{{url('/')}}/assets/global/css/components-md-rtl.min.css" rel="stylesheet" id="style_components"
@@ -34,6 +34,34 @@
             <input type="hidden" name="type" id="type" value="service_provider">
             <div class="form-body">
                 <h3 class="form-section">البيانات الاساسية</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label class="control-label col-md-3">الصورة الشخصية</label>
+                            <div class="col-md-9">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput"
+                                         style="width: 200px; height: 150px;">
+                                        <img src="{{url('assets/apps/img/unknown.png')}}"
+                                             alt=""/>
+
+                                    </div>
+                                    <div>
+                                                            <span class="btn red btn-outline btn-file">
+                                                                <span class="fileinput-new"> اختيار </span>
+                                                                <span class="fileinput-exists"> تغير </span>
+                                                                <input type="file" name="photo"
+                                                                       id="photo"> </span>
+                                        <a href="javascript:;" class="btn red fileinput-exists"
+                                           data-dismiss="fileinput">
+                                            افراغ </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -141,9 +169,10 @@
                                 <div class="input-group">
                                     <div class="input-icon">
                                         <input type="text" name="address" id="address" class="form-control"
-                                               placeholder="اضف العنوان..." disabled>                                    </div>
+                                               placeholder="اضف العنوان..."></div>
                                     <span class="input-group-btn">
-                                                            <button id="genpassword" class="btn btn-success" type="button" onclick="openMap()">
+                                                            <button id="genpassword" class="btn btn-success"
+                                                                    type="button" onclick="openMap()">
                                                                 <i class="fa fa-map-marker"></i> الخريطة</button>
                                                         </span>
                                 </div>
@@ -279,9 +308,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">اغلاق</button>
+                            data-dismiss="modal">اغلاق
+                    </button>
                     <button type="button" class="btn btn-primary"
-                            onclick="AddPlace()">تحديد العنوان</button>
+                            onclick="AddPlace()">تحديد العنوان
+                    </button>
                 </div>
             </div>
         </div>
@@ -289,10 +320,8 @@
 
 @endsection
 @section('js')
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <script src="{{url('/')}}/assets/global/scripts/datatable.js" type="text/javascript"></script>
-    <script src="{{url('/')}}/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-    <script src="{{url('/')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"
+
+    <script src="{{url('/')}}/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"
             type="text/javascript"></script>
     <!-- END PAGE LEVEL PLUGINS -->
     =    <!-- BEGIN THEME GLOBAL SCRIPTS -->
@@ -317,6 +346,7 @@
     }
 
     var address = '';
+
     function geocodeLatLng(location, first) {
 
         geocoder.geocode({'location': location}, function (results, status) {
@@ -409,7 +439,6 @@
         places = new google.maps.places.PlacesService(map);
         autocomplete.addListener('place_changed', onPlaceChanged);
     }
-
 
 
     function deleteMarkers() {

@@ -564,6 +564,68 @@ class UserEloquent extends Uploader implements UserRepository
         }
     }
 
+    // add service provider by admin
+    function storeProvider(array $attributes)
+    {
+        if (isset($attributes['photo'])) {
+            auth()->user()->photo = $this->storeImageThumb('user', auth()->user()->id, $attributes['photo']);
+            auth()->user()->save();
+            sleep(1);
+        }
+        $service_provider = $this->serviceProvider->where('user_id', auth()->user()->id)->first();
+
+        $service_provider_type = ServiceProviderType::find($attributes['service_provider_type_id']);
+        if (!isset($service_provider))
+            $service_provider = new ServiceProvider();
+        $service_provider->user_id = auth()->user()->id;
+        $service_provider->service_provider_type_id = $attributes['service_provider_type_id'];
+
+        $service_provider->idno = $attributes['idno'];
+        if (isset($attributes['skill']))
+            $service_provider->skill = $attributes['skill'];
+        if (isset($attributes['licensed']))
+            $service_provider->licensed = $attributes['licensed'];
+        if (isset($attributes['bio']))
+            $service_provider->bio = $attributes['bio'];
+        if (isset($attributes['address']))
+            $service_provider->address = $attributes['address'];
+        if (isset($attributes['latitude']))
+            $service_provider->latitude = $attributes['latitude'];
+        if (isset($attributes['longitude']))
+            $service_provider->longitude = $attributes['longitude'];
+
+        $service_provider->license_type = $service_provider_type->is_licensed ? 'licensed' : 'unlicensed';
+
+        if ($service_provider->save()) {
+
+            auth()->user()->is_completed = 1;
+            auth()->user()->save();
+
+            if (isset($attributes['idno_file'])) {
+                $service_provider->idno_file = $this->upload($attributes, 'idno_file');
+                sleep(1);
+                $service_provider->save();
+
+            }
+            if (isset($attributes['skill_file'])) {
+                $service_provider->skill_file = $this->upload($attributes, 'skill_file');
+                sleep(1);
+                $service_provider->save();
+
+            }
+            if (isset($attributes['licensed_file'])) {
+                $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
+                sleep(1);
+                $service_provider->save();
+
+            }
+            return response_api(true, 200, trans('app.complete-service-provider'), [
+                'token' => null,
+                'user' => new ProfileResource(auth()->user())
+            ]);// . ',' . trans('app.sent_email_verification')
+        }
+    }
+
     function update(array $attributes, $id = null)
     {
         $message = 'تم حفظ البيانات بنجاح';
