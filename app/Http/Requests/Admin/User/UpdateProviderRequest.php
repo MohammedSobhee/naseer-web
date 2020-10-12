@@ -24,8 +24,6 @@ class UpdateProviderRequest extends FormRequest
     public function rules()
     {
 
-        dd(request()->route('id'));
-
         return [
             //
             'photo' => 'nullable|image',
