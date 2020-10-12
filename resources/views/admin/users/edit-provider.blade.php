@@ -191,7 +191,7 @@
                                         @foreach($service_provider_types as $service_provider_type)
                                             <option
                                                 value="{{$service_provider_type->id}}"
-                                                @if($user->service_provider_type_id == $service_provider_type->id) selected @endif>{{$service_provider_type->name}}</option>
+                                                @if($user->ServiceProvider->service_provider_type_id == $service_provider_type->id) selected @endif>{{$service_provider_type->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -205,7 +205,7 @@
                                     <div class="input-group">
                                         <div class="input-icon">
                                             <input type="text" name="address" id="address" class="form-control"
-                                                   placeholder="اضف العنوان..." value="{{$user->address ?? ''}}"></div>
+                                                   placeholder="اضف العنوان..." value="{{$user->ServiceProvider->address ?? ''}}"></div>
                                         <span class="input-group-btn">
                                                             <button id="genpassword" class="btn btn-success"
                                                                     type="button" onclick="openMap()">
@@ -214,10 +214,10 @@
                                     </div>
 
 
-                                    <input type="hidden" name="latitude" id="latitude" value="{{$user->latitude ?? ''}}"
+                                    <input type="hidden" name="latitude" id="latitude" value="{{$user->ServiceProvider->latitude ?? ''}}"
                                            class="form-control">
                                     <input type="hidden" name="longitude" id="longitude"
-                                           value="{{$user->longitude ?? ''}}" class="form-control">
+                                           value="{{$user->ServiceProvider->longitude ?? ''}}" class="form-control">
 
 
                                 </div>
@@ -231,7 +231,7 @@
                                 <label class="control-label col-md-3">رقم البطاقة الشخصية:</label>
                                 <div class="col-md-9">
                                     <input type="text" name="idno" id="idno" class="form-control"
-                                           value="{{$user->idno ?? ''}}"
+                                           value="{{$user->ServiceProvider->idno ?? ''}}"
                                            placeholder="اضف رقم البطاقة الشخصية...">
                                 </div>
                             </div>
@@ -253,7 +253,7 @@
                                 <label class="control-label col-md-3">الهواية:</label>
                                 <div class="col-md-9">
                                     <input type="text" name="skill" id="skill" class="form-control"
-                                           value="{{$user->skill ?? ''}}"
+                                           value="{{$user->ServiceProvider->skill ?? ''}}"
                                            placeholder="اضف الهواية...">
                                 </div>
                             </div>
@@ -278,11 +278,11 @@
 
                                     <select class="form-control select" name="license_type"
                                             id="license_type">
-                                        <option value="licensed" @if($user->license_type == 'licensed') selected @endif>
+                                        <option value="licensed" @if($user->ServiceProvider->license_type == 'licensed') selected @endif>
                                             مرخص
                                         </option>
                                         <option value="unlicensed"
-                                                @if($user->license_type == 'unlicensed') selected @endif>غير مرخص
+                                                @if($user->ServiceProvider->license_type == 'unlicensed') selected @endif>غير مرخص
                                         </option>
                                     </select>
 
@@ -308,7 +308,7 @@
                                 <label class="control-label col-md-3">نبذه:</label>
                                 <div class="col-md-9">
                                     <textarea name="bio" id="bio" rows="5" placeholder="اضف نبذه..."
-                                              class="form-control">{{$user->bio}}</textarea>
+                                              class="form-control">{{$user->ServiceProvider->bio}}</textarea>
                                 </div>
                             </div>
                         </div>
