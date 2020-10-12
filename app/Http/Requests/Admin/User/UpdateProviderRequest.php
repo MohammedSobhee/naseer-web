@@ -23,14 +23,17 @@ class UpdateProviderRequest extends FormRequest
      */
     public function rules()
     {
+
+        dd(request()->route('id'));
+
         return [
             //
             'photo' => 'nullable|image',
             'type' => 'required|in:service_provider',
             'name' => 'required',
-            'phone' => 'required|unique:users,phone,id,' . request()->route('id'),
+            'phone' => 'required|unique:users,phone,' . request()->route('id'),
             'country_code' => 'required|between:2,4',
-            'email' => 'required|email|unique:users,email,id,' . request()->route('id'),
+            'email' => 'required|email|unique:users,email,'. request()->route('id'),
             'password' => 'nullable|min:6|confirmed',
             'gender' => 'required|in:male,female',
             'city_id' => 'required|exists:cities,id',
