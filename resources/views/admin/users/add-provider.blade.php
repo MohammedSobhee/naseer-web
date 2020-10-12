@@ -72,305 +72,305 @@
                             </div>
                         </div>
                     </div>
-                    <!--/span-->
+
                     <div class="col-md-6">
+
                         <div class="form-group">
                             <label class="control-label col-md-3">رقم الهاتف:</label>
                             <div class="col-md-9">
-
                                 <div class="input-group">
+                                    <div class="input-group-text">
+                                        <input type="text" name="country_code" id="country_code"
+                                               class="form-control"
+                                               placeholder="+966">
+                                    </div>
+                                    <!-- /btn-group -->
                                     <input type="text" name="phone" id="phone" class="form-control"
-                                           placeholder="اضف رقم الهاتف..."></div>
-                                <span class="input-group-btn">
-                                                            <input type="text" name="country_code" id="country_code"
-                                                                   class="form-control"
-                                                                   placeholder="+966">
-                                                        </span>
+                                           placeholder="اضف رقم الهاتف...">
+                                    <!-- /input-group -->
+                                </div>
+                            </div>
+                        </div>
 
+                        <!--/span-->
+                    </div>
+                    <!--/row-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">البريد الالكتروني:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="email" id="email" class="form-control"
+                                           placeholder="اضف البريد الالكتروني...">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">الجنس:</label>
+                                <div class="col-md-9">
+                                    <select class="form-control select" name="gender"
+                                            id="gender">
+                                        <option value="male">ذكر</option>
+                                        <option value="female">انثى</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+                    <!--/row-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">المدينة:</label>
+                                <div class="col-md-9">
+                                    <select class="form-control select" name="city_id"
+                                            id="city_id">
+                                        @foreach($cities as $city)
+                                            <option value="{{$city->id}}">{{$city->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">الحالة:</label>
+                                <div class="col-md-9">
+                                    <p class="form-control-static"><input type="checkbox"
+                                                                          class="make-switch"
+                                                                          data-on-text="&nbsp;مفعّل&nbsp;"
+                                                                          data-off-text="&nbsp;معطّل&nbsp;"
+                                                                          name="is_active"
+                                                                          checked
+                                                                          data-on-color="success"
+                                                                          data-size="mini" data-off-color="warning"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">كلمة المرور:</label>
+                                <div class="col-md-9">
+                                    <input type="password" name="password" id="password" class="form-control"
+                                           placeholder="اضف كلمة المرور...">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">تأكيد كلمة المرور:</label>
+                                <div class="col-md-9">
+                                    <input type="password" name="password_confirmation" id="password_confirmation"
+                                           class="form-control"
+                                           placeholder="اضف تأكيد كلمة المرور...">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+                    <!--/row-->
+                    <h3 class="form-section">البيانات الفرعية</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">نوع مزود الخدمة:</label>
+                                <div class="col-md-9">
 
+                                    <select class="form-control select" name="service_provider_type_id"
+                                            id="service_provider_type_id">
+                                        @foreach($service_provider_types as $service_provider_type)
+                                            <option
+                                                value="{{$service_provider_type->id}}">{{$service_provider_type->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-
-                    <!--/span-->
-                </div>
-                <!--/row-->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">البريد الالكتروني:</label>
-                            <div class="col-md-9">
-                                <input type="text" name="email" id="email" class="form-control"
-                                       placeholder="اضف البريد الالكتروني...">
-                            </div>
-                        </div>
-                    </div>
-                    <!--/span-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">الجنس:</label>
-                            <div class="col-md-9">
-                                <select class="form-control select" name="gender"
-                                        id="gender">
-                                    <option value="male">ذكر</option>
-                                    <option value="female">انثى</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/span-->
-                </div>
-                <!--/row-->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">المدينة:</label>
-                            <div class="col-md-9">
-                                <select class="form-control select" name="city_id"
-                                        id="city_id">
-                                    @foreach($cities as $city)
-                                        <option value="{{$city->id}}">{{$city->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/span-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">الحالة:</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static"><input type="checkbox"
-                                                                      class="make-switch"
-                                                                      data-on-text="&nbsp;مفعّل&nbsp;"
-                                                                      data-off-text="&nbsp;معطّل&nbsp;"
-                                                                      name="is_active"
-                                                                      checked
-                                                                      data-on-color="success"
-                                                                      data-size="mini" data-off-color="warning"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/span-->
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">كلمة المرور:</label>
-                            <div class="col-md-9">
-                                <input type="password" name="password" id="password" class="form-control"
-                                       placeholder="اضف كلمة المرور...">
-                            </div>
-                        </div>
-                    </div>
-                    <!--/span-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">تأكيد كلمة المرور:</label>
-                            <div class="col-md-9">
-                                <input type="password" name="password_confirmation" id="password_confirmation"
-                                       class="form-control"
-                                       placeholder="اضف تأكيد كلمة المرور...">
-                            </div>
-                        </div>
-                    </div>
-                    <!--/span-->
-                </div>
-                <!--/row-->
-                <h3 class="form-section">البيانات الفرعية</h3>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">نوع مزود الخدمة:</label>
-                            <div class="col-md-9">
-
-                                <select class="form-control select" name="service_provider_type_id"
-                                        id="service_provider_type_id">
-                                    @foreach($service_provider_types as $service_provider_type)
-                                        <option
-                                            value="{{$service_provider_type->id}}">{{$service_provider_type->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">العنوان:</label>
-                            <div class="col-md-9">
-                                <div class="input-group">
-                                    <div class="input-icon">
-                                        <input type="text" name="address" id="address" class="form-control"
-                                               placeholder="اضف العنوان..."></div>
-                                    <span class="input-group-btn">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">العنوان:</label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <div class="input-icon">
+                                            <input type="text" name="address" id="address" class="form-control"
+                                                   placeholder="اضف العنوان..."></div>
+                                        <span class="input-group-btn">
                                                             <button id="genpassword" class="btn btn-success"
                                                                     type="button" onclick="openMap()">
                                                                 <i class="fa fa-map-marker"></i> الخريطة</button>
                                                         </span>
+                                    </div>
+
+
+                                    <input type="hidden" name="latitude" id="latitude" class="form-control">
+                                    <input type="hidden" name="longitude" id="longitude" class="form-control">
+
+
                                 </div>
-
-
-                                <input type="hidden" name="latitude" id="latitude" class="form-control">
-                                <input type="hidden" name="longitude" id="longitude" class="form-control">
-
-
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--/row-->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">رقم البطاقة الشخصية:</label>
-                            <div class="col-md-9">
-                                <input type="text" name="idno" id="idno" class="form-control"
-                                       placeholder="اضف رقم البطاقة الشخصية...">
+                    <!--/row-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">رقم البطاقة الشخصية:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="idno" id="idno" class="form-control"
+                                           placeholder="اضف رقم البطاقة الشخصية...">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!--/span-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">صورة البطاقة التعريفية:</label>
-                            <div class="col-md-9">
-                                <input type="file" name="idno_file" id="idno_file" class="form-control">
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">صورة البطاقة التعريفية:</label>
+                                <div class="col-md-9">
+                                    <input type="file" name="idno_file" id="idno_file" class="form-control">
+                                </div>
                             </div>
                         </div>
+                        <!--/span-->
                     </div>
-                    <!--/span-->
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">الهواية:</label>
-                            <div class="col-md-9">
-                                <input type="text" name="skill" id="skill" class="form-control"
-                                       placeholder="اضف الهواية...">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">الهواية:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="skill" id="skill" class="form-control"
+                                           placeholder="اضف الهواية...">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!--/span-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">مرفق الهواية:</label>
-                            <div class="col-md-9">
-                                <input type="file" name="skill_file" id="skill_file" class="form-control">
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">مرفق الهواية:</label>
+                                <div class="col-md-9">
+                                    <input type="file" name="skill_file" id="skill_file" class="form-control">
 
+                                </div>
                             </div>
                         </div>
+                        <!--/span-->
                     </div>
-                    <!--/span-->
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">حالة الرخصة:</label>
-                            <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">حالة الرخصة:</label>
+                                <div class="col-md-9">
 
-                                <select class="form-control select" name="license_type"
-                                        id="license_type">
-                                    <option value="licensed">مرخص</option>
-                                    <option value="unlicensed">غير مرخص</option>
-                                </select>
+                                    <select class="form-control select" name="license_type"
+                                            id="license_type">
+                                        <option value="licensed">مرخص</option>
+                                        <option value="unlicensed">غير مرخص</option>
+                                    </select>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!--/span-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">ملف الرخصة:</label>
-                            <div class="col-md-9">
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">ملف الرخصة:</label>
+                                <div class="col-md-9">
 
-                                <input type="file" name="licensed_file" id="licensed_file" class="form-control">
+                                    <input type="file" name="licensed_file" id="licensed_file" class="form-control">
 
+                                </div>
                             </div>
                         </div>
+                        <!--/span-->
                     </div>
-                    <!--/span-->
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">نبذه:</label>
-                            <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">نبذه:</label>
+                                <div class="col-md-9">
                                     <textarea name="bio" id="bio" rows="5" placeholder="اضف نبذه..."
                                               class="form-control"></textarea>
+                                </div>
                             </div>
                         </div>
+                        <!--/span-->
                     </div>
-                    <!--/span-->
                 </div>
-            </div>
 
-            <div class="form-actions">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <button type="submit" class="btn btn-circle green btn-md save"><i
-                                class="fa fa-user-plus"></i>
-                            اضافة جديدة
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-circle green btn-md save"><i
+                                    class="fa fa-user-plus"></i>
+                                اضافة جديدة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {!! Form::close() !!}
+            <!-- END FORM-->
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLongTitle"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"
+                            id="exampleModalLongTitle"> تحديد العنوان</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <input id="autocomplete" class="form-control"
+                               placeholder="تحديد العنوان " type="text"/>
+
+                        <div id="map" style="height: 300px; width:100%; margin-top: 10px"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">اغلاق
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                                onclick="AddPlace()">تحديد العنوان
                         </button>
                     </div>
                 </div>
             </div>
-        {!! Form::close() !!}
-        <!-- END FORM-->
         </div>
-    </div>
 
+        @endsection
+        @section('js')
 
-    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"
-                        id="exampleModalLongTitle"> تحديد العنوان</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+            <script src="{{url('/')}}/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"
+                    type="text/javascript"></script>
+            <!-- END PAGE LEVEL PLUGINS -->
+            =    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+            <script src="{{url('/')}}/assets/global/scripts/app.min.js" type="text/javascript"></script>
+            <!-- END THEME GLOBAL SCRIPTS -->
+            <script src="{{url('/')}}/assets/pages/scripts/form-samples.min.js" type="text/javascript"></script>
 
-                    <input id="autocomplete" class="form-control"
-                           placeholder="تحديد العنوان " type="text"/>
+            <!-- BEGIN PAGE LEVEL SCRIPTS -->
+            <!-- END PAGE LEVEL SCRIPTS -->
+            <script src="{{url('/')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
+            <script src="{{url('/')}}/assets/js/providers.js" type="text/javascript"></script>
 
-                    <div id="map" style="height: 300px; width:100%; margin-top: 10px"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">اغلاق
-                    </button>
-                    <button type="button" class="btn btn-primary"
-                            onclick="AddPlace()">تحديد العنوان
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+            <script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script>
 
-@endsection
-@section('js')
-
-    <script src="{{url('/')}}/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"
-            type="text/javascript"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
-    =    <!-- BEGIN THEME GLOBAL SCRIPTS -->
-    <script src="{{url('/')}}/assets/global/scripts/app.min.js" type="text/javascript"></script>
-    <!-- END THEME GLOBAL SCRIPTS -->
-    <script src="{{url('/')}}/assets/pages/scripts/form-samples.min.js" type="text/javascript"></script>
-
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <!-- END PAGE LEVEL SCRIPTS -->
-    <script src="{{url('/')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
-    <script src="{{url('/')}}/assets/js/providers.js" type="text/javascript"></script>
-
-    <script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script>
-
-    <script>
+            <script>
     $(document).ready(function () {
     });
 
@@ -658,7 +658,7 @@
     }
     </script>
 
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDviHB7G4RWAgQNwvjaVXLhC1j5DNTSPFE&libraries=places&callback=initMap"
-        async defer></script>
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDviHB7G4RWAgQNwvjaVXLhC1j5DNTSPFE&libraries=places&callback=initMap"
+                async defer></script>
 @stop
