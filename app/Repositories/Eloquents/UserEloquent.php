@@ -281,23 +281,23 @@ class UserEloquent extends Uploader implements UserRepository
 //                                        <i class="fa fa-trash"></i>
 //                                    </a>';
                 $action = '';
-                if (isset($user->Slave)) {
-
-                    $action = '<button class="btn btn-sm btn-success green btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> معّدل
-                                                            <i class="fa fa-angle-down"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>
-                                                                <a href="' . url(admin_vw() . '/users/approval-provider-edits/' . $user->id) . ' " class="approval-edits">
-                                                                    <i class="fa fa-check"></i> اعتماد التعديل </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="' . url(admin_vw() . '/users/reject-provider-edits/' . $user->id) . '" class="reject-edits">
-                                                                    <i class="fa fa-times"></i> رفض التعديل </a>
-                                                            </li>
-
-                                                        </ul>';
-                }
+//                if (isset($user->Slave)) {
+//
+//                    $action = '<button class="btn btn-sm btn-success green btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> معّدل
+//                                                            <i class="fa fa-angle-down"></i>
+//                                                        </button>
+//                                                        <ul class="dropdown-menu" role="menu">
+//                                                            <li>
+//                                                                <a href="' . url(admin_vw() . '/users/approval-provider-edits/' . $user->id) . ' " class="approval-edits">
+//                                                                    <i class="fa fa-check"></i> اعتماد التعديل </a>
+//                                                            </li>
+//                                                            <li>
+//                                                                <a href="' . url(admin_vw() . '/users/reject-provider-edits/' . $user->id) . '" class="reject-edits">
+//                                                                    <i class="fa fa-times"></i> رفض التعديل </a>
+//                                                            </li>
+//
+//                                                        </ul>';
+//                }
 
                 $action .= '<button class="btn btn-sm btn-success purple btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> العملية
                                                             <i class="fa fa-angle-down"></i>
