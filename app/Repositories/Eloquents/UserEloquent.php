@@ -683,7 +683,7 @@ class UserEloquent extends Uploader implements UserRepository
         ]);
 
         if (isset($attributes['photo'])) {
-            $user->photo = $this->storeImageThumb('user', $user->id, $attributes['photo']);
+            $user->photo = $this->storeImageThumb('user', $id, $attributes['photo']);
             $user->save();
             sleep(1);
         }
@@ -692,12 +692,12 @@ class UserEloquent extends Uploader implements UserRepository
             $user->save();
         }
 
-        $service_provider = $this->serviceProvider->where('user_id', $user->id)->first();
+        $service_provider = $this->serviceProvider->where('user_id', $id)->first();
 
         $service_provider_type = ServiceProviderType::find($attributes['service_provider_type_id']);
         if (!isset($service_provider))
             $service_provider = new ServiceProvider();
-        $service_provider->user_id = $user->id;
+        $service_provider->user_id = $id;
         $service_provider->service_provider_type_id = $attributes['service_provider_type_id'];
 
         $service_provider->idno = $attributes['idno'];
