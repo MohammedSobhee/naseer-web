@@ -283,7 +283,7 @@ class UserEloquent extends Uploader implements UserRepository
                 $action = '';
                 if (isset($user->Slave)) {
 
-                    $action .= '<div class="btn-group">
+                    $action .= '
 
 <button class="btn btn-sm btn-success red btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> معّدل
                                                             <i class="fa fa-angle-down"></i>
@@ -298,11 +298,10 @@ class UserEloquent extends Uploader implements UserRepository
                                                                     <i class="fa fa-times"></i> رفض التعديل </a>
                                                             </li>
 
-                                                        </ul>
-                                                        </div>';
+                                                        </ul>';
                 }
 
-                $action .= '<div class="btn-group">
+                $action .= '
                                                         <button class="btn btn-sm green btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> العمليات
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
@@ -322,8 +321,7 @@ class UserEloquent extends Uploader implements UserRepository
                                                                                     تعديل
                                                                                 </a>
                                                             </li>
-                                                        </ul>
-                                                    </div>';
+                                                        </ul>';
                 return $action;
             })->addIndexColumn()
             ->rawColumns(['action', 'photo', 'is_active', 'is_verify'])->toJson();
