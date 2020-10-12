@@ -284,7 +284,7 @@ class UserEloquent extends Uploader implements UserRepository
                 if (isset($user->Slave)) {
 
                     $action .= '
-<div class="btn-group" style=" position: relative;  margin-top: 0px;">
+<div class="btn-group" style=" position: relative;  margin-top: 0px; margin-left: 2px;">
 <button class="btn btn-sm btn-success red btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> معّدل
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
