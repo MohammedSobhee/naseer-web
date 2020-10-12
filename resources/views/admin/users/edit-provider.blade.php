@@ -24,7 +24,7 @@
     <div class="portlet light bordered">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-user-plus font-green-haze"></i>
+                <i class="fa fa-edit font-green-haze"></i>
                 <span class="caption-subject font-green-haze bold uppercase">{{$title ?? ''}}</span>
             </div>
         </div>

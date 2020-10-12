@@ -80,7 +80,7 @@ class UserController extends Controller
         $data = [
             'user' => $user,
             'title' => 'مزود خدمة',
-            'icon' => 'fa fa-user-plus',
+            'icon' => 'fa fa-edit',
             'cities' => $cities,
             'service_provider_types' => $service_provider_types,
         ];
