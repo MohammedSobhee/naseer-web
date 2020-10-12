@@ -307,11 +307,29 @@ class UserEloquent extends Uploader implements UserRepository
                                                                                     تعديل
                                                                                 </a>';
                 }
-                return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/view') . '" class="btn btn-sm btn-success blue btn-circle"
+
+                $action .= '<button class="btn btn-sm btn-success purple btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> العملية
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <a href="' . url(admin_vw() . '/users/' . $user->id . '/view') . '"
                                                                                    title="عرض">
                                                                                     <i class="fa fa-eye"></i>
                                                                                     عرض
-                                                                                </a>' . $action;
+                                                                                </a>
+                                                            </li>
+                                                            <li>
+
+                                                                    <a href="' . url(admin_vw() . '/service_provider/' . $user->id) . '"
+                                                                                   title="تعديل">
+                                                                                    <i class="fa fa-edit"></i>
+                                                                                    تعديل
+                                                                                </a>
+                                                            </li>
+
+                                                        </ul>';
+                return $action;
             })->addIndexColumn()
             ->rawColumns(['action', 'photo', 'is_active', 'is_verify'])->toJson();
     }
