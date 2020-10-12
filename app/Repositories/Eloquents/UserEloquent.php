@@ -299,6 +299,32 @@ class UserEloquent extends Uploader implements UserRepository
 //                                                        </ul>';
 //                }
 
+                $action .= '<div class="btn-group">
+                                                        <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <a href="javascript:;">
+                                                                    <i class="icon-docs"></i> New Post </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:;">
+                                                                    <i class="icon-tag"></i> New Comment </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:;">
+                                                                    <i class="icon-user"></i> New User </a>
+                                                            </li>
+                                                            <li class="divider"> </li>
+                                                            <li>
+                                                                <a href="javascript:;">
+                                                                    <i class="icon-flag"></i> Comments
+                                                                    <span class="badge badge-success">4</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>';
                 $action .= '<button class="btn btn-sm btn-success purple btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> العملية
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
