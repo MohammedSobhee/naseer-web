@@ -79,16 +79,14 @@
                             <label class="control-label col-md-3">رقم الهاتف:</label>
                             <div class="col-md-9">
                                 <div class="input-group">
-                                    <div class="input-group">
-                                        <input type="text" name="country_code" id="country_code"
-                                               class="form-control"
-                                               placeholder="+966">
-                                    </div>
-                                    <!-- /btn-group -->
-                                    <input type="text" name="phone" id="phone" class="form-control"
-                                           placeholder="اضف رقم الهاتف...">
-                                    <!-- /input-group -->
+                                    <input type="text" name="country_code" id="country_code"
+                                           class="form-control"
+                                           placeholder="+966">
                                 </div>
+                                <!-- /btn-group -->
+                                <input type="text" name="phone" id="phone" class="form-control"
+                                       placeholder="اضف رقم الهاتف...">
+                                <!-- /input-group -->
                             </div>
                         </div>
 
