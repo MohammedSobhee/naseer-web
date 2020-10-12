@@ -75,7 +75,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label col-md-3">رقم الهاتف:</label>
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-icon">
                                         <input type="text" name="phone" id="phone" class="form-control"
