@@ -33,7 +33,7 @@
             {!! Form::open(['method'=>'put','class'=>'form-horizontal','files'=>true,'id'=>'formEdit']) !!}
             <input type="hidden" name="type" id="type" value="service_provider">
             <div class="form-body">
-                <h3 class="form-section">البيانات الاساسية</h3>
+                <h3 class="form-section">البيانات الأساسية</h3>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group ">
