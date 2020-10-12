@@ -299,7 +299,9 @@ $(document).ready(function () {
 
                     $('.alert').hide();
                     toastr['success'](data.message, '');
-                    location.reload();
+
+                    if (event.target.id === 'formAdd')
+                        location.reload();
                 } else {
                     var $errors = '<strong>' + data.message + '</strong>';
                     $errors += '<ul>';

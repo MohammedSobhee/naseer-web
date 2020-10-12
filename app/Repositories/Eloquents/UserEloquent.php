@@ -670,7 +670,7 @@ class UserEloquent extends Uploader implements UserRepository
     function updateProvider(array $attributes, $id)
     {
 
-        $code = generateVerificationCode(4);
+//        $code = generateVerificationCode(4);
 
         $user = User::find($id);
 
