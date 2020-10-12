@@ -301,7 +301,7 @@ class UserEloquent extends Uploader implements UserRepository
                                                         </ul>';
                 }
 
-                $action .= '
+                $action .= '<div class="btn-group">
                                                         <button class="btn btn-sm green btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> العمليات
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
@@ -321,7 +321,8 @@ class UserEloquent extends Uploader implements UserRepository
                                                                                     تعديل
                                                                                 </a>
                                                             </li>
-                                                        </ul>';
+                                                        </ul>
+                                                    </div>';
                 return $action;
             })->addIndexColumn()
             ->rawColumns(['action', 'photo', 'is_active', 'is_verify'])->toJson();
