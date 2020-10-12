@@ -567,17 +567,32 @@ class UserEloquent extends Uploader implements UserRepository
     // add service provider by admin
     function storeProvider(array $attributes)
     {
+
+        $code = generateVerificationCode(4);
+
+        $user = User::create([
+            'name' => $attributes['name'],
+            'email' => $attributes['email'],
+            'password' => bcrypt($attributes['password']),
+            'gender' => $attributes['gender'],
+            'verification_code' => '1234',//$code,
+            'phone' => $attributes['phone'],
+            'country_code' => $attributes['country_code'],
+            'type' => $attributes['type'],
+        ]);
+
         if (isset($attributes['photo'])) {
-            auth()->user()->photo = $this->storeImageThumb('user', auth()->user()->id, $attributes['photo']);
-            auth()->user()->save();
+            $user->photo = $this->storeImageThumb('user', $user->id, $attributes['photo']);
+            $user->save();
             sleep(1);
         }
-        $service_provider = $this->serviceProvider->where('user_id', auth()->user()->id)->first();
+
+        $service_provider = $this->serviceProvider->where('user_id', $user->id)->first();
 
         $service_provider_type = ServiceProviderType::find($attributes['service_provider_type_id']);
         if (!isset($service_provider))
             $service_provider = new ServiceProvider();
-        $service_provider->user_id = auth()->user()->id;
+        $service_provider->user_id = $user->id;
         $service_provider->service_provider_type_id = $attributes['service_provider_type_id'];
 
         $service_provider->idno = $attributes['idno'];
@@ -598,8 +613,8 @@ class UserEloquent extends Uploader implements UserRepository
 
         if ($service_provider->save()) {
 
-            auth()->user()->is_completed = 1;
-            auth()->user()->save();
+            $user->is_completed = 1;
+            $user->save();
 
             if (isset($attributes['idno_file'])) {
                 $service_provider->idno_file = $this->upload($attributes, 'idno_file');
@@ -621,7 +636,7 @@ class UserEloquent extends Uploader implements UserRepository
             }
             return response_api(true, 200, trans('app.complete-service-provider'), [
                 'token' => null,
-                'user' => new ProfileResource(auth()->user())
+                'user' => new ProfileResource($user)
             ]);// . ',' . trans('app.sent_email_verification')
         }
     }

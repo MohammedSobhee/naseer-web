@@ -30,6 +30,7 @@ class StoreProviderRequest extends FormRequest
             'name' => 'required',
             'phone' => 'required|unique:users,phone',
             'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
             'gender' => 'required|in:male,female',
             'city_id' => 'required|exists:cities,id',
             'is_active' => 'nullable',

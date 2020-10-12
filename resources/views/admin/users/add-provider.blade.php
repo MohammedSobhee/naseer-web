@@ -65,7 +65,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-3">اسم كامل:</label>
+                            <label class="control-label col-md-3">الاسم كامل:</label>
                             <div class="col-md-9">
                                 <input type="text" name="name" id="name" class="form-control"
                                        placeholder="اضف الاسم كامل...">
@@ -138,6 +138,29 @@
                                                                       checked
                                                                       data-on-color="success"
                                                                       data-size="mini" data-off-color="warning"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">كلمة المرور:</label>
+                            <div class="col-md-9">
+                                <input type="password" name="password" id="password" class="form-control"
+                                       placeholder="اضف كلمة المرور...">
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">تأكيد كلمة المرور:</label>
+                            <div class="col-md-9">
+                                <input type="password" name="confirmation_password" id="confirmation_password"
+                                       class="form-control"
+                                       placeholder="اضف تأكيد كلمة المرور...">
                             </div>
                         </div>
                     </div>
