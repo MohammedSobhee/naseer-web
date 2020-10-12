@@ -281,51 +281,29 @@ class UserEloquent extends Uploader implements UserRepository
 //                                        <i class="fa fa-trash"></i>
 //                                    </a>';
                 $action = '';
-//                if (isset($user->Slave)) {
-//
-//                    $action = '<button class="btn btn-sm btn-success green btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> معّدل
-//                                                            <i class="fa fa-angle-down"></i>
-//                                                        </button>
-//                                                        <ul class="dropdown-menu" role="menu">
-//                                                            <li>
-//                                                                <a href="' . url(admin_vw() . '/users/approval-provider-edits/' . $user->id) . ' " class="approval-edits">
-//                                                                    <i class="fa fa-check"></i> اعتماد التعديل </a>
-//                                                            </li>
-//                                                            <li>
-//                                                                <a href="' . url(admin_vw() . '/users/reject-provider-edits/' . $user->id) . '" class="reject-edits">
-//                                                                    <i class="fa fa-times"></i> رفض التعديل </a>
-//                                                            </li>
-//
-//                                                        </ul>';
-//                }
+                if (isset($user->Slave)) {
 
-                $action .= '<div class="btn-group">
-                                                        <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                    $action .= '<div class="btn-group">
+
+<button class="btn btn-sm btn-success green btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> معّدل
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
                                                             <li>
-                                                                <a href="javascript:;">
-                                                                    <i class="icon-docs"></i> New Post </a>
+                                                                <a href="' . url(admin_vw() . '/users/approval-provider-edits/' . $user->id) . ' " class="approval-edits">
+                                                                    <i class="fa fa-check"></i> اعتماد التعديل </a>
                                                             </li>
                                                             <li>
-                                                                <a href="javascript:;">
-                                                                    <i class="icon-tag"></i> New Comment </a>
+                                                                <a href="' . url(admin_vw() . '/users/reject-provider-edits/' . $user->id) . '" class="reject-edits">
+                                                                    <i class="fa fa-times"></i> رفض التعديل </a>
                                                             </li>
-                                                            <li>
-                                                                <a href="javascript:;">
-                                                                    <i class="icon-user"></i> New User </a>
-                                                            </li>
-                                                            <li class="divider"> </li>
-                                                            <li>
-                                                                <a href="javascript:;">
-                                                                    <i class="icon-flag"></i> Comments
-                                                                    <span class="badge badge-success">4</span>
-                                                                </a>
-                                                            </li>
+
                                                         </ul>
-                                                    </div>';
-                $action .= '<button class="btn btn-sm btn-success purple btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> العملية
+                                                        </div>';
+                }
+
+                $action .= '<div class="btn-group">
+                                                        <button class="btn btn-sm green btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> العمليات
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
@@ -344,8 +322,8 @@ class UserEloquent extends Uploader implements UserRepository
                                                                                     تعديل
                                                                                 </a>
                                                             </li>
-
-                                                        </ul>';
+                                                        </ul>
+                                                    </div>';
                 return $action;
             })->addIndexColumn()
             ->rawColumns(['action', 'photo', 'is_active', 'is_verify'])->toJson();
