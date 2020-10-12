@@ -299,15 +299,6 @@ class UserEloquent extends Uploader implements UserRepository
                                                         </ul>';
                 }
 
-                if ($user->type == 'service_provider') {
-
-                    $action .= '<a href="' . url(admin_vw() . '/service_provider/' . $user->id) . '" class="btn btn-sm btn-success purple btn-circle"
-                                                                                   title="تعديل">
-                                                                                    <i class="fa fa-edit"></i>
-                                                                                    تعديل
-                                                                                </a>';
-                }
-
                 $action .= '<button class="btn btn-sm btn-success purple btn-circle dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> العملية
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
