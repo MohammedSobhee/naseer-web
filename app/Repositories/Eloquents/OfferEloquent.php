@@ -55,8 +55,8 @@ class OfferEloquent extends Uploader implements Repository
                 }
 
             })
-            ->editColumn('service_provider.name', function ($request) {
-                return isset($request->ServiceProvider) ? $request->ServiceProvider->name : '-';
+            ->editColumn('service_provider.name', function ($offer) {
+                return isset($offer->ServiceProvider) ? '<a href="' . url(admin_users_url() . '/' . $offer->service_provider_id . '/view') . '">' . $offer->ServiceProvider->name . '</a>' : '-';
             })
 //            ->editColumn('order.payment_type', function ($request) {
 //                if ($request->Order->payment_type == 'down_payment')
@@ -64,12 +64,12 @@ class OfferEloquent extends Uploader implements Repository
 //                if ($request->Order->payment_type == 'late_payment')
 //                    return 'دفعة متأخرة';
 //            })
-            ->editColumn('status', function ($request) {
-                if ($request->status == 'pending')
+            ->editColumn('status', function ($offer) {
+                if ($offer->status == 'pending')
                     return '<span class="label label-warning">قيد الانتظار</span>';
-                if ($request->status == 'accepted')
+                if ($offer->status == 'accepted')
                     return '<span class="label label-success">مقبولة</span>';
-                if ($request->status == 'rejected')
+                if ($offer->status == 'rejected')
                     return '<span class="label label-danger">مرفوضة</span>';
             })->addIndexColumn()
             ->rawColumns(['status'])->toJson();
