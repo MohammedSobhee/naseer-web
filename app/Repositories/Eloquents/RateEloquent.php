@@ -48,10 +48,11 @@ class RateEloquent implements Repository
             ->editColumn('client.name', function ($rate) {
                 return isset($rate->Client) ? '<a href="' . url(admin_users_url() . '/' . $rate->user_id . '/view') . '" target="_blank">' . $rate->Client->name . '</a>' : '-';
             })->addColumn('action', function ($rate) {
-                return '<input type="checkbox" class="make-switch is_active" data-on-text="&nbsp;معتمد&nbsp;" data-off-text="&nbsp;مرفوض&nbsp;" name="is_approved" data-id="' . $rate->id . '" checked  data-on-color="success" data-size="mini" data-off-color="warning"><a href="' . url(admin_rate_url() . '/' . $rate->id) . '" class="btn btn-sm btn-danger red btn-circle btn-icon-only delete"
-                                                                                   title="حذف">
-                                                                                    <i class="fa fa-trash"></i>
-                                                                                </a>';
+                return '<input type="checkbox" class="make-switch is_active" data-on-text="&nbsp;معتمد&nbsp;" data-off-text="&nbsp;مرفوض&nbsp;" name="is_approved" data-id="' . $rate->id . '" checked  data-on-color="success" data-size="mini" data-off-color="warning">';
+//                <a href="' . url(admin_rate_url() . '/' . $rate->id) . '" class="btn btn-sm btn-danger red btn-circle btn-icon-only delete"
+//                                                                                   title="حذف">
+//                                                                                    <i class="fa fa-trash"></i>
+//                                                                                </a>
             })
             ->addIndexColumn()
             ->rawColumns(['client.name', 'service_provider.name', 'order.type', 'action'])->toJson();
