@@ -32,4 +32,11 @@ class RateController extends Controller
     {
         return $this->rate->anyData();
     }
+
+
+    public function rateApproved(Request $request)
+    {
+        return $this->rate->rateApproved($request->only('rate_id'));
+    }
+
 }

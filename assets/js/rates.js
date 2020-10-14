@@ -64,6 +64,28 @@ $(document).ready(function () {
         });
     }
 
+    $('#rates_tbl').on('switchChange.bootstrapSwitch', '.is_active', function (event, state) {
+        // ... skipped ...
+        var rate_id = $(this).data('id');
+
+        $.ajax({
+            url: baseURL + '/rates/rate-status',
+            type: 'PUT',
+            dataType: 'json',
+            data: {'_token': csrf_token, 'rate_id': rate_id},
+            success: function (data) {
+
+                if (data.status) {
+                    toastr['success'](data.message, '');
+                } else {
+                    toastr['error'](data.message);
+                }
+
+            }
+        });
+
+    });
+
     $(document).on("click", ".filter-submit", function () {
 //                if ($(this).val().length > 3)
         rates_tbl.api().ajax.reload();

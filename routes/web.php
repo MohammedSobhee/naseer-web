@@ -74,6 +74,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
 
     Route::get('/rates', 'RateController@index');
     Route::get('/rates/rate-data', 'RateController@anyData');
+    Route::put('/rates/rate-status', 'RateController@rateApproved');
 
     Route::get('/requests', 'RequestController@index');
     Route::get('/requests/request-data', 'RequestController@anyData');
