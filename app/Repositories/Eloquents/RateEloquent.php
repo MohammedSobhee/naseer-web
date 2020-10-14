@@ -21,6 +21,36 @@ class RateEloquent implements Repository
         $this->model = $model;
     }
 
+    function anyData()
+    {
+        $rates = $this->model->with(['Client', 'ServiceProvider', 'Order'])->orderByDesc('created_at');
+
+        return datatables()->of($rates)
+            ->filter(function ($query) {
+
+                if (request()->filled('name')) {
+
+                }
+
+            })
+            ->editColumn('service_provider.name', function ($rate) {
+                return isset($offer->ServiceProvider) ? '<a href="' . url(admin_users_url() . '/' . $rate->service_provider_id . '/view') . '" target="_blank">' . $rate->ServiceProvider->name . '</a>' : '-';
+            })
+            ->editColumn('client.name', function ($rate) {
+                return isset($rate->Client) ? '<a href="' . url(admin_users_url() . '/' . $rate->user_id . '/view') . '" target="_blank">' . $rate->Client->name . '</a>' : '-';
+            })->addColumn('action', function ($rate) {
+                return '<a href="' . url(admin_constant_url() . '/intros/' . $rate->id . '/edit') . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only edit-intro-mdl"
+                                                                                   title="تعديل">
+                                                                                    <i class="fa fa-edit"></i>
+                                                                                </a><a href="' . url(admin_constant_url() . '/intros/' . $rate->id) . '" class="btn btn-sm btn-danger red btn-circle btn-icon-only delete"
+                                                                                   title="حذف">
+                                                                                    <i class="fa fa-trash"></i>
+                                                                                </a>';
+            })
+            ->addIndexColumn()
+            ->rawColumns(['client.name', 'service_provider.name', 'action'])->toJson();
+    }
+
     function getAll(array $attributes)
     {
 
