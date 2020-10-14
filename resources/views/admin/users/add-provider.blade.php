@@ -294,7 +294,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">نبذه:</label>
                                 <div class="col-md-9">
-                                    <textarea name="bio" id="bio" rows="5" placeholder="اضف نبذه..."
+                                    <textarea name="bio" id="bio" rows="10" placeholder="اضف نبذه..."
                                               class="form-control"></textarea>
                                 </div>
                             </div>

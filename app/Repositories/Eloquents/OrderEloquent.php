@@ -100,6 +100,8 @@ class OrderEloquent extends Uploader implements Repository
                     return '<span class="label label-success">منتهية</span>';
                 if ($request->status == 'canceled')
                     return '<span class="label label-danger">ملغاة</span>';
+                if ($request->status == 'assigned')
+                    return '<span class="label label-primary">قيد التنفيذ</span>';
             })
             ->addColumn('action', function ($request) {
                 return '<a href="' . url(admin_vw() . '/requests/' . $request->id) . '" class="btn btn-sm btn-success green btn-circle"
