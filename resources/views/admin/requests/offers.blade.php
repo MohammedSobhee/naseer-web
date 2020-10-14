@@ -39,7 +39,7 @@
                                 </th>
 
                                 <th width="10%"> مزود الخدمة</th>
-                                <th width="10%"> طريقة الدفع</th>
+{{--                                <th width="10%"> طريقة الدفع</th>--}}
                                 <th width="10%"> الحالة</th>
                                 <th width="10%"> العمليات</th>
                             </tr>
@@ -49,15 +49,15 @@
                                     <input type="text" class="form-control form-filter input-md" name="name"
                                            placeholder=" مزود الخدمة" id="name">
                                 </td>
-                                <td>
-                                    <select class="form-control input-md payment_type select"
-                                            name="payment_type"
-                                            id="payment_type">
-                                        <option value="">طريقة الدفع</option>
-                                        <option value="down_payment">دفع مقدم</option>
-                                        <option value="late_payment">دفع متأخر</option>
-                                    </select>
-                                </td>
+{{--                                <td>--}}
+{{--                                    <select class="form-control input-md payment_type select"--}}
+{{--                                            name="payment_type"--}}
+{{--                                            id="payment_type">--}}
+{{--                                        <option value="">طريقة الدفع</option>--}}
+{{--                                        <option value="down_payment">دفع مقدم</option>--}}
+{{--                                        <option value="late_payment">دفع متأخر</option>--}}
+{{--                                    </select>--}}
+{{--                                </td>--}}
                                 <td>
                                     <select class="form-control input-md status select"
                                             name="status"

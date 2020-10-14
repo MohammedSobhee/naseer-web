@@ -49,9 +49,7 @@ class OfferEloquent extends Uploader implements Repository
                     $service_providers_id = User::where('type', 'service_provider')->where('name', 'LIKE', '%' . request()->get('name') . '%')->pluck('id');
                     $query->whereIn('service_provider_id', $service_providers_id);
                 }
-                if (request()->filled('payment_type')) {
-                    $query->where('payment_type', request()->get('payment_type'));
-                }
+
                 if (request()->filled('status')) {
                     $query->where('status', request()->get('status'));
                 }
