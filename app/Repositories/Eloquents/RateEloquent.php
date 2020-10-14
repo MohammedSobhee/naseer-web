@@ -57,7 +57,7 @@ class RateEloquent implements Repository
                                                                                 </a>';
             })
             ->addIndexColumn()
-            ->rawColumns(['client.name', 'service_provider.name', 'action'])->toJson();
+            ->rawColumns(['client.name', 'service_provider.name', 'order.type', 'action'])->toJson();
     }
 
     function getAll(array $attributes)
