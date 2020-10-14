@@ -21,6 +21,8 @@ class RateController extends Controller
     public function index()
     {
         $data = [
+            'title' => 'التقييمات',
+            'icon' => 'icon-star',
         ];
         return view(admin_vw() . '.rates.index', $data);
     }
