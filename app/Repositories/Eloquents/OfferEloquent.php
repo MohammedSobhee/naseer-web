@@ -59,12 +59,13 @@ class OfferEloquent extends Uploader implements Repository
             })
             ->editColumn('service_provider.name', function ($request) {
                 return isset($request->ServiceProvider) ? $request->ServiceProvider->name : '-';
-            })->editColumn('payment_type', function ($request) {
-                if ($request->payment_type == 'down_payment')
-                    return 'دفعة مقدمة';
-                if ($request->payment_type == 'late_payment')
-                    return 'دفعة متأخرة';
             })
+//            ->editColumn('order.payment_type', function ($request) {
+//                if ($request->Order->payment_type == 'down_payment')
+//                    return 'دفعة مقدمة';
+//                if ($request->Order->payment_type == 'late_payment')
+//                    return 'دفعة متأخرة';
+//            })
             ->editColumn('status', function ($request) {
                 if ($request->status == 'pending')
                     return '<span class="label label-warning">قيد الانتظار</span>';

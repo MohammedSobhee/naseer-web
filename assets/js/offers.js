@@ -26,8 +26,8 @@ $(document).ready(function () {
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'service_provider.name', name: 'service_provider.name'},
-                {data: 'payment_type', name: 'payment_type'},
-                {data: 'payment_value', name: 'payment_value'},
+                {data: 'down_payment', name: 'down_payment'},
+                {data: 'late_payment', name: 'late_payment'},
                 {data: 'details', name: 'details'},
                 {data: 'status', name: 'status'},
             ],
