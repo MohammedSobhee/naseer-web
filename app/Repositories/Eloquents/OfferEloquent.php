@@ -56,7 +56,7 @@ class OfferEloquent extends Uploader implements Repository
 
             })
             ->editColumn('service_provider.name', function ($offer) {
-                return isset($offer->ServiceProvider) ? '<a href="' . url(admin_users_url() . '/' . $offer->service_provider_id . '/view') . '">' . $offer->ServiceProvider->name . '</a>' : '-';
+                return isset($offer->ServiceProvider) ? '<a href="' . url(admin_users_url() . '/' . $offer->service_provider_id . '/view') . '" target="_blank">' . $offer->ServiceProvider->name . '</a>' : '-';
             })
 //            ->editColumn('order.payment_type', function ($request) {
 //                if ($request->Order->payment_type == 'down_payment')
