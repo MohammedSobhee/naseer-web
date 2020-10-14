@@ -23,7 +23,9 @@ class RateEloquent implements Repository
 
     function anyData()
     {
-        $rates = $this->model->with(['Client', 'ServiceProvider', 'Order'])->orderByDesc('created_at');
+        $rates = $this->model->with(['Client', 'ServiceProvider', 'Order' => function ($query) {
+            $query->with('Service');
+        }])->orderByDesc('created_at');
 
         return datatables()->of($rates)
             ->filter(function ($query) {
