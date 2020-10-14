@@ -59,6 +59,13 @@
                     <span class="selected"></span>
                 </a>
             </li>
+            <li class="nav-item @if(preg_match('/rates/i',url()->current())) start active open @endif ">
+                <a href="{{url(admin_vw().'/rates')}}" class="nav-link nav-toggle">
+                    <i class="icon-star"></i>
+                    <span class="title">التقييمات</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
             <li class="nav-item @if(preg_match('/services/i',url()->current())) start active open @endif ">
                 <a href="{{url(admin_vw().'/services')}}" class="nav-link nav-toggle">
                     <i class="icon-layers"></i>
