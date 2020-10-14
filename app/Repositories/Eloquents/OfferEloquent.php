@@ -72,7 +72,7 @@ class OfferEloquent extends Uploader implements Repository
                 if ($offer->status == 'rejected')
                     return '<span class="label label-danger">مرفوضة</span>';
             })->addIndexColumn()
-            ->rawColumns(['status'])->toJson();
+            ->rawColumns(['service_provider.name', 'status'])->toJson();
     }
 
     function getAll(array $attributes)
