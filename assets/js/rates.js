@@ -31,7 +31,10 @@ $(document).ready(function () {
                 {data: 'note', name: 'note'},
                 {data: 'action', name: 'action'}
             ],
-
+            "fnDrawCallback": function () {
+                //Initialize checkbos for enable/disable user
+                $(".make-switch").bootstrapSwitch({size: "mini", onColor: "success", offColor: "danger"});
+            },
             language: {
                 "sProcessing": "<img src='" + baseAssets + "/apps/img/preloader.svg'>",
                 "sLengthMenu": "أظهر _MENU_ مدخلات",
