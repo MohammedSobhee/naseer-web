@@ -147,6 +147,7 @@ $(document).ready(function () {
 
                 if (data.status) {
                     toastr['success'](data.message, '');
+                    _this.closest('.mt-repeater-item').slideUp();
                 } else {
                     toastr['error'](data.message);
                 }
