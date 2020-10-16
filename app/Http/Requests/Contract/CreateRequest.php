@@ -26,6 +26,7 @@ class CreateRequest extends FormRequest
         return [
             //
             'text' => 'required',
+            'service_ids' => 'required',
             'service_ids.*' => 'required|exists:services,id',
         ];
     }
@@ -33,7 +34,7 @@ class CreateRequest extends FormRequest
     public function attributes()
     {
         return [
-                'service_ids.*'=>'أنواع الخدمات'
-            ];
+            'service_ids' => 'أنواع الخدمات',
+        ];
     }
 }
