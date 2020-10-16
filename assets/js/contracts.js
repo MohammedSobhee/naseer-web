@@ -135,11 +135,15 @@ $(document).ready(function () {
     });
     $(document).on('click', '.add-field', function (event) {
 
+        event.preventDefault();
+
         var _this = $(this);
         var action = _this.attr('href');
         var type = _this.closest('.mt-repeater-item').find('#type_id');
-        event.preventDefault();
         //do something else
+
+        console.log('action:' + action);
+        console.log('type:' + type);
         $.ajax({
             url: action,
             type: 'POST',
