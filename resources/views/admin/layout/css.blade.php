@@ -61,7 +61,7 @@
     /*}*/
 
     .select2-search__field{
-        width: 613px !important;
+        /*width: 613px !important;*/
     }
     th, td {
         text-align: center !important;
