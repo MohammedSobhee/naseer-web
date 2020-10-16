@@ -81,7 +81,7 @@ class ContractEloquent implements Repository
 
         if ($contract->save()) {
             // add contract's services
-            foreach ($attributes['services_id'] as $service_id) {
+            foreach ($attributes['service_ids'] as $service_id) {
 
                 $contract_service = new ContractService();
                 $contract_service->contract_id = $contract->id;
@@ -99,10 +99,10 @@ class ContractEloquent implements Repository
         $contract->text = $attributes['text'];
         if ($contract->save()) {
 
-            if (count($attributes['services_id']) > 0) {
+            if (count($attributes['service_ids']) > 0) {
                 ContractService::where('contract_id', $contract->id)->forceDelete();
             }
-            foreach ($attributes['services_id'] as $service_id) {
+            foreach ($attributes['service_ids'] as $service_id) {
 
                 $contract_service = new ContractService();
                 $contract_service->contract_id = $contract->id;

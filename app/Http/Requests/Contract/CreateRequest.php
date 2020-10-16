@@ -25,9 +25,9 @@ class CreateRequest extends FormRequest
     {
         return [
             //
-            'text' => 'required',
             'service_ids' => 'required',
             'service_ids.*' => 'required|exists:services,id',
+            'text' => 'required',
         ];
     }
 
@@ -35,6 +35,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'service_ids' => 'الخدمات',
+            'text' => 'نص عقد الاتفاق',
         ];
     }
 }
