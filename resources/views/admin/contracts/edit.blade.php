@@ -115,6 +115,7 @@
                                             <label class="control-label">تابع لـ</label>
                                             <br/>
                                             <select name="type" id="type" class="form-control">
+                                                <option value="">حدد تابع لـ</option>
                                                 <option value="user">المُوكِل</option>
                                                 <option value="service_provider">مزود الخدمة</option>
                                             </select>
