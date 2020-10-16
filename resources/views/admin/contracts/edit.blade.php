@@ -93,7 +93,7 @@
                                                 <label class="control-label">قيمة المتغير</label>
                                                 <br/>
                                                 <input type="text" name="slug" id="slug" class="form-control" readonly
-                                                       value=""/>
+                                                       value="{{$field->slug}}"/>
                                                 <div class="hint red">يتم تحديدها بعد حفظ القيمة</div>
                                             </div>
 

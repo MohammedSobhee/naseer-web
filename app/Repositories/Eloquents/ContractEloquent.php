@@ -136,8 +136,9 @@ class ContractEloquent implements Repository
         $contract_field = new ContractField();
         $contract_field->contract_id = $id;
         $contract_field->type = $attributes['type'];
-        $contract_field->slug = 'FLDNM' . $contract_field->id;
         if ($contract_field->save()) {
+            $contract_field->slug = 'FLDNM' . $contract_field->id;
+            $contract_field->save();
             return response_api(true, 200, trans('app.success'), $contract_field);
 
         }

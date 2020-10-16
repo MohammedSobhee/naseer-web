@@ -17,7 +17,7 @@ class CreateContractFieldsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('contract_id');
             $table->enum('type', ['user', 'service_provider']);
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
