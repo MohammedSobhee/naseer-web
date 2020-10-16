@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <label for="services" class="col-md-2 control-label">الخدمات</label>
                         <div class="col-md-6">
-                            <select class="form-control input-md type select2" multiple
+                            <select class="form-control select2" multiple
                                     name="service_ids[]"
                                     id="service_ids">
                                 <option value="">نوع الخدمة</option>
