@@ -169,7 +169,7 @@ $(document).ready(function () {
 
         console.log(slug);
 
-        if (slug != undefined || slug != '')
+        if (slug != '')
             return;
 
         alert(slug);
