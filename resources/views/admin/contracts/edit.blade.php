@@ -70,8 +70,9 @@
                             <form action="#" class="mt-repeater form-horizontal">
                                 <h5 class="mt-repeater-title">بعد اضافة المتغير قم بأخذ قيمة المتغير واضافتها في نص
                                     العقد بدلاً من الفراغ</h5>
-                                @foreach($contract->fields as $field)
-                                    <div data-repeater-list="group-a">
+
+                                <div data-repeater-list="group-a">
+                                    @foreach($contract->fields as $field)
                                         <div data-repeater-item class="mt-repeater-item">
                                             <!-- jQuery Repeater Container -->
                                             <div class="mt-repeater-input">
@@ -104,9 +105,8 @@
                                                     <i class="fa fa-close"></i> حذف</a>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
-                                <div data-repeater-list="group-a">
+                                    @endforeach
+
                                     <div data-repeater-item class="mt-repeater-item">
                                         <!-- jQuery Repeater Container -->
                                         <div class="mt-repeater-input">
