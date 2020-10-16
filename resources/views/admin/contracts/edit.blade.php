@@ -73,7 +73,7 @@
 
                                 <div data-repeater-list="group-a">
                                     @foreach($contract->fields as $field)
-                                        <div data-repeater-item class="mt-repeater-item">
+                                        <div  class="mt-repeater-item">
                                             <!-- jQuery Repeater Container -->
                                             <div class="mt-repeater-input">
                                                 <label class="control-label">تابع لـ</label>
@@ -106,7 +106,6 @@
                                             </div>
                                         </div>
                                     @endforeach
-
                                     <div data-repeater-item class="mt-repeater-item">
                                         <!-- jQuery Repeater Container -->
                                         <div class="mt-repeater-input">
@@ -136,6 +135,7 @@
                                                 <i class="fa fa-close"></i> حذف</a>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <a href="javascript:;" data-repeater-create class="btn btn-success mt-repeater-add">
