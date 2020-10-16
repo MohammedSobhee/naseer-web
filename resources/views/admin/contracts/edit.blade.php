@@ -74,8 +74,8 @@
                     <div class="form-body">
                         <div class="form-group">
                             <form action="#" class="mt-repeater form-horizontal">
-                                <h3 class="mt-repeater-title">بعد اضافة المتغير قم بأخذ قيمة المتغير واضافتها في نص
-                                    العقد بدلاً من الفراغ</h3>
+                                <h5 class="mt-repeater-title">بعد اضافة المتغير قم بأخذ قيمة المتغير واضافتها في نص
+                                    العقد بدلاً من الفراغ</h5>
                                 <div data-repeater-list="group-a">
                                     <div data-repeater-item class="mt-repeater-item">
                                         <!-- jQuery Repeater Container -->
