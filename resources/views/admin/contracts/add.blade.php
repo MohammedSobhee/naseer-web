@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label for="contract" class="col-md-2 control-label">تفاصيل عقد الاتفاق</label>
                         <div class="col-md-9">
-                            <textarea rows="8" class="form-control ckeditor" name="text"
+                            <textarea rows="9" class="form-control ckeditor" name="text"
                                       placeholder="تفاصيل عقد الاتفاق">
                             </textarea>
                         </div>
