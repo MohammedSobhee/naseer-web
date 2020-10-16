@@ -178,7 +178,7 @@ $(document).ready(function () {
                 if (data.status) {
                     toastr['success'](data.message, '');
                     _this.closest('.mt-repeater-item').find('#slug').val(data.items.slug);
-                    _this.remove();
+                    _this.hide();
                 } else {
                     toastr['error'](data.message);
                 }
