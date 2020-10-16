@@ -78,6 +78,7 @@
                                                 <label class="control-label">تابع لـ</label>
                                                 <br/>
                                                 <select name="type" id="type" class="form-control">
+                                                    <option value="">حدد تابع لـ</option>
                                                     <option value="user" @if($field->type == 'user') selected @endif>
                                                         المُوكِل
                                                     </option>

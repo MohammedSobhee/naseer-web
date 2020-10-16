@@ -139,7 +139,7 @@ $(document).ready(function () {
 
         var _this = $(this);
         var action = _this.attr('href');
-        var type = _this.closest('.mt-repeater-item').find('#type_id');
+        var type = _this.closest('.mt-repeater-item').find('#type_id').val();
         //do something else
         _this.find('.save i').addClass('fa-spinner fa-spin');
 
