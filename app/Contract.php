@@ -19,7 +19,7 @@ class Contract extends Model
 
     public function Services()
     {
-        return $this->belongsToMany(Service::class, 'contract_services', 'service_id', 'contract_id', 'id', 'id')->whereNull('contract_services.deleted_at');
+        return $this->belongsToMany(Service::class, 'contract_services', 'contract_id', 'service_id', 'id', 'id')->whereNull('contract_services.deleted_at');
     }
 
 
