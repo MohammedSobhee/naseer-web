@@ -24,7 +24,7 @@
 
                     <div class="form-group">
                         <label for="services" class="col-md-2 control-label">الخدمات</label>
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <select class="form-control select2" multiple name="service_ids[]" id="service_ids"
                                     data-placeholder="الخدمات">
                                 @foreach($services as $service)
@@ -37,8 +37,8 @@
 
                     <div class="form-group">
                         <label for="contract" class="col-md-2 control-label">تفاصيل عقد الاتفاق</label>
-                        <div class="col-md-6">
-                            <textarea rows="5" class="form-control ckeditor" name="text"
+                        <div class="col-md-9">
+                            <textarea rows="9" class="form-control ckeditor" name="text"
                                       placeholder="تفاصيل عقد الاتفاق">{!! $contract->text ?? '' !!}</textarea>
                         </div>
                     </div>
