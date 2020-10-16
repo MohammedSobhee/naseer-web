@@ -167,6 +167,8 @@ $(document).ready(function () {
         //do something else
         _this.find('i').addClass('fa-spinner fa-spin');
 
+        console.log(slug);
+
         if (slug != undefined || slug != '')
             return;
 
