@@ -97,11 +97,9 @@
                                         </div>
 
                                         <div class="mt-repeater-input">
-                                            <a href="javascript:;"
+                                            <a href="javascript:;" data-repeater-delete
                                                class="btn btn-success save">
                                                 <i class="fa fa-check"></i> حفظ</a>
-                                        </div>
-                                        <div class="mt-repeater-input">
                                             <a href="javascript:;" data-repeater-delete
                                                class="btn btn-danger mt-repeater-delete">
                                                 <i class="fa fa-close"></i> حذف</a>
