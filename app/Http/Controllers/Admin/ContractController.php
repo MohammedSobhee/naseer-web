@@ -57,6 +57,8 @@ class ContractController extends Controller
         $contract = $this->contract->getById($id);
 
         $selected_services = $contract->Services->pluck('id')->toArray();
+
+        dd($selected_services);
         $contract_services = ContractService::whereNotIn('id', $selected_services)->pluck('service_id')->unique()->toArray();
 
         dd($contract_services);
