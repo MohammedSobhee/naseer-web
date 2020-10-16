@@ -141,7 +141,7 @@ $(document).ready(function () {
         var action = _this.attr('href');
         var type = _this.closest('.mt-repeater-item').find('#type_id').val();
         //do something else
-        _this.find('.save i').addClass('fa-spinner fa-spin');
+        _this.find('i').addClass('fa-spinner fa-spin');
 
         console.log('action:' + action);
         console.log('type:' + type);
@@ -159,7 +159,7 @@ $(document).ready(function () {
                     toastr['error'](data.message);
                 }
 
-                _this.find('.btn i').removeClass('fa-spinner fa-spin');
+                _this.find('i').removeClass('fa-spinner fa-spin');
 
             }
         });
