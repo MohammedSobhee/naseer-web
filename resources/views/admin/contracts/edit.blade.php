@@ -39,7 +39,7 @@
                         <label for="contract" class="col-md-2 control-label">تفاصيل عقد الاتفاق</label>
                         <div class="col-md-6">
                             <textarea rows="5" class="form-control ckeditor" name="text"
-                                      placeholder="تفاصيل عقد الاتفاق">{{$contract->text ?? ''}}</textarea>
+                                      placeholder="تفاصيل عقد الاتفاق">{!! $contract->text ?? '' !!}</textarea>
                         </div>
                     </div>
 
@@ -48,7 +48,7 @@
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-circle green btn-md save"><i
                                         class="fa fa-check"></i>
-                                    اضافة
+                                    حفظ التغيرات
                                 </button>
                             </div>
                         </div>
