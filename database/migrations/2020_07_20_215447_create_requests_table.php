@@ -37,6 +37,7 @@ class CreateRequestsTable extends Migration
             $table->enum('payment_prefer', ['down_payment', 'without_down_payment'])->nullable();
             $table->timestamp('service_date'); //موعد تقديم الخدمة
 
+            $table->longText('contract')->nullable();
 
             $table->enum('status', ['new', 'assigned', 'completed', 'canceled'])->default('new');
             $table->boolean('is_active')->default(true);

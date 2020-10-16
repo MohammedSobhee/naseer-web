@@ -10,6 +10,8 @@ class Contract extends Model
     //
     use SoftDeletes;
 
+    protected $fillable = ['text'];
+
     public function Fields()
     {
         return $this->hasMany(ContractField::class, 'contract_id', 'id');
