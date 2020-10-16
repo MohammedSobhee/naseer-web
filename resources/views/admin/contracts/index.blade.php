@@ -36,8 +36,7 @@
                     <div class="form-group">
                         <label for="services" class="col-md-2 control-label">الخدمات</label>
                         <div class="col-md-6">
-                            <select class="form-control select2" multiple name="service_ids[]" id="service_ids"
-                                    data-placeholder="أنواع الخدمات">
+                            <select class="form-control select2" multiple name="service_ids[]" id="service_ids" data-placeholder="أنواع الخدمات">
                                 @foreach($services as $service)
                                     <option value="{{$service->id}}">{{$service->name}}</option>
                                 @endforeach
@@ -55,7 +54,7 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="mt-repeater form-horizontal">
+                        <form action="#" class="mt-repeater form-horizontal">
                             <h3 class="mt-repeater-title">Human Resource Management</h3>
                             <div data-repeater-list="group-a">
                                 <div data-repeater-item class="mt-repeater-item">
@@ -63,14 +62,11 @@
                                     <div class="mt-repeater-input">
                                         <label class="control-label">Name</label>
                                         <br/>
-                                        <input type="text" name="text-input" class="form-control" value="John Smith"/>
-                                    </div>
+                                        <input type="text" name="text-input" class="form-control" value="John Smith" /> </div>
                                     <div class="mt-repeater-input">
                                         <label class="control-label">Joined Date</label>
                                         <br/>
-                                        <input class="input-group form-control form-control-inline date date-picker"
-                                               size="16" type="text" value="01/08/2016" name="date-input"
-                                               data-date-format="dd/mm/yyyy"/></div>
+                                        <input class="input-group form-control form-control-inline date date-picker" size="16" type="text" value="01/08/2016" name="date-input" data-date-format="dd/mm/yyyy" /> </div>
                                     <div class="mt-repeater-input mt-repeater-textarea">
                                         <label class="control-label">Job Description</label>
                                         <br/>
@@ -80,13 +76,11 @@
                                         <label class="control-label">Tier</label>
                                         <br/>
                                         <label class="mt-radio">
-                                            <input type="radio" name="optionsRadios" id="optionsRadios25" value="junior"
-                                                   checked=""> Junior
+                                            <input type="radio" name="optionsRadios" id="optionsRadios25" value="junior" checked=""> Junior
                                             <span></span>
                                         </label>
                                         <label class="mt-radio">
-                                            <input type="radio" name="optionsRadios" id="optionsRadios26" value="senior"
-                                                   checked=""> Senior
+                                            <input type="radio" name="optionsRadios" id="optionsRadios26" value="senior" checked=""> Senior
                                             <span></span>
                                         </label>
                                     </div>
@@ -112,15 +106,14 @@
                                         </select>
                                     </div>
                                     <div class="mt-repeater-input">
-                                        <a href="javascript:;" data-repeater-delete
-                                           class="btn btn-danger mt-repeater-delete">
+                                        <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete">
                                             <i class="fa fa-close"></i> Delete</a>
                                     </div>
                                 </div>
                             </div>
                             <a href="javascript:;" data-repeater-create class="btn btn-success mt-repeater-add">
                                 <i class="fa fa-plus"></i> Add</a>
-                        </div>
+                        </form>
                     </div>
 
 
