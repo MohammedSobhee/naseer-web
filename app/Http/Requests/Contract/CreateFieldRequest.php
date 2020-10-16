@@ -28,4 +28,11 @@ class CreateFieldRequest extends FormRequest
             'type' => 'required|in:user,service_provider'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'type' => 'تابع لـ',
+        ];
+    }
 }
