@@ -76,6 +76,43 @@
                             <form action="#" class="mt-repeater form-horizontal">
                                 <h5 class="mt-repeater-title">بعد اضافة المتغير قم بأخذ قيمة المتغير واضافتها في نص
                                     العقد بدلاً من الفراغ</h5>
+                                @foreach($contract->fields as $field)
+                                    <div data-repeater-list="group-a">
+                                        <div data-repeater-item class="mt-repeater-item">
+                                            <!-- jQuery Repeater Container -->
+                                            <div class="mt-repeater-input">
+                                                <label class="control-label">تابع لـ</label>
+                                                <br/>
+                                                <select name="type" id="type" class="form-control">
+                                                    <option value="user" @if($field->type == 'user') selected @endif>
+                                                        المُوكِل
+                                                    </option>
+                                                    <option value="service_provider"
+                                                            @if($field->type == 'service_provider') selected @endif>مزود
+                                                        الخدمة
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mt-repeater-input">
+                                                <label class="control-label">قيمة المتغير</label>
+                                                <br/>
+                                                <input type="text" name="slug" id="slug" class="form-control" readonly
+                                                       value=""/>
+                                                <div class="hint">يتم تحديدها بعد حفظ القيمة</div>
+                                            </div>
+
+                                            <div class="mt-repeater-input">
+                                                <a href="javascript:;"
+                                                   class="btn btn-success save mt-repeater-delete">
+                                                    <i class="fa fa-check"></i> حفظ</a>
+                                                <a href="javascript:;" data-repeater-delete
+                                                   class="btn btn-danger mt-repeater-delete">
+                                                    <i class="fa fa-close"></i> حذف</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                                 <div data-repeater-list="group-a">
                                     <div data-repeater-item class="mt-repeater-item">
                                         <!-- jQuery Repeater Container -->
@@ -92,7 +129,7 @@
                                             <label class="control-label">قيمة المتغير</label>
                                             <br/>
                                             <input type="text" name="slug" id="slug" class="form-control"
-                                                   value="John Smith"/>
+                                                   value=""/>
                                             <div class="hint">يتم تحديدها بعد حفظ القيمة</div>
                                         </div>
 
@@ -106,6 +143,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <a href="javascript:;" data-repeater-create class="btn btn-success mt-repeater-add">
                                     <i class="fa fa-plus"></i> اضافة متغير جديد</a>
                             </form>
