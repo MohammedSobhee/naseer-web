@@ -133,6 +133,31 @@ $(document).ready(function () {
 
 
     });
+    $(document).on('click', '.add-field', function (event) {
+
+        var _this = $(this);
+        var action = _this.attr('href');
+        var type = _this.closest('.mt-repeater-item').find('#type_id');
+        event.preventDefault();
+        //do something else
+        $.ajax({
+            url: action,
+            type: 'POST',
+            dataType: 'json',
+            data: {_token: csrf_token, type: type},
+            success: function (data) {
+
+                if (data.status) {
+                    toastr['success'](data.message, '');
+                    _this.closest('.mt-repeater-item').find('#slug').val(data.items.slug)
+                } else {
+                    toastr['error'](data.message);
+                }
+            }
+        });
+
+
+    });
 
     $(document).on('submit', '#formAdd,#formEdit', function (event) {
 

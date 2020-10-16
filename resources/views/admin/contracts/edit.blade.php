@@ -128,8 +128,8 @@
                                         </div>
 
                                         <div class="mt-repeater-input">
-                                            <a href="javascript:;"
-                                               class="btn btn-success save mt-repeater-delete">
+                                            <a href="{{url(admin_vw().'/contracts/add-field/'.$contract->id)}}"
+                                               class="btn btn-success save  add-field mt-repeater-delete">
                                                 <i class="fa fa-check"></i> حفظ</a>
                                             <a href="javascript:;" data-repeater-delete
                                                class="btn btn-danger mt-repeater-delete">
