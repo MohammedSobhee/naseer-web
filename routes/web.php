@@ -78,6 +78,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
 
     Route::get('/contracts', 'ContractController@index');
     Route::get('/contracts/contract-data', 'ContractController@anyData');
+    Route::get('/contracts/add-contract', 'ContractController@create');
 
     Route::get('/requests', 'RequestController@index');
     Route::get('/requests/request-data', 'RequestController@anyData');

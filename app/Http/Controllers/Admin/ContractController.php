@@ -22,8 +22,7 @@ class ContractController extends Controller
     {
         $data = [
             'title' => 'العقود',
-            'icon' => 'icon-basket',
-            'services' => Service::all(),
+            'icon' => 'icon-book-open',
         ];
         return view(admin_vw() . '.contracts.index', $data);
     }
@@ -31,5 +30,15 @@ class ContractController extends Controller
     public function anyData()
     {
         return $this->contract->anyData();
+    }
+
+    public function create()
+    {
+        $data = [
+            'title' => 'اضافة عقد جديد',
+            'icon' => 'icon-book-open',
+            'services' => Service::all(),
+        ];
+        return view(admin_vw() . '.contracts.add', $data);
     }
 }
