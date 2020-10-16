@@ -163,11 +163,14 @@ $(document).ready(function () {
         var _this = $(this);
         var action = _this.attr('href');
         var type = _this.closest('.mt-repeater-item').find('#type').val();
+        var slug = _this.closest('.mt-repeater-item').find('#slug').val();
         //do something else
         _this.find('i').addClass('fa-spinner fa-spin');
 
-        console.log('action:' + action);
-        console.log('type:' + type);
+        if (slug !== undefined || slug !== '')
+            return;
+
+        alert(slug);
         $.ajax({
             url: action,
             type: 'POST',
@@ -178,7 +181,6 @@ $(document).ready(function () {
                 if (data.status) {
                     toastr['success'](data.message, '');
                     _this.closest('.mt-repeater-item').find('#slug').val(data.items.slug);
-                    _this.hide();
                 } else {
                     toastr['error'](data.message);
                 }
