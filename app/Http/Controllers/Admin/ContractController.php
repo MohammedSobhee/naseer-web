@@ -49,7 +49,6 @@ class ContractController extends Controller
 
     public function store(CreateRequest $request)
     {
-        dd($request->all());
         return $this->contract->create($request->all());
     }
 
