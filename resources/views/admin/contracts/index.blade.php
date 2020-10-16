@@ -213,7 +213,6 @@
 
 
     <script src="{{url('/')}}/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
-    <script src="{{url('/')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
 
     <script src="{{url('/')}}/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"
             type="text/javascript"></script>
@@ -226,6 +225,7 @@
     <script src="{{url('/')}}/assets/global/scripts/app.min.js" type="text/javascript"></script>
     <!-- END THEME GLOBAL SCRIPTS -->
     <script src="{{url('/')}}/assets/pages/scripts/form-repeater.min.js" type="text/javascript"></script>
+    <script src="{{url('/')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
 
 
     <script src="{{url('/')}}/assets/pages/scripts/table-datatables-managed.min.js"
