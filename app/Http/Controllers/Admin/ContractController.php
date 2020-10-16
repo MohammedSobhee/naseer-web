@@ -37,7 +37,7 @@ class ContractController extends Controller
 
     public function create()
     {
-        $selected_services = ContractService::pluck('service_id')->toArray()->unique();
+        $selected_services = ContractService::pluck('service_id')->unique()->toArray();
 
         $data = [
             'title' => 'اضافة عقد جديد',
@@ -58,7 +58,7 @@ class ContractController extends Controller
         $contract = $this->contract->getById($id);
 
         $selected_services = $contract->Services->pluck('service_id')->toArray();
-        $contract_services = ContractService::whereNotIn('id', $selected_services)->pluck('service_id')->toArray()->unique();
+        $contract_services = ContractService::whereNotIn('id', $selected_services)->pluck('service_id')->unique()->toArray();
         $data = [
             'title' => 'اكمال العقد',
             'icon' => 'icon-book-open',
@@ -74,7 +74,7 @@ class ContractController extends Controller
         $contract = $this->contract->getById($id);
 
         $selected_services = $contract->Services->pluck('service_id')->toArray();
-        $contract_services = ContractService::whereNotIn('id', $selected_services)->pluck('service_id')->toArray()->unique();
+        $contract_services = ContractService::whereNotIn('id', $selected_services)->pluck('service_id')->unique()->toArray();
         $data = [
             'title' => 'اكمال العقد',
             'icon' => 'icon-book-open',
