@@ -34,7 +34,7 @@ class CreateRequest extends FormRequest
     public function attributes()
     {
         return [
-            'service_ids' => 'أنواع الخدمات',
+            'service_ids' => 'الخدمات',
         ];
     }
 }

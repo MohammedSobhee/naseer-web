@@ -20,14 +20,13 @@
                     </div>
                 </div>
                 <div class="portlet-body form">
-                    {{--<form class="form-horizontal" role="form">--}}
                     {!! Form::open(['method'=>'PUT','class'=>'form-horizontal','files'=>true,'id'=>'formEdit']) !!}
 
                     <div class="form-group">
                         <label for="services" class="col-md-2 control-label">الخدمات</label>
                         <div class="col-md-6">
                             <select class="form-control select2" multiple name="service_ids[]" id="service_ids"
-                                    data-placeholder="أنواع الخدمات">
+                                    data-placeholder="الخدمات">
                                 @foreach($services as $service)
                                     <option value="{{$service->id}}"
                                             @if(in_array($service->id,$selected_services)) selected @endif>{{$service->name}}</option>

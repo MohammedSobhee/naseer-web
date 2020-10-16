@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label for="services" class="col-md-2 control-label">الخدمات</label>
                         <div class="col-md-9">
-                            <select class="form-control select2" multiple name="service_ids[]" id="service_ids" data-placeholder="أنواع الخدمات">
+                            <select class="form-control select2" multiple name="service_ids[]" id="service_ids" data-placeholder="الخدمات">
                                 @foreach($services as $service)
                                     <option value="{{$service->id}}">{{$service->name}}</option>
                                 @endforeach
