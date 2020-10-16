@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
-    if ($("#cities_tbl").length) {
+    if ($("#contracts_tbl").length) {
 
-        var cities_tbl = $("#cities_tbl");
-        cities_tbl.on('preXhr.dt', function (e, settings, data) {
+        var contracts_tbl = $("#contracts_tbl");
+        contracts_tbl.on('preXhr.dt', function (e, settings, data) {
 
             data.name = $('#name').val();
 
@@ -12,11 +12,11 @@ $(document).ready(function () {
             "serverSide": true,
 
             "ajax": {
-                url: baseURL + "/constants/cities-data"
+                url: baseURL + "/contracts/contract-data"
                 , "dataSrc": function (json) {
                     //Make your callback here.
                     if (json.status != undefined && !json.status) {
-                        $('#cities_tbl_processing').hide();
+                        $('#contracts_tbl_processing').hide();
                         location.reload();
                         //
                     } else
@@ -65,68 +65,26 @@ $(document).ready(function () {
                 // If the length is 3 or more characters, or the user pressed ENTER, search
                 if (this.value.length >= 3 || e.keyCode == 13) {
                     // Call the API search function
-                    cities_tbl.api().search(this.value).ajax.reload();
+                    contracts_tbl.api().search(this.value).ajax.reload();
 
                 }
                 // Ensure we clear the search if they backspace far enough
                 if (this.value == "") {
-                    cities_tbl.api().search("").ajax.reload();
+                    contracts_tbl.api().search("").ajax.reload();
                 }
             });
     }
 
-    $(document).on('click', '.edit-city-mdl', function (event) {
-
-        var _this = $(this);
-        var action = _this.attr('href');
-        event.preventDefault();
-
-
-        $.ajax({
-            url: action,
-            type: 'GET',
-            // dataType: 'json',
-            success: function (data) {
-
-                $("#wait_msg,#overlay").hide();
-
-                $('#results-modals').html(data);
-                $('#edit-city').modal('show', {backdrop: 'static', keyboard: false});
-            }
-        });
-
-    });
-    $(document).on('click', '.add-city-mdl', function (event) {
-
-        var _this = $(this);
-        var action = _this.attr('href');
-        event.preventDefault();
-
-
-        $.ajax({
-            url: action,
-            type: 'GET',
-            // dataType: 'json',
-            success: function (data) {
-
-                $("#wait_msg,#overlay").hide();
-
-                $('#results-modals').html(data);
-                $('#add-city').modal('show', {backdrop: 'static', keyboard: false});
-            }
-        });
-
-    });
     $(document).on("click", ".filter-submit", function () {
 //                if ($(this).val().length > 3)
-        cities_tbl.api().ajax.reload();
+        contracts_tbl.api().ajax.reload();
     });
     $(document).on('click', '.filter-cancel', function () {
 
         $(".select2").val('').trigger('change');
         $(this).closest('tr').find('input,select').val('');
         // $('#is_admin_confirm,.status').val('').trigger('change');
-        cities_tbl.api().ajax.reload();
+        contracts_tbl.api().ajax.reload();
     });
 
     $(document).on('click', '.delete', function (event) {
@@ -155,7 +113,7 @@ $(document).ready(function () {
 
                                 if (data.status) {
                                     toastr['success'](data.message, '');
-                                    cities_tbl.api().ajax.reload();
+                                    contracts_tbl.api().ajax.reload();
                                 } else {
                                     toastr['error'](data.message);
                                 }
@@ -203,8 +161,10 @@ $(document).ready(function () {
 
                     $('.alert').hide();
                     toastr['success'](data.message, '');
-                    cities_tbl.api().ajax.reload();
 
+                    if (event.target.id === 'formAdd') {
+                        location.href = baseUrl + '/contracts/edit-contract/' + data.items.id;
+                    }
                 } else {
                     var $errors = '<strong>' + data.message + '</strong>';
                     $errors += '<ul>';

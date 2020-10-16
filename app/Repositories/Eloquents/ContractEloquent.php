@@ -9,6 +9,7 @@
 namespace App\Repositories\Eloquents;
 
 use App\Contract;
+use App\ContractField;
 use App\ContractService;
 use App\Repositories\Interfaces\Repository;
 
@@ -87,25 +88,60 @@ class ContractEloquent implements Repository
                 $contract_service->service_id = $service_id;
                 $contract_service->save();
             }
-
-            // add contract's fields
-
-            return response_api(true, 200, trans('app.created'), $obj);
+            return response_api(true, 200, trans('app.success'), $contract);
         }
     }
 
     function update(array $attributes, $id = null)
     {
         // TODO: Implement update() method.
-        $city = $this->model->find($id);
-        $city->name = $attributes['name'];
-        if ($city->save()) {
+        $contract = $this->model->find($id);
+        $contract->text = $attributes['text'];
+        if ($contract->save()) {
 
-            return response_api(true, 200, trans('app.updated'), $city);
+            if (count($attributes['services_id']) > 0) {
+                ContractService::where('contract_id', $contract->id)->forceDelete();
+            }
+            foreach ($attributes['services_id'] as $service_id) {
+
+                $contract_service = new ContractService();
+                $contract_service->contract_id = $contract->id;
+                $contract_service->service_id = $service_id;
+                $contract_service->save();
+            }
+//
+//            if (count($attributes['fields_id']) > 0) {
+//                ContractField::where('contract_id', $contract->id)->whereNotIn('id',$attributes['fields_id'])->forceDelete();
+//            }
+//            $index = 0;
+//            foreach ($attributes['fields_id'] as $field_id) {
+//
+//                $contract_field = new ContractField();
+//                $contract_field->type = $attributes[$index++]['type'];
+//                $contract_field->slug = ;
+//                $contract_field->save();
+//            }
+
+
+            return response_api(true, 200, trans('app.success'), $contract);
 
         }
-        return response_api(false, 422, trans('app.not_updated'));
+        return response_api(false, 422, trans('app.error'));
 
+
+    }
+
+    function addField(array $attributes, $id)
+    {
+        $contract_field = new ContractField();
+        $contract_field->contract_id = $id;
+        $contract_field->type = $attributes['type'];
+        $contract_field->slug = 'FLDNM' . $contract_field->id;
+        if ($contract_field->save()) {
+            return response_api(true, 200, trans('app.success'), $contract_field);
+
+        }
+        return response_api(false, 422, trans('app.error'));
 
     }
 

@@ -79,6 +79,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('/contracts', 'ContractController@index');
     Route::get('/contracts/contract-data', 'ContractController@anyData');
     Route::get('/contracts/add-contract', 'ContractController@create');
+    Route::post('/contracts/add-contract', 'ContractController@store');
+    Route::get('/contracts/edit-contract/{id}', 'ContractController@completeContract');
+    Route::put('/contracts/edit-contract/{id}', 'ContractController@update');
+    Route::post('/contracts/add-field/{contract_id}', 'ContractController@addField');
 
     Route::get('/requests', 'RequestController@index');
     Route::get('/requests/request-data', 'RequestController@anyData');
