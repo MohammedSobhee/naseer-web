@@ -58,6 +58,8 @@ class ContractController extends Controller
 
         $selected_services = $contract->Services->pluck('id')->toArray();
         $contract_services = ContractService::whereNotIn('id', $selected_services)->pluck('service_id')->unique()->toArray();
+
+        dd($contract_services);
         $data = [
             'title' => 'اكمال العقد',
             'icon' => 'icon-book-open',
