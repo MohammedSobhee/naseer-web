@@ -68,7 +68,7 @@
             </li>
             <li class="nav-item @if(preg_match('/contracts/i',url()->current())) start active open @endif ">
                 <a href="{{url(admin_vw().'/contracts')}}" class="nav-link nav-toggle">
-                    <i class="ui-icon-contact"></i>
+                    <i class="icon-book-open"></i>
                     <span class="title">العقود</span>
                     <span class="selected"></span>
                 </a>
