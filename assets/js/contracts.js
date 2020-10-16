@@ -133,6 +133,29 @@ $(document).ready(function () {
 
 
     });
+    $(document).on('click', '.delete-field', function (event) {
+
+        var _this = $(this);
+        var action = _this.attr('href');
+        event.preventDefault();
+        $.ajax({
+            url: action,
+            type: 'DELETE',
+            dataType: 'json',
+            data: {_token: csrf_token},
+            success: function (data) {
+
+                if (data.status) {
+                    toastr['success'](data.message, '');
+                } else {
+                    toastr['error'](data.message);
+                }
+            }
+
+        });
+
+
+    });
     $(document).on('click', '.add-field', function (event) {
 
         event.preventDefault();

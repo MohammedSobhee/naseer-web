@@ -98,11 +98,9 @@
                                             </div>
 
                                             <div class="mt-repeater-input">
-                                                <a href="javascript:;"
-                                                   class="btn btn-success save mt-repeater-delete">
-                                                    <i class="fa fa-check"></i> حفظ</a>
-                                                <a href="javascript:;" data-repeater-delete
-                                                   class="btn btn-danger mt-repeater-delete">
+                                                <a href="{{url(admin_vw().'/contracts/delete-field/'.$field->id)}}"
+                                                   data-repeater-delete
+                                                   class="btn btn-danger mt-repeater-delete delete-field">
                                                     <i class="fa fa-close"></i> حذف</a>
                                             </div>
                                         </div>

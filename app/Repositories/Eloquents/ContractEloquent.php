@@ -146,6 +146,17 @@ class ContractEloquent implements Repository
 
     }
 
+    function deleteField($id)
+    {
+        // TODO: Implement delete() method.
+        $obj = ContractField::find($id);
+        if (isset($obj) && $obj->delete()) {
+            return response_api(true, 200, trans('app.deleted'), []);
+        }
+        return response_api(false, 422, null, []);
+
+    }
+
     function delete($id)
     {
         // TODO: Implement delete() method.
