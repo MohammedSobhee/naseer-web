@@ -163,7 +163,7 @@ $(document).ready(function () {
                     toastr['success'](data.message, '');
 
                     if (event.target.id === 'formAdd') {
-                        location.href = baseUrl + '/contracts/edit-contract/' + data.items.id;
+                        location.href = baseURL + '/contracts/edit-contract/' + data.items.id;
                     }
                 } else {
                     var $errors = '<strong>' + data.message + '</strong>';
