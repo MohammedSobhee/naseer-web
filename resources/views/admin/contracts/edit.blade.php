@@ -93,7 +93,7 @@
                                                 <label class="control-label">قيمة المتغير</label>
                                                 <br/>
                                                 <input type="text" name="slug" id="slug" class="form-control" readonly
-                                                       value="" disabled/>
+                                                       value=""/>
                                                 <div class="hint red">يتم تحديدها بعد حفظ القيمة</div>
                                             </div>
 
@@ -124,7 +124,7 @@
                                         <div class="mt-repeater-input">
                                             <label class="control-label">قيمة المتغير</label>
                                             <br/>
-                                            <input type="text" name="slug" id="slug" class="form-control"
+                                            <input type="text" name="slug" id="slug" class="form-control" readonly
                                                    value=""/>
                                             <div class="hint">يتم تحديدها بعد حفظ القيمة</div>
                                         </div>
