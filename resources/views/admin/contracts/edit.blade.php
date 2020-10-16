@@ -61,13 +61,7 @@
             <div class="portlet box green">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-gift"></i>المتغيرات العقد
-                    </div>
-                    <div class="tools">
-                        <a href="javascript:;" class="collapse"> </a>
-                        <a href="#portlet-config" data-toggle="modal" class="config"> </a>
-                        <a href="javascript:;" class="reload"> </a>
-                        <a href="javascript:;" class="remove"> </a>
+                        <i class="fa fa-gift"></i>متغيرات العقد
                     </div>
                 </div>
                 <div class="portlet-body form">
@@ -98,8 +92,8 @@
                                                 <label class="control-label">قيمة المتغير</label>
                                                 <br/>
                                                 <input type="text" name="slug" id="slug" class="form-control" readonly
-                                                       value=""/>
-                                                <div class="hint">يتم تحديدها بعد حفظ القيمة</div>
+                                                       value="" disabled/>
+                                                <div class="hint red">يتم تحديدها بعد حفظ القيمة</div>
                                             </div>
 
                                             <div class="mt-repeater-input">
