@@ -97,8 +97,8 @@
                                         </div>
 
                                         <div class="mt-repeater-input">
-                                            <a href="javascript:;" data-repeater-delete
-                                               class="btn btn-success save">
+                                            <a href="javascript:;"
+                                               class="btn btn-success save mt-repeater-delete">
                                                 <i class="fa fa-check"></i> حفظ</a>
                                             <a href="javascript:;" data-repeater-delete
                                                class="btn btn-danger mt-repeater-delete">
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                                 <a href="javascript:;" data-repeater-create class="btn btn-success mt-repeater-add">
-                                    <i class="fa fa-plus"></i> Add</a>
+                                    <i class="fa fa-plus"></i> اضافة متغير جديد</a>
                             </form>
                         </div>
                     </div>
