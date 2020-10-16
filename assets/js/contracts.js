@@ -169,10 +169,9 @@ $(document).ready(function () {
 
         console.log(slug);
 
-        if (slug != '')
-            return;
-
-        alert(slug);
+        if (slug != '') {
+            _this.find('i').removeClass('fa-spinner fa-spin');
+        }
         $.ajax({
             url: action,
             type: 'POST',
