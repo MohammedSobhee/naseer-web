@@ -57,11 +57,7 @@ class ContractController extends Controller
         $contract = $this->contract->getById($id);
 
         $selected_services = $contract->Services->pluck('id')->toArray();
-
-        dd($selected_services);
-        $contract_services = ContractService::whereNotIn('id', $selected_services)->pluck('service_id')->unique()->toArray();
-
-        dd($contract_services);
+        $contract_services = ContractService::whereNotIn('service_id', $selected_services)->pluck('service_id')->unique()->toArray();
         $data = [
             'title' => 'اكمال العقد',
             'icon' => 'icon-book-open',
@@ -77,9 +73,9 @@ class ContractController extends Controller
         $contract = $this->contract->getById($id);
 
         $selected_services = $contract->Services->pluck('id')->toArray();
-        $contract_services = ContractService::whereNotIn('id', $selected_services)->pluck('service_id')->unique()->toArray();
+        $contract_services = ContractService::whereNotIn('service_id', $selected_services)->pluck('service_id')->unique()->toArray();
         $data = [
-            'title' => 'اكمال العقد',
+            'title' => 'تعديل العقد',
             'icon' => 'icon-book-open',
             'services' => Service::whereNotIn('id', $contract_services)->get(),
             'selected_services' => $selected_services,
