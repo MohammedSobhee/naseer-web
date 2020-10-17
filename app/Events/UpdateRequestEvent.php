@@ -38,8 +38,7 @@ class UpdateRequestEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-//        return ['update-request'];
-        return new PrivateChannel('update-request');
+        return ['update-request'];
 
     }
 

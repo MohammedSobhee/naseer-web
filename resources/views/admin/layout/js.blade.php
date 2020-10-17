@@ -79,7 +79,7 @@
         cluster: 'mt1'
     });
 
-    var channel = pusher.subscribe('private-update-request');
+    var channel = pusher.subscribe('update-request');
     channel.bind('my-event', function (data) {
         alert(JSON.stringify(data));
     });
