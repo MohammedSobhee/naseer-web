@@ -478,3 +478,4 @@
         </div>
         <!-- /.modal-content -->
     </div>
+</div>
