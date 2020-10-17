@@ -10,6 +10,8 @@ namespace App\Repositories\Eloquents;
 
 use App\Rate;
 use App\Repositories\Interfaces\Repository;
+use App\Request;
+use App\User;
 
 class RateEloquent implements Repository
 {
@@ -30,9 +32,26 @@ class RateEloquent implements Repository
         return datatables()->of($rates)
             ->filter(function ($query) {
 
-                dd(request()->all());
                 if (request()->filled('name')) {
+                    $users_id = User::where('type', 'user')->where('name', 'LIKE', '%' . request()->get('name') . '%')->pluck('id');
+                    $query->whereIn('user_id', $users_id);
+                }
+                if (request()->filled('service_provider')) {
+                    $service_provider_id = User::where('type', 'service_provider')->where('name', 'LIKE', '%' . request()->get('service_provider') . '%')->pluck('id');
+                    $query->whereIn('service_provider_id', $service_provider_id);
+                }
+                if (request()->filled('type')) {
+                    $request_id = Request::where('type', request()->get('type'))->pluck('id');
+                    $query->whereIn('request_id', $request_id);
 
+                }
+                if (request()->filled('service_id')) {
+                    $request_id = Request::where('service_id', request()->get('service_id'))->pluck('id');
+                    $query->whereIn('request_id', $request_id);
+
+                }
+                if (request()->filled('is_approved')) {
+                    $query->where('is_approved', request()->get('is_approved'));
                 }
 
             })
