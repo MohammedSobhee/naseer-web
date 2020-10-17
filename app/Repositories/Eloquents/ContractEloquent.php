@@ -133,7 +133,13 @@ class ContractEloquent implements Repository
 
     function addField(array $attributes, $id)
     {
-        $contract_field = new ContractField();
+        if (isset($attributes['slug'])) {
+            $contract_field = ContractField::where('slug', $attributes['slug'])->first();
+            if (isset($contract_field))
+                return response_api(true, 200, trans('app.success'), $contract_field);
+
+        } else
+            $contract_field = new ContractField();
         $contract_field->contract_id = $id;
         $contract_field->type = $attributes['type'];
         if ($contract_field->save()) {

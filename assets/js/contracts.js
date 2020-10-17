@@ -168,17 +168,11 @@ $(document).ready(function () {
         //do something else
         _this.find('i').addClass('fa-spinner fa-spin');
 
-        console.log(slug);
-
-        if (slug != '') {
-            _this.find('i').removeClass('fa-spinner fa-spin');
-            return;
-        }
         $.ajax({
             url: action,
             type: 'POST',
             dataType: 'json',
-            data: {_token: csrf_token, type: type},
+            data: {_token: csrf_token, type: type, slug: slug},
             success: function (data) {
 
                 if (data.status) {
