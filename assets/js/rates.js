@@ -4,7 +4,11 @@ $(document).ready(function () {
 
         var rates_tbl = $("#rates_tbl");
         rates_tbl.on('preXhr.dt', function (e, settings, data) {
-            // data.name = $('#name').val();
+            data.name = $('#name').val();
+            data.service_provider = $('#service_provider').val();
+            data.type = $('#type').val();
+            data.service_id = $('#service_id').val();
+            data.is_approved = $('#is_approved').val();
         }).dataTable({
             "processing": true,
             "serverSide": true,
