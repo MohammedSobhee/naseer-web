@@ -13,6 +13,7 @@ use App\Arbitration;
 use App\AssignExpert;
 use App\City;
 use App\CompaniesRegistrationAndTrademarking;
+use App\Contract;
 use App\CourtAndLawsuit;
 use App\DivisionOfInheritance;
 use App\DraftingRegulationAndContract;

@@ -75,14 +75,14 @@ class ContractEloquent implements Repository
         // TODO: Implement getAll() method.
 
         $request = Request::find($attributes['contract']['request_id']);
-
-        dd($request);
+        $contract = Contract::find($attributes['contract']['contract_id']);
         if (isset($request)) {
 
             foreach ($attributes['contract']['fields'] as $field) {
-                $request->contract = str_replace($field['slug'], $field['value'], $request->contract);
+                $contract = str_replace($field['slug'], $field['value'], $contract);
             }
 
+            $request->contract = $contract;
             $request->save();
         }
 
