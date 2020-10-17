@@ -84,6 +84,7 @@ class ContractEloquent implements Repository
             if (isset($request->contract)) {
                 $contract_text = $request->contract;
             }
+            dd($contract_text);
 
             foreach ($attributes['contract']['fields'] as $field) {
                 $contract_text = str_replace($field['slug'], $field['value'], $contract_text);
