@@ -119,6 +119,28 @@ class NotificationSystemEloquent
         return $object;
     }
 
+    public function FCM_Topic($body)
+    {
+        $notificationBuilder = new PayloadNotificationBuilder(config('app.name'));
+        $notificationBuilder->setBody($body)
+            ->setSound('default');
+
+        $notification = $notificationBuilder->build();
+
+        $topic = new Topics();
+        $topic->topic('NasserNotification');
+
+        $topicResponse = FCM::sendToTopic($topic, null, $notification, null);
+
+        $object = [
+            'numberSuccess' => $topicResponse->isSuccess(),
+            'numberFailure' => $topicResponse->shouldRetry(),
+            'numberModification' => $topicResponse->error(),
+        ];
+
+        return response_api(true, 200, null, $object);
+    }
+
     public function getActionTrans($action)
     {
 

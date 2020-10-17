@@ -3,84 +3,45 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Notification\SendPublicRequest;
 use App\Notification;
+use App\Repositories\Eloquents\NotificationEloquent;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private $notification;
+
+    public function __construct(NotificationEloquent $notificationEloquent)
+    {
+        parent::__construct();
+        $this->notification = $notificationEloquent;
+    }
+
+    // Begin category operation
     public function index()
     {
-        //
+
+        $data = [
+            'main_title' => 'اشعارات عامة',
+            'icon' => 'fa fa-bell',
+        ];
+        return view(admin_settings_vw() . '.push_notifications', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function anyData()
     {
-        //
+        return $this->notification->anyData();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function delete($id)
     {
-        //
+        return $this->notification->delete($id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Notification  $notification
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Notification $notification)
+    public function sendPublicNotification(SendPublicRequest $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Notification  $notification
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Notification $notification)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Notification  $notification
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Notification $notification)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Notification  $notification
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Notification $notification)
-    {
-        //
+        return $this->notification->sendPublicNotification($request->all());
     }
 }

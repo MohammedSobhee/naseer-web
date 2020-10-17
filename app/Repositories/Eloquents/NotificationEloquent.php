@@ -30,6 +30,31 @@ class NotificationEloquent implements Repository
         $this->device = $device;
     }
 
+    function anyData()
+    {
+        $notifications = $this->model->where('action', 'public')->orderByDesc('created_at');
+
+        return datatables()->of($notifications)
+            ->filter(function ($query) {
+
+//                if (request()->filled('search')) {
+//                    $search = request()->get('search');
+//                    $query->where('action', 'LIKE', '%' . $search['value'] . '%');
+//                }
+
+            })
+            ->editColumn('text', function ($notification) {
+                return $notification->text;
+            })->addColumn('delete', function ($notification) {
+
+
+                return '<a href="' . url(admin_vw() . '/notification/' . $notification->id) . '" class="btn btn-circle btn-icon-only red delete" title="Delete">
+                                        <i class="fa fa-trash"></i>
+                                    </a>';
+            })->addIndexColumn()
+            ->rawColumns(['delete'])->toJson();
+    }
+
     function getList(array $attributes)
     {
         $page_size = isset($attributes['page_size']) ? $attributes['page_size'] : max_pagination(10);
@@ -124,7 +149,7 @@ class NotificationEloquent implements Repository
         // TODO: Implement delete() method.
         $notification = $this->model->find($id['notification_id']);
         if ($notification->delete()) {
-            return response_api(true, 200, trans('app.notification_deleted'), []);
+            return response_api(true, 200, trans('app.success'), []);
         }
         return response_api(false, 422, null, []);
 
@@ -190,5 +215,17 @@ class NotificationEloquent implements Repository
         }
 
         return null;
+    }
+
+    function sendPublicNotification(array $attributes)
+    {
+        // TODO: Implement getById() method.
+        $notification = new Notification();
+        $notification->sender_id = null;
+        $notification->action = 'public';
+        $notification->action_id = null;
+        $notification->seen = 0;
+        $notification->save();
+        return $this->notificationSystem->FCM_Topic($attributes['message']);
     }
 }
