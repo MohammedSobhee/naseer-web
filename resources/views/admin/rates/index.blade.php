@@ -37,10 +37,10 @@
                                 </th>
 
                                 <th width="10%"> مقدم الطلب</th>
-                                <th width="10%"> المدينة</th>
+                                <th width="10%"> مزود الخدمة</th>
                                 <th width="10%"> نوع الخدمة</th>
                                 <th width="10%"> الخدمة</th>
-                                <th width="10%"> حالة الطلب</th>
+                                <th width="10%"> الحالة</th>
                                 <th width="10%"> العمليات</th>
                             </tr>
                             <tr role="row" class="filter">
@@ -50,8 +50,8 @@
                                            placeholder=" مقدم الطلب" id="name">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control form-filter input-md" name="city"
-                                           placeholder="المدينة" id="city">
+                                    <input type="text" class="form-control form-filter input-md" name="service_provider"
+                                           placeholder="مزود الخدمة" id="service_provider">
                                 </td>
                                 <td>
                                     <select class="form-control input-md type select"
@@ -67,19 +67,18 @@
                                             name="service_id"
                                             id="service_id">
                                         <option value=""> الخدمة</option>
-{{--                                        @foreach($services as $service)--}}
-{{--                                            <option value="{{$service->id}}">{{$service->name}}</option>--}}
-{{--                                        @endforeach--}}
+                                        @foreach($services as $service)
+                                            <option value="{{$service->id}}">{{$service->name}}</option>
+                                        @endforeach
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="form-control input-md status select"
-                                            name="status"
-                                            id="status">
-                                        <option value="">حالة الطلب</option>
-                                        <option value="new">جديدة</option>
-                                        <option value="completed">منتهية</option>
-                                        <option value="canceled">ملغاة</option>
+                                    <select class="form-control input-md is_approved select"
+                                            name="is_approved"
+                                            id="is_approved">
+                                        <option value="">حالة</option>
+                                        <option value="1">معتمد</option>
+                                        <option value="0">غير معتمد</option>
                                     </select>
                                 </td>
                                 <td>

@@ -30,6 +30,7 @@ class RateEloquent implements Repository
         return datatables()->of($rates)
             ->filter(function ($query) {
 
+                dd(request()->all());
                 if (request()->filled('name')) {
 
                 }

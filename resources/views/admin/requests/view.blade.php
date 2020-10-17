@@ -5,12 +5,7 @@
             <span class="caption-subject bold uppercase"> تفاصيل الطلب </span>
         </div>
         <div class="actions">
-            @if($order->status == 'assigned')
-                {{--                <a href="{{url(admin_vw().'/order-contract/'.$order->id)}}"--}}
-                {{--                   class="btn btn-circle btn-info order-contract-mdl">--}}
-                {{--                    <i class="fa fa-file"></i>--}}
-                {{--                    <span class="hidden-xs"> عقد الاتفاق </span>--}}
-                {{--                </a>--}}
+            @if($order->status == 'assigned' && $order->type == 'categorized')
                 <a class="btn btn-circle green btn-outline sbold" data-toggle="modal" href="#contract_mdl"> <i
                         class="fa fa-file"></i> <span class="hidden-xs"> عقد الاتفاق </span> </a>
 
@@ -473,7 +468,7 @@
             </div>
             <div class="modal-body"> {!! $order->contract ?? '' !!} </div>
             <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline" data-dismiss="modal">أغلاق</button>
+                <button type="button" class="btn red btn-outline" data-dismiss="modal">أغلاق</button>
             </div>
         </div>
         <!-- /.modal-content -->
