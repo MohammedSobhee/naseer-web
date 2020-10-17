@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Rate;
 use App\Repositories\Eloquents\RateEloquent;
+use App\Service;
 use Illuminate\Http\Request;
 
 class RateController extends Controller
@@ -20,9 +21,11 @@ class RateController extends Controller
 
     public function index()
     {
+        $services = Service::all();
         $data = [
             'title' => 'التقييمات',
             'icon' => 'icon-star',
+            'services' => $services,
         ];
         return view(admin_vw() . '.rates.index', $data);
     }
