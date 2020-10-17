@@ -45,7 +45,7 @@ class OrderResource extends JsonResource
                 $service_id = $this->service_id;
                 $contract = new ContractResource(Contract::whereHas('Services', function ($query) use ($service_id) {
                     $query->where('service_id', $service_id);
-                }));
+                })->first());
             }
         }
 

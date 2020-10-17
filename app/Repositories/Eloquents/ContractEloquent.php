@@ -62,10 +62,17 @@ class ContractEloquent implements Repository
 
     }
 
+
     function getAll(array $attributes)
     {
         // TODO: Implement getAll() method.
         return $this->model->all();
+    }
+
+    function editContract(array $attributes)
+    {
+        // TODO: Implement getAll() method.
+
     }
 
     function getById($id)

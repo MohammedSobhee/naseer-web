@@ -376,6 +376,7 @@ class OrderEloquent extends Uploader implements Repository
             if (isset($attributes['preferred_outcomes_text']))
                 $request->preferred_outcomes_text = $attributes['preferred_outcomes_text'];
 
+
 //            if (isset($attributes['contact_prefer']))
 //                $request->contact_prefer = $attributes['contact_prefer'];
 //            if (isset($attributes['payment_prefer']))

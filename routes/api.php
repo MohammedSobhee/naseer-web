@@ -66,6 +66,8 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
 
         });
 
+        Route::put('contract', 'ContractController@editContract');
+
         Route::put('profile', 'UserController@putUser');
 
         Route::post('service_providers', 'UserController@getServiceProviders');
