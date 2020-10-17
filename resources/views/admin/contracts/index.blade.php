@@ -35,7 +35,7 @@
                         <span class="caption-subject bold uppercase"> {{$title}}</span>
                     </div>
                     <div class="actions">
-                        <a href="{{url(admin_vw().'/contracts/add-contract')}}"
+                        <a href="{{url(admin_contract_url().'/add-contract')}}"
                            class="btn btn-circle btn-info">
                             <i class="fa fa-file"></i>
                             <span class="hidden-xs"> اضافة </span>

@@ -18,6 +18,13 @@
                         <i class="fa fa-cog font-dark"></i>
                         <span class="caption-subject bold uppercase"> العقود</span>
                     </div>
+                    <div class="actions">
+                        <a href="{{url(admin_contract_url().'/add-contract')}}"
+                           class="btn btn-circle btn-info">
+                            <i class="fa fa-file"></i>
+                            <span class="hidden-xs"> اضافة </span>
+                        </a>
+                    </div>
                 </div>
                 <div class="portlet-body form">
                     {!! Form::open(['method'=>'PUT','class'=>'form-horizontal','files'=>true,'id'=>'formEdit']) !!}
@@ -73,7 +80,7 @@
 
                                 <div data-repeater-list="group-a">
                                     @foreach($contract->fields as $field)
-                                        <div  class="mt-repeater-item">
+                                        <div class="mt-repeater-item">
                                             <!-- jQuery Repeater Container -->
                                             <div class="mt-repeater-input">
                                                 <label class="control-label">تابع لـ</label>
