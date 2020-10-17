@@ -15,6 +15,7 @@ class ContractResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'text' => $this->text,
             'fields' => ContractFieldResource::collection($this->Fields()->where('type', auth()->user()->type)->get())
         ];
