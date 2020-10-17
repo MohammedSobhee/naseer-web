@@ -12,6 +12,7 @@ use App\Contract;
 use App\ContractField;
 use App\ContractService;
 use App\Repositories\Interfaces\Repository;
+use App\Request;
 
 
 class ContractEloquent implements Repository
@@ -72,6 +73,19 @@ class ContractEloquent implements Repository
     function editContract(array $attributes)
     {
         // TODO: Implement getAll() method.
+
+        $request = Request::find($attributes['contract']['request_id']);
+
+        if (isset($request)) {
+
+            foreach ($attributes['contract']['fields'] as $field) {
+                $request->contract = str_replace($field->slug, $field->value, $request->contract);
+            }
+
+            $request->save();
+        }
+
+        return response_api(false, 422, trans('app.error'));
 
     }
 

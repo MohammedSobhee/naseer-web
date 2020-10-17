@@ -24,7 +24,6 @@ class ContractController extends Controller
 
     public function editContract(Request $request)
     {
-        dd($request->all());
         return $this->contract->editContract($request->all());
     }
 
