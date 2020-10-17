@@ -11,7 +11,8 @@
                 {{--                    <i class="fa fa-file"></i>--}}
                 {{--                    <span class="hidden-xs"> عقد الاتفاق </span>--}}
                 {{--                </a>--}}
-                <a class="btn purple btn-outline sbold" data-toggle="modal" href="#contract_mdl"> عقد الاتفاق </a>
+                <a class="btn purple btn-outline sbold" data-toggle="modal" href="#contract_mdl"> <i
+                        class="fa fa-file"></i> <span class="hidden-xs"> عقد الاتفاق </span> </a>
 
             @endif
         </div>
