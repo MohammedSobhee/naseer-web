@@ -223,6 +223,7 @@ class NotificationEloquent implements Repository
         $notification = new Notification();
         $notification->sender_id = null;
         $notification->action = 'public';
+        $notification->message = $attributes['message'];
         $notification->action_id = null;
         $notification->seen = 0;
         $notification->save();

@@ -19,7 +19,7 @@ class CreateNotificationsTable extends Migration
             $table->enum('action', ['new_order', 'assigned_driver', 'completed_order', 'canceled_order', 'new_offer', 'chat', 'public']);
 
             $table->unsignedBigInteger('action_id')->nullable();
-            $table->string('text')->nullable();
+            $table->longText('message')->nullable(); // for public action
             $table->boolean('seen')->default(false);
 
             $table->softDeletes();

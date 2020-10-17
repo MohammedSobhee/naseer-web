@@ -30,7 +30,9 @@ class Notification extends Model
 
     public function getTextAttribute()
     {
-        return trans(notification_trans() . '.' . $this->action);
+        if ($this->action == 'public')
+            return $this->message;
+        return __(notification_trans() . '.' . $this->action);
     }
 
     public function getCreatedDateAttribute()

@@ -26,7 +26,7 @@ $(document).ready(function () {
 
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'text', name: 'text'},
+                {data: 'message', name: 'message'},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'delete', name: 'delete'}
             ],
@@ -167,6 +167,7 @@ $(document).ready(function () {
 
                     $('.alert').hide();
                     toastr['success'](data.message, '');
+                    notification_tbl.api().ajax.reload();
                 } else {
                     var $errors = '<strong>' + data.message + '</strong>';
                     $errors += '<ul>';
