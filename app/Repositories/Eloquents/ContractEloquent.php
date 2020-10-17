@@ -88,7 +88,6 @@ class ContractEloquent implements Repository
                 $contract_text = str_replace($field['slug'], $field['value'], $contract_text);
             }
 
-            dd($contract_text);
             $request->contract = $contract_text;
             $request->save();
         }
