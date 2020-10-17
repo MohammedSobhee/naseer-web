@@ -98,6 +98,16 @@ function admin_constant_url()
     return 'admin/constants';
 }
 
+function admin_contracts_vw()
+{
+    return 'admin.contracts';
+}
+
+function admin_contract_url()
+{
+    return 'admin/contracts';
+}
+
 function admin_rates_vw()
 {
     return 'admin.rates';

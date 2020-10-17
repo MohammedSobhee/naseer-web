@@ -26,7 +26,8 @@ $(document).ready(function () {
 
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'name', name: 'name'},
+                {data: 'services', name: 'services'},
+                {data: 'is_completed', name: 'is_completed'},
                 {data: 'action', name: 'action'}
             ],
 

@@ -35,14 +35,24 @@ class ContractEloquent implements Repository
 //                    $query->where('name', 'LIKE', '%' . request()->get('name') . '%');
 //                }
             })
+            ->addColumn('services', function ($contract) {
+
+                $services = $contract->Services->pluck('name')->toArray();
+                $services = implode($services);
+                return $services;
+            })->editColumn('is_completed', function ($contract) {
+                if ($contract->is_completed)
+                    return '<span class="label label-success">مكتمل</span>';
+                return '<span class="label label-danger">غير مكتمل</span>';
+            })
             ->addColumn('action', function ($contract) {
-//                return '<a href="' . url(admin_constant_url() . '/cities/' . $city->id . '/edit') . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only edit-city-mdl"
-//                                                                                   title="تعديل">
-//                                                                                    <i class="fa fa-edit"></i>
-//                                                                                </a><a href="' . url(admin_constant_url() . '/cities/' . $city->id) . '" class="btn btn-sm btn-danger red btn-circle btn-icon-only delete"
-//                                                                                   title="حذف">
-//                                                                                    <i class="fa fa-trash"></i>
-//                                                                                </a>';
+                return '<a href="' . url(admin_contract_url() . '/edit-contract/' . $contract->id) . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only"
+                                                                                   title="تعديل">
+                                                                                    <i class="fa fa-edit"></i>
+                                                                                </a><a href="' . url(admin_contract_url() . '/delete-contract/' . $contract->id) . '" class="btn btn-sm btn-danger red btn-circle btn-icon-only delete"
+                                                                                   title="حذف">
+                                                                                    <i class="fa fa-trash"></i>
+                                                                                </a>';
             })->addIndexColumn()
             ->rawColumns(['action'])->toJson();
     }
@@ -145,6 +155,8 @@ class ContractEloquent implements Repository
         if ($contract_field->save()) {
             $contract_field->slug = 'FLDNM' . $contract_field->id;
             $contract_field->save();
+
+            $this->model->find($id)->update(['is_completed' => true]);
             return response_api(true, 200, trans('app.success'), $contract_field);
 
         }

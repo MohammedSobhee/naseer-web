@@ -84,6 +84,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::put('/contracts/edit-contract/{id}', 'ContractController@update');
     Route::post('/contracts/add-field/{contract_id}', 'ContractController@addField');
     Route::delete('/contracts/delete-field/{contract_id}', 'ContractController@deleteField');
+    Route::delete('/contracts/delete-contract/{contract_id}', 'ContractController@delete');
 
     Route::get('/requests', 'RequestController@index');
     Route::get('/requests/request-data', 'RequestController@anyData');
