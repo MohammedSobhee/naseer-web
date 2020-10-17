@@ -78,7 +78,6 @@ class ContractEloquent implements Repository
         $contract = Contract::find($attributes['contract']['contract_id']);
 
 
-        dd($attributes['contract']['fields']);
         if (isset($request) && isset($contract)) {
 
             $contract_text = $contract->text;
@@ -90,6 +89,7 @@ class ContractEloquent implements Repository
                 $contract_text = str_replace($field['slug'], $field['value'], $contract_text);
             }
 
+            dd($contract_text);
             $request->contract = $contract_text;
             $request->save();
         }
