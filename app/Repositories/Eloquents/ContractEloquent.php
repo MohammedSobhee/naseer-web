@@ -76,6 +76,9 @@ class ContractEloquent implements Repository
 
         $request = Request::find($attributes['contract']['request_id']);
         $contract = Contract::find($attributes['contract']['contract_id']);
+
+
+        dd($attributes['contract']['fields']);
         if (isset($request) && isset($contract)) {
 
             $contract_text = $contract->text;
