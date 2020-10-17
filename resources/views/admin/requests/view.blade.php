@@ -4,7 +4,15 @@
             <i class="icon-layers font-dark"></i>
             <span class="caption-subject bold uppercase"> تفاصيل الطلب </span>
         </div>
-
+        <div class="actions">
+            @if($order->status == 'assigned')
+                <a href="{{url(admin_vw().'/order-contract/'.$order->id)}}"
+                   class="btn btn-circle btn-info order-contract-mdl">
+                    <i class="fa fa-file"></i>
+                    <span class="hidden-xs"> عقد الاتفاق </span>
+                </a>
+            @endif
+        </div>
     </div>
     <div class="portlet-body form">
         <!-- BEGIN FORM-->
