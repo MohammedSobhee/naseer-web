@@ -81,7 +81,31 @@
 
     var channel = pusher.subscribe('update-request');
     channel.bind('my-event', function (data) {
-        alert(JSON.stringify(data));
+        // Show toastr
+        toastr.options = {
+            // timeOut: 10000,
+            // extendedTimeOut: 0,
+            // fadeIn: 200,
+            // fadeOut: 200
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "60000",
+            "extendedTimeOut": "60000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.success('<a href="' + baseURL + '/request/' + data.orderId + '">' + data.message + '</a>');
+
+
     });
 </script>
 
