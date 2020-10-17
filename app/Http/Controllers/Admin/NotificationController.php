@@ -15,7 +15,6 @@ class NotificationController extends Controller
 
     public function __construct(NotificationEloquent $notificationEloquent)
     {
-        parent::__construct();
         $this->notification = $notificationEloquent;
     }
 
