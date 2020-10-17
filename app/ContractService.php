@@ -9,4 +9,6 @@ class ContractService extends Model
 {
     //
     use SoftDeletes;
+
+
 }

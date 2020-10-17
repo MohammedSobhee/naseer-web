@@ -60,7 +60,6 @@ class ContractEloquent implements Repository
     function export()
     {
 
-
     }
 
     function getAll(array $attributes)
@@ -119,19 +118,6 @@ class ContractEloquent implements Repository
                 $contract_service->service_id = $service_id;
                 $contract_service->save();
             }
-//
-//            if (count($attributes['fields_id']) > 0) {
-//                ContractField::where('contract_id', $contract->id)->whereNotIn('id',$attributes['fields_id'])->forceDelete();
-//            }
-//            $index = 0;
-//            foreach ($attributes['fields_id'] as $field_id) {
-//
-//                $contract_field = new ContractField();
-//                $contract_field->type = $attributes[$index++]['type'];
-//                $contract_field->slug = ;
-//                $contract_field->save();
-//            }
-
 
             return response_api(true, 200, trans('app.success'), $contract);
 
@@ -145,9 +131,6 @@ class ContractEloquent implements Repository
     {
         if (isset($attributes['slug'])) {
             $contract_field = ContractField::where('slug', $attributes['slug'])->first();
-//            if (isset($contract_field))
-//                return response_api(true, 200, trans('app.success'), $contract_field);
-
         } else
             $contract_field = new ContractField();
         $contract_field->contract_id = $id;
@@ -155,7 +138,6 @@ class ContractEloquent implements Repository
         if ($contract_field->save()) {
             $contract_field->slug = 'FLDNM' . $contract_field->id;
             $contract_field->save();
-
             $this->model->where('id', $id)->update(['is_completed' => true]);
 
             return response_api(true, 200, trans('app.success'), $contract_field);

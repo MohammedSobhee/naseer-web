@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Contract;
+use App\ContractService;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -36,7 +38,18 @@ class OrderResource extends JsonResource
             } elseif ($this->service_id == 12) {
                 $subService = new AssignExpertResource($this->AssignExpert()->first());
             }
+
+            $contract = null;
+            $contract_service = ContractService::where('service_id', $this->service_id)->first();
+            if (isset($contract_service)) {
+                $service_id = $this->service_id;
+                $contract = new ContractResource(Contract::whereHas('Services', function ($query) use ($service_id) {
+                    $query->where('service_id', $service_id);
+                }));
+            }
         }
+
+
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -56,15 +69,16 @@ class OrderResource extends JsonResource
             'payment_prefer_lbl' => __('app.payment_prefer.' . $this->payment_prefer),
             'service_date' => $this->service_date,
             'status' => $this->status,
+            'contract' => $this->contract,
             'is_edit' => $this->is_edit,
             'offers_num' => $this->Offers()->count(),
             'offers' => OfferSecondResource::collection($this->Offers()->orderByDesc('created_at')->get()),
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'city' => new CityResource($this->City()->first()),
             'service' => new ServiceResource($this->Service()->first()),
-
             'client' => new ProfileResource($this->User()->first()),
-            'data_request' => $subService
+            'data_request' => $subService,
+            'contract_fields' => $contract
         ];
     }
 }
