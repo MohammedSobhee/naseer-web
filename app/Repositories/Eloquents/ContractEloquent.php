@@ -89,6 +89,8 @@ class ContractEloquent implements Repository
             }
 
             $request->contract = $contract_text;
+            $request->contract_status = (auth()->user()->type == 'user') ? 2 : 1;
+
             $request->save();
             return response_api(true, 422, trans('app.success'));
 
