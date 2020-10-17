@@ -119,6 +119,14 @@
                     <span class="selected"></span>
                 </a>
             </li>
+
+            <li class="nav-item @if(preg_match('/notifications/i',url()->current())) start active open @endif">
+                <a href="{{url('admin/notifications')}}" class="nav-link nav-toggle">
+                    <i class="fa fa-bell"></i>
+                    <span class="title">اشعارات تثقيفية</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
         </ul>
 
 
