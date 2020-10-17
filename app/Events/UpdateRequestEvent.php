@@ -11,9 +11,10 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UpdateRequestEvent
+class UpdateRequestEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
 
     /**
      * Create a new event instance.
@@ -21,7 +22,7 @@ class UpdateRequestEvent
      * @return void
      */
 
-    protected $data;
+    public $data;
 
     public function __construct($data)
     {
