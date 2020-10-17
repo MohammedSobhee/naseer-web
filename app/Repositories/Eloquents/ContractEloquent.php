@@ -79,7 +79,7 @@ class ContractEloquent implements Repository
         if (isset($request)) {
 
             foreach ($attributes['contract']['fields'] as $field) {
-                $request->contract = str_replace($field->slug, $field->value, $request->contract);
+                $request->contract = str_replace($field['slug'], $field['value'], $request->contract);
             }
 
             $request->save();
