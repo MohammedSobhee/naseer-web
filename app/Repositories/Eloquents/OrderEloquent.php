@@ -17,6 +17,7 @@ use App\Contract;
 use App\CourtAndLawsuit;
 use App\DivisionOfInheritance;
 use App\DraftingRegulationAndContract;
+use App\Events\UpdateRequestEvent;
 use App\Http\Resources\OrderEditResource;
 use App\Http\Resources\OrderResource;
 use App\MarriageOfficer;
@@ -396,7 +397,7 @@ class OrderEloquent extends Uploader implements Repository
 
             if ($request->save()) {
 
-
+                event(new UpdateRequestEvent(['orderId' => $request->id, 'message' => 'تعديل طلب']));
                 $attributes['request_id'] = $request->id;
 
                 /*if (isset($request->service_id)) {

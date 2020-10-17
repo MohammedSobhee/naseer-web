@@ -45,6 +45,9 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 
 <script src="{{url('/')}}/assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
 <script>
     toastr.options = {
         "closeButton": true,
@@ -68,6 +71,18 @@
         $(target).find("select").val('');
         $(target).find(".select2").val(null).trigger('change');
     }
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('777ac0c530714c6e8f4b', {
+        cluster: 'mt1'
+    });
+
+    var channel = pusher.subscribe('update-request');
+    channel.bind('my-event', function (data) {
+        alert(JSON.stringify(data));
+    });
 </script>
 
 @stack('js')

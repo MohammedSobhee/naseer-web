@@ -27,7 +27,12 @@ class SettingController extends Controller
     {
         //
         $setting = Setting::first();
-        return view(admin_settings_vw() . '.index', ['setting' => $setting]);
+        $data = [
+            'title' => 'الاعدادات',
+            'icon' => 'fa fa-cogs',
+            'setting' => $setting
+        ];
+        return view(admin_settings_vw() . '.index', $data);
     }
 
     /**
