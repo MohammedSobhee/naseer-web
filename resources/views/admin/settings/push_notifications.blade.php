@@ -37,9 +37,9 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th> Notification</th>
-                            <th> Date</th>
-                            <th> Action</th>
+                            <th> نص الاشعار</th>
+                            <th> تاريخ الارسال</th>
+                            <th> العمليات</th>
                         </tr>
                         </thead>
                     </table>
@@ -54,7 +54,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title"><i class="fa fa-send"></i> Send public notification<span
+                    <h4 class="modal-title"><i class="fa fa-send"></i> اشعار عام<span
                             class="badge badge-primary name "
                             style="text-transform: inherit"></span></h4>
                 </div>
@@ -70,11 +70,11 @@
 
                             <div class="form-group">
                                 <div class="control-label col-md-2">
-                                    <label for="message">Message</label>
+                                    <label for="message">نص الاشعار</label>
                                 </div>
                                 <div class="control-label col-md-10">
                                 <textarea name="message" id="message" class="form-control" rows="5"
-                                          placeholder="Message ..."></textarea>
+                                          placeholder="نص الاشعار ..."></textarea>
                                 </div>
 
                             </div>
