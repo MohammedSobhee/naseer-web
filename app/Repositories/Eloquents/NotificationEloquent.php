@@ -43,12 +43,12 @@ class NotificationEloquent implements Repository
 //                }
 
             })
-            ->editColumn('text', function ($notification) {
-                return $notification->text;
+            ->editColumn('message', function ($notification) {
+                return $notification->message;
             })->addColumn('delete', function ($notification) {
 
 
-                return '<a href="' . url(admin_vw() . '/notification/' . $notification->id) . '" class="btn btn-circle btn-icon-only red delete" title="Delete">
+                return '<a href="' . url(admin_vw() . '/notifications/' . $notification->id) . '" class="btn btn-circle btn-icon-only red delete" title="Delete">
                                         <i class="fa fa-trash"></i>
                                     </a>';
             })->addIndexColumn()
