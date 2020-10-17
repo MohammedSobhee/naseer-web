@@ -56,7 +56,7 @@ class RateEloquent implements Repository
 
             })
             ->editColumn('service_provider.name', function ($rate) {
-                return isset($offer->ServiceProvider) ? '<a href="' . url(admin_users_url() . '/' . $rate->service_provider_id . '/view') . '" target="_blank">' . $rate->ServiceProvider->name . '</a>' : '-';
+                return isset($rate->ServiceProvider) ? '<a href="' . url(admin_users_url() . '/' . $rate->service_provider_id . '/view') . '" target="_blank">' . $rate->ServiceProvider->name . '</a>' : '-';
             })->editColumn('order.service.name', function ($rate) {
                 return isset($rate->Order->Service) ? $rate->Order->Service->name : '-';
             })->editColumn('order.type', function ($rate) {
