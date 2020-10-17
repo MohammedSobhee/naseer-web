@@ -22,12 +22,13 @@ class UpdateRequestEvent implements ShouldBroadcast
      * @return void
      */
 
-    public $data;
+    public $orderId, $message;
 
-    public function __construct($data)
+    public function __construct($orderId, $message)
     {
         //
-        $this->data = $data;
+        $this->orderId = $orderId;
+        $this->message = $message;
     }
 
     /**
