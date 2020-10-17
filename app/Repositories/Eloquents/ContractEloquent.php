@@ -76,6 +76,7 @@ class ContractEloquent implements Repository
 
         $request = Request::find($attributes['contract']['request_id']);
 
+        dd($request);
         if (isset($request)) {
 
             foreach ($attributes['contract']['fields'] as $field) {
