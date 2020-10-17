@@ -23,7 +23,7 @@ class NotificationController extends Controller
     {
 
         $data = [
-            'main_title' => 'اشعارات تثقيفية',
+            'title' => 'اشعارات تثقيفية',
             'icon' => 'fa fa-bell',
         ];
         return view(admin_settings_vw() . '.push_notifications', $data);
