@@ -223,7 +223,7 @@ class OrderEloquent extends Uploader implements Repository
             $type = 'categorized';
 
             $contract = Contract::whereHas('Services', function ($query) use ($attributes) {
-                $query->where('id', $attributes['service_id']);
+                $query->where('services.id', $attributes['service_id']);
             })->first();
             if (isset($contract))
                 $request->contract = $contract->text;
