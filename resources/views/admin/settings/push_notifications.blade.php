@@ -3,13 +3,13 @@
 @section('css')
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <link href="{{url('/')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css"/>
-    <link href="{{url('/')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css"
+    <link href="{{url('/')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap-rtl.css"
           rel="stylesheet" type="text/css"/>
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL STYLES -->
-    <link href="{{url('/')}}/assets/global/css/components-md.min.css" rel="stylesheet" id="style_components"
+    <link href="{{url('/')}}/assets/global/css/components-md-rtl.min.css" rel="stylesheet" id="style_components"
           type="text/css"/>
-    <link href="{{url('/')}}/assets/global/css/plugins-md.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{url('/')}}/assets/global/css/plugins-md-rtl.min.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
 @endsection
 @section('content')
@@ -25,7 +25,7 @@
                     <div class="actions">
                         <a href="javascript:;" class="btn btn-circle btn-info add-send-notification-mdl">
                             <i class="fa fa-send"></i>
-                            <span class="hidden-xs"> Send Public Notification. </span>
+                            <span class="hidden-xs"> اشعار عام </span>
                         </a>
                     </div>
 
@@ -37,7 +37,6 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th> Sender</th>
                             <th> Notification</th>
                             <th> Date</th>
                             <th> Action</th>
@@ -88,12 +87,12 @@
                                     <div class="col-md-12 text-center">
                                         <button type="submit" class="btn btn-circle green btn-md save"><i
                                                 class="fa fa-check"></i>
-                                            Send
+                                            ارسال
                                         </button>
                                         <button type="button" class="btn btn-circle btn-md red"
                                                 data-dismiss="modal">
                                             <i class="fa fa-times"></i>
-                                            Close
+                                            اغلاق
                                         </button>
                                     </div>
                                 </div>

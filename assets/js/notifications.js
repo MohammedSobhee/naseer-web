@@ -5,6 +5,8 @@ $(document).ready(function () {
         var notification_tbl = $("#notification_tbl");
         notification_tbl.on('preXhr.dt', function (e, settings, data) {
 
+            data.name = $('#name').val();
+
         }).dataTable({
             "processing": true,
             "serverSide": true,
@@ -15,7 +17,7 @@ $(document).ready(function () {
                     //Make your callback here.
                     if (json.status != undefined && !json.status) {
                         $('#notification_tbl_processing').hide();
-                        bootbox.alert(json.message);
+                        location.reload();
                         //
                     } else
                         return json.data;
@@ -24,17 +26,30 @@ $(document).ready(function () {
 
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'sender', name: 'sender'},
-                {data: 'action', name: 'action'},
+                {data: 'text', name: 'text'},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'delete', name: 'delete'}
             ],
 
             language: {
-                "sProcessing": "<img src='" + baseAssets + "/apps/img/preloader_.gif'>",
+                "sProcessing": "<img src='" + baseAssets + "/apps/img/preloader.svg'>",
+                "sLengthMenu": "أظهر _MENU_ مدخلات",
+                "sZeroRecords": "لم يعثر على أية سجلات",
+                "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                "sInfoPostFix": "",
+                "sSearch": "ابحث:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "الأول",
+                    "sPrevious": "السابق",
+                    "sNext": "التالي",
+                    "sLast": "الأخير"
+                }
             },
-            // "searching": false,
-            // "ordering": false,
+            "searching": false,
+            "ordering": false,
 
             bStateSave: !0,
             lengthMenu: [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
@@ -66,15 +81,14 @@ $(document).ready(function () {
         var _this = $(this);
         var action = _this.attr('href');
         event.preventDefault();
-        var constant_name = _this.closest('tr').find("td:eq(1)").text();
 
         bootbox.dialog({
-            message: "Are you sure to delete (" + constant_name + ")? <span class='label label-danger'> Can not return back...</span>",
-            title: "Confirm deletion !",
+            message: "هل انت متأكد من حذف؟ <span class='label label-danger'> لا يمكن التراجع عن العملية</span>",
+            title: "تأكيد عملية الحذف!",
             buttons: {
 
                 main: {
-                    label: 'Sure <i class="fa fa-check"></i> ',
+                    label: 'بالتأكيد <i class="fa fa-check"></i> ',
                     className: "btn-primary",
                     callback: function () {
                         //do something else
@@ -87,7 +101,7 @@ $(document).ready(function () {
 
                                 if (data.status) {
                                     toastr['success'](data.message, '');
-                                    notification_tbl.api().ajax.reload();
+                                    contracts_tbl.api().ajax.reload();
                                 } else {
                                     toastr['error'](data.message);
                                 }
@@ -95,7 +109,7 @@ $(document).ready(function () {
                         });
                     }
                 }, danger: {
-                    label: 'Close <i class="fa fa-remove"></i>',
+                    label: 'اغلاق <i class="fa fa-remove"></i>',
                     className: "btn-danger",
                     callback: function () {
                         //do something
