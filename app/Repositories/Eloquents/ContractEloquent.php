@@ -135,8 +135,8 @@ class ContractEloquent implements Repository
     {
         if (isset($attributes['slug'])) {
             $contract_field = ContractField::where('slug', $attributes['slug'])->first();
-            if (isset($contract_field))
-                return response_api(true, 200, trans('app.success'), $contract_field);
+//            if (isset($contract_field))
+//                return response_api(true, 200, trans('app.success'), $contract_field);
 
         } else
             $contract_field = new ContractField();
