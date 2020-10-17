@@ -103,7 +103,7 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        toastr.success('<a href="' + baseURL + '/request/' + data.orderId + '">' + data.message + '#' + data.orderId + '</a>');
+        toastr.success('<a href="' + baseURL + '/requests/' + data.orderId + '">' + data.message + '#' + data.orderId + '</a>');
 
 
     });
