@@ -398,6 +398,8 @@ class OrderEloquent extends Uploader implements Repository
             if ($request->save()) {
 
                 event(new UpdateRequestEvent(['orderId' => $request->id, 'message' => 'تعديل طلب']));
+
+                dd(2);
                 $attributes['request_id'] = $request->id;
 
                 /*if (isset($request->service_id)) {
