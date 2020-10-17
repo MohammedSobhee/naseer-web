@@ -90,6 +90,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('/requests/request-data', 'RequestController@anyData');
     Route::get('/requests/{id}', 'RequestController@requestDet');
 
+    Route::get('/notifications', 'NotificationController@index');
     Route::post('/general-notification/create', 'NotificationController@sendPublicNotification');
     Route::get('/notification-data', 'NotificationController@anyData');
     Route::delete('/notification', 'NotificationController@delete');
