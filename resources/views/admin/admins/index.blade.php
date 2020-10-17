@@ -98,7 +98,7 @@
                     </div>
                     <div class="actions">
                         <a href="{{url(admin_vw().'/admins/create')}}" class="btn btn-circle btn-success add-admin-mdl">
-                            <i class="fa fa-plus"></i>
+                            <i class="fa fa-user-plus"></i>
                             <span class="hidden-xs"> اضافة </span>
                         </a>
                     </div>
