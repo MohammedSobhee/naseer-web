@@ -11,6 +11,7 @@ namespace App\Repositories\Eloquents;
 use App\Contract;
 use App\ContractField;
 use App\ContractService;
+use App\Http\Resources\OrderResource;
 use App\Repositories\Interfaces\Repository;
 use App\Request;
 
@@ -92,11 +93,11 @@ class ContractEloquent implements Repository
             $request->contract_status = (auth()->user()->type == 'user') ? 2 : 1;
 
             $request->save();
-            return response_api(true, 422, trans('app.success'));
+            return response_api(true, 422, trans('app.success'), new OrderResource($request));
 
         }
 
-        return response_api(false, 422, trans('app.error'));
+        return response_api(false, 422, trans('app.error'), empObj());
 
     }
 
