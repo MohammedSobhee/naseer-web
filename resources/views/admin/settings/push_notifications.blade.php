@@ -20,7 +20,7 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="{{$icon}}"></i>
-                        <span class="caption-subject bold uppercase"> {{$main_title}}</span>
+                        <span class="caption-subject bold uppercase"> {{$title}}</span>
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn btn-circle btn-info add-send-notification-mdl">
