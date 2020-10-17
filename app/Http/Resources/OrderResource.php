@@ -70,6 +70,7 @@ class OrderResource extends JsonResource
             'service_date' => $this->service_date,
             'status' => $this->status,
             'contract' => $this->contract,
+            'contract_status' => $this->contract_status,
             'is_edit' => $this->is_edit,
             'offers_num' => $this->Offers()->count(),
             'offers' => OfferSecondResource::collection($this->Offers()->orderByDesc('created_at')->get()),

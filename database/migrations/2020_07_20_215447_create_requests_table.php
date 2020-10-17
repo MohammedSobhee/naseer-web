@@ -38,6 +38,7 @@ class CreateRequestsTable extends Migration
             $table->timestamp('service_date'); //موعد تقديم الخدمة
 
             $table->longText('contract')->nullable();
+            $table->integer('contract_status')->default(0); // 0 didn't edit, 1 edited by service provider, 2 edited by client
 
             $table->enum('status', ['new', 'assigned', 'completed', 'canceled'])->default('new');
             $table->boolean('is_active')->default(true);
