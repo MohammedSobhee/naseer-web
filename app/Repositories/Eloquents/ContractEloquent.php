@@ -157,6 +157,7 @@ class ContractEloquent implements Repository
             $contract_field->save();
 
             $this->model->find($id)->update(['is_completed' => true]);
+
             return response_api(true, 200, trans('app.success'), $contract_field);
 
         }

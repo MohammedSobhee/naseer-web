@@ -98,4 +98,9 @@ class ContractController extends Controller
     {
         return $this->contract->deleteField($id);
     }
+
+    public function delete($id)
+    {
+        return $this->contract->delete($id);
+    }
 }
