@@ -38,7 +38,7 @@ class ContractEloquent implements Repository
             ->addColumn('services', function ($contract) {
 
                 $services = $contract->Services->pluck('name')->toArray();
-                $services = implode($services);
+                $services = implode(',', $services);
                 return $services;
             })->editColumn('is_completed', function ($contract) {
                 if ($contract->is_completed)
@@ -54,7 +54,7 @@ class ContractEloquent implements Repository
                                                                                     <i class="fa fa-trash"></i>
                                                                                 </a>';
             })->addIndexColumn()
-            ->rawColumns(['action'])->toJson();
+            ->rawColumns(['action', 'is_completed'])->toJson();
     }
 
     function export()
