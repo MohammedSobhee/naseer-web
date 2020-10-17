@@ -6,11 +6,13 @@
         </div>
         <div class="actions">
             @if($order->status == 'assigned')
-                <a href="{{url(admin_vw().'/order-contract/'.$order->id)}}"
-                   class="btn btn-circle btn-info order-contract-mdl">
-                    <i class="fa fa-file"></i>
-                    <span class="hidden-xs"> عقد الاتفاق </span>
-                </a>
+                {{--                <a href="{{url(admin_vw().'/order-contract/'.$order->id)}}"--}}
+                {{--                   class="btn btn-circle btn-info order-contract-mdl">--}}
+                {{--                    <i class="fa fa-file"></i>--}}
+                {{--                    <span class="hidden-xs"> عقد الاتفاق </span>--}}
+                {{--                </a>--}}
+                <a class="btn purple btn-outline sbold" data-toggle="modal" href="#contract_mdl"> عقد الاتفاق </a>
+
             @endif
         </div>
     </div>
@@ -459,3 +461,19 @@
     </div>
 
 </div>
+
+<!-- /.modal -->
+<div class="modal fade bs-modal-lg" id="contract_mdl" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">عقد الاتفاق</h4>
+            </div>
+            <div class="modal-body"> {!! $order->contract ?? '' !!} </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">أغلاق</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
