@@ -90,6 +90,8 @@ class ContractEloquent implements Repository
 
             $request->contract = $contract_text;
             $request->save();
+            return response_api(true, 422, trans('app.success'));
+
         }
 
         return response_api(false, 422, trans('app.error'));
