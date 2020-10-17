@@ -147,8 +147,8 @@ class NotificationEloquent implements Repository
     function delete($id)
     {
         // TODO: Implement delete() method.
-        $notification = $this->model->find($id);
-        if ($notification->delete()) {
+        $notification = $this->model->where('action', 'public')->find($id);
+        if (isset($notification) && $notification->delete()) {
             return response_api(true, 200, trans('app.success'), []);
         }
         return response_api(false, 422, null, []);
