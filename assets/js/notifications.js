@@ -101,7 +101,7 @@ $(document).ready(function () {
 
                                 if (data.status) {
                                     toastr['success'](data.message, '');
-                                    contracts_tbl.api().ajax.reload();
+                                    notification_tbl.api().ajax.reload();
                                 } else {
                                     toastr['error'](data.message);
                                 }
