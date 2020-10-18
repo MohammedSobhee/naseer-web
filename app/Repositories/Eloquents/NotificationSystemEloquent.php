@@ -160,6 +160,10 @@ class NotificationSystemEloquent
                 return trans(notification_trans() . '.canceled_order');
             case 'new_offer':
                 return trans(notification_trans() . '.new_offer');
+            case 'edit_contract_client':
+                return trans(notification_trans() . '.edit_contract_client');
+            case 'edit_contract_provider':
+                return trans(notification_trans() . '.edit_contract_provider');
             default:
                 return trans(notification_trans() . '.chat'); //chat user // action_id : auth id
         }

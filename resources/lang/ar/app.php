@@ -37,6 +37,8 @@ return [
         'assigned_driver' => 'تمت الموافقة على عرضك',
 //        'canceled_order' => 'تم ',
         'completed_order' => 'تم الانتهاء من الطلب',
+        'edit_contract_client' => 'قام صاحب الطلب بتعديل على العقد',
+        'edit_contract_provider' => 'قام مزود الخدمة بتعديل على العقد',
         'chat' => 'رسالة جديدة',
     ],
 ];

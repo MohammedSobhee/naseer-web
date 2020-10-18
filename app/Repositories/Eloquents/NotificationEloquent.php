@@ -227,6 +227,7 @@ class NotificationEloquent implements Repository
         $notification->action_id = null;
         $notification->seen = 0;
         $notification->save();
+        
         return $this->notificationSystem->FCM_Topic($attributes['message'], $notification);
     }
 }

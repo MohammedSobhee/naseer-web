@@ -15,6 +15,7 @@ class Request extends Model
         'city_id' => 'integer',
         'service_id' => 'integer',
         'level' => 'integer',
+        'contract_status' => 'integer',
         'is_active' => 'boolean',
         'is_edit' => 'boolean',
 

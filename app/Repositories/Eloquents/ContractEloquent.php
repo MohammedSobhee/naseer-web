@@ -19,11 +19,12 @@ use App\Request;
 class ContractEloquent implements Repository
 {
 
-    private $model;
+    private $model, $notification;
 
-    public function __construct(Contract $model)
+    public function __construct(Contract $model, NotificationSystemEloquent $notification)
     {
         $this->model = $model;
+        $this->notification = $notification;
 
     }
 
@@ -92,9 +93,17 @@ class ContractEloquent implements Repository
             $request->contract = $contract_text;
             $request->contract_status = (auth()->user()->type == 'user') ? 2 : 1;
 
-            $request->save();
-            return response_api(true, 422, trans('app.success'), new OrderResource($request));
+            if ($request->save()) {
+                $receiver = (auth()->user()->type == 'user') ? 2 : $request->user_id;
 
+                if (auth()->user()->type == 'user')
+                    $this->notification->sendNotification(auth()->user()->id, $receiver, $request->id, 'edit_contract_client');
+                else
+                    $this->notification->sendNotification(auth()->user()->id, $receiver, $request->id, 'edit_contract_provider');
+
+                return response_api(true, 422, trans('app.success'), new OrderResource($request));
+
+            }
         }
 
         return response_api(false, 422, trans('app.error'), empObj());
