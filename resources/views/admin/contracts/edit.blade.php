@@ -111,6 +111,10 @@
                                                        value="{{$field->hint}}"/>
                                             </div>
 
+                                            <a href="{{url(admin_vw().'/contracts/edit-field/'.$field->id)}}"
+                                               class="btn btn-success save  add-field mt-repeater-delete">
+                                                <i class="fa fa-check"></i> حفظ</a>
+
                                             <div class="mt-repeater-input">
                                                 <a href="{{url(admin_vw().'/contracts/delete-field/'.$field->id)}}"
                                                    data-repeater-delete
@@ -142,7 +146,7 @@
                                         <div class="mt-repeater-input">
                                             <label class="control-label">تلميح</label>
                                             <br/>
-                                            <input type="text" name="hint" id="hint" class="form-control"/>
+                                            <input type="text" name="hint" id="hint" class="form-control" readonly/>
                                         </div>
 
                                         <div class="mt-repeater-input">

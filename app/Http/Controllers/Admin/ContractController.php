@@ -94,6 +94,11 @@ class ContractController extends Controller
         return $this->contract->addField($request->all(), $id);
     }
 
+    public function editField(CreateFieldRequest $request, $id)
+    {
+        return $this->contract->editField($request->all(), $id);
+    }
+
     public function deleteField($id)
     {
         return $this->contract->deleteField($id);

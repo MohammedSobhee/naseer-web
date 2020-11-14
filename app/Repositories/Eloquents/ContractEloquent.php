@@ -80,7 +80,7 @@ class ContractEloquent implements Repository
         $contract = Contract::find($attributes['contract']['contract_id']);
 
         if (isset($request) && isset($contract)) {
-            $offer = $request->Offers()->where('status','accept')->first();
+            $offer = $request->Offers()->where('status', 'accept')->first();
 
             dd();
             $contract_text = $contract->text;
@@ -185,6 +185,21 @@ class ContractEloquent implements Repository
             $contract_field->save();
             $this->model->where('id', $id)->update(['is_completed' => true]);
 
+            return response_api(true, 200, trans('app.success'), $contract_field);
+
+        }
+        return response_api(false, 422, trans('app.error'));
+
+    }
+
+    function editField(array $attributes, $id)
+    {
+
+        $contract_field = ContractField::find($id);
+        $contract_field->type = $attributes['type'];
+        $contract_field->hint = $attributes['hint'];
+        if ($contract_field->save()) {
+            $this->model->where('id', $id)->update(['is_completed' => true]);
             return response_api(true, 200, trans('app.success'), $contract_field);
 
         }

@@ -83,6 +83,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('/contracts/edit-contract/{id}', 'ContractController@completeContract');
     Route::put('/contracts/edit-contract/{id}', 'ContractController@update');
     Route::post('/contracts/add-field/{contract_id}', 'ContractController@addField');
+    Route::post('/contracts/edit-field/{id}', 'ContractController@editField');
     Route::delete('/contracts/delete-field/{contract_id}', 'ContractController@deleteField');
     Route::delete('/contracts/delete-contract/{contract_id}', 'ContractController@delete');
 
