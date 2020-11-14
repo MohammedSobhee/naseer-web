@@ -107,7 +107,7 @@
                                             <div class="mt-repeater-input">
                                                 <label class="control-label">تلميح</label>
                                                 <br/>
-                                                <input type="text" name="hint" id="hint" class="form-control" readonly
+                                                <input type="text" name="hint" id="hint" class="form-control"
                                                        value="{{$field->hint}}"/>
                                             </div>
 
