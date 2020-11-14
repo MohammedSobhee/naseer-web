@@ -157,7 +157,7 @@ $(document).ready(function () {
 
 
     });
-    $(document).on('click', '.add-field', function (event) {
+    $(document).on('click', '.add-field,.edit-field', function (event) {
 
         event.preventDefault();
 
@@ -165,6 +165,7 @@ $(document).ready(function () {
         var action = _this.attr('href');
         var type = _this.closest('.mt-repeater-item').find('#type').val();
         var slug = _this.closest('.mt-repeater-item').find('#slug').val();
+        var hint = _this.closest('.mt-repeater-item').find('#hint').val();
         //do something else
         _this.find('i').addClass('fa-spinner fa-spin');
 
@@ -172,7 +173,7 @@ $(document).ready(function () {
             url: action,
             type: 'POST',
             dataType: 'json',
-            data: {_token: csrf_token, type: type, slug: slug},
+            data: {_token: csrf_token, type: type, slug: slug, hint: hint},
             success: function (data) {
 
                 if (data.status) {

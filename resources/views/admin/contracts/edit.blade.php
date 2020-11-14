@@ -113,7 +113,7 @@
 
                                             <div class="mt-repeater-input">
                                                 <a href="{{url(admin_vw().'/contracts/edit-field/'.$field->id)}}"
-                                                   class="btn btn-success save  add-field mt-repeater-delete">
+                                                   class="btn btn-success save  edit-field mt-repeater-delete">
                                                     <i class="fa fa-check"></i> حفظ</a>
                                                 <a href="{{url(admin_vw().'/contracts/delete-field/'.$field->id)}}"
                                                    data-repeater-delete
