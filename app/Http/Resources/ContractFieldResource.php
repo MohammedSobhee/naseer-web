@@ -17,6 +17,7 @@ class ContractFieldResource extends JsonResource
         return [
             'slug' => $this->slug,
             'type' => $this->type,
+            'hint' => $this->hint,
         ];
     }
 }

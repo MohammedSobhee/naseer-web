@@ -81,12 +81,11 @@ class ContractEloquent implements Repository
 
         if (isset($request) && isset($contract)) {
             $offer = $request->Offers()->where('status', 'accept')->first();
-
-            dd();
             $contract_text = $contract->text;
             if (isset($request->contract)) {
                 $contract_text = $request->contract;
             }
+
             foreach ($attributes['contract']['fields'] as $field) {
                 $contract_text = str_replace($field['slug'], $field['value'], $contract_text);
             }
@@ -96,7 +95,7 @@ class ContractEloquent implements Repository
 
             if ($request->save()) {
 
-                $receiver = (auth()->user()->type == 'user') ? 2 : $request->user_id;
+                $receiver = (auth()->user()->type == 'user') ? $offer->service_provider_id : $request->user_id;
 
                 if (auth()->user()->type == 'user')
                     $this->notification->sendNotification(auth()->user()->id, $receiver, $request->id, 'edit_contract_client');
