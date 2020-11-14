@@ -40,7 +40,7 @@ class CreateRequestsTable extends Migration
             $table->longText('contract')->nullable();
             $table->integer('contract_status')->default(0); // 0 didn't edit, 1 edited by service provider, 2 edited by client
 
-            $table->enum('status', ['new', 'assigned', 'completed', 'canceled'])->default('new');
+            $table->enum('status', ['new', 'initial_assigned', 'assigned', 'completed', 'canceled'])->default('new'); // initial_assigned client just choose service provider
             $table->boolean('is_active')->default(true);
             $table->boolean('is_edit')->default(false);
 

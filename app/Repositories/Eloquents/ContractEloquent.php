@@ -79,9 +79,10 @@ class ContractEloquent implements Repository
         $request = Request::find($attributes['contract']['request_id']);
         $contract = Contract::find($attributes['contract']['contract_id']);
 
-
         if (isset($request) && isset($contract)) {
+            $offer = $request->Offers()->where('status','accept')->first();
 
+            dd();
             $contract_text = $contract->text;
             if (isset($request->contract)) {
                 $contract_text = $request->contract;
@@ -94,6 +95,7 @@ class ContractEloquent implements Repository
             $request->contract_status = (auth()->user()->type == 'user') ? 2 : 1;
 
             if ($request->save()) {
+
                 $receiver = (auth()->user()->type == 'user') ? 2 : $request->user_id;
 
                 if (auth()->user()->type == 'user')
@@ -177,6 +179,7 @@ class ContractEloquent implements Repository
             $contract_field = new ContractField();
         $contract_field->contract_id = $id;
         $contract_field->type = $attributes['type'];
+        $contract_field->hint = $attributes['hint'];
         if ($contract_field->save()) {
             $contract_field->slug = 'FLDNM' . $contract_field->id;
             $contract_field->save();

@@ -148,7 +148,7 @@ $(document).ready(function () {
         var constant_name = _this.closest('tr').find("td:eq(2)").text();
 
         bootbox.dialog({
-            message: "هل انت متأكد من حذف (" + constant_name + ")؟ <span class='label label-danger'> لا يمكن التراجع عن العملية</span>",
+            message: "هل انت متأكد من حذف (" + constant_name + ")? <span class='label label-danger'> لا يمكن التراجع عن العملية</span>",
             title: "تأكيد عملية الحذف!",
             buttons: {
 

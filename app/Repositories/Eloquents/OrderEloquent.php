@@ -551,7 +551,6 @@ class OrderEloquent extends Uploader implements Repository
 
     public function changeStatus(array $attributes)
     {
-
         $request = $this->model->find($attributes['request_id']);
         $request->status = $attributes['status'];
 

@@ -105,6 +105,13 @@
                                             </div>
 
                                             <div class="mt-repeater-input">
+                                                <label class="control-label">تلميح</label>
+                                                <br/>
+                                                <input type="text" name="hint" id="hint" class="form-control" readonly
+                                                       value="{{$field->hint}}"/>
+                                            </div>
+
+                                            <div class="mt-repeater-input">
                                                 <a href="{{url(admin_vw().'/contracts/delete-field/'.$field->id)}}"
                                                    data-repeater-delete
                                                    class="btn btn-danger mt-repeater-delete delete-field">
@@ -130,6 +137,12 @@
                                             <input type="text" name="slug" id="slug" class="form-control" readonly
                                                    value=""/>
                                             <div class="hint">يتم تحديدها بعد حفظ القيمة</div>
+                                        </div>
+
+                                        <div class="mt-repeater-input">
+                                            <label class="control-label">تلميح</label>
+                                            <br/>
+                                            <input type="text" name="hint" id="hint" class="form-control" readonly/>
                                         </div>
 
                                         <div class="mt-repeater-input">
