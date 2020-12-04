@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\City;
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\StoreProviderRequest;
 use App\Http\Requests\Admin\User\UpdateProviderRequest;
@@ -11,6 +12,7 @@ use App\Repositories\Eloquents\UserEloquent;
 use App\ServiceProviderType;
 use App\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -133,6 +135,6 @@ class UserController extends Controller
 
     public function export()
     {
-//        return $this->user->export();
+        return Excel::download(new UsersExport(), 'users.xlsx');
     }
 }

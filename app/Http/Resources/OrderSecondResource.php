@@ -66,8 +66,6 @@ class OrderSecondResource extends JsonResource
             'client' => new ProfileResource($this->User()->first()),
             'data_request' => $data,
             'contract_fields' => $contract
-
-
         ];
     }
 

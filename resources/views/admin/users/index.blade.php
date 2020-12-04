@@ -27,7 +27,7 @@
                 </div>
                 <div class="portlet-body">
                     <div class="table-container">
-                        {!! Form::open(['method'=>'POST','url'=>url(admin_vw().'/users/export')]) !!}
+                        {!! Form::open(['method'=>'POST','url'=>url(admin_users_url().'/export')]) !!}
                         {{--                        <form method="POST" action="#">--}}
                         <table class="table table-striped table-bordered table-hover table-checkable"
                                id="datatable_products">
@@ -81,6 +81,11 @@
                                            title="فلترة">
                                             <i class="fa fa-search"></i>
                                         </a>
+                                        <button type="submit"
+                                                class="btn btn-sm btn-info btn-circle btn-icon-only"
+                                                title="Export">
+                                            <i class="fa fa-file-excel-o"></i>
+                                        </button>
                                         <a href="javascript:;"
                                            class="btn btn-sm btn-danger btn-circle btn-icon-only filter-cancel"
                                            title="افراغ الخانات">
@@ -117,7 +122,7 @@
                             <th> اسم المستخدم</th>
                             <th> الجنس</th>
                             <th> البريد الالكتروني</th>
-{{--                            <th> تحقق البريد الالكتروني</th>--}}
+                            {{--                            <th> تحقق البريد الالكتروني</th>--}}
                             <th> رقم الهاتف</th>
                             <th> تحقق الهاتف</th>
                             <th>المدينة</th>

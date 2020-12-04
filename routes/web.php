@@ -64,6 +64,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::post('/service-provider', 'UserController@storeProvider');
     Route::get('/service-provider/{id}', 'UserController@editProvider');
     Route::put('/service-provider/{id}', 'UserController@updateProvider');
+
     Route::get('/users', 'UserController@index');
     Route::get('/users/{id}/view', 'UserController@profile');
     Route::get('/users/user-data/{type}', 'UserController@anyData');
@@ -71,6 +72,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::put('/users/user-status', 'UserController@userActive');
     Route::put('/users/approval-provider-edits/{id}', 'UserController@confirmUpdateProvider');
     Route::put('/users/reject-provider-edits/{id}', 'UserController@rejectUpdateProvider');
+    Route::post('/users/export', 'UserController@export');
 
     Route::get('/rates', 'RateController@index');
     Route::get('/rates/rate-data', 'RateController@anyData');
