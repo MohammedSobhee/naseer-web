@@ -26,6 +26,7 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping
 //    `name`, `phone`, `country_code`, `email`, `email_verified_at`,
 // `password`, `verification_code`, `is_verify`, `photo`, `gender`,
 // `type`, `is_active`, `city_id`, `is_completed`, `is_edit`, `master_id`
+
     /**
      * @inheritDoc
      */

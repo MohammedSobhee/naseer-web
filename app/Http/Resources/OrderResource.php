@@ -18,6 +18,8 @@ class OrderResource extends JsonResource
     public function toArray($request)
     {
         $subService = null;
+        $contract = null;
+
         if (isset($this->service_id)) {
             if ($this->service_id == 1) {
                 $subService = new CourtAndLawsuitResource($this->CourtAndLawsuit()->first());
@@ -39,7 +41,6 @@ class OrderResource extends JsonResource
                 $subService = new AssignExpertResource($this->AssignExpert()->first());
             }
 
-            $contract = null;
             $contract_service = ContractService::where('service_id', $this->service_id)->first();
             if (isset($contract_service)) {
                 $service_id = $this->service_id;
