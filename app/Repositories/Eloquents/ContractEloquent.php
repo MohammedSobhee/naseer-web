@@ -82,13 +82,13 @@ class ContractEloquent implements Repository
         if (isset($request) && isset($contract)) {
             $offer = $request->Offers()->where('status', 'accept')->first();
             $contract_text = $contract->text;
+
             if (isset($request->contract)) {
                 $contract_text = $request->contract;
             }
 
-            foreach ($attributes['contract']['fields'] as $field) {
+            foreach ($attributes['contract']['fields'] as $field)
                 $contract_text = str_replace($field['slug'], '<u>' . $field['value'] . '</u>', $contract_text);
-            }
 
             $request->contract = $contract_text;
             $request->contract_status = (auth()->user()->type == 'user') ? 2 : 1;
