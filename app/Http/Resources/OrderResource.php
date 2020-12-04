@@ -70,8 +70,6 @@ class OrderResource extends JsonResource
             'payment_prefer_lbl' => __('app.payment_prefer.' . $this->payment_prefer),
             'service_date' => $this->service_date,
             'status' => $this->status,
-            'contract' => $this->contract,
-            'contract_status' => $this->contract_status,
             'is_edit' => $this->is_edit,
             'offers_num' => $this->Offers()->count(),
             'offers' => OfferSecondResource::collection($this->Offers()->orderByDesc('created_at')->get()),
@@ -80,6 +78,8 @@ class OrderResource extends JsonResource
             'service' => new ServiceResource($this->Service()->first()),
             'client' => new ProfileResource($this->User()->first()),
             'data_request' => $subService,
+            'contract' => $this->contract,
+            'contract_status' => $this->contract_status,
             'contract_fields' => $contract
         ];
     }
