@@ -9,4 +9,6 @@ class RequestContractField extends Model
 {
     //
     use SoftDeletes;
+
+    protected $fillable = ['user_id', 'request_id', 'contract_id', 'contract_field_id', 'value'];
 }

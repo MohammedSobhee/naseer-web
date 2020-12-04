@@ -14,6 +14,7 @@ use App\ContractService;
 use App\Http\Resources\OrderResource;
 use App\Repositories\Interfaces\Repository;
 use App\Request;
+use App\RequestContractField;
 
 
 class ContractEloquent implements Repository
@@ -87,8 +88,22 @@ class ContractEloquent implements Repository
                 $contract_text = $request->contract;
             }
 
-            foreach ($attributes['contract']['fields'] as $field)
+            foreach ($attributes['contract']['fields'] as $field) {
+
+                // add  request contract field values
+                $request_contract_field = RequestContractField::where('user_id', auth()->user()->id)->where('request_id', $request->id)->where('contract_id', $contract->id)->where('contract_field_id', $field['field_id']);
+                if (!isset($request_contract_field))
+                    $request_contract_field = new RequestContractField();
+                $request_contract_field->user_id = auth()->user()->id;
+                $request_contract_field->request_id = $request->id;
+                $request_contract_field->contract_id = $contract->id;
+                $request_contract_field->contract_field_id = $field['field_id'];
+                $request_contract_field->value = $field['value'];
+                $request_contract_field->save();
+
+
                 $contract_text = str_replace($field['slug'], '<u>' . $field['value'] . '</u>', $contract_text);
+            }
 
             $request->contract = $contract_text;
             $request->contract_status = (auth()->user()->type == 'user') ? 2 : 1;

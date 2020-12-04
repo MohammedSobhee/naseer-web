@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Eloquents\OrderEloquent;
 use App\Request;
 use App\Service;
-
+use PDF;
 class RequestController extends Controller
 {
     private $order;
@@ -41,6 +41,18 @@ class RequestController extends Controller
             'order' => Request::with('City')->find($order_id),
         ];
         return view(admin_vw() . '.requests.offers', $data);
+    }
+
+    public function getContract($order_id)
+    {
+        $order = $this->order->getById($order_id);
+
+        $data = [
+            'title' => 'عقد اتفاق',
+            'content' => $order->contract
+        ];
+        $pdf = PDF::loadView('admin.contracts.pdf', $data);
+        return $pdf->stream('document.pdf');
     }
 
 }

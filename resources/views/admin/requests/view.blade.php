@@ -6,9 +6,13 @@
         </div>
         <div class="actions">
             @if($order->status == 'assigned' && $order->type == 'categorized')
-                <a class="btn btn-circle green btn-outline sbold" data-toggle="modal" href="#contract_mdl"> <i
-                        class="fa fa-file"></i> <span class="hidden-xs"> عقد الاتفاق </span> </a>
-
+                <a class="btn btn-circle purple btn-outline sbold" data-toggle="modal" href="#contract_mdl"> <i
+                        class="fa fa-file"></i> <span class="hidden-xs"> عرض عقد الاتفاق </span> </a>
+                <a href="{{url(admin_vw().'/requests/'.$order->id.'/contract')}}"
+                   class="btn green btn-circle btn-outline" target="_blank"><i
+                        class="fa fa-print"></i>
+                    طباعة عقد الاتفاق
+                </a>
             @endif
         </div>
     </div>
@@ -466,11 +470,45 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">عقد الاتفاق</h4>
             </div>
-            <div class="modal-body"> {!! $order->contract ?? '' !!} </div>
-            <div class="modal-footer">
-                <button type="button" class="btn red btn-outline" data-dismiss="modal">أغلاق</button>
+            <div class="modal-body" style="margin: 32px;">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="portlet-body form">
+                            <div class="alert alert-danger" role="alert" style="display: none"></div>
+
+                            <div class="form-body">
+                                {!! $order->contract ?? '' !!}
+
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <a href="{{url(admin_vw().'/requests/'.$order->id.'/contract')}}"
+                                               class="btn green btn-circle btn-outline" target="_blank"><i
+                                                    class="fa fa-print"></i>
+                                                طباعة
+                                            </a>
+                                            <button type="button" class="btn red btn-circle btn-outline"
+                                                    data-dismiss="modal">
+                                                <i class="fa fa-times"></i>
+                                                اغلاق
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            {{--            <div class="modal-footer">--}}
+            {{--                <a href="{{url(admin_vw().'/requests/'.$order->id.'/contract')}}"--}}
+            {{--                   class="btn green btn-outline" target="_blank">طباعة</a>--}}
+            {{--                <button type="button" class="btn red btn-outline" data-dismiss="modal">أغلاق</button>--}}
+
+            {{--            </div>--}}
         </div>
+
         <!-- /.modal-content -->
     </div>
 </div>

@@ -3,3 +3,7 @@
     font-weight: bolder !important;
     padding: 10px 0px !important;
 }
+
+.modal-footer {
+    text-align: right !important;
+}

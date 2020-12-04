@@ -99,6 +99,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::delete('/notifications/{id}', 'NotificationController@delete');
 
     Route::get('/requests/{order_id}/offers', 'OfferController@index');
+    Route::get('/requests/{order_id}/contract', 'RequestController@getContract');
     Route::get('/offers/offer-data/{order_id}', 'OfferController@anyData');
 
     Route::get('/settings', 'SettingController@index');
