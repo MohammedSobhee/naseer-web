@@ -17,7 +17,7 @@ class ContractResource extends JsonResource
         return [
             'id' => $this->id,
             'text' => $this->text,
-            'fields' => ContractFieldResource::collection($this->Fields()->where('type', auth()->user()->type)->get())
+            'fields' => ContractFieldResource::collection($this->Fields()->get())
         ];
     }
 }
