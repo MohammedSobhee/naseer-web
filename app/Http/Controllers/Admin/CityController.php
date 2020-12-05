@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\City;
+use App\Exports\Constant\CitiesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\City\CreateRequest;
 use App\Http\Requests\City\UpdateRequest;
 use App\Repositories\Eloquents\CityEloquent;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CityController extends Controller
 {
@@ -105,5 +107,10 @@ class CityController extends Controller
     {
 
         return $this->city->delete($id);
+    }
+
+    public function export()
+    {
+        return Excel::download(new CitiesExport(), 'cities.xlsx');
     }
 }

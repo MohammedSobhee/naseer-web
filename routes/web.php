@@ -132,6 +132,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
         Route::get('/intros/{id}/edit', 'IntroController@edit');
         Route::put('/intros/{id}/edit', 'IntroController@update');
         Route::delete('/intros/{id}', 'IntroController@delete');
+        Route::post('/intros/export', 'IntroController@export');
 
         Route::get('/countries', 'CountryController@index');
         Route::get('/countries-data', 'CountryController@anyData');
@@ -140,6 +141,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
         Route::get('/countries/{id}/edit', 'CountryController@edit');
         Route::put('/countries/{id}/edit', 'CountryController@update');
         Route::delete('/countries/{id}', 'CountryController@delete');
+        Route::post('/countries/export', 'CountryController@export');
 
         Route::get('/cities', 'CityController@index');
         Route::get('/cities-data', 'CityController@anyData');
@@ -148,6 +150,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
         Route::get('/cities/{id}/edit', 'CityController@edit');
         Route::put('/cities/{id}/edit', 'CityController@update');
         Route::delete('/cities/{id}', 'CityController@delete');
+        Route::post('/cities/export', 'CityController@export');
 
     });
 

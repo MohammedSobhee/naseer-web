@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\Constant\CountriesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Country\CreateRequest;
 use App\Http\Requests\Country\UpdateRequest;
 use App\Repositories\Eloquents\CountryEloquent;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CountryController extends Controller
 {
@@ -104,5 +106,10 @@ class CountryController extends Controller
     {
 
         return $this->country->delete($id);
+    }
+
+    public function export()
+    {
+        return Excel::download(new CountriesExport(), 'countries.xlsx');
     }
 }

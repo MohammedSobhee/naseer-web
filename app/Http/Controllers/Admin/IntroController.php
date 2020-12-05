@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\Constant\IntrosExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Intro\CreateRequest;
 use App\Http\Requests\Intro\UpdateRequest;
 use App\Intro;
 use App\Repositories\Eloquents\IntroEloquent;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class IntroController extends Controller
 {
@@ -115,5 +117,10 @@ class IntroController extends Controller
     {
 
         return $this->intro->delete($id);
+    }
+
+    public function export()
+    {
+        return Excel::download(new IntrosExport(), 'intros.xlsx');
     }
 }

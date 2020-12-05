@@ -28,7 +28,7 @@
                 </div>
                 <div class="portlet-body">
                     <div class="table-container">
-                        {!! Form::open(['method'=>'POST','url'=>url(admin_vw().'/service-provider-types/export')]) !!}
+                        {!! Form::open(['method'=>'POST','url'=>url(admin_constant_url().'/service-provider-types/export')]) !!}
                         <table class="table table-striped table-bordered table-hover table-checkable"
                                id="datatable_products">
                             <thead>

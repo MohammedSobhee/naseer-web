@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\ServiceProvidersExport;
+use App\Exports\Constant\ServiceProviderTypesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceProviderType\CreateRequest;
 use App\Http\Requests\ServiceProviderType\UpdateRequest;
 use App\Repositories\Eloquents\ServiceProviderTypeEloquent;
-use App\ServiceProviderType;
-use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ServiceProviderTypeController extends Controller
@@ -17,7 +15,6 @@ class ServiceProviderTypeController extends Controller
 
     public function __construct(ServiceProviderTypeEloquent $serviceProviderType)
     {
-//        parent::__construct();
         $this->serviceProviderType = $serviceProviderType;
     }
 
@@ -111,6 +108,6 @@ class ServiceProviderTypeController extends Controller
 
     public function export()
     {
-        return Excel::download(new ServiceProvidersExport(), 'service_types.xlsx');
+        return Excel::download(new ServiceProviderTypesExport(), 'service_types.xlsx');
     }
 }

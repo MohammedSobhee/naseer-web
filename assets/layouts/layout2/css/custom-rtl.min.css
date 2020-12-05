@@ -16,8 +16,3 @@
 .bootstrap-switch {
     border-radius: 20px;
 }
-
-.btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all).btn-sm {
-    font-size: 11px;
-    padding: 3px 8px;
-}
