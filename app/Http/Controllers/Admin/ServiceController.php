@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ServicesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Service\UpdateRequest;
 use App\Repositories\Eloquents\ServiceEloquent;
 use App\Service;
 use App\ServiceProviderType;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ServiceController extends Controller
 {
@@ -76,5 +78,10 @@ class ServiceController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         return $this->service->update($request->all(), $id);
+    }
+
+    public function export()
+    {
+        return Excel::download(new ServicesExport(), 'services.xlsx');
     }
 }

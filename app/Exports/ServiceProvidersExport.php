@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class UsersExport implements FromCollection, WithHeadings, WithMapping
+class ServiceProvidersExport implements FromCollection, WithHeadings, WithMapping
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -36,6 +36,7 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping
         }
         return $collection->get();
     }
+
     /**
      * @inheritDoc
      */
@@ -51,6 +52,12 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping
             'كود التحقق',
             'نوع المستخدم',
             'المدينة',
+            'العنوان',
+            'رقم الهوية',
+            'المهارات',
+            'نوع الترخيص',
+            'الترخيص',
+            'نوع مزود الخدمة',
         ];
     }
 
@@ -69,6 +76,12 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping
             $row->verification_code,
             ($row->type == 'user') ? 'عميل' : 'مزود خدمة',
             isset($row->City) ? $row->City->name : '',
+            isset($row->ServiceProvider) ? $row->ServiceProvider->address : '',
+            isset($row->ServiceProvider) ? $row->ServiceProvider->idno : '',
+            isset($row->ServiceProvider) ? $row->ServiceProvider->skill : '',
+            isset($row->ServiceProvider) && ($row->ServiceProvider->license_type == 'licensed') ? 'مرخّص' : 'غير مرخّص',
+            isset($row->ServiceProvider) ? $row->ServiceProvider->licensed : '',
+            isset($row->ServiceProvider) ? $row->ServiceProvider->ServiceProviderType->name : '',
         ];
     }
 }

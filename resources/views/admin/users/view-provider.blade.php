@@ -90,7 +90,7 @@
                                                                           name="is_active" data-id="{{$user->id}}"
                                                                           @if($user->is_active) checked
                                                                           @endif data-on-color="success"
-                                                                          data-size="mini" data-off-color="warning"></p>
+                                                                          data-size="mini" data-off-color="danger"></p>
                                 </div>
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">حالة الرخصة:</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static">  {{$user->ServiceProvider->license_type == 'licensed' ? 'مرخص' : 'غير مرخص' ?? ''}}  </p>
+                                    <p class="form-control-static">  {{isset($user->ServiceProvider) && $user->ServiceProvider->license_type == 'licensed' ? 'مرخص' : 'غير مرخص' ?? ''}}  </p>
                                 </div>
                             </div>
                         </div>
@@ -291,7 +291,7 @@
                                                                               data-id="{{$user->Slave->id}}"
                                                                               @if($user->Slave->is_active) checked
                                                                               @endif data-on-color="success"
-                                                                              data-size="mini" data-off-color="warning">
+                                                                              data-size="mini" data-off-color="danger">
                                         </p>
                                     </div>
                                 </div>

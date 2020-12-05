@@ -67,6 +67,11 @@
                                            title="فلترة">
                                             <i class="fa fa-search"></i>
                                         </a>
+                                        <button type="submit"
+                                                class="btn btn-sm btn-default btn-circle btn-icon-only"
+                                                title="تصدير">
+                                            <i class="fa fa-file-excel-o"></i>
+                                        </button>
                                         <a href="javascript:;"
                                            class="btn btn-sm btn-danger btn-circle btn-icon-only filter-cancel"
                                            title="افراغ الخانات">
@@ -74,10 +79,10 @@
                                         </a>
 
 
-{{--                                        <button type="submit"--}}
-{{--                                                class="btn btn-sm btn-default btn-circle btn-icon-only filter-export margin-bottom" title="تصدير اكسل">--}}
-{{--                                            <i class="fa fa-file-excel-o"></i>--}}
-{{--                                        </button>--}}
+                                        {{--                                        <button type="submit"--}}
+                                        {{--                                                class="btn btn-sm btn-default btn-circle btn-icon-only filter-export margin-bottom" title="تصدير اكسل">--}}
+                                        {{--                                            <i class="fa fa-file-excel-o"></i>--}}
+                                        {{--                                        </button>--}}
 
                                     </div>
 
@@ -135,7 +140,7 @@
     <script src="{{url('/')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"
             type="text/javascript"></script>
     <!-- END PAGE LEVEL PLUGINS -->
-=    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    =    <!-- BEGIN THEME GLOBAL SCRIPTS -->
     <script src="{{url('/')}}/assets/global/scripts/app.min.js" type="text/javascript"></script>
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->

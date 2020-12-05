@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin;
+use App\Exports\AdminsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateAdminRequest;
 use App\Http\Requests\Admin\UpdateRequest;
 use App\Repositories\Eloquents\AdminEloquent;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -142,6 +144,11 @@ class AdminController extends Controller
     {
 
         return $this->admin->delete($id);
+    }
+
+    public function export()
+    {
+        return Excel::download(new AdminsExport(), 'admins.xlsx');
     }
 
 }

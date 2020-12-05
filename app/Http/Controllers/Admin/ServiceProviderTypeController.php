@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ServiceProvidersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceProviderType\CreateRequest;
 use App\Http\Requests\ServiceProviderType\UpdateRequest;
 use App\Repositories\Eloquents\ServiceProviderTypeEloquent;
 use App\ServiceProviderType;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ServiceProviderTypeController extends Controller
 {
@@ -105,5 +107,10 @@ class ServiceProviderTypeController extends Controller
     {
 
         return $this->serviceProviderType->delete($id);
+    }
+
+    public function export()
+    {
+        return Excel::download(new ServiceProvidersExport(), 'service_types.xlsx');
     }
 }

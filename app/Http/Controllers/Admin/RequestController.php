@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\RequestsExport;
 use App\Http\Controllers\Controller;
 use App\Repositories\Eloquents\OrderEloquent;
 use App\Request;
 use App\Service;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+
 class RequestController extends Controller
 {
     private $order;
@@ -55,4 +58,8 @@ class RequestController extends Controller
         return $pdf->stream('document.pdf');
     }
 
+    public function export()
+    {
+        return Excel::download(new RequestsExport(), 'requests.xlsx');
+    }
 }

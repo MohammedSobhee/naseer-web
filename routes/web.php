@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('admins/create', 'AdminController@create');
     Route::put('admins/{id}/edit', 'AdminController@update');
     Route::post('admins/create', 'AdminController@store');
+    Route::post('/admins/export', 'AdminController@export');
 
     Route::get('/service-providers', 'UserController@providers');
     Route::get('/service-provider', 'UserController@createProvider');
@@ -77,6 +78,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('/rates', 'RateController@index');
     Route::get('/rates/rate-data', 'RateController@anyData');
     Route::put('/rates/rate-status', 'RateController@rateApproved');
+    Route::post('/rates/export', 'RateController@export');
 
     Route::get('/contracts', 'ContractController@index');
     Route::get('/contracts/contract-data', 'ContractController@anyData');
@@ -92,6 +94,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('/requests', 'RequestController@index');
     Route::get('/requests/request-data', 'RequestController@anyData');
     Route::get('/requests/{id}', 'RequestController@requestDet');
+    Route::post('/requests/export', 'RequestController@export');
 
     Route::get('/notifications', 'NotificationController@index');
     Route::post('/general-notification/create', 'NotificationController@sendPublicNotification');
@@ -109,6 +112,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('/services/service-data', 'ServiceController@anyData');
     Route::get('services/{id}/edit', 'ServiceController@edit');
     Route::put('services/{id}/edit', 'ServiceController@update');
+    Route::post('/services/export', 'ServiceController@export');
 
     Route::group(['prefix' => 'constants'], function () {
 
@@ -119,6 +123,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
         Route::get('/service-provider-types/{id}/edit', 'ServiceProviderTypeController@edit');
         Route::put('/service-provider-types/{id}/edit', 'ServiceProviderTypeController@update');
         Route::delete('/service-provider-types/{id}', 'ServiceProviderTypeController@delete');
+        Route::post('/service-provider-types/export', 'ServiceProviderTypeController@export');
 
         Route::get('/intros', 'IntroController@index');
         Route::get('/intros-data', 'IntroController@anyData');

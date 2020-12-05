@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\City;
+use App\Exports\ServiceProvidersExport;
 use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\StoreProviderRequest;
@@ -73,6 +74,7 @@ class UserController extends Controller
         return view(admin_vw() . '.users.add-provider', $data);
 //        return $this->user->provider_create_mdl();
     }
+
     public function editProvider($id)
     {
 
@@ -135,6 +137,8 @@ class UserController extends Controller
 
     public function export()
     {
-        return Excel::download(new UsersExport(), 'users.xlsx');
+        if (\request()->get('type') == 'user')
+            return Excel::download(new UsersExport(), 'users.xlsx');
+        return Excel::download(new ServiceProvidersExport(), 'service_providers.xlsx');
     }
 }

@@ -29,6 +29,7 @@
                     <div class="table-container">
                         {!! Form::open(['method'=>'POST','url'=>url(admin_users_url().'/export')]) !!}
                         {{--                        <form method="POST" action="#">--}}
+                        <input type="hidden" class="form-control form-filter input-md" name="type" value="user">
                         <table class="table table-striped table-bordered table-hover table-checkable"
                                id="datatable_products">
                             <thead>
@@ -45,6 +46,7 @@
                             </tr>
                             <tr role="row" class="filter">
                                 <td></td>
+
                                 <td>
                                     <input type="text" class="form-control form-filter input-md" name="name"
                                            placeholder=" اسم المستخدم" id="name">
@@ -58,7 +60,7 @@
                                            placeholder="رقم الهاتف" id="phone">
                                 </td>
                                 <td>
-                                    <select class="form-control input-md is_active select" name="is_active"
+                                    <select class="form-control input-md is_verify select" name="is_verify"
                                             id="is_verify">
                                         <option value="">اختيار حالة التحقق</option>
                                         <option value="1">مفعّل</option>
@@ -82,8 +84,8 @@
                                             <i class="fa fa-search"></i>
                                         </a>
                                         <button type="submit"
-                                                class="btn btn-sm btn-info btn-circle btn-icon-only"
-                                                title="Export">
+                                                class="btn btn-sm btn-default btn-circle btn-icon-only"
+                                                title="تصدير">
                                             <i class="fa fa-file-excel-o"></i>
                                         </button>
                                         <a href="javascript:;"

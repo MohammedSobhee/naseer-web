@@ -7,3 +7,17 @@
 .modal-footer {
     text-align: right !important;
 }
+
+
+.bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-handle-on, .bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-handle-off, .bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-label {
+    line-height: 2.5;
+}
+
+.bootstrap-switch {
+    border-radius: 20px;
+}
+
+.btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all).btn-sm {
+    font-size: 11px;
+    padding: 3px 8px;
+}
