@@ -89,7 +89,7 @@ class ContractEloquent implements Repository
 
             foreach ($attributes['contract']['fields'] as $field) {
 
-                // add  request contract field values
+                // add request contract field values
                 $request_contract_field = RequestContractField::where('user_id', auth()->user()->id)->where('request_id', $request->id)->where('contract_id', $contract->id)->where('contract_field_id', $field['field_id'])->first();
                 if (!isset($request_contract_field))
                     $request_contract_field = new RequestContractField();
@@ -122,12 +122,12 @@ class ContractEloquent implements Repository
                     $this->notification->sendNotification(auth()->user()->id, $offer->service_provider_id, $offer->request_id, 'assigned');
 
                 }
-                return response_api(true, 422, trans('app.success'), new OrderResource($request));
+                return response_api(true, 422, __('app.success'), new OrderResource($request));
 
             }
         }
 
-        return response_api(false, 422, trans('app.error'), empObj());
+        return response_api(false, 422, __('app.error'), empObj());
 
     }
 
@@ -138,7 +138,7 @@ class ContractEloquent implements Repository
             $obj = $this->model->find($id);
             if (isset($obj))
                 return response_api(true, 200, null, $obj);
-            return response_api(false, 422, trans('app.not_data_found'), []);
+            return response_api(false, 422, __('app.not_data_found'), []);
         }
         return $this->model->find($id);
 
@@ -160,7 +160,7 @@ class ContractEloquent implements Repository
                 $contract_service->service_id = $service_id;
                 $contract_service->save();
             }
-            return response_api(true, 200, trans('app.success'), $contract);
+            return response_api(true, 200, __('app.success'), $contract);
         }
     }
 
@@ -182,10 +182,10 @@ class ContractEloquent implements Repository
                 $contract_service->save();
             }
 
-            return response_api(true, 200, trans('app.success'), $contract);
+            return response_api(true, 200, __('app.success'), $contract);
 
         }
-        return response_api(false, 422, trans('app.error'));
+        return response_api(false, 422, __('app.error'));
 
 
     }
@@ -204,10 +204,10 @@ class ContractEloquent implements Repository
             $contract_field->save();
             $this->model->where('id', $id)->update(['is_completed' => true]);
 
-            return response_api(true, 200, trans('app.success'), $contract_field);
+            return response_api(true, 200, __('app.success'), $contract_field);
 
         }
-        return response_api(false, 422, trans('app.error'));
+        return response_api(false, 422, __('app.error'));
 
     }
 
@@ -219,10 +219,10 @@ class ContractEloquent implements Repository
         $contract_field->hint = $attributes['hint'];
         if ($contract_field->save()) {
             $this->model->where('id', $id)->update(['is_completed' => true]);
-            return response_api(true, 200, trans('app.success'), $contract_field);
+            return response_api(true, 200, __('app.success'), $contract_field);
 
         }
-        return response_api(false, 422, trans('app.error'));
+        return response_api(false, 422, __('app.error'));
 
     }
 
@@ -231,7 +231,7 @@ class ContractEloquent implements Repository
         // TODO: Implement delete() method.
         $obj = ContractField::find($id);
         if (isset($obj) && $obj->delete()) {
-            return response_api(true, 200, trans('app.deleted'), []);
+            return response_api(true, 200, __('app.deleted'), []);
         }
         return response_api(false, 422, null, []);
 
@@ -242,7 +242,7 @@ class ContractEloquent implements Repository
         // TODO: Implement delete() method.
         $obj = $this->model->find($id);
         if (isset($obj) && $obj->delete()) {
-            return response_api(true, 200, trans('app.deleted'), []);
+            return response_api(true, 200, __('app.deleted'), []);
         }
         return response_api(false, 422, null, []);
 
