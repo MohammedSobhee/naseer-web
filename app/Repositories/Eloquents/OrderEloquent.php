@@ -130,7 +130,6 @@ class OrderEloquent extends Uploader implements Repository
             $collection = $this->model->where('user_id', auth()->user()->id)->where('type', $attributes['type']);
         else // for service provider
         {
-
             $collection = $this->model->where('type', $attributes['type']);
 
             if ($attributes['type'] == 'categorized') {

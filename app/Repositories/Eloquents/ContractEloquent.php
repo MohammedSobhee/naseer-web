@@ -76,12 +76,11 @@ class ContractEloquent implements Repository
     function editContract(array $attributes)
     {
         // TODO: Implement getAll() method.
-
         $request = Request::find($attributes['contract']['request_id']);
         $contract = Contract::find($attributes['contract']['contract_id']);
 
         if (isset($request) && isset($contract)) {
-            $offer = $request->Offers()->where('status', 'accept')->first();
+            $offer = $request->Offers()->where('status', 'accepted')->first();
             $contract_text = $contract->text;
 
             if (isset($request->contract)) {
