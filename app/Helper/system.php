@@ -198,17 +198,17 @@ function message($status_code)
 {
     switch ($status_code) {
         case 200:
-            return trans('app.success');
+            return __('app.success');
         case 400:
-            return trans('app.not_data_found');
+            return __('app.not_data_found');
         case 401:
-            return trans('app.invalid_token');
+            return __('app.invalid_token');
         case 404:
-            return trans('app.invalid_route');
+            return __('app.invalid_route');
         case 422:
-            return trans('app.client_input_error');//'Client input error.';
+            return __('app.client_input_error');//'Client input error.';
         case 500:
-            return trans('app.server_error');//'Something went wrong. Please try again later.';
+            return __('app.server_error');//'Something went wrong. Please try again later.';
     }
     return 'Sorry! You do not have permission.';
 }

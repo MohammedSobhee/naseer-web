@@ -124,31 +124,24 @@ class OrderEloquent extends Uploader implements Repository
         $page_size = isset($attributes['page_size']) ? $attributes['page_size'] : max_pagination(10);
         $page_number = isset($attributes['page_number']) ? $attributes['page_number'] : 1;
 
-
         if (auth()->user()->type == 'user')
             // for client
             $collection = $this->model->where('user_id', auth()->user()->id)->where('type', $attributes['type']);
         else // for service provider
         {
             $collection = $this->model->where('type', $attributes['type']);
-
             if ($attributes['type'] == 'categorized') {
-
                 $service_ids = Service::where('service_provider_type_id', auth()->user()->ServiceProvider->service_provider_type_id)->pluck('id');
-
                 $collection = $collection->whereIn('service_id', $service_ids);
             }
-
             $provider_offer_orders = Offer::where('service_provider_id', auth()->user()->id)->pluck('request_id')->toArray();
             $collection = $collection->whereNotIn('id', $provider_offer_orders);
-
         }
 
-        if (isset($attributes['status'])) {
+        if (isset($attributes['status']))
             $collection = $collection->where('status', $attributes['status']);
-        }
-        $count = $collection->count();
 
+        $count = $collection->count();
         $page_count = page_count($count, $page_size);
         $page_number = $page_number - 1;
         $page_number = $page_number > $page_count ? $page_number = $page_count - 1 : $page_number;
@@ -167,7 +160,6 @@ class OrderEloquent extends Uploader implements Repository
         $page_number = isset($attributes['page_number']) ? $attributes['page_number'] : 1;
 
         $collection = $this->model;
-
         $orders = Offer::where('service_provider_id', auth()->user()->id)->where('status', 'accepted')->pluck('request_id');
         $collection = $collection::whereIn('id', $orders)->orderByDesc('service_date');
 
@@ -193,7 +185,7 @@ class OrderEloquent extends Uploader implements Repository
             $obj = $this->model->find($id);
             if (isset($obj))
                 return response_api(true, 200, null, new OrderEditResource($obj));
-            return response_api(false, 422, trans('app.not_data_found'), []);
+            return response_api(false, 422, __('app.not_data_found'), []);
         }
         return $this->model->find($id);
 
@@ -206,7 +198,7 @@ class OrderEloquent extends Uploader implements Repository
             $obj = $this->model->find($id);
             if (isset($obj))
                 return response_api(true, 200, null, new OrderResource($obj));
-            return response_api(false, 422, trans('app.not_data_found'), []);
+            return response_api(false, 422, __('app.not_data_found'), []);
         }
         return $this->model->find($id);
 
@@ -215,7 +207,6 @@ class OrderEloquent extends Uploader implements Repository
     function create(array $attributes)
     {
         // TODO: Implement create() method.
-
         $request = new Request();
         $request->city_id = $attributes['city_id'];
         $request->user_id = auth()->user()->id;
@@ -458,12 +449,10 @@ class OrderEloquent extends Uploader implements Repository
                     $request->preferred_outcomes_audio = null;
                 }
                 $request->save();
-
                 return response_api(true, 200, 'تم تعديل الطلب بنجاح', new OrderResource($request));// . ',' . trans('app.sent_email_verification')
             }
         }
         return response_api(false, 422, null, empObj());// . ',' . trans('app.sent_email_verification')
-
     }
 
     function delete($id)
@@ -471,10 +460,9 @@ class OrderEloquent extends Uploader implements Repository
         // TODO: Implement delete() method.
         $obj = $this->model->where('user_id', auth()->user()->id)->find($id);
         if (isset($obj) && $obj->delete()) {
-            return response_api(true, 200, trans('app.cancel_request'), []);
+            return response_api(true, 200, __('app.cancel_request'), []);
         }
         return response_api(false, 422, null, []);
-
     }
 
     public function changeStatus(array $attributes)
