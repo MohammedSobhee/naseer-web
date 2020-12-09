@@ -151,21 +151,23 @@ class NotificationSystemEloquent
 
         switch ($action) {
             case 'new_order':
-                return trans(notification_trans() . '.new_order');
-            case 'assigned_driver':
-                return trans(notification_trans() . '.assigned_driver'); // //
+                return __(notification_trans() . '.new_order');
+            case 'assigned':
+                return __(notification_trans() . '.assigned'); // //
+            case 'initial_assigned':
+                return __(notification_trans() . '.initial_assigned'); // //
             case 'completed_order':
-                return trans(notification_trans() . '.completed_order');
+                return __(notification_trans() . '.completed_order');
             case 'canceled_order':
-                return trans(notification_trans() . '.canceled_order');
+                return __(notification_trans() . '.canceled_order');
             case 'new_offer':
-                return trans(notification_trans() . '.new_offer');
+                return __(notification_trans() . '.new_offer');
             case 'edit_contract_client':
-                return trans(notification_trans() . '.edit_contract_client');
+                return __(notification_trans() . '.edit_contract_client');
             case 'edit_contract_provider':
-                return trans(notification_trans() . '.edit_contract_provider');
+                return __(notification_trans() . '.edit_contract_provider');
             default:
-                return trans(notification_trans() . '.chat'); //chat user // action_id : auth id
+                return __(notification_trans() . '.chat'); //chat user // action_id : auth id
         }
     }
 

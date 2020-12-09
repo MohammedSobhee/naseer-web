@@ -16,7 +16,7 @@ class CreateNotificationsTable extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sender_id')->nullable();
-            $table->enum('action', ['new_order', 'assigned_driver', 'completed_order', 'canceled_order', 'new_offer','edit_contract_client', 'edit_contract_provider', 'chat', 'public']);
+            $table->enum('action', ['new_order', 'assigned', 'initial_assigned', 'completed_order', 'canceled_order', 'new_offer', 'edit_contract_client', 'edit_contract_provider', 'chat', 'public']);
 
             $table->unsignedBigInteger('action_id')->nullable();
             $table->longText('message')->nullable(); // for public action

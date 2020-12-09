@@ -107,6 +107,8 @@ class ContractEloquent implements Repository
 
             $request->contract = $contract_text;
             $request->contract_status = (auth()->user()->type == 'user') ? 2 : 1;
+            if ($request->contract_status == 2)
+                $request->status = 'assigned';
 
             if ($request->save()) {
 
@@ -117,6 +119,10 @@ class ContractEloquent implements Repository
                 else
                     $this->notification->sendNotification(auth()->user()->id, $receiver, $request->id, 'edit_contract_provider');
 
+                if ($request->contract_status == 2) {
+                    $this->notification->sendNotification(auth()->user()->id, $offer->service_provider_id, $offer->request_id, 'assigned');
+
+                }
                 return response_api(true, 422, trans('app.success'), new OrderResource($request));
 
             }
