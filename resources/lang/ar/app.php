@@ -34,7 +34,7 @@ return [
         'new_order' => 'طلب جدید',
         'new_offer' => 'تم تقديم عرض على طلبك',
         'assigned' => 'تم الموافقة على عرضك',
-        'initial_assigned' => 'الموافقة مبدئية وبانتظار توقيع العقد',
+        'initial_assigned' => 'الموافقة مبدئية وبإنتظار توقيع العقد',
 //        'canceled_order' => 'تم ',
         'completed_order' => 'تم الانتهاء من الطلب',
         'edit_contract_client' => 'قام صاحب الطلب بتعديل على العقد',
