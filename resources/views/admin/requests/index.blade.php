@@ -80,6 +80,8 @@
                                         <option value="new">جديدة</option>
                                         <option value="completed">منتهية</option>
                                         <option value="canceled">ملغاة</option>
+                                        <option value="assigned">قيد التنفيذ</option>
+                                        <option value="initial_assigned">بإنتظار توقيع العقد</option>
                                     </select>
                                 </td>
                                 <td>

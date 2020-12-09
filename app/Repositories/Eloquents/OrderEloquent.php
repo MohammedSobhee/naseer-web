@@ -104,6 +104,8 @@ class OrderEloquent extends Uploader implements Repository
                     return '<span class="label label-danger">ملغاة</span>';
                 if ($request->status == 'assigned')
                     return '<span class="label label-primary">قيد التنفيذ</span>';
+                if ($request->status == 'initial_assigned')
+                    return '<span class="label label-info">بإنتظار توقيع العقد</span>';
             })
             ->addColumn('action', function ($request) {
                 return '<a href="' . url(admin_vw() . '/requests/' . $request->id) . '" class="btn btn-sm btn-success green btn-circle"
@@ -400,80 +402,6 @@ class OrderEloquent extends Uploader implements Repository
 
                 event(new UpdateRequestEvent($request->id, 'تعديل طلب'));
                 $attributes['request_id'] = $request->id;
-
-                /*if (isset($request->service_id)) {
-                    //CourtAndLawsuit
-                    if ($request->service_id == 1) {
-                        CourtAndLawsuit::where('request_id', $request->id)->update($attributes);
-                    }
-                    //PublicProsecutionAndPolice
-                    if ($request->service_id == 2) {
-                        PublicProsecutionAndPolice::where('request_id', $request->id)->update($attributes);
-                    }
-                    //DraftingRegulationAndContract
-                    if ($request->service_id == 4) {
-                        DraftingRegulationAndContract::where('request_id', $request->id)->update($attributes);
-                    }
-
-                    //DivisionOfInheritance
-                    if ($request->service_id == 7) {
-                        DivisionOfInheritance::where('request_id', $request->id)->update($attributes);
-                    }
-                    //CompaniesRegistrationAndTrademarking
-                    if ($request->service_id == 8) {
-                        CompaniesRegistrationAndTrademarking::where('request_id', $request->id)->update($attributes);
-                    }
-
-                    //Arbitration
-                    if ($request->service_id == 9) {
-                        Arbitration::where('request_id', $request->id)->update($attributes);
-                    }
-                    //MarriageOfficer
-                    if ($request->service_id == 10) {
-
-                        $marriage_office = MarriageOfficer::where('request_id', $request->id)->first();
-                        if (!isset($marriage_office))
-                            $marriage_office = new MarriageOfficer();
-                        if (isset($attributes['request_id']))
-                            $marriage_office->request_id = $request->id;
-                        if (isset($attributes['service_id']))
-                            $marriage_office->service_id = $request->service_id;
-                        if (isset($attributes['sub_service_id']))
-                            $marriage_office->sub_service_id = $attributes['sub_service_id'];
-                        if (isset($attributes['location']))
-                            $marriage_office->location = $attributes['location'];
-                        if (isset($attributes['latitude']))
-                            $marriage_office->latitude = $attributes['latitude'];
-                        if (isset($attributes['longitude']))
-                            $marriage_office->longitude = $attributes['longitude'];
-                        if (isset($attributes['request_datetime']))
-                            $marriage_office->request_datetime = $attributes['request_datetime'];
-                        if (isset($attributes['client_idno']))
-                            $marriage_office->client_idno = $attributes['client_idno'];
-                        if ($marriage_office->save()) {
-                            if (isset($attributes['medical_examination'])) {
-                                sleep(1);
-                                $marriage_office->medical_examination = $this->upload($attributes, 'medical_examination');
-                                $marriage_office->save();
-                            }
-                            if (isset($attributes['divorce_certificate'])) {
-                                sleep(1);
-                                $marriage_office->divorce_certificate = $this->upload($attributes, 'divorce_certificate');
-                                $marriage_office->save();
-                            }
-                        }
-                    }
-                    //AssignExpert
-                    if ($request->service_id == 12) {
-                        AssignExpert::where('request_id', $request->id)->update($attributes);
-                    }
-
-                    //AnnualLegalContract
-                    if ($request->service_id == 5) {
-                        AnnualLegalContract::where('request_id', $request->id)->update($attributes);
-                    }
-                }
-                */
 
                 if (isset($attributes['case_file']) && $attributes['case_file'] != 'deleted') {
                     sleep(1);
