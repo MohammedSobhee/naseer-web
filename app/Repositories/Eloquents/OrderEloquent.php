@@ -138,8 +138,14 @@ class OrderEloquent extends Uploader implements Repository
             $collection = $collection->whereNotIn('id', $provider_offer_orders);
         }
 
-        if (isset($attributes['status']))
-            $collection = $collection->where('status', $attributes['status']);
+        if (isset($attributes['status'])) {
+            if ($attributes['status'] == 'assigned')
+                $collection = $collection->where(function ($query) {
+                    $query->where('status', 'assigned')->orWhere('status', 'initial_assigned');
+                });
+            else
+                $collection = $collection->where('status', $attributes['status']);
+        }
 
         $count = $collection->count();
         $page_count = page_count($count, $page_size);
