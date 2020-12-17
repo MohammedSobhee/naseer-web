@@ -227,7 +227,6 @@ class OrderEloquent extends Uploader implements Repository
 
             if (isset($contract))
                 $request->contract = $contract->text;
-
         }
         $request->type = $type;//categorized', 'uncategorized
         if (isset($attributes['case_text']))
@@ -243,9 +242,7 @@ class OrderEloquent extends Uploader implements Repository
 
         if ($request->save()) {
 
-
             $attributes['request_id'] = $request->id;
-
             if (isset($attributes['service_id'])) {
                 //CourtAndLawsuit
                 if ($attributes['service_id'] == 1) {
@@ -367,6 +364,7 @@ class OrderEloquent extends Uploader implements Repository
 
             return response_api(true, 200, 'تم انشاء الطلب بنجاح', new OrderResource($request));// . ',' . trans('app.sent_email_verification')
         }
+
         return response_api(false, 422, null, empObj());// . ',' . trans('app.sent_email_verification')
 
     }
