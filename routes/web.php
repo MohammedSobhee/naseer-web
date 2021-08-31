@@ -53,6 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('/admins', 'AdminController@index');
     Route::get('/admins/admin-data', 'AdminController@anyData');
     Route::put('/admins/admin-status', 'AdminController@adminStatus');
+
     Route::delete('admins/{id}', 'AdminController@delete');
     Route::get('admins/{id}/edit', 'AdminController@edit');
     Route::get('admins/create', 'AdminController@create');

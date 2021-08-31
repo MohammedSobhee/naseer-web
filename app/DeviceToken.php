@@ -9,7 +9,6 @@ class DeviceToken extends Model
 {
     //
     use SoftDeletes;
-    use SoftDeletes;
 
     protected $casts = ['user_id' => 'integer'];
 

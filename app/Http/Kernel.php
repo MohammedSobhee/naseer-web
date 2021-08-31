@@ -6,6 +6,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthGuestMiddleware;
 use App\Http\Middleware\ClientMiddleware;
 use App\Http\Middleware\ServiceProviderMiddleware;
+use App\Http\Middleware\XAuthorizationHeader;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -25,6 +26,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        XAuthorizationHeader::class,
+
     ];
 
     /**

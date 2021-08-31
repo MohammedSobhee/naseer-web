@@ -1,5 +1,5 @@
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
-{{--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />--}}
+
 <link href="{{url('/')}}/assets/fonts/droid-arabic-kufi.css" rel="stylesheet" type="text/css"/>
 
 <link href="{{url('/')}}/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -7,12 +7,14 @@
 <link href="{{url('/')}}/assets/global/plugins/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
 <link href="{{url('/')}}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch-rtl.min.css" rel="stylesheet" type="text/css" />
 <!-- END GLOBAL MANDATORY STYLES -->
-<!-- BEGIN PAGE LEVEL PLUGINS -->
 
+<!-- BEGIN PAGE LEVEL PLUGINS -->
 <link href="{{url('/')}}/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css"/>
 <link href="{{url('/')}}/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet"
       type="text/css"/>
+
 @yield('css')
+
 <link href="{{url('/')}}/assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" id="style_components"
       type="text/css">
 

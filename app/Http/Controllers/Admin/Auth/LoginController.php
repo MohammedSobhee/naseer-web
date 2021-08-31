@@ -55,7 +55,7 @@ class LoginController extends Controller
         return redirect()->back()->withInput($request->only('email', 'remember'));
     }
 
-    public
+
     function logout()
     {
         auth()->guard('admin')->logout();
