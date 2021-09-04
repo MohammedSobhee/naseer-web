@@ -64,6 +64,11 @@ class LookUpController extends Controller
                 $setting = Setting::first();
                 $data = ['contract' => $setting->contract];
             }
+            if ($type == 'about_app') {
+
+                $setting = Setting::first();
+                $data = ['about_app' => $setting->about_app];
+            }
         } else {
 
             $service_provider_types = ServiceProviderTypeResource::collection($this->providerType->all());
@@ -79,6 +84,7 @@ class LookUpController extends Controller
                 'cities' => CityResource::collection($this->city->getAll([])),
                 'terms' => $setting->terms,
                 'contract' => $setting->contract,
+                'about_app' => $setting->about_app,
             ];
         }
         return response_api(true, 200, null, $data);
