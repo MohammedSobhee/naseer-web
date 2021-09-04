@@ -16,6 +16,7 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->longText('contract');
+            $table->longText('about_app');
             $table->longText('terms');
             $table->integer('expire_offer');
             $table->softDeletes();
