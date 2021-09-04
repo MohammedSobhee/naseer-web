@@ -9,5 +9,5 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.uiColor = '#AADC6E';
 
     config.width="100%";
-    config.height="700px"
+    config.height="400px"
 };
