@@ -146,7 +146,7 @@ class UserController extends Controller
     {
         $data = [
             'title' => 'تواصل بنا',
-            'icon' => 'fa fa-address-book',
+            'icon' => 'fa fa-book',
         ];
         return view(admin_vw() . '.users.contact-us', $data);
     }
