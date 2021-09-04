@@ -53,6 +53,7 @@ class SettingEloquent implements Repository
         $setting = $this->model->first();
         $setting->contract = $attributes['contract'];
         $setting->terms = $attributes['terms'];
+        $setting->about_app = $attributes['about_app'];
         $setting->expire_offer = $attributes['expire_offer'];
         if ($setting->save()) {
 

@@ -333,6 +333,18 @@ class UserEloquent extends Uploader implements UserRepository
             ->rawColumns(['action', 'photo', 'is_active', 'is_verify'])->toJson();
     }
 
+    function anyContactUsData()
+    {
+        $contactUs = ContactUs::orderByDesc('updated_at');
+
+        return datatables()->of($contactUs)
+            ->filter(function ($query) {
+
+            })
+            ->addIndexColumn()
+            ->rawColumns(['action'])->toJson();
+    }
+
 
     function verifyEmail($id)
     {

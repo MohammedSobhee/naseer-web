@@ -141,4 +141,19 @@ class UserController extends Controller
             return Excel::download(new UsersExport(), 'users.xlsx');
         return Excel::download(new ServiceProvidersExport(), 'service_providers.xlsx');
     }
+
+    public function contacts()
+    {
+        $data = [
+            'title' => 'تواصل بنا',
+            'icon' => 'fa fa-address-book',
+        ];
+        return view(admin_vw() . '.users.contact-us', $data);
+    }
+
+    public function anyContactUsData()
+    {
+        return $this->user->anyContactUsData();
+    }
+
 }

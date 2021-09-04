@@ -127,6 +127,13 @@
                     <span class="selected"></span>
                 </a>
             </li>
+            <li class="nav-item @if(preg_match('/contacts/i',url()->current())) start active open @endif">
+                <a href="{{url('admin/users/contacts')}}" class="nav-link nav-toggle">
+                    <i class="fa fa-address-book"></i>
+                    <span class="title">تواصل بنا</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
         </ul>
 
 

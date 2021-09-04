@@ -75,6 +75,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::put('/users/approval-provider-edits/{id}', 'UserController@confirmUpdateProvider');
     Route::put('/users/reject-provider-edits/{id}', 'UserController@rejectUpdateProvider');
     Route::post('/users/export', 'UserController@export');
+    Route::get('/users/contacts', 'UserController@contacts');
+    Route::get('/users/contacts-data', 'UserController@anyContactUsData');
 
     Route::get('/rates', 'RateController@index');
     Route::get('/rates/rate-data', 'RateController@anyData');

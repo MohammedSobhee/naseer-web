@@ -31,20 +31,28 @@
                             </div>
                         </div>
                     </div>
-{{--                    <div class="form-group">--}}
-{{--                        <label for="contract" class="col-md-2 control-label">تفاصيل عقد الاتفاق</label>--}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <textarea rows="5" class="form-control ckeditor" name="contract"--}}
-{{--                                      placeholder="تفاصيل عقد الاتفاق">{{$setting->contract ?? ''}}--}}
-{{--                            </textarea>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="form-group">--}}
+                    {{--                        <label for="contract" class="col-md-2 control-label">تفاصيل عقد الاتفاق</label>--}}
+                    {{--                        <div class="col-md-6">--}}
+                    {{--                            <textarea rows="5" class="form-control ckeditor" name="contract"--}}
+                    {{--                                      placeholder="تفاصيل عقد الاتفاق">{{$setting->contract ?? ''}}--}}
+                    {{--                            </textarea>--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
 
                     <div class="form-group">
                         <label for="terms" class="col-md-2 control-label">الشروط والاحكام</label>
                         <div class="col-md-6">
-                            <textarea rows="5" class="form-control ckeditor" name="terms" id="terms"
+                            <textarea rows="3" class="form-control ckeditor" name="terms" id="terms"
                                       placeholder="الشروط والاحكام">{{$setting->terms ?? ''}}
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="terms" class="col-md-2 control-label">عن التطبيق</label>
+                        <div class="col-md-6">
+                            <textarea rows="3" class="form-control ckeditor" name="about_app" id="about_app"
+                                      placeholder="عن التطبيق">{{$setting->about_app ?? ''}}
                             </textarea>
                         </div>
                     </div>
