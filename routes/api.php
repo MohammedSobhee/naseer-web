@@ -43,6 +43,7 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
 
         Route::get('offer/{id}', 'OfferController@show');
 
+        Route::post('contact-us', 'UserController@contactUs');
         Route::group(['middleware' => ['service_provider']], function () {
 
             Route::post('offer', 'OfferController@create');

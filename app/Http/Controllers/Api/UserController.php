@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\CompleteServiceProviderRequest;
 use App\Http\Requests\Api\User\ConfirmCodeRequest;
+use App\Http\Requests\Api\User\ContactUsRequest;
 use App\Http\Requests\Api\User\GetRequest;
 use App\Http\Requests\Api\User\GetServiceProvidersRequest;
 use App\Http\Requests\Api\User\LoginRequest;
@@ -90,6 +91,12 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         return $this->user->logout();
+    }
+
+    public function contactUs(ContactUsRequest $request)
+    {
+        return $this->user->contactUs($request->all());
+
     }
 
 }

@@ -8,6 +8,7 @@
 
 namespace App\Repositories\Eloquents;
 
+use App\ContactUs;
 use App\DeviceToken;
 use App\Http\Resources\OrderResource;
 use App\Http\Resources\ProfileResource;
@@ -1177,4 +1178,17 @@ class UserEloquent extends Uploader implements UserRepository
         return $this->model->count();
     }
 
+    public function contactUs(array $attributes)
+    {
+
+        $contactUs = new ContactUs();
+        $contactUs->name = $attributes['name'];
+        $contactUs->email = $attributes['email'] ?? null;
+        $contactUs->phone = $attributes['phone'];
+        $contactUs->message = $attributes['message'];
+        if ($contactUs->save())
+            return response_api(true, 200, null, []);
+        return response_api(false, 422, null, []);
+
+    }
 }
