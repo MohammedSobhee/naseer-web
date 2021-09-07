@@ -20,6 +20,7 @@ use App\DraftingRegulationAndContract;
 use App\Events\UpdateRequestEvent;
 use App\Http\Resources\OrderEditResource;
 use App\Http\Resources\OrderResource;
+use App\Jobs\RejectPendingOfferJob;
 use App\MarriageOfficer;
 use App\Offer;
 use App\PublicProsecutionAndPolice;
@@ -29,6 +30,8 @@ use App\Request;
 use App\Service;
 use App\ServiceProvider;
 use App\User;
+use Carbon\Carbon;
+use Illuminate\Contracts\Bus\Dispatcher;
 
 
 class OrderEloquent extends Uploader implements Repository
@@ -361,6 +364,10 @@ class OrderEloquent extends Uploader implements Repository
 
             }
 
+            $request = $request->fresh();
+            // cancel request after 24 hours when request is new (no offer accepted)
+            $job = (new RejectPendingOfferJob($request))->delay(Carbon::now());
+            app(Dispatcher::class)->dispatch($job);
 
             return response_api(true, 200, 'تم انشاء الطلب بنجاح', new OrderResource($request));// . ',' . trans('app.sent_email_verification')
         }
