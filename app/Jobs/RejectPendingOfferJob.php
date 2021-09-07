@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -20,7 +21,7 @@ class RejectPendingOfferJob implements ShouldQueue
 
     private $request;
 
-    public function __construct($request)
+    public function __construct(Request $request)
     {
         //
         $this->request = $request;
