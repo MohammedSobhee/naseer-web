@@ -21,6 +21,7 @@ class Request extends Model
 
     ];
 
+    protected $fillable = ['status'];
     protected $appends = ['offers_num'];
 
     public function getCaseFileAttribute($value)
