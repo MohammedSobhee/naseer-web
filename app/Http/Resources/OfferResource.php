@@ -22,7 +22,7 @@ class OfferResource extends JsonResource
             'late_payment' => $this->late_payment,
             'details' => $this->details,
             'service_provider' => new ProfileResource($this->ServiceProvider()->first()),
-            'order' => new OrderSecondResource($this->Order()->first()),
+            'order' => new OrderSecondResource($this->Order),
 
         ];
     }
