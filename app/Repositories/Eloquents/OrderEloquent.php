@@ -29,6 +29,7 @@ use App\Repositories\Uploader;
 use App\Request;
 use App\Service;
 use App\ServiceProvider;
+use App\Setting;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Bus\Dispatcher;
@@ -365,9 +366,12 @@ class OrderEloquent extends Uploader implements Repository
             }
 
             $request = $request->fresh();
+
+            $setting = Setting::first();
+
             // cancel request after 24 hours when request is new (no offer accepted)
-            $job = (new RejectPendingOfferJob($request))->delay(Carbon::now()->addSeconds(10));
-            $jobId = app(Dispatcher::class)->dispatch($job);
+            $job = (new RejectPendingOfferJob($request))->delay(Carbon::now()->addHours(intval($setting->expire_offer)));
+            app(Dispatcher::class)->dispatch($job);
             return response_api(true, 200, 'تم انشاء الطلب بنجاح', new OrderResource($request));// . ',' . trans('app.sent_email_verification')
         }
 

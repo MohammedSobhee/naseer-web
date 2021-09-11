@@ -19,12 +19,12 @@
                     {!! Form::open(['method'=>'PUT','class'=>'form-horizontal','files'=>true,'id'=>'formEdit']) !!}
 
                     <div class="form-group">
-                        <label for="support_mobile" class="col-md-2 control-label">وقت انتهاء صلاحية العرض</label>
+                        <label for="support_mobile" class="col-md-2 control-label">وقت انتهاء صلاحية الطلب</label>
                         <div class="col-md-6">
                             <div class="input-group">
 
                                 <input type="text" class="form-control " value="{{$setting->expire_offer ?? ''}}"
-                                       name="expire_offer" id="expire_offer" placeholder="وقت انتهاء صلاحية العرض">
+                                       name="expire_offer" id="expire_offer" placeholder="وقت انتهاء صلاحية الطلب">
                                 <span class="input-group-addon">
                                                         ساعة
                                                     </span>
