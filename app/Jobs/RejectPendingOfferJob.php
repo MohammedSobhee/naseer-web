@@ -19,6 +19,9 @@ class RejectPendingOfferJob implements ShouldQueue
      * @return void
      */
 
+    public $tries = 3;
+
+
     private $request;
 
     public function __construct(Request $request)
@@ -35,7 +38,7 @@ class RejectPendingOfferJob implements ShouldQueue
     public function handle()
     {
         //
-//        if ($this->request->status == 'new')
-//            $this->request->update(['status' => 'canceled']);
+        if ($this->request->status == 'new')
+            $this->request->update(['status' => 'canceled']);
     }
 }
