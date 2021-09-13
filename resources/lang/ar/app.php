@@ -21,6 +21,9 @@ return [
     'user_created' => 'تم انشاء حساب جديد',
     'complete-service-provider' => 'تم اكمال عملية التسجيل لمزود الخدمة',
 
+    'error_confirmation' => 'هناك خطأ في كود التأكيد.',
+    'mobile_token' => 'رقم الهاتف مسجل مسبقاً لشخص آخر.',
+
     'contact_prefer' => [
         'go_to_service_provider' => 'حضوري إلى مقّر مزود الخدمة',
         'go_to_user' => 'حضور مزود الخدمة إلى موقعي',

@@ -18,5 +18,7 @@ return [
     'invalid_route' => 'Invalid route.',
     'client_input_error' => 'Client input error.',
     'server_error' => 'Server error.',
+    'error_confirmation' => 'There is an error in confirmation code.',
+    'mobile_token' => 'The mobile is already token.',
 
 ];
