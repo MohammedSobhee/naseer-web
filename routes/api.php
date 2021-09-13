@@ -38,7 +38,7 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
     Route::group(['middleware' => ['auth:api']], function () {
 
         Route::put('mobile', 'UserController@putUserMobile');
-        Route::put('profile', 'UserController@putProfile');
+//        Route::put('profile', 'UserController@putProfile');
         Route::get('profile/{id?}', 'UserController@getProfile');
 
         Route::get('offer/{id}', 'OfferController@show');
