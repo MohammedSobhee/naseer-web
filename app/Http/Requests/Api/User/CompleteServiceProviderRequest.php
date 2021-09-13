@@ -27,15 +27,15 @@ class CompleteServiceProviderRequest extends FormRequest
             //
             'service_provider_type_id' => 'required|exists:service_provider_types,id',
             'idno' => 'required',
-            'idno_file' => 'required|file',
+            'idno_file' => 'required|mimes:jpeg,png,jpg,svg,doc,docx,odt,pdf,tex,txt,wpd,tiff,tif,csv,psd,key,odp,pps,ppt,pptx,ods,xls,xlsm,xlsx',
             'skill' => 'required',
             'photo' => 'nullable|image',
-            'skill_file' => 'required|file',
+            'skill_file' => 'required|mimes:jpeg,png,jpg,svg,doc,docx,odt,pdf,tex,txt,wpd,tiff,tif,csv,psd,key,odp,pps,ppt,pptx,ods,xls,xlsm,xlsx',
             'address' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
             'licensed' => 'nullable',
-            'licensed_file' => 'nullable|file',
+            'licensed_file' => 'nullable|mimes:jpeg,png,jpg,svg,doc,docx,odt,pdf,tex,txt,wpd,tiff,tif,csv,psd,key,odp,pps,ppt,pptx,ods,xls,xlsm,xlsx',
         ];
     }
 }

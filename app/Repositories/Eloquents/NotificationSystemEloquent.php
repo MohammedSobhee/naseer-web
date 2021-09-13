@@ -70,7 +70,6 @@ class NotificationSystemEloquent
 
     public function FCM($title, $body, $data, $tokens, $badge, $action)
     {
-
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60 * 20);
 
