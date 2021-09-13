@@ -39,6 +39,7 @@ class UpdateProfileRequest extends FormRequest
             ];
         else {
 
+            dd(auth()->user());
             return [
                 'name' => 'nullable',
                 'email' => 'nullable|email|unique:users,email,' . $id,
