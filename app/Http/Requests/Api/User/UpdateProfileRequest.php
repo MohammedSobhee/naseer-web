@@ -28,11 +28,11 @@ class UpdateProfileRequest extends FormRequest
         if (auth()->user()->type == 'user')
             return [
                 'name' => 'nullable',
-                'email' => 'nullable|email|unique:users,email,' . $id,
+                'email' => 'nullable|email|unique:users,email,' . $id . ',id',
                 'password' => 'nullable|min:6',
                 'old_password' => 'required_with:password|min:6',
                 'gender' => 'nullable|in:male,female',
-                'phone' => 'nullable|digits:9|unique:users,phone,' . $id,
+                'phone' => 'nullable|digits:9|unique:users,phone,' . $id . ',id',
                 'country_code' => 'nullable',//|exists:countries,country_code
                 'city_id' => 'nullable|exists:cities,id',
 
@@ -41,11 +41,11 @@ class UpdateProfileRequest extends FormRequest
 
             return [
                 'name' => 'nullable',
-                'email' => 'nullable|email|unique:users,email,' . $id,
+                'email' => 'nullable|email|unique:users,email,' . $id . ',id',
                 'password' => 'nullable|min:6',
                 'old_password' => 'required_with:password|min:6',
                 'gender' => 'nullable|in:male,female',
-                'phone' => 'nullable|digits:9|unique:users,phone,' . $id,
+                'phone' => 'nullable|digits:9|unique:users,phone,' . $id . ',id',
                 'country_code' => 'nullable',//|exists:countries,country_code
                 'city_id' => 'nullable|exists:cities,id',
 
