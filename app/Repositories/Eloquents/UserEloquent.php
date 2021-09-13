@@ -544,7 +544,7 @@ class UserEloquent extends Uploader implements UserRepository
     function completeServiceProvider(array $attributes)
     {
         if (isset($attributes['photo'])) {
-            auth()->user()->photo = $this->storeImageThumb('user', auth()->user()->id, $attributes['photo']);
+            auth()->user()->photo = $this->storeImageThumb('users', auth()->user()->id, $attributes['photo']);
             auth()->user()->save();
             sleep(1);
         }
