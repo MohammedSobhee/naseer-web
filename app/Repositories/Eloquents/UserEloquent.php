@@ -621,7 +621,7 @@ class UserEloquent extends Uploader implements UserRepository
         ]);
 
         if (isset($attributes['photo'])) {
-            $user->photo = $this->storeImageThumb('user', $user->id, $attributes['photo']);
+            $user->photo = $this->storeImageThumb('users', $user->id, $attributes['photo']);
             $user->save();
             sleep(1);
         }
@@ -700,7 +700,7 @@ class UserEloquent extends Uploader implements UserRepository
         ]);
 
         if (isset($attributes['photo'])) {
-            $user->photo = $this->storeImageThumb('user', $id, $attributes['photo']);
+            $user->photo = $this->storeImageThumb('users', $id, $attributes['photo']);
             $user->save();
             sleep(1);
         }
