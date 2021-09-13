@@ -26,7 +26,7 @@ class LoginRequest extends FormRequest
         return [
             //
             'device_type' => 'required|in:android,ios',
-            'device_token' => 'required',
+            'device_token' => 'nullable',
             'device_id' => 'nullable',
         ];
     }
