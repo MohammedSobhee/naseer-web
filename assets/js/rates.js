@@ -29,6 +29,7 @@ $(document).ready(function () {
                 {data: 'id', name: 'id'},
                 {data: 'client.name', name: 'client.name'},
                 {data: 'service_provider.name', name: 'service_provider.name'},
+                {data: 'action', name: 'action'},
                 {data: 'order.type', name: 'order.type'},
                 {data: 'order.service.name', name: 'order.service.name'},
                 {data: 'rate', name: 'rate'},

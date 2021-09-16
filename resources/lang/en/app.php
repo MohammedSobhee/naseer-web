@@ -21,4 +21,5 @@ return [
     'error_confirmation' => 'There is an error in confirmation code.',
     'mobile_token' => 'The mobile is already token.',
 
+
 ];

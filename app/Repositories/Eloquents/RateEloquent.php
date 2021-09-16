@@ -57,6 +57,8 @@ class RateEloquent implements Repository
             })
             ->editColumn('service_provider.name', function ($rate) {
                 return isset($rate->ServiceProvider) ? '<a href="' . url(admin_users_url() . '/' . $rate->service_provider_id . '/view') . '" target="_blank">' . $rate->ServiceProvider->name . '</a>' : '-';
+            })->editColumn('action', function ($rate) {
+                return ($rate->action == 'user') ? 'مقدم طلب' : 'مزود خدمة';
             })->editColumn('order.service.name', function ($rate) {
                 return isset($rate->Order->Service) ? $rate->Order->Service->name : '-';
             })->editColumn('order.type', function ($rate) {
@@ -112,13 +114,20 @@ class RateEloquent implements Repository
     {
         // TODO: Implement create() method.
 
-        $rate = Rate::where('user_id', auth()->user()->id)->where('request_id', $attributes['request_id'])->first();
+        $rate = Rate::where(function ($query) use ($attributes) {
+            $query->where('user_id', $attributes['user_id'])->where('action', 'user')
+                ->orWhere('service_provider_id', $attributes['service_provider_id'])->where('action', 'service_provider');
+        })->where('request_id', $attributes['request_id'])->first();
+
+
         if (!isset($rate))
             $rate = new Rate();
-        $rate->user_id = auth()->user()->id;
+        $rate->user_id = $attributes['user_id'];
         $rate->service_provider_id = $attributes['service_provider_id'];
         $rate->request_id = $attributes['request_id'];
+        $rate->action = auth()->user()->type;
         $rate->rate = $attributes['rate'];
+        $rate->text = $attributes['text'] ?? null;
         if ($rate->save()) {
             //rate_product
 //            $this->notificationSystem->sendNotification(auth()->user()->id, $product->merchant_id, $attributes['action_id'], 'rate_product');

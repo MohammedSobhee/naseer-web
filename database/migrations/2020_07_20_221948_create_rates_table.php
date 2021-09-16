@@ -15,11 +15,12 @@ class CreateRatesTable extends Migration
     {
         Schema::create('rates', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('service_provider_id');
+            $table->unsignedBigInteger('user_from_id');
+            $table->unsignedBigInteger('user_to_id');
             $table->unsignedBigInteger('request_id');
+            $table->enum('action', ['user', 'service_provider']);
             $table->double('rate');
-            $table->longText('note')->nullable();
+            $table->longText('text')->nullable();
             $table->boolean('is_approved')->default(false);
             $table->softDeletes();
             $table->timestamps();

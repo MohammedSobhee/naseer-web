@@ -10,7 +10,7 @@ class Rate extends Model
     //
     use SoftDeletes;
 
-    protected $casts = ['rate' => 'double', 'user_id' => 'integer', 'service_provider_id' => 'integer', 'request_id' => 'integer'];
+    protected $casts = ['rate' => 'double', 'user_from_id' => 'integer', 'user_to_id' => 'integer', 'request_id' => 'integer'];
 
     public function Client()
     {
