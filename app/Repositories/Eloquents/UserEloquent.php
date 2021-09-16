@@ -55,6 +55,7 @@ class UserEloquent extends Uploader implements UserRepository
 
 //        $statusCode = json_decode($response->getStatusCode());
 
+        dd($response);
         if (isset($token_obj->error)) {
 
             return [
