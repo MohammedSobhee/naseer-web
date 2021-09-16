@@ -80,6 +80,11 @@ class Request extends Model
         return $this->hasMany(Offer::class, 'request_id', 'id');
     }
 
+    public function Rates()
+    {
+        return $this->hasMany(Rate::class, 'request_id', 'id');
+    }
+
     public function CourtAndLawsuit()
     {
         return $this->hasOne(CourtAndLawsuit::class, 'request_id', 'id');

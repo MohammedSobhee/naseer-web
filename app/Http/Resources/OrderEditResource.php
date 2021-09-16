@@ -44,6 +44,12 @@ class OrderEditResource extends JsonResource
             'sub_service_id' => isset($subService) ? $subService->sub_service_id : 0,
             'dataRequest' => isset($subService) ? $subService : empObj()]);
 
+
+        $rate = $this->Rates()->where(function ($query) {
+            $query->where('user_id', auth()->user()->id)->orWhere('service_provider_id', auth()->user()->id);
+        })->where('action', auth()->user()->type)->first();
+
+
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -64,6 +70,7 @@ class OrderEditResource extends JsonResource
             'service_date' => $this->service_date,
             'status' => $this->status,
             'is_edit' => $this->is_edit,
+            'is_rate' => isset($rate) ? 1 : 0,
             'offers_num' => $this->Offers()->count(),
             'offers' => OfferSecondResource::collection($this->Offers()->orderByDesc('created_at')->get()),
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),

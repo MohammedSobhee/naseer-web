@@ -35,6 +35,9 @@ class OrderSecondResource extends JsonResource
             })->first());
         }
 
+        $rate = $this->Rates()->where(function ($query) {
+            $query->where('user_id', auth()->user()->id)->orWhere('service_provider_id', auth()->user()->id);
+        })->where('action', auth()->user()->type)->first();
 
         return [
             'id' => $this->id,
@@ -57,6 +60,8 @@ class OrderSecondResource extends JsonResource
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'status' => $this->status,
             'is_edit' => $this->is_edit,
+            'is_rate' => isset($rate) ? 1 : 0,
+
             'offers_num' => $this->Offers()->count(),
             'city' => new CityResource($this->City()->first()),
             'service' => new ServiceResource($this->Service()->first()),
