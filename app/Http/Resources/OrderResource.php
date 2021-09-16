@@ -83,7 +83,6 @@ class OrderResource extends JsonResource
             'city' => new CityResource($this->City()->first()),
             'service' => new ServiceResource($this->Service()->first()),
             'client' => new ProfileResource($this->User()->first()),
-            'service_provider' => isset($accepted_offer) ? new ProfileResource($accepted_offer->ServiceProvider) : null,
             'data_request' => $subService,
             'contract' => $this->contract,
             'contract_status' => $this->contract_status,
