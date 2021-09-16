@@ -54,6 +54,7 @@ class OrderResource extends JsonResource
             $query->where('user_id', auth()->user()->id)->orWhere('service_provider_id', auth()->user()->id);
         })->where('action', auth()->user()->type)->first();
 
+        $accepted_offer = $this->Offers()->where('status', 'accepted')->first();
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -77,10 +78,12 @@ class OrderResource extends JsonResource
             'is_rate' => isset($rate),
             'offers_num' => $this->Offers()->count(),
             'offers' => OfferSecondResource::collection($this->Offers()->orderByDesc('created_at')->get()),
+            'accepted_offer' => isset($accepted_offer) ? new OfferSecondResource($accepted_offer) : null,
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'city' => new CityResource($this->City()->first()),
             'service' => new ServiceResource($this->Service()->first()),
             'client' => new ProfileResource($this->User()->first()),
+            'service_provider' => isset($accepted_offer) ? new ProfileResource($accepted_offer->ServiceProvider) : null,
             'data_request' => $subService,
             'contract' => $this->contract,
             'contract_status' => $this->contract_status,
