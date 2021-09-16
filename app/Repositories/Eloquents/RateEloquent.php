@@ -117,10 +117,12 @@ class RateEloquent implements Repository
         if (auth()->user()->type == 'user') {
             $user_id = auth()->user()->id;
             $service_provider_id = $attributes['user_id'];
+
         } else {
             $user_id = $attributes['user_id'];
             $service_provider_id = auth()->user()->id;
         }
+
         $rate = Rate::where(function ($query) use ($attributes) {
             $query->where('user_id', $attributes['user_id'])->where('action', 'user')
                 ->orWhere('service_provider_id', $attributes['service_provider_id'])->where('action', 'service_provider');
