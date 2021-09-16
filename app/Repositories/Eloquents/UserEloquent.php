@@ -55,7 +55,6 @@ class UserEloquent extends Uploader implements UserRepository
 
 //        $statusCode = json_decode($response->getStatusCode());
 
-        dd($response);
         if (isset($token_obj->error)) {
 
             return [
@@ -82,6 +81,7 @@ class UserEloquent extends Uploader implements UserRepository
         );
         $response = Route::dispatch($request);
 
+        dd($response);
         $data = json_decode($response->getContent());
         $statusCode = json_decode($response->getStatusCode());
 
