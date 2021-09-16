@@ -475,6 +475,7 @@ class UserEloquent extends Uploader implements UserRepository
                 ->select('rates.service_provider_id')
                 ->selectRaw('AVG(rates.rate) AS average_rating')
                 ->where('is_approved', 1)
+                ->where('action', 'user')
                 ->groupBy('rates.service_provider_id')
                 ->havingRaw('AVG(rates.rate) >= ' . $attributes['rate'])
                 ->havingRaw('AVG(rates.rate) < ' . ($attributes['rate'] + 1))
