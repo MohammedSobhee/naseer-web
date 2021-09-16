@@ -60,7 +60,7 @@ class OrderSecondResource extends JsonResource
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'status' => $this->status,
             'is_edit' => $this->is_edit,
-            'is_rate' => isset($rate) ? 1 : 0,
+            'is_rate' => isset($rate),
 
             'offers_num' => $this->Offers()->count(),
             'city' => new CityResource($this->City()->first()),

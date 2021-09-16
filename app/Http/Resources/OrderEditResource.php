@@ -70,7 +70,7 @@ class OrderEditResource extends JsonResource
             'service_date' => $this->service_date,
             'status' => $this->status,
             'is_edit' => $this->is_edit,
-            'is_rate' => isset($rate) ? 1 : 0,
+            'is_rate' => isset($rate),
             'offers_num' => $this->Offers()->count(),
             'offers' => OfferSecondResource::collection($this->Offers()->orderByDesc('created_at')->get()),
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
