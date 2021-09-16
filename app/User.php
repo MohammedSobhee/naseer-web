@@ -80,7 +80,7 @@ class User extends Authenticatable
 
     public function Rates()
     {
-        return $this->hasMany(Rate::class, 'user_from_id', 'id');
+        return $this->hasMany(Rate::class, 'user_id', 'id');
     }
 
     public function getPhoto100Attribute()
