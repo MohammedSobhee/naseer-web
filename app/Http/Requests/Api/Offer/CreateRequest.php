@@ -25,7 +25,7 @@ class CreateRequest extends FormRequest
     {
         return [
             //`request_id`, `service_provider_id`, `status`, `payment_type`, `payment_value`, `details`
-            'request_id' => 'required|exists:requests,id,status,new',
+            'request_id' => 'required|exists:requests,id',//,status,new',
             'down_payment' => 'required|numeric|gte:0',
             'late_payment' => 'required|numeric|gte:0',
         ];
