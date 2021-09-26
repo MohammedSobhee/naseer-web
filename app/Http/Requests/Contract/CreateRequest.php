@@ -25,8 +25,8 @@ class CreateRequest extends FormRequest
     {
         return [
             //
-            'service_ids' => 'required',
-            'service_ids.*' => 'required|exists:services,id',
+            'service_ids' => 'nullable',
+            'service_ids.*' => 'nullable|exists:services,id',
             'text' => 'required',
         ];
     }
