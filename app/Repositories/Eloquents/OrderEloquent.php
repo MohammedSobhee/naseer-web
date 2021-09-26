@@ -488,7 +488,7 @@ class OrderEloquent extends Uploader implements Repository
 
             if ($attributes['status'] == 'completed') {
                 $offer = Offer::where('request_id', $attributes['request_id'])->where('status', 'accepted')->first();
-                $this->notification->sendNotification(auth()->user()->id, $offer->service_provider_id, $offer->request_id, $attributes['status'] . '_order');
+                $this->notification->sendNotification(auth()->user()->id, $request->user_id, $offer->request_id, $attributes['status'] . '_order');
             }
 
             return response_api(true, 200, null, []);
