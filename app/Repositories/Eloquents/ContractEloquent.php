@@ -82,6 +82,7 @@ class ContractEloquent implements Repository
         $contract = Contract::find($attributes['contract']['contract_id']);
 
         if (isset($request) && isset($contract)) {
+
             $offer = $request->Offers()->where('status', 'accepted')->first();
             $contract_text = $contract->text;
 
@@ -108,8 +109,9 @@ class ContractEloquent implements Repository
 
             $request->contract = $contract_text;
             $request->contract_status = (auth()->user()->type == 'user') ? 2 : 1;
-            if ($request->contract_status == 2)
+            if ($request->contract_status == 2) {
                 $request->status = 'assigned';
+            }
 
             if ($request->save()) {
 
