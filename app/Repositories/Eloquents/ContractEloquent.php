@@ -41,6 +41,8 @@ class ContractEloquent implements Repository
             })
             ->addColumn('services', function ($contract) {
 
+                if (!$contract->has_service)
+                    return 'الطلبات غير مصنفة';
                 $services = $contract->Services->pluck('name')->toArray();
                 $services = implode(',', $services);
                 return $services;
@@ -148,9 +150,13 @@ class ContractEloquent implements Repository
     {
         // TODO: Implement create() method.
 
-        $contract = new Contract();
+        $has_service = (isset($attributes['service_ids']) && count($attributes['service_ids']) > 0) ? 1 : 0;
+        if (!$has_service) {
+            $contract = $this->model->where('has_service', 0)->first();
+        } else
+            $contract = new Contract();
         $contract->text = $attributes['text'];
-        $contract->has_service = (isset($attributes['service_ids']) && count($attributes['service_ids']) > 0) ? 1 : 0;
+        $contract->has_service = $has_service;
 
         if ($contract->save()) {
 
