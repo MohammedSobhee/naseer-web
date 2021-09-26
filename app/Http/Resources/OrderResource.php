@@ -48,6 +48,8 @@ class OrderResource extends JsonResource
                     $query->where('service_id', $service_id);
                 })->first());
             }
+        } else {
+            $contract = new ContractResource(Contract::where('has_service', 0)->first());
         }
 
         $rate = $this->Rates()->where(function ($query) {
