@@ -59,7 +59,6 @@ class OrderResource extends JsonResource
         $accepted_offer = $this->Offers()->where('status', 'accepted')->first();
 
 
-
         if (in_array($this->status, ['initial_assigned', 'assigned', 'completed']))
             $offers = $this->Offers()->where('status', 'accepted')->orderByDesc('created_at')->get();
         else
@@ -87,7 +86,7 @@ class OrderResource extends JsonResource
             'status' => $this->status,
             'is_edit' => $this->is_edit,
             'is_rate' => isset($rate),
-            'offers_num' => $this->Offers()->count(),
+            'offers_num' => count($offers),
             'offers' => OfferSecondResource::collection($offers),
             'accepted_offer' => isset($accepted_offer) ? new OfferSecondResource($accepted_offer) : null,
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
