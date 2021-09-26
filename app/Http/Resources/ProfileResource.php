@@ -26,7 +26,7 @@ class ProfileResource extends JsonResource
             'gender' => $this->gender,
             'type' => $this->type,
             'rate_num' => auth()->check() ? (($this->Rates()->where('action', '<>', auth()->user()->type)->where('is_approved', true)->count()) ? 1 : 0) : 0,
-            'rate' => auth()->check() ? (($this->Rates()->where('action', '<>', auth()->user()->type)->where('is_approved', true)->average('rate')) ? 1 : 0) : 0,
+            'rate' => auth()->check() ? (($this->Rates()->where('action', '<>', auth()->user()->type)->where('is_approved', true)->average('rate')) ?: 0) : 0,
             'is_active' => $this->is_active,
             'is_completed' => $this->is_completed,
             'is_edit' => $this->is_edit,
