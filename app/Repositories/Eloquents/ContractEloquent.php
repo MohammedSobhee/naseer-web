@@ -150,16 +150,19 @@ class ContractEloquent implements Repository
 
         $contract = new Contract();
         $contract->text = $attributes['text'];
+        $contract->has_service = (isset($attributes['service_ids']) && count($attributes['service_ids']) > 0) ? 1 : 0;
 
         if ($contract->save()) {
-            // add contract's services
-            foreach ($attributes['service_ids'] as $service_id) {
 
-                $contract_service = new ContractService();
-                $contract_service->contract_id = $contract->id;
-                $contract_service->service_id = $service_id;
-                $contract_service->save();
-            }
+            if (isset($attributes['service_ids']) && count($attributes['service_ids']) > 0)
+                // add contract's services
+                foreach ($attributes['service_ids'] as $service_id) {
+
+                    $contract_service = new ContractService();
+                    $contract_service->contract_id = $contract->id;
+                    $contract_service->service_id = $service_id;
+                    $contract_service->save();
+                }
             return response_api(true, 200, __('app.success'), $contract);
         }
     }
