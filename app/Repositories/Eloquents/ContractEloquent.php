@@ -180,15 +180,16 @@ class ContractEloquent implements Repository
         $contract->text = $attributes['text'];
         if ($contract->save()) {
 
-            if (count($attributes['service_ids']) > 0) {
+            if (isset($attributes['service_ids']) && count($attributes['service_ids']) > 0) {
                 ContractService::where('contract_id', $contract->id)->forceDelete();
-            }
-            foreach ($attributes['service_ids'] as $service_id) {
 
-                $contract_service = new ContractService();
-                $contract_service->contract_id = $contract->id;
-                $contract_service->service_id = $service_id;
-                $contract_service->save();
+                foreach ($attributes['service_ids'] as $service_id) {
+
+                    $contract_service = new ContractService();
+                    $contract_service->contract_id = $contract->id;
+                    $contract_service->service_id = $service_id;
+                    $contract_service->save();
+                }
             }
 
             return response_api(true, 200, __('app.success'), $contract);
