@@ -34,7 +34,7 @@ $(document).ready(function () {
                 {data: 'order.service.name', name: 'order.service.name'},
                 {data: 'rate', name: 'rate'},
                 {data: 'text', name: 'text'},
-                {data: 'action', name: 'action'}
+                {data: 'actions', name: 'actions'}
             ],
             "fnDrawCallback": function () {
                 //Initialize checkbos for enable/disable user

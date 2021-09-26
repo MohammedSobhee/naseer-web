@@ -69,7 +69,7 @@ class RateEloquent implements Repository
             })
             ->editColumn('client.name', function ($rate) {
                 return isset($rate->Client) ? '<a href="' . url(admin_users_url() . '/' . $rate->user_id . '/view') . '" target="_blank">' . $rate->Client->name . '</a>' : '-';
-            })->addColumn('action', function ($rate) {
+            })->addColumn('actions', function ($rate) {
                 if ($rate->is_approved)
                     return '<input type="checkbox" class="make-switch is_active" data-on-text="&nbsp;معتمد&nbsp;" data-off-text="&nbsp;مرفوض&nbsp;" name="is_approved" data-id="' . $rate->id . '" checked  data-on-color="success" data-size="mini" data-off-color="warning">';
                 return '<input type="checkbox" class="make-switch is_active" data-on-text="&nbsp;معتمد&nbsp;" data-off-text="&nbsp;مرفوض&nbsp;" name="is_approved" data-id="' . $rate->id . '"  data-on-color="success" data-size="mini" data-off-color="warning">';
@@ -79,7 +79,7 @@ class RateEloquent implements Repository
 //                                                                                </a>
             })
             ->addIndexColumn()
-            ->rawColumns(['client.name', 'service_provider.name', 'order.type', 'action'])->toJson();
+            ->rawColumns(['client.name', 'service_provider.name', 'order.type', 'actions'])->toJson();
     }
 
     function rateApproved($id)
