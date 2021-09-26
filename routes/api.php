@@ -57,11 +57,12 @@ Route::group(['prefix' => version_api(), 'namespace' => namespace_api()], functi
             Route::put('order/{id}', 'OrderController@putOrder');
             Route::post('order', 'OrderController@postOrder');
             Route::delete('order/{id}', 'OrderController@delete');
-            Route::put('order_status', 'OrderController@changeStatus');
             Route::put('offer_status', 'OfferController@changeStatus');
             Route::post('rate', 'RateController@create');
 
         });
+
+        Route::put('order_status', 'OrderController@changeStatus');
 
         Route::put('contract', 'ContractController@editContract');
 
