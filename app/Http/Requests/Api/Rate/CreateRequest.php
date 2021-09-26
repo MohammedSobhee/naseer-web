@@ -25,7 +25,7 @@ class CreateRequest extends FormRequest
     {
         return [
             //
-            'request_id' => 'required|exists:requests,id,user_id,' . auth()->user()->id,
+            'request_id' => 'required|exists:requests,id',
             'user_id' => 'required|exists:users,id',
             'rate' => 'required|between:0,5'
         ];
