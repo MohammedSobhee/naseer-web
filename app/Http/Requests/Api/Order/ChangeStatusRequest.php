@@ -25,7 +25,7 @@ class ChangeStatusRequest extends FormRequest
     {
         return [
             //
-            'request_id' => 'required|exists:requests,id,user_id,' . auth()->user()->id,
+            'request_id' => 'required|exists:requests,id',
             'status' => 'required|in:completed,canceled'
         ];
     }
