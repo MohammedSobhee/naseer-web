@@ -33,7 +33,7 @@ $(document).ready(function () {
                 {data: 'order.type', name: 'order.type'},
                 {data: 'order.service.name', name: 'order.service.name'},
                 {data: 'rate', name: 'rate'},
-                {data: 'note', name: 'note'},
+                {data: 'text', name: 'text'},
                 {data: 'action', name: 'action'}
             ],
             "fnDrawCallback": function () {
