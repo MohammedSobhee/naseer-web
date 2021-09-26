@@ -35,6 +35,10 @@ class OrderSecondResource extends JsonResource
             })->first());
         }
 
+        if ($this->service_id) {
+            $contract = new ContractResource(Contract::where('has_service', 0)->first());
+        }
+
         $rate = $this->Rates()->where(function ($query) {
             $query->where('user_id', auth()->user()->id)->orWhere('service_provider_id', auth()->user()->id);
         })->where('action', auth()->user()->type)->first();
