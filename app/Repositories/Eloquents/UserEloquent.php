@@ -10,7 +10,6 @@ namespace App\Repositories\Eloquents;
 
 use App\ContactUs;
 use App\DeviceToken;
-use App\Http\Resources\OrderResource;
 use App\Http\Resources\ProfileResource;
 use App\Offer;
 use App\Repositories\Interfaces\UserRepository;
