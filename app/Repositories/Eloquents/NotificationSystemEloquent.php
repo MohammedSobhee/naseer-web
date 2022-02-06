@@ -32,6 +32,8 @@ class NotificationSystemEloquent
 
         if ($sender_id != $receiver_id) {
 
+            dd($receiver_id);
+
             $tokens = DeviceToken::getReceiverToken($receiver_id);//
 
             dd($tokens);
