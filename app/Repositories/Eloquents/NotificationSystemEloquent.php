@@ -54,18 +54,16 @@ class NotificationSystemEloquent
 
                 $badge = $this->getCountUnseen($receiver_id);
 
-//                try {
+                try {
                     if (count($tokens[0]) > 0 || count($tokens[1]) > 0 || count($this->devices_id) > 0)
 
                         $fcm_object = $this->FCM(config('app.name'), $message, $notification, $tokens, $badge, $action);
-//
-                dd($fcm_object);
-//                } catch (\Throwable $e) { // For PHP 7
-//                    // handle $e
-//                } catch (\Exception $e) { // For PHP 5
-//                    // handle $e
-//
-//                }
+                } catch (\Throwable $e) { // For PHP 7
+                    // handle $e
+                } catch (\Exception $e) { // For PHP 5
+                    // handle $e
+
+                }
             }
         }
     }
