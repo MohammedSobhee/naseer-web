@@ -35,6 +35,7 @@ class NotificationSystemEloquent
 
             $tokens = DeviceToken::getReceiverToken($receiver_id);//
 
+            dd($tokens[0]);
             $this->devices_id = DeviceToken::getDevices($receiver_id);
 
 

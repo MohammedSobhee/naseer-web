@@ -14,8 +14,9 @@ class DeviceToken extends Model
 
     static function getReceiverToken($receiver_id)
     {
-        $token_android = self::where('user_id', $receiver_id)->where('status', 'on')->where('type', 'android')->lists('device_token')->toArray();
-        $token_ios = self::where('user_id', $receiver_id)->where('status', 'on')->where('type', 'ios')->lists('device_token')->toArray();
+        $token_android = self::where('user_id', $receiver_id)->where('status', 'on')->where('type', 'android')->pluck('device_token')->toArray();
+        $token_ios = self::where('user_id', $receiver_id)->where('status', 'on')->where('type', 'ios')->pluck('device_token')->toArray();
+
         return [$token_android, $token_ios];
     }
 
