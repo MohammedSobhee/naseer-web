@@ -72,6 +72,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'admin'], 'nam
     Route::get('/users/user-data/{type}', 'UserController@anyData');
     Route::put('/users/user-verify', 'UserController@verifyPhone');
     Route::put('/users/user-status', 'UserController@userActive');
+    Route::put('/users/user-approve', 'UserController@userApprove');
     Route::put('/users/approval-provider-edits/{id}', 'UserController@confirmUpdateProvider');
     Route::put('/users/reject-provider-edits/{id}', 'UserController@rejectUpdateProvider');
     Route::post('/users/export', 'UserController@export');

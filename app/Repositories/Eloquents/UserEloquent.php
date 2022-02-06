@@ -214,6 +214,22 @@ class UserEloquent extends Uploader implements UserRepository
 
     }
 
+    function userApprove($id)
+    {
+
+        $user = $this->model->find($id['user_id']);
+
+        if (isset($user)) {
+            $user->approved_at = isset($user->approved_at) ? null : Carbon::now();
+
+            if ($user->save()) {
+                return response_api(true, 200);
+            }
+        }
+        return response_api(false, 422);
+
+    }
+
     function anyData($type)
     {
         $users_id = $this->model->whereNotNull('master_id')->pluck('master_id')->toArray();

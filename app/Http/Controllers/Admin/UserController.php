@@ -55,6 +55,11 @@ class UserController extends Controller
         return $this->user->userActive($request->only('user_id'));
     }
 
+    public function userApprove(Request $request)
+    {
+        return $this->user->userApprove($request->only('user_id'));
+    }
+
     public function verifyPhone(Request $request)
     {
         return $this->user->verifyPhone($request->only('user_id'));
