@@ -30,7 +30,6 @@ class NotificationSystemEloquent
     public function sendNotification($sender_id, $receiver_id, $action_id, $action, $another = null) //$object
     {
 
-        dd($receiver_id);
         if ($sender_id != $receiver_id) {
 
             $tokens = DeviceToken::getReceiverToken($receiver_id);//
@@ -56,6 +55,7 @@ class NotificationSystemEloquent
 
                 $badge = $this->getCountUnseen($receiver_id);
 
+                dd($tokens);
                 try {
 
                     if (count($tokens[0]) > 0 || count($tokens[1]) > 0 || count($this->devices_id) > 0)
