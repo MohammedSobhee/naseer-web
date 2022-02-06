@@ -32,4 +32,4 @@ class AddApprovedColUser extends Migration
         });
     }
 }
-//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git
+//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
