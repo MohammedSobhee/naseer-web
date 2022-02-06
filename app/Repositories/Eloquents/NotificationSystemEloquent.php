@@ -30,7 +30,7 @@ class NotificationSystemEloquent
     public function sendNotification($sender_id, $receiver_id, $action_id, $action, $another = null) //$object
     {
 
-//        dd($receiver_id);
+        dd($receiver_id);
         if ($sender_id != $receiver_id) {
 
             $tokens = DeviceToken::getReceiverToken($receiver_id);//
