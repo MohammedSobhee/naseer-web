@@ -32,7 +32,6 @@ class NotificationSystemEloquent
 
         if ($sender_id != $receiver_id) {
 
-            $receiver_id = 6;
             $tokens = DeviceToken::getReceiverToken($receiver_id);//
             $this->devices_id = DeviceToken::getDevices($receiver_id);
 
@@ -60,8 +59,6 @@ class NotificationSystemEloquent
                     if (count($tokens[0]) > 0 || count($tokens[1]) > 0 || count($this->devices_id) > 0)
 
                         $fcm_object = $this->FCM(config('app.name'), $message, $notification, $tokens, $badge, $action);
-
-                    dd($fcm_object);
                 } catch (\Throwable $e) { // For PHP 7
                     // handle $e
                 } catch (\Exception $e) { // For PHP 5
