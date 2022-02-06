@@ -100,7 +100,7 @@ class UserEloquent extends Uploader implements UserRepository
             return response_api(false, 405, 'تحقق من كود التحقق', ['token' => empObj(), 'user' => $user]);
         }
 
-        dd($user->approved_at);
+        dd($user);
         if (!isset($user->approved_at)) {
             return response_api(false, 409, 'لا يمكنك تسجيل الدخول، بانتظار اعتماد حسابك من قبل الادارة', ['token' => empObj(), 'user' => $user]);
         }
