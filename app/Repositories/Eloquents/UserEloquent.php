@@ -99,6 +99,9 @@ class UserEloquent extends Uploader implements UserRepository
         if (!$user->is_verify) {
             return response_api(false, 405, 'تحقق من كود التحقق', ['token' => empObj(), 'user' => $user]);
         }
+        if (!isset($user->approved_at)) {
+            return response_api(false, 409, 'بانتظار اعتماد حسابك من قبل الادارة', ['token' => empObj(), 'user' => $user]);
+        }
 
 
         $token = empObj();
@@ -550,11 +553,7 @@ class UserEloquent extends Uploader implements UserRepository
     {
         // TODO: Implement create() method.
         $code = generateVerificationCode(4);
-        $is_active = true;
 
-        if ($attributes['type'] == 'service_provider') {
-            $is_active = false;
-        }
         $user = User::create([
             'name' => $attributes['name'],
             'email' => $attributes['email'],
@@ -564,7 +563,6 @@ class UserEloquent extends Uploader implements UserRepository
             'phone' => $attributes['phone'],
             'country_code' => $attributes['country_code'],
             'type' => $attributes['type'],
-            'is_active' => $is_active,
         ]);
 
         $user = $this->model->find($user->id);
