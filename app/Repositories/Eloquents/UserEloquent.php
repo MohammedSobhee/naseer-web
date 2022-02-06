@@ -100,6 +100,7 @@ class UserEloquent extends Uploader implements UserRepository
             return response_api(false, 405, 'تحقق من كود التحقق', ['token' => empObj(), 'user' => $user]);
         }
 
+
         $token = empObj();
 //
         $token->token_type = $token_obj->token_type;
@@ -526,7 +527,11 @@ class UserEloquent extends Uploader implements UserRepository
     {
         // TODO: Implement create() method.
         $code = generateVerificationCode(4);
+        $is_active = true;
 
+        if ($attributes['type'] == 'service_provider') {
+            $is_active = false;
+        }
         $user = User::create([
             'name' => $attributes['name'],
             'email' => $attributes['email'],
@@ -536,6 +541,7 @@ class UserEloquent extends Uploader implements UserRepository
             'phone' => $attributes['phone'],
             'country_code' => $attributes['country_code'],
             'type' => $attributes['type'],
+            'is_active' => $is_active,
         ]);
 
         $user = $this->model->find($user->id);
