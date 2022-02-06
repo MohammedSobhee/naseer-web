@@ -294,8 +294,8 @@ class UserEloquent extends Uploader implements UserRepository
                 if ($user->type == 'user')
                     return '-';
                 if (isset($user->approved_at))
-                    return '<input type="checkbox" class="make-switch approved_at" data-on-text="&nbsp;معتمد&nbsp;" data-off-text="&nbsp;غير معتمد&nbsp;" name="is_active" data-id="' . $user->id . '" checked  data-on-color="success" data-size="mini" data-off-color="warning">';
-                return '<input type="checkbox" class="make-switch approved_at" data-on-text="&nbsp;معتمد&nbsp;" data-off-text="&nbsp;غير معتمد&nbsp;" name="is_active" data-id="' . $user->id . '" data-on-color="success" data-size="mini" data-off-color="warning">';
+                    return '<input type="checkbox" class="make-switch approved_at" data-on-text="&nbsp;معتمد&nbsp;" data-off-text="&nbsp;انتظار&nbsp;" name="is_active" data-id="' . $user->id . '" checked  data-on-color="success" data-size="mini" data-off-color="warning">';
+                return '<input type="checkbox" class="make-switch approved_at" data-on-text="&nbsp;معتمد&nbsp;" data-off-text="&nbsp;انتظار&nbsp;" name="is_active" data-id="' . $user->id . '" data-on-color="success" data-size="mini" data-off-color="warning">';
             })
             ->addColumn('action', function ($user) {
 //                return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/edit') . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only edit-user-mdl"
