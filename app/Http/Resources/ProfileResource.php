@@ -30,6 +30,7 @@ class ProfileResource extends JsonResource
             'is_active' => $this->is_active,
             'is_completed' => $this->is_completed,
             'is_edit' => $this->is_edit,
+            'approved_at' => $this->approved_at,
             'city' => new CityResource($this->City()->first()),
             'provider_det' => new ServiceProviderResource($this->ServiceProvider()->first()),
         ];
