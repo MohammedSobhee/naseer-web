@@ -55,7 +55,6 @@ class NotificationSystemEloquent
 
                 $badge = $this->getCountUnseen($receiver_id);
 
-                dd($tokens);
                 try {
 
                     if (count($tokens[0]) > 0 || count($tokens[1]) > 0 || count($this->devices_id) > 0)
