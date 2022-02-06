@@ -273,6 +273,13 @@ class UserEloquent extends Uploader implements UserRepository
                 if ($user->is_active)
                     return '<input type="checkbox" class="make-switch is_active" data-on-text="&nbsp;مفعّل&nbsp;" data-off-text="&nbsp;معطّل&nbsp;" name="is_active" data-id="' . $user->id . '" checked  data-on-color="success" data-size="mini" data-off-color="warning">';
                 return '<input type="checkbox" class="make-switch is_active" data-on-text="&nbsp;مفعّل&nbsp;" data-off-text="&nbsp;معطّل&nbsp;" name="is_active" data-id="' . $user->id . '" data-on-color="success" data-size="mini" data-off-color="warning">';
+            })->editColumn('approved_at', function ($user) {
+
+                if ($user->type == 'user')
+                    return '-';
+                if (isset($user->approved_at))
+                    return '<input type="checkbox" class="make-switch approved_at" data-on-text="&nbsp;معتمد&nbsp;" data-off-text="&nbsp;غير معتمد&nbsp;" name="is_active" data-id="' . $user->id . '" checked  data-on-color="success" data-size="mini" data-off-color="warning">';
+                return '<input type="checkbox" class="make-switch approved_at" data-on-text="&nbsp;معتمد&nbsp;" data-off-text="&nbsp;غير معتمد&nbsp;" name="is_active" data-id="' . $user->id . '" data-on-color="success" data-size="mini" data-off-color="warning">';
             })
             ->addColumn('action', function ($user) {
 //                return '<a href="' . url(admin_vw() . '/users/' . $user->id . '/edit') . '" class="btn btn-sm btn-success purple btn-circle btn-icon-only edit-user-mdl"
@@ -331,7 +338,7 @@ class UserEloquent extends Uploader implements UserRepository
                                                     </div>';
                 return $action;
             })->addIndexColumn()
-            ->rawColumns(['action', 'photo', 'is_active', 'is_verify'])->toJson();
+            ->rawColumns(['action', 'photo', 'is_active', 'approved_at', 'is_verify'])->toJson();
     }
 
     function anyContactUsData()

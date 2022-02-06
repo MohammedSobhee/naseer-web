@@ -21,6 +21,27 @@ $(document).ready(function () {
         });
 
     });
+    $('#users_tbl').on('switchChange.bootstrapSwitch', '.approved_at', function (event, state) {
+        // ... skipped ...
+        var user_id = $(this).data('id');
+
+        $.ajax({
+            url: baseURL + '/users/user-approve',
+            type: 'PUT',
+            dataType: 'json',
+            data: {'_token': csrf_token, 'user_id': user_id},
+            success: function (data) {
+
+                if (data.status) {
+                    toastr['success'](data.message, '');
+                } else {
+                    toastr['error'](data.message);
+                }
+
+            }
+        });
+
+    });
 
     $('#users_tbl').on('switchChange.bootstrapSwitch', '.verify', function (event, state) {
         // ... skipped ...
@@ -91,6 +112,7 @@ $(document).ready(function () {
                 {data: 'is_verify', name: 'is_verify'},
                 {data: 'city.name', name: 'city.name'},
                 {data: 'is_active', name: 'is_active'},
+                {data: 'approved_at', name: 'approved_at'},
                 {data: 'action', name: 'action'}
             ],
             "fnDrawCallback": function () {
