@@ -601,13 +601,13 @@ class UserEloquent extends Uploader implements UserRepository
         $service_provider->license_type = $service_provider_type->is_licensed ? 'licensed' : 'unlicensed';
 
         if (isset($attributes['idno_file']))
-            $service_provider->idno_file = $this->upload($attributes, 'idno_file');
+            $service_provider->idno_file = $this->storeImage('service_provider', 'idno_file');
 
         if (isset($attributes['licensed_file']))
-            $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
+            $service_provider->licensed_file = $this->storeImage('service_provider', 'licensed_file');
 
         if (isset($attributes['skill_file']))
-            $service_provider->skill_file = $this->upload($attributes, 'skill_file');
+            $service_provider->skill_file = $this->storeImage('service_provider', 'skill_file');
 
         if ($service_provider->save()) {
 
@@ -687,29 +687,40 @@ class UserEloquent extends Uploader implements UserRepository
 
         $service_provider->license_type = $service_provider_type->is_licensed ? 'licensed' : 'unlicensed';
 
+
+        if (isset($attributes['idno_file']))
+            $service_provider->idno_file = $this->storeImage('service_provider', 'idno_file');
+
+        if (isset($attributes['licensed_file']))
+            $service_provider->licensed_file = $this->storeImage('service_provider', 'licensed_file');
+
+        if (isset($attributes['skill_file']))
+            $service_provider->skill_file = $this->storeImage('service_provider', 'skill_file');
+
+
         if ($service_provider->save()) {
 
             $user->is_completed = 1;
             $user->save();
 
-            if (isset($attributes['idno_file'])) {
-                $service_provider->idno_file = $this->upload($attributes, 'idno_file');
-                sleep(1);
-                $service_provider->save();
-
-            }
-            if (isset($attributes['skill_file'])) {
-                $service_provider->skill_file = $this->upload($attributes, 'skill_file');
-                sleep(1);
-                $service_provider->save();
-
-            }
-            if (isset($attributes['licensed_file'])) {
-                $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
-                sleep(1);
-                $service_provider->save();
-
-            }
+//            if (isset($attributes['idno_file'])) {
+//                $service_provider->idno_file = $this->upload($attributes, 'idno_file');
+//                sleep(1);
+//                $service_provider->save();
+//
+//            }
+//            if (isset($attributes['skill_file'])) {
+//                $service_provider->skill_file = $this->upload($attributes, 'skill_file');
+//                sleep(1);
+//                $service_provider->save();
+//
+//            }
+//            if (isset($attributes['licensed_file'])) {
+//                $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
+//                sleep(1);
+//                $service_provider->save();
+//
+//            }
             return response_api(true, 200, __('app.success'), [
                 'token' => null,
                 'user' => new ProfileResource($user)
@@ -770,29 +781,39 @@ class UserEloquent extends Uploader implements UserRepository
 
         $service_provider->license_type = $service_provider_type->is_licensed ? 'licensed' : 'unlicensed';
 
+        if (isset($attributes['idno_file']))
+            $service_provider->idno_file = $this->storeImage('service_provider', 'idno_file');
+
+        if (isset($attributes['licensed_file']))
+            $service_provider->licensed_file = $this->storeImage('service_provider', 'licensed_file');
+
+        if (isset($attributes['skill_file']))
+            $service_provider->skill_file = $this->storeImage('service_provider', 'skill_file');
+
+
         if ($service_provider->save()) {
 
             $user->is_completed = 1;
             $user->save();
 
-            if (isset($attributes['idno_file'])) {
-                $service_provider->idno_file = $this->upload($attributes, 'idno_file');
-                sleep(1);
-                $service_provider->save();
-
-            }
-            if (isset($attributes['skill_file'])) {
-                $service_provider->skill_file = $this->upload($attributes, 'skill_file');
-                sleep(1);
-                $service_provider->save();
-
-            }
-            if (isset($attributes['licensed_file'])) {
-                $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
-                sleep(1);
-                $service_provider->save();
-
-            }
+//            if (isset($attributes['idno_file'])) {
+//                $service_provider->idno_file = $this->upload($attributes, 'idno_file');
+//                sleep(1);
+//                $service_provider->save();
+//
+//            }
+//            if (isset($attributes['skill_file'])) {
+//                $service_provider->skill_file = $this->upload($attributes, 'skill_file');
+//                sleep(1);
+//                $service_provider->save();
+//
+//            }
+//            if (isset($attributes['licensed_file'])) {
+//                $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
+//                sleep(1);
+//                $service_provider->save();
+//
+//            }
             return response_api(true, 200, __('app.success'), [
                 'token' => null,
                 'user' => new ProfileResource($user)
