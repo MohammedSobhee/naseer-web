@@ -51,6 +51,8 @@ class SettingEloquent implements Repository
     {
         // TODO: Implement update() method.
         $setting = $this->model->first();
+        if (!isset($setting))
+            $setting = new Setting();
 //        $setting->contract = $attributes['contract'];
         $setting->terms = $attributes['terms'];
         $setting->about_app = $attributes['about_app'];
