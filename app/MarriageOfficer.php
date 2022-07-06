@@ -29,14 +29,12 @@ class MarriageOfficer extends Model
 
     public function getMedicalExaminationAttribute($value)
     {
-        if (isset($value))
-            return url('assets/upload') . '/' . $value;
+        return storage_public($value);
     }
 
     public function getDivorceCertificateAttribute($value)
     {
-        if (isset($value))
-            return url('assets/upload') . '/' . $value;
+        return storage_public($value);
     }
 
 

@@ -26,38 +26,32 @@ class Request extends Model
 
     public function getCaseFileAttribute($value)
     {
-        if (isset($value))
-            return url('assets/upload') . '/' . $value;
+        return storage_public($value);
     }
 
     public function getCaseAudioAttribute($value)
     {
-        if (isset($value))
-            return url('assets/upload') . '/' . $value;
+        return storage_public($value);
     }
 
     public function getEvidencesFileAttribute($value)
     {
-        if (isset($value))
-            return url('assets/upload') . '/' . $value;
+        return storage_public($value);
     }
 
     public function getEvidencesAudioAttribute($value)
     {
-        if (isset($value))
-            return url('assets/upload') . '/' . $value;
+        return storage_public($value);
     }
 
     public function getPreferredOutcomesFileAttribute($value)
     {
-        if (isset($value))
-            return url('assets/upload') . '/' . $value;
+        return storage_public($value);
     }
 
     public function getPreferredOutcomesAudioAttribute($value)
     {
-        if (isset($value))
-            return url('assets/upload') . '/' . $value;
+        return storage_public($value);
     }
 
     public function City()
