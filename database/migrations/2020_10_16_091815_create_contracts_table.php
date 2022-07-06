@@ -16,7 +16,7 @@ class CreateContractsTable extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->longText('text');
-            $table->boolean('has_service');
+            $table->boolean('has_service')->default(false);
             $table->boolean('is_completed')->default(false);
             $table->softDeletes();
             $table->timestamps();

@@ -17,9 +17,11 @@ class CreateRequestFieldsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('sub_service_id');
             $table->string('key');
+            $table->string('select_key')->nullable();
+            $table->string('value')->nullable();
             $table->string('hint');
-            $table->enum('type', ['select', 'text', 'date']);
-            $table->string('data')->nullable();
+            $table->enum('type', ['select','text','date','object_list','select_tree','location','file','number']);
+            $table->longText('data')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->softDeletes();
             $table->timestamps();

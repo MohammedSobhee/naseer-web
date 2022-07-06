@@ -21,6 +21,7 @@ class CreateSubServicesTable extends Migration
             $table->boolean('is_evidence')->default(false);
             $table->boolean('is_prefered_outcome')->default(false);
             $table->unsignedBigInteger('service_id');
+            $table->string('icon')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
