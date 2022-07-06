@@ -21,7 +21,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name', 'email', 'password', 'phone', 'verification_code', 'country_code',
-        'is_verify', 'gender', 'type', 'city_id','gender','is_active'
+        'is_verify', 'gender', 'type', 'city_id', 'gender', 'is_active'
     ];
 
     /**
@@ -83,25 +83,9 @@ class User extends Authenticatable
         return $this->hasMany(Rate::class, 'user_id', 'id');
     }
 
-    public function getPhoto100Attribute()
-    {
-        if (isset($this->getAttributes()['photo']))
-            return url('storage/app/users/' . $this->id) . '/100/' . $this->getAttributes()['photo'];
-        return url('assets/apps/img/unknown.png');
-    }
-
-    public function getPhoto300Attribute()
-    {
-        if (isset($this->getAttributes()['photo']))
-            return url('storage/app/users/' . $this->id) . '/300/' . $this->getAttributes()['photo'];
-        return url('assets/apps/img/unknown.png');
-    }
-
     public function getPhotoAttribute($value)
     {
-        if (isset($value))
-            return url('storage/app/users/' . $this->id) . '/' . $value;
-        return url('assets/apps/img/unknown.png');
+        return storage_public($value);
     }
 
 

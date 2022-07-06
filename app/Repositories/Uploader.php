@@ -44,6 +44,12 @@ class Uploader
         return false;
     }
 
+    public function removeImage($path)
+    {
+        if (file_exists($path))
+            unlink($path);
+    }
+
     public function deleteImage($folder, $id, $image_name)
     {
         $filename = base_path('storage/app/' . $folder . '/' . $id . '/' . $image_name);
@@ -61,19 +67,32 @@ class Uploader
         }
     }
 
-    public function storeImage($file_name)
-    {
-        $file = request()->file($file_name);
-        $filePath = "/upload";
-
-        return Storage::disk('local')->put($filePath, $file);
-    }
+//    public function storeImage($file_name)
+//    {
+//        $file = request()->file($file_name);
+//        $filePath = "/upload";
+//
+//        return Storage::disk('local')->put($filePath, $file);
+//    }
 
     public function storeImageFile($file)
     {
         $filePath = "/upload";
 
         return Storage::disk('local')->put($filePath, $file);
+    }
+
+    public function removeFile($path)
+    {
+        Storage::disk('public')->delete($path);
+    }
+
+    public function storeImage($folder, $file_name)
+    {
+        if (!request()->hasFile($file_name)) return null;
+
+        $file = request()->file($file_name);
+        return Storage::disk('public')->put($folder, $file);
     }
 
     public function storeImageThumb($folder, $id, $image)
@@ -129,13 +148,13 @@ class Uploader
         return $filename;
     }
 
-    public function upload_image(array $request ,$input_name ,$folder)
+    public function upload_image(array $request, $input_name, $folder)
     {
         $temp = time() . rand(5, 50);
         $ext = $request[$input_name]->getClientOriginalExtension();
         $ext = strtolower($ext);
         $new_file_name = $temp . '.' . $ext;
-        $path ="assets/".$folder;
+        $path = "assets/" . $folder;
         if (!File::exists($path)) {
             File::makeDirectory($path, $mode = 0777, true, true);
         }
@@ -146,7 +165,6 @@ class Uploader
 
         return null;
     }
-
 
 
 }

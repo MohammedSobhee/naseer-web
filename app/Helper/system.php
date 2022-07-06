@@ -274,3 +274,9 @@ function distance($point1_lat, $point1_long, $point2_lat, $point2_long, $unit = 
     }
     return round($distance, $decimals);
 }
+
+
+function storage_public($path)
+{
+    return (isset($path)) ? url('public/storage/' . $path) : null;
+}

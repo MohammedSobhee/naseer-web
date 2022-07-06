@@ -572,7 +572,7 @@ class UserEloquent extends Uploader implements UserRepository
     function completeServiceProvider(array $attributes)
     {
         if (isset($attributes['photo'])) {
-            auth()->user()->photo = $this->storeImageThumb('users', auth()->user()->id, $attributes['photo']);
+            auth()->user()->photo = $this->storeImage('users', 'photo');
             auth()->user()->save();
             sleep(1);
         }
@@ -600,27 +600,36 @@ class UserEloquent extends Uploader implements UserRepository
 
         $service_provider->license_type = $service_provider_type->is_licensed ? 'licensed' : 'unlicensed';
 
+        if (isset($attributes['idno_file']))
+            $service_provider->idno_file = $this->upload($attributes, 'idno_file');
+
+        if (isset($attributes['licensed_file']))
+            $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
+
+        if (isset($attributes['skill_file']))
+            $service_provider->skill_file = $this->upload($attributes, 'skill_file');
+
         if ($service_provider->save()) {
 
             auth()->user()->is_completed = 1;
             auth()->user()->save();
 
-            if (isset($attributes['idno_file'])) {
-                $service_provider->idno_file = $this->upload($attributes, 'idno_file');
-                sleep(1);
-                $service_provider->save();
-
-            }
-            if (isset($attributes['skill_file'])) {
-                $service_provider->skill_file = $this->upload($attributes, 'skill_file');
-                sleep(1);
-                $service_provider->save();
-
-            }
-            if (isset($attributes['licensed_file'])) {
-                $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
-                sleep(1);
-                $service_provider->save();
+//            if (isset($attributes['idno_file'])) {
+//                $service_provider->idno_file = $this->upload($attributes, 'idno_file');
+//                sleep(1);
+//                $service_provider->save();
+//
+//            }
+//            if (isset($attributes['skill_file'])) {
+//                $service_provider->skill_file = $this->upload($attributes, 'skill_file');
+//                sleep(1);
+//                $service_provider->save();
+//
+//            }
+//            if (isset($attributes['licensed_file'])) {
+//                $service_provider->licensed_file = $this->upload($attributes, 'licensed_file');
+//                sleep(1);
+//                $service_provider->save();
 
             }
             return response_api(true, 200, trans('app.complete-service-provider'), [
@@ -649,7 +658,7 @@ class UserEloquent extends Uploader implements UserRepository
         ]);
 
         if (isset($attributes['photo'])) {
-            $user->photo = $this->storeImageThumb('users', $user->id, $attributes['photo']);
+            $user->photo = $this->storeImage('users', 'photo');
             $user->save();
             sleep(1);
         }
@@ -728,7 +737,7 @@ class UserEloquent extends Uploader implements UserRepository
         ]);
 
         if (isset($attributes['photo'])) {
-            $user->photo = $this->storeImageThumb('users', $id, $attributes['photo']);
+            $user->photo = $this->storeImage('users', 'photo');
             $user->save();
             sleep(1);
         }
@@ -812,9 +821,10 @@ class UserEloquent extends Uploader implements UserRepository
         if (isset($attributes['photo'])) {
 
             if (isset($user->photo) && $user->photo != '') {
-                $this->deleteImage('users', $user->id, $user->getOriginal('photo'));
+                $this->removeFile($user->photo);
+//                $this->deleteImage('users', $user->id, $user->getOriginal('photo'));
             }
-            $user->photo = $this->storeImageThumb('users', $user->id, $attributes['photo']);
+            $user->photo = $this->storeImage('users', 'photo');
         }
 
         if (isset($attributes['password'])) {
@@ -967,7 +977,7 @@ class UserEloquent extends Uploader implements UserRepository
             $user_tmp->city_id = $user->city_id;
 
         if (isset($attributes['photo'])) {
-            $user_tmp->photo = $this->storeImageThumb('users', $user->id, $attributes['photo']);
+            $user_tmp->photo = $this->storeImage('users', 'photo');
         } else
             $user_tmp->photo = $user->getAttributes()['photo'];
 

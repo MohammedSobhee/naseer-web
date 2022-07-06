@@ -31,19 +31,16 @@ class ServiceProvider extends Model
 
     public function getIdnoFileAttribute($value)
     {
-        if (isset($value))
-            return url('assets/upload') . '/' . $value;
+        return storage_public($value);
     }
 
     public function getSkillFileAttribute($value)
     {
-        if (isset($value))
-            return url('assets/upload') . '/' . $value;
+        return storage_public($value);
     }
 
     public function getLicensedFileAttribute($value)
     {
-        if (isset($value))
-            return url('assets/upload') . '/' . $value;
+        return storage_public($value);
     }
 }
