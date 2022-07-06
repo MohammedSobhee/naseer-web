@@ -637,7 +637,7 @@ class UserEloquent extends Uploader implements UserRepository
                 'user' => new ProfileResource(auth()->user())
             ]);// . ',' . trans('app.sent_email_verification')
         }
-    }
+
 
     // add service provider by admin
     function storeProvider(array $attributes)
