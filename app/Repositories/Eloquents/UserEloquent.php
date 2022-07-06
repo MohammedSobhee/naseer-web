@@ -50,6 +50,7 @@ class UserEloquent extends Uploader implements UserRepository
 
         $response = Route::dispatch($proxy);
 
+        dd($response);
         $token_obj = json_decode($response->getContent());
 
 //        $statusCode = json_decode($response->getStatusCode());
