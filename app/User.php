@@ -46,8 +46,6 @@ class User extends Authenticatable
         'is_edit' => 'boolean',
     ];
 
-    protected $appends = ['photo100', 'photo300'];
-
     // Set as username any column from users table
     public function findForPassport($username)
     {
