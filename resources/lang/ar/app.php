@@ -20,6 +20,7 @@ return [
     'client_input_error' => 'خطأ في الإدخال',
     'user_created' => 'تم انشاء حساب جديد',
     'complete-service-provider' => 'تم اكمال عملية التسجيل لمزود الخدمة, بانتظار الاعتماد من قبل الادارة.',
+    'resend_code_success' => 'تم ارسال كود التحقق بنجاح',
 
     'error_confirmation' => 'هناك خطأ في كود التأكيد.',
     'mobile_token' => 'رقم الهاتف مسجل مسبقاً لشخص آخر.',

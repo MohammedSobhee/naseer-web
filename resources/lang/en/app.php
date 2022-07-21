@@ -20,6 +20,7 @@ return [
     'server_error' => 'Server error.',
     'error_confirmation' => 'There is an error in confirmation code.',
     'mobile_token' => 'The mobile is already token.',
+    'resend_code_success' => 'Code sent successfully.',
 
 
 ];
