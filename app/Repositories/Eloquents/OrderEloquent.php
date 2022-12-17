@@ -154,7 +154,7 @@ class OrderEloquent extends Uploader implements Repository
         $count = $collection->count();
         $page_count = page_count($count, $page_size);
         $page_number = $page_number - 1;
-        $page_number = $page_number > $page_count ? $page_number = $page_count - 1 : $page_number;
+        $page_number = $page_number > $page_count ? $page_count - 1 : $page_number;
         $object = $collection->take($page_size)->skip((int)$page_number * $page_size)->orderBy('created_at', 'desc')->get();
         if (request()->segment(1) == 'api' || request()->ajax()) {
             return response_api(true, 200, null, OrderResource::collection($object), $page_count, $page_number, $count);
