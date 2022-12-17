@@ -102,12 +102,12 @@ class CreateRequest extends FormRequest
             //AnnualLegalContract
             'activity' => 'required_if:service_id,5',
             'contract_period' => 'required_if:service_id,5',
-            'lawsuit_argument' => 'required_if:service_id,5|numeric',
-            'preparation_interception' => 'required_if:service_id,5|numeric',
-            'contract_formation' => 'required_if:service_id,5|numeric',
-            'contract_revision' => 'required_if:service_id,5|numeric',
-            'legal_consultation' => 'required_if:service_id,5|numeric',
-            'issue_procuration' => 'required_if:service_id,5|numeric',
+            'lawsuit_argument' => 'required_if:service_id,5',
+            'preparation_interception' => 'required_if:service_id,5',
+            'contract_formation' => 'required_if:service_id,5',
+            'contract_revision' => 'required_if:service_id,5',
+            'legal_consultation' => 'required_if:service_id,5',
+            'issue_procuration' => 'required_if:service_id,5',
 
         ];
     }

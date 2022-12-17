@@ -15,6 +15,7 @@ class SubServiceResource extends JsonResource
      */
     public function toArray($request)
     {
+
         $extend_data = [
             'hint' => ($this->service_id == 7) ? 'موجودات التركة' : 'حدد أنواع الخدمات السنوية',
             'fields' => Estate::where('sub_service_id', $this->id)->get(),

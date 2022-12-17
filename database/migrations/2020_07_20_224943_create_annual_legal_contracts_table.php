@@ -20,12 +20,12 @@ class CreateAnnualLegalContractsTable extends Migration
             $table->unsignedBigInteger('sub_service_id');
             $table->string('activity')->nullable(); //
             $table->string('contract_period')->nullable(); //
-            $table->double('lawsuit_argument')->nullable(); //
-            $table->double('preparation_interception')->nullable(); //
-            $table->double('contract_formation')->nullable(); //
-            $table->double('contract_revision')->nullable(); //
-            $table->double('legal_consultation')->nullable(); //
-            $table->double('issue_procuration')->nullable(); //
+            $table->string('lawsuit_argument')->nullable(); //
+            $table->string('preparation_interception')->nullable(); //
+            $table->string('contract_formation')->nullable(); //
+            $table->string('contract_revision')->nullable(); //
+            $table->string('legal_consultation')->nullable(); //
+            $table->string('issue_procuration')->nullable(); //
 
             $table->softDeletes();
             $table->timestamps();
