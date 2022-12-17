@@ -285,7 +285,7 @@ class OrderEloquent extends Uploader implements Repository
                     $marriage_office->latitude = $attributes['latitude'];
                     $marriage_office->longitude = $attributes['longitude'];
                     $marriage_office->request_datetime = $attributes['request_datetime'];
-                    $marriage_office->client_idno = $attributes['client_idno'];
+//                    $marriage_office->client_idno = $attributes['client_idno'];
                     if ($marriage_office->save()) {
                         if (isset($attributes['medical_examination'])) {
                             sleep(1);

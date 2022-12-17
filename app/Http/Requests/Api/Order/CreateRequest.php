@@ -92,7 +92,7 @@ class CreateRequest extends FormRequest
             'latitude' => 'required_if:service_id,10',
             'longitude' => 'required_if:service_id,10',
             'request_datetime' => 'required_if:service_id,10|date_format:Y-m-d H:i:s',
-            'client_idno' => 'required_if:service_id,10',
+//            'client_idno' => 'required_if:service_id,10',
             'medical_examination' => 'required_if:service_id,10|file',
             'divorce_certificate' => 'required_if:service_id,10|file',
 

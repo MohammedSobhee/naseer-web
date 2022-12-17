@@ -22,7 +22,7 @@ class CreateMarriageOfficersTable extends Migration
             $table->string('latitude')->nullable(); //
             $table->string('longitude')->nullable(); //
             $table->timestamp('request_datetime')->nullable(); //
-            $table->string('client_idno')->nullable(); //
+//            $table->string('client_idno')->nullable(); //
             $table->string('medical_examination')->nullable(); //
             $table->string('divorce_certificate')->nullable(); //
 
