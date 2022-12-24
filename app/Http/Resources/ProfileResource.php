@@ -14,6 +14,8 @@ class ProfileResource extends JsonResource
      */
     public function toArray($request)
     {
+
+        dd($this->Rates);
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -25,7 +27,7 @@ class ProfileResource extends JsonResource
             'photo' => $this->photo,
             'gender' => $this->gender,
             'type' => $this->type,
-            'rate_num' => auth()->check() ? 1 : 0,
+            'rate_num' => auth()->check() ? (($this->Rates()->where('action', '<>', auth()->user()->type)->where('is_approved', 1)->count()) ? 1 : 0) : 0,
             'rate' => auth()->check() ? (($this->Rates()->where('action', '<>', auth()->user()->type)->where('is_approved', 1)->average('rate')) ?: 0) : 0,
             'is_active' => $this->is_active,
             'is_completed' => $this->is_completed,
