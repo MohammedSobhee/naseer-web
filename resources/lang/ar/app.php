@@ -54,7 +54,7 @@ return [
     ],
     '_order_statuses' => [
         'new' => 'الطلب جديدة',
-        'completed' => 'الطلب منتهية',
+        'completed' => 'الطلب منتهي',
         'canceled' => 'الطلب ملغاة',
         'assigned' => 'الطلب قيد التنفيذ',
     ],
