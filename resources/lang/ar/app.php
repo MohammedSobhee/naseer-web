@@ -53,10 +53,10 @@ return [
         'assigned' => 'قيد التنفيذ',
     ],
     '_order_statuses' => [
-        'new' => 'الطلب جديدة',
-        'completed' => 'الطلب منتهي',
-        'canceled' => 'الطلب ملغاة',
-        'assigned' => 'الطلب قيد التنفيذ',
+        'new' => 'طلب جديدة',
+        'completed' => 'طلب منتهي',
+        'canceled' => 'طلب ملغي',
+        'assigned' => 'طلب قيد التنفيذ',
     ],
 
 
