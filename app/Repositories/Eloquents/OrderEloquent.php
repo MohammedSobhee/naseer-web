@@ -370,7 +370,7 @@ class OrderEloquent extends Uploader implements Repository
             $setting = Setting::first();
 
             // cancel request after 24 hours when request is new (no offer accepted)
-            $job = (new RejectPendingOfferJob($request))->delay(Carbon::now()->addMinute()); // addHours(intval($setting->expire_offer))
+            $job = (new RejectPendingOfferJob($request))->delay(Carbon::now()->addHours(intval($setting->expire_offer))); // addHours(intval($setting->expire_offer))
             app(Dispatcher::class)->dispatch($job);
             return response_api(true, 200, 'تم انشاء الطلب بنجاح', new OrderResource($request));// . ',' . trans('app.sent_email_verification')
         }
