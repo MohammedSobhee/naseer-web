@@ -52,6 +52,12 @@ return [
         'canceled' => 'ملغاة',
         'assigned' => 'قيد التنفيذ',
     ],
+    '_order_statuses' => [
+        'new' => 'الطلب جديدة',
+        'completed' => 'الطلب منتهية',
+        'canceled' => 'الطلب ملغاة',
+        'assigned' => 'الطلب قيد التنفيذ',
+    ],
 
 
 ];
