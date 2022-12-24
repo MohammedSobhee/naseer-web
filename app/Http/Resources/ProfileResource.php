@@ -18,7 +18,7 @@ class ProfileResource extends JsonResource
 //        $rate = 0;
         if ($this->type == 'service_provider') {
             $rate_num = auth()->check() ? (($this->ProviderRates()->where('is_approved', 1)->count()) ? 1 : 0) : 0;
-            $rate = auth()->check() ? (($this->ProviderRates()->where('is_approved', 1)->average('rate')) ?: 0) : 0
+            $rate = auth()->check() ? (($this->ProviderRates()->where('is_approved', 1)->average('rate')) ?: 0) : 0;
         } else {
             $rate_num = auth()->check() ? (($this->Rates()->where('is_approved', 1)->count()) ? 1 : 0) : 0;
             $rate = auth()->check() ? (($this->Rates()->where('is_approved', 1)->average('rate')) ?: 0) : 0;
