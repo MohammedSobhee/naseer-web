@@ -14,8 +14,16 @@ class ProfileResource extends JsonResource
      */
     public function toArray($request)
     {
+//        $rate_num = 0;
+//        $rate = 0;
+        if ($this->type == 'service_provider') {
+            $rate_num = auth()->check() ? (($this->ProviderRates()->where('is_approved', 1)->count()) ? 1 : 0) : 0;
+            $rate = auth()->check() ? (($this->ProviderRates()->where('is_approved', 1)->average('rate')) ?: 0) : 0
+        } else {
+            $rate_num = auth()->check() ? (($this->Rates()->where('is_approved', 1)->count()) ? 1 : 0) : 0;
+            $rate = auth()->check() ? (($this->Rates()->where('is_approved', 1)->average('rate')) ?: 0) : 0;
 
-        dd($this->Rates);
+        }
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -27,8 +35,8 @@ class ProfileResource extends JsonResource
             'photo' => $this->photo,
             'gender' => $this->gender,
             'type' => $this->type,
-            'rate_num' => auth()->check() ? (($this->Rates()->where('action', '<>', auth()->user()->type)->where('is_approved', 1)->count()) ? 1 : 0) : 0,
-            'rate' => auth()->check() ? (($this->Rates()->where('action', '<>', auth()->user()->type)->where('is_approved', 1)->average('rate')) ?: 0) : 0,
+            'rate_num' => $rate_num,
+            'rate' => $rate,
             'is_active' => $this->is_active,
             'is_completed' => $this->is_completed,
             'is_edit' => $this->is_edit,
