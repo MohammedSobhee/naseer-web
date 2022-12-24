@@ -84,6 +84,7 @@ class OrderResource extends JsonResource
             'payment_prefer_lbl' => __('app.payment_prefer.' . $this->payment_prefer),
             'service_date' => $this->service_date,
             'status' => $this->status,
+            'status_label' => __('app.order_statuses.' . $this->status),
             'is_edit' => $this->is_edit,
             'is_rate' => isset($rate),
             'offers_num' => count($offers),
