@@ -129,7 +129,7 @@ class OfferEloquent extends Uploader implements Repository
 
         $request = Request::where('status', '<>', 'new')->find($attributes['request_id']);
         if (isset($request))
-            return response_api(false, 422, 'لا يمكن تقديم عرض على هذا الطلب',[]);
+            return response_api(false, 422, 'لا يمكن تقديم عرض على هذا الطلب', []);
 
         $attributes['service_provider_id'] = auth()->user()->id;
 
@@ -164,6 +164,12 @@ class OfferEloquent extends Uploader implements Repository
     {
 
         $offer = $this->model->find($attributes['offer_id']);
+
+        // check if order new
+        if (isset($offer->Order))
+            if ($offer->Order->status != 'new') {
+                return response_api(false, 422,'لا يمكن قبول هذا العرض لوجود موافقة على عرض آخر.', []);
+            }
         $offer->status = $attributes['status'];
 
         if ($offer->save()) {
@@ -172,7 +178,7 @@ class OfferEloquent extends Uploader implements Repository
                 $offer->Order()->update(['status' => 'initial_assigned', 'is_edit' => 1]);
 
                 // reject  other offers
-                Offer::where('request_id', $offer->request_id)->where('id', '<>', $offer->id)->update(['status' => 'rejected']);
+//                Offer::where('request_id', $offer->request_id)->where('id', '<>', $offer->id)->update(['status' => 'rejected']);
 
                 $this->notification->sendNotification(auth()->user()->id, $offer->service_provider_id, $offer->request_id, 'initial_assigned');
             }
