@@ -84,7 +84,13 @@ class OfferEloquent extends Uploader implements Repository
         $collection = $this->model;
 
         if (auth()->user()->type == 'service_provider') {
-            $collection = $collection->where('service_provider_id', auth()->user()->id);
+
+
+            $collection = $collection->where(function ($query) {
+                $query->whereHas('Order', function ($query) {
+                    $query->where('status', 'new');
+                })->orWhere('status', 'accepted');
+            })->where('service_provider_id', auth()->user()->id);
         }
         if (isset($attributes['request_id'])) {
             $collection = $collection->where('request_id', $attributes['request_id']);
@@ -168,7 +174,7 @@ class OfferEloquent extends Uploader implements Repository
         // check if order new
         if (isset($offer->Order))
             if ($offer->Order->status != 'new') {
-                return response_api(false, 422,'لا يمكن قبول هذا العرض لوجود موافقة على عرض آخر.', []);
+                return response_api(false, 422, 'لا يمكن قبول هذا العرض لوجود موافقة على عرض آخر.', []);
             }
         $offer->status = $attributes['status'];
 
