@@ -22,6 +22,7 @@ use App\Offer;
 use App\PublicProsecutionAndPolice;
 use App\Repositories\Interfaces\Repository;
 use App\Repositories\Uploader;
+use App\Request;
 use App\User;
 
 
@@ -125,6 +126,10 @@ class OfferEloquent extends Uploader implements Repository
 
         if (isset($offer))
             return response_api(false, 422, 'يوجد عرض مسبقاً لهذا الطلب', new OfferResource($offer));
+
+        $request = Request::where('status', '<>', 'new')->find($attributes['request_id']);
+        if (isset($request))
+            return response_api(false, 422, 'لا يمكن تقديم العرض على هذا الطلب', new OfferResource($offer));
 
         $attributes['service_provider_id'] = auth()->user()->id;
 
