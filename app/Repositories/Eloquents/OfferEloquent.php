@@ -129,7 +129,7 @@ class OfferEloquent extends Uploader implements Repository
 
         $request = Request::where('status', '<>', 'new')->find($attributes['request_id']);
         if (isset($request))
-            return response_api(false, 422, 'لا يمكن تقديم العرض على هذا الطلب', new OfferResource($offer));
+            return response_api(false, 422, 'لا يمكن تقديم العرض على هذا الطلب',[]);
 
         $attributes['service_provider_id'] = auth()->user()->id;
 
