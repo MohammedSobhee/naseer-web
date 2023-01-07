@@ -88,13 +88,8 @@ class OfferEloquent extends Uploader implements Repository
 
             $collection = $collection->where(function ($query) {
                 $query->whereHas('Order', function ($query) {
-                    $query->where('status', 'new');
-                })->orWhere(function ($query){
-                    $query->where('status', 'accepted')
-                        ->whereHas('Order', function ($query) {
-                        $query->where('status', 'initial_assigned');
-                    });
-                });
+                    $query->whereIn('status', ['new', 'initial_assigned']);
+                })->orWhere('status', 'accepted');
             })->where('service_provider_id', auth()->user()->id);
         }
         if (isset($attributes['request_id'])) {
