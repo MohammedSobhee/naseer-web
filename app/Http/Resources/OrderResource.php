@@ -59,9 +59,9 @@ class OrderResource extends JsonResource
         $accepted_offer = $this->Offers()->where('status', 'accepted')->first();
 
 
-//        if (in_array($this->status, ['initial_assigned', 'assigned', 'completed']))
-//            $offers = $this->Offers()->orderByDesc('created_at')->get();
-//        else
+        if (in_array($this->status, ['assigned', 'completed']))
+            $offers = $this->Offers()->where('status', 'accepted')->orderByDesc('created_at')->get();
+        else
             $offers = $this->Offers()->orderByDesc('created_at')->get();
 
 
