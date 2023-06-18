@@ -20,7 +20,7 @@ class CreateRequestFieldsTable extends Migration
             $table->string('select_key')->nullable();
             $table->string('value')->nullable();
             $table->string('hint');
-            $table->enum('type', ['select','text','date','object_list','select_tree','location','file','number']);
+            $table->enum('type', ['select','text','date','object_list','select_tree','location','file','number','label']);
             $table->longText('data')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->softDeletes();

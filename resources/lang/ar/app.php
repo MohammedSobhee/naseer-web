@@ -52,6 +52,13 @@ return [
         'canceled' => 'ملغاة',
         'assigned' => 'قيد التنفيذ',
     ],
+    '_order_statuses' => [
+        'new' => 'طلب جديد',
+        'completed' => 'طلب منتهي',
+        'canceled' => 'طلب ملغي',
+        'assigned' => 'طلب قيد التنفيذ',
+        'initial_assigned' => 'موافقة مبدئية',
+    ],
 
-
+//'new','initial_assigned','assigned','completed','canceled'
 ];

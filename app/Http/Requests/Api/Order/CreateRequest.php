@@ -92,7 +92,7 @@ class CreateRequest extends FormRequest
             'latitude' => 'required_if:service_id,10',
             'longitude' => 'required_if:service_id,10',
             'request_datetime' => 'required_if:service_id,10|date_format:Y-m-d H:i:s',
-            'client_idno' => 'required_if:service_id,10',
+//            'client_idno' => 'required_if:service_id,10',
             'medical_examination' => 'required_if:service_id,10|file',
             'divorce_certificate' => 'required_if:service_id,10|file',
 
@@ -102,12 +102,12 @@ class CreateRequest extends FormRequest
             //AnnualLegalContract
             'activity' => 'required_if:service_id,5',
             'contract_period' => 'required_if:service_id,5',
-            'lawsuit_argument' => 'required_if:service_id,5|numeric',
-            'preparation_interception' => 'required_if:service_id,5|numeric',
-            'contract_formation' => 'required_if:service_id,5|numeric',
-            'contract_revision' => 'required_if:service_id,5|numeric',
-            'legal_consultation' => 'required_if:service_id,5|numeric',
-            'issue_procuration' => 'required_if:service_id,5|numeric',
+            'lawsuit_argument' => 'required_if:service_id,5',
+            'preparation_interception' => 'required_if:service_id,5',
+            'contract_formation' => 'required_if:service_id,5',
+            'contract_revision' => 'required_if:service_id,5',
+            'legal_consultation' => 'required_if:service_id,5',
+            'issue_procuration' => 'required_if:service_id,5',
 
         ];
     }

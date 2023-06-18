@@ -63,6 +63,8 @@ class OrderSecondResource extends JsonResource
             'service_date' => $this->service_date,
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'status' => $this->status,
+            'status_label' => __('app._order_statuses.' . $this->status),
+
             'is_edit' => $this->is_edit,
             'is_rate' => isset($rate),
 

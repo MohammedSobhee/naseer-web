@@ -78,7 +78,12 @@ class User extends Authenticatable
 
     public function Rates()
     {
-        return $this->hasMany(Rate::class, 'user_id', 'id');
+        return $this->hasMany(Rate::class, 'user_id', 'id')->where('action','service_provider');
+    }
+
+    public function ProviderRates()
+    {
+        return $this->hasMany(Rate::class, 'service_provider_id', 'id')->where('action','user');
     }
 
     public function getPhotoAttribute($value)

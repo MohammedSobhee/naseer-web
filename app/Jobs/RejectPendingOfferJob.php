@@ -39,6 +39,6 @@ class RejectPendingOfferJob implements ShouldQueue
     {
         //
         if ($this->request->status == 'new')
-            $this->request->update(['status' => 'canceled']);
+            $this->request->update(['status' => 'canceled', 'is_edit' => 1]);
     }
 }

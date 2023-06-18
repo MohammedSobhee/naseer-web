@@ -139,7 +139,10 @@ class OrderEloquent extends Uploader implements Repository
                 $collection = $collection->whereIn('service_id', $service_ids);
             }
             $provider_offer_orders = Offer::where('service_provider_id', auth()->user()->id)->pluck('request_id')->toArray();
+
             $collection = $collection->whereNotIn('id', $provider_offer_orders);
+            $collection = $collection->whereNotIn('status', ['assigned', 'completed']);
+
         }
 
         if (isset($attributes['status'])) {
@@ -154,7 +157,7 @@ class OrderEloquent extends Uploader implements Repository
         $count = $collection->count();
         $page_count = page_count($count, $page_size);
         $page_number = $page_number - 1;
-        $page_number = $page_number > $page_count ? $page_number = $page_count - 1 : $page_number;
+        $page_number = $page_number > $page_count ? $page_count - 1 : $page_number;
         $object = $collection->take($page_size)->skip((int)$page_number * $page_size)->orderBy('created_at', 'desc')->get();
         if (request()->segment(1) == 'api' || request()->ajax()) {
             return response_api(true, 200, null, OrderResource::collection($object), $page_count, $page_number, $count);
@@ -285,7 +288,7 @@ class OrderEloquent extends Uploader implements Repository
                     $marriage_office->latitude = $attributes['latitude'];
                     $marriage_office->longitude = $attributes['longitude'];
                     $marriage_office->request_datetime = $attributes['request_datetime'];
-                    $marriage_office->client_idno = $attributes['client_idno'];
+//                    $marriage_office->client_idno = $attributes['client_idno'];
                     if ($marriage_office->save()) {
                         if (isset($attributes['medical_examination'])) {
                             sleep(1);
@@ -370,7 +373,7 @@ class OrderEloquent extends Uploader implements Repository
             $setting = Setting::first();
 
             // cancel request after 24 hours when request is new (no offer accepted)
-            $job = (new RejectPendingOfferJob($request))->delay(Carbon::now()->addHours(intval($setting->expire_offer)));
+            $job = (new RejectPendingOfferJob($request))->delay(Carbon::now()->addHours(intval($setting->expire_offer))); // addHours(intval($setting->expire_offer))
             app(Dispatcher::class)->dispatch($job);
             return response_api(true, 200, 'تم انشاء الطلب بنجاح', new OrderResource($request));// . ',' . trans('app.sent_email_verification')
         }
@@ -460,7 +463,7 @@ class OrderEloquent extends Uploader implements Repository
                 return response_api(true, 200, 'تم تعديل الطلب بنجاح', new OrderResource($request));// . ',' . trans('app.sent_email_verification')
             }
         }
-        return response_api(false, 422, null, empObj());// . ',' . trans('app.sent_email_verification')
+        return response_api(false, 422, 'الطلب ملغي', empObj());// . ',' . trans('app.sent_email_verification')
     }
 
     function delete($id)
@@ -477,13 +480,16 @@ class OrderEloquent extends Uploader implements Repository
     {
         $request = $this->model->find($attributes['request_id']);
         $request->status = $attributes['status'];
-
+        if ($attributes['status'] == 'canceled') {
+            $request->is_edit = 1;
+        }
         if ($request->save()) {
 
             if ($attributes['status'] == 'completed') {
                 $offer = Offer::where('request_id', $attributes['request_id'])->where('status', 'accepted')->first();
                 $this->notification->sendNotification(auth()->user()->id, $request->user_id, $offer->request_id, $attributes['status'] . '_order');
             }
+
 
             return response_api(true, 200, null, []);
         }

@@ -22,6 +22,7 @@ use App\Offer;
 use App\PublicProsecutionAndPolice;
 use App\Repositories\Interfaces\Repository;
 use App\Repositories\Uploader;
+use App\Request;
 use App\User;
 
 
@@ -83,7 +84,13 @@ class OfferEloquent extends Uploader implements Repository
         $collection = $this->model;
 
         if (auth()->user()->type == 'service_provider') {
-            $collection = $collection->where('service_provider_id', auth()->user()->id);
+
+
+            $collection = $collection->where(function ($query) {
+                $query->whereHas('Order', function ($query) {
+                    $query->whereIn('status', ['new', 'initial_assigned']);
+                })->orWhere('status', 'accepted');
+            })->where('service_provider_id', auth()->user()->id);
         }
         if (isset($attributes['request_id'])) {
             $collection = $collection->where('request_id', $attributes['request_id']);
@@ -126,6 +133,10 @@ class OfferEloquent extends Uploader implements Repository
         if (isset($offer))
             return response_api(false, 422, 'يوجد عرض مسبقاً لهذا الطلب', new OfferResource($offer));
 
+        $request = Request::where('status', '<>', 'new')->find($attributes['request_id']);
+        if (isset($request))
+            return response_api(false, 422, 'لا يمكن تقديم عرض على هذا الطلب', []);
+
         $attributes['service_provider_id'] = auth()->user()->id;
 
         $this->model->create($attributes);
@@ -159,6 +170,12 @@ class OfferEloquent extends Uploader implements Repository
     {
 
         $offer = $this->model->find($attributes['offer_id']);
+
+        // check if order new
+        if (isset($offer->Order))
+            if ($offer->Order->status != 'new') {
+                return response_api(false, 422, 'لا يمكن قبول هذا العرض لوجود موافقة على عرض آخر.', []);
+            }
         $offer->status = $attributes['status'];
 
         if ($offer->save()) {
@@ -167,7 +184,7 @@ class OfferEloquent extends Uploader implements Repository
                 $offer->Order()->update(['status' => 'initial_assigned', 'is_edit' => 1]);
 
                 // reject  other offers
-                Offer::where('request_id', $offer->request_id)->where('id', '<>', $offer->id)->update(['status' => 'rejected']);
+//                Offer::where('request_id', $offer->request_id)->where('id', '<>', $offer->id)->update(['status' => 'rejected']);
 
                 $this->notification->sendNotification(auth()->user()->id, $offer->service_provider_id, $offer->request_id, 'initial_assigned');
             }
