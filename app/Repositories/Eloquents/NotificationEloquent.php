@@ -20,7 +20,7 @@ class NotificationEloquent implements Repository
 
     public $model, $receiverModel, $notificationSystem, $user, $device;
 
-    public function __construct(Notification $model, NotificationReceiver $receiverModel,
+    public function __construct(Notification   $model, NotificationReceiver $receiverModel,
                                 DeviceEloquent $device, User $user, NotificationSystemEloquent $notificationSystem)
     {
         $this->model = $model;
@@ -159,10 +159,17 @@ class NotificationEloquent implements Repository
     {
         $receiver = $this->user->find($attributes['user_id']);
         if (isset($receiver)) {
-
+            $userId = auth()->user()->id;
+            if (isset($attributes['order_id'])) {
+                $senderId = $userId;
+                $action_id = intval($attributes['order_id']);
+            } else {
+                $senderId = $userId;
+                $action_id = $userId;
+            }
             $attributes = [
-                'sender_id' => auth()->user()->id,
-                'action_id' => auth()->user()->id,
+                'sender_id' => $senderId,
+                'action_id' => $action_id,
                 'action' => 'chat',
             ];
 
@@ -227,7 +234,7 @@ class NotificationEloquent implements Repository
         $notification->action_id = null;
         $notification->seen = 0;
         $notification->save();
-        
+
         return $this->notificationSystem->FCM_Topic($attributes['message'], $notification);
     }
 }
